@@ -8,6 +8,7 @@
 #include "secdialog.h"
 #include "informationdialog.h"
 #include "servisdialog.h"
+#include "servisgetdialog.h"
 
 class QMenu;
 class LineEditPopUpForm;
@@ -48,6 +49,8 @@ private slots:
 
     void on_pushButton_servis_ekle_clicked();
 
+    void on_pushButton_servis_bilgial_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -56,6 +59,7 @@ private:
     InformationDialog *informationdialog;
     SecDialog *secdialog;
     ServisDialog *servisDialog;
+    ServisGetDialog *servisGetDialog;
 
     QSqlDatabase database;
     QSqlDatabase database1;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1023</width>
-    <height>690</height>
+    <height>588</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,10 +34,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>570</x>
      <y>50</y>
-     <width>178</width>
-     <height>72</height>
+     <width>191</width>
+     <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -45,7 +45,7 @@
      <widget class="QLabel" name="UIDNo">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -57,7 +57,7 @@
      <widget class="QLineEdit" name="UIDNo_">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
      </widget>
@@ -67,10 +67,10 @@
   <widget class="QWidget" name="layoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>150</y>
-     <width>178</width>
-     <height>72</height>
+     <x>360</x>
+     <y>160</y>
+     <width>191</width>
+     <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -78,7 +78,7 @@
      <widget class="QLabel" name="musteriAdi">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -90,7 +90,7 @@
      <widget class="QLineEdit" name="musteriAdi_">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
      </widget>
@@ -100,10 +100,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>360</x>
      <y>50</y>
-     <width>178</width>
-     <height>72</height>
+     <width>191</width>
+     <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -111,7 +111,7 @@
      <widget class="QLabel" name="servisNo">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -123,7 +123,7 @@
      <widget class="QLineEdit" name="servisNo_">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
      </widget>
@@ -133,10 +133,10 @@
   <widget class="QWidget" name="layoutWidget_4">
    <property name="geometry">
     <rect>
-     <x>770</x>
-     <y>80</y>
-     <width>178</width>
-     <height>72</height>
+     <x>570</x>
+     <y>160</y>
+     <width>191</width>
+     <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -144,7 +144,7 @@
      <widget class="QLabel" name="arizaTanimi">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -156,7 +156,7 @@
      <widget class="QLineEdit" name="arizaTanimi_">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
      </widget>
@@ -166,10 +166,10 @@
   <widget class="QWidget" name="layoutWidget_5">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>250</y>
-     <width>181</width>
-     <height>74</height>
+     <x>600</x>
+     <y>270</y>
+     <width>220</width>
+     <height>82</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -177,7 +177,7 @@
      <widget class="QLabel" name="sevkTarihi">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -191,7 +191,7 @@
        <widget class="QLineEdit" name="sevkTarihiDay_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
@@ -200,7 +200,7 @@
        <widget class="QLineEdit" name="sevkTarihiMonth_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
@@ -209,7 +209,7 @@
        <widget class="QLineEdit" name="sevkTarihiYear_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
@@ -221,18 +221,18 @@
   <widget class="QWidget" name="layoutWidget_6">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>150</y>
-     <width>181</width>
-     <height>74</height>
+     <x>780</x>
+     <y>50</y>
+     <width>220</width>
+     <height>82</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_9">
     <item>
-     <widget class="QLabel" name="sevkTarihi_2">
+     <widget class="QLabel" name="gelisTarihi">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -243,28 +243,28 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLineEdit" name="sevkTarihiDay_1">
+       <widget class="QLineEdit" name="gelisTarihiDay_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="sevkTarihiMonth_1">
+       <widget class="QLineEdit" name="gelisTarihiMonth_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="sevkTarihiYear_1">
+       <widget class="QLineEdit" name="gelisTarihiYear_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
@@ -273,13 +273,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>250</y>
-     <width>181</width>
-     <height>74</height>
+     <x>360</x>
+     <y>270</y>
+     <width>220</width>
+     <height>82</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -287,7 +287,7 @@
      <widget class="QLabel" name="bitisTarihi">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -301,7 +301,7 @@
        <widget class="QLineEdit" name="bitisTarihiDay_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
@@ -310,7 +310,7 @@
        <widget class="QLineEdit" name="bitisTarihiMonth_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
@@ -319,7 +319,7 @@
        <widget class="QLineEdit" name="bitisTarihiYear_">
         <property name="font">
          <font>
-          <pointsize>16</pointsize>
+          <pointsize>18</pointsize>
          </font>
         </property>
        </widget>
@@ -328,13 +328,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>50</y>
-     <width>271</width>
-     <height>470</height>
+     <width>311</width>
+     <height>518</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -342,19 +342,19 @@
      <widget class="QLabel" name="label_2">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>Cihazla gelen donanımlar</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox">
+     <widget class="QCheckBox" name="donanim_1">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -363,10 +363,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_2">
+     <widget class="QCheckBox" name="donanim_2">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -375,10 +375,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_3">
+     <widget class="QCheckBox" name="donanim_3">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -387,10 +387,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_4">
+     <widget class="QCheckBox" name="donanim_4">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -399,10 +399,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_5">
+     <widget class="QCheckBox" name="donanim_5">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -411,10 +411,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_6">
+     <widget class="QCheckBox" name="donanim_6">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -423,10 +423,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_7">
+     <widget class="QCheckBox" name="donanim_7">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -435,10 +435,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_8">
+     <widget class="QCheckBox" name="donanim_8">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -447,10 +447,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_9">
+     <widget class="QCheckBox" name="donanim_9">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -459,10 +459,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_11">
+     <widget class="QCheckBox" name="donanim_10">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -471,10 +471,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_10">
+     <widget class="QCheckBox" name="donanim_11">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -483,6 +483,108 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_7">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>380</y>
+     <width>191</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_10">
+    <item>
+     <widget class="QLabel" name="testSuresi">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Test Süresi</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="testSuresi_">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_8">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>160</y>
+     <width>221</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_11">
+    <item>
+     <widget class="QLabel" name="yapilanIslem">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Yapılan İşlem</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="yapilanIslem_">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>820</x>
+     <y>480</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Servis Ekle</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>480</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Not Ekle</string>
+   </property>
   </widget>
  </widget>
  <resources/>

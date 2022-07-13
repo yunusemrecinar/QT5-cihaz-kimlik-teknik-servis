@@ -1,9 +1,12 @@
 #include "secdialog.h"
 #include "ui_secdialog.h"
 #include <QMessageBox>
+#include <QSqlQuery>
+
 #include "lineeditpopupform.h"
 #include <QVBoxLayout>
 #include <QMenu>
+
 #include <iostream>
 using namespace std;
 

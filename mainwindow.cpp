@@ -6,6 +6,7 @@
 #include "secdialog.h"
 #include "servisdialog.h"
 #include "informationdialog.h"
+#include "servisgetdialog.h"
 
 
 #include <iostream>
@@ -171,5 +172,12 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
 {
     servisDialog = new ServisDialog(this);
     servisDialog->show();
+}
+
+
+void MainWindow::on_pushButton_servis_bilgial_clicked()
+{
+    servisGetDialog = new ServisGetDialog(this);
+    servisGetDialog->show();
 }
 

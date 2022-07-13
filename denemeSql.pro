@@ -14,21 +14,24 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     secdialog.cpp \
-    servisdialog.cpp
+    servisdialog.cpp \
+    servisgetdialog.cpp
 
 HEADERS += \
     informationdialog.h \
     lineeditpopupform.h \
     mainwindow.h \
     secdialog.h \
-    servisdialog.h
+    servisdialog.h \
+    servisgetdialog.h
 
 FORMS += \
     informationdialog.ui \
     lineeditpopupform.ui \
     mainwindow.ui \
     secdialog.ui \
-    servisdialog.ui
+    servisdialog.ui \
+    servisgetdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -81,24 +81,11 @@
    <widget class="QTableView" name="tableView_teknikServis">
     <property name="geometry">
      <rect>
-      <x>1070</x>
-      <y>31</y>
+      <x>1060</x>
+      <y>10</y>
       <width>821</width>
       <height>961</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>10</y>
-      <width>411</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
     </property>
    </widget>
    <widget class="QPushButton" name="getInformation">
