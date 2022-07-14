@@ -29,6 +29,8 @@ public:
 
     QString mainWindowValue;
 
+    QString serviceValue;
+
 public slots:
 
 signals:
@@ -50,6 +52,8 @@ private slots:
     void on_pushButton_servis_ekle_clicked();
 
     void on_pushButton_servis_bilgial_clicked();
+
+    void on_tableView_teknikServis_activated(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

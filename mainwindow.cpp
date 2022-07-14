@@ -76,7 +76,11 @@ void MainWindow::on_getInformation_clicked() {
     QString message(ui->label->text());
     emit notifyMessageSent(message);
 }*/
-
+void MainWindow::on_tableView_teknikServis_activated(const QModelIndex &index)
+{
+    QString value = ui->tableView_teknikServis->model()->data(index).toString();
+    serviceValue = value;
+}
 void MainWindow::on_tableView_activated(const QModelIndex &index)
 {
     QString value = ui->tableView->model()->data(index).toString();
@@ -139,7 +143,12 @@ void MainWindow::on_getInformation_clicked()
     inform->exec();
 }
 
-
+void MainWindow::on_pushButton_servis_bilgial_clicked()
+{
+    ServisGetDialog *servisDialog = new ServisGetDialog();
+    servisDialog->initialize(serviceValue);
+    servisDialog->exec();
+}
 void MainWindow::on_pushButton_servis_verigetir_clicked()
 {
     database2 = QSqlDatabase::addDatabase("QMYSQL");
@@ -175,9 +184,8 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
 }
 
 
-void MainWindow::on_pushButton_servis_bilgial_clicked()
-{
-    servisGetDialog = new ServisGetDialog(this);
-    servisGetDialog->show();
-}
+
+
+
+
 

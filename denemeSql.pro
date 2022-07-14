@@ -9,26 +9,32 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    getNotlar.cpp \
     informationdialog.cpp \
     lineeditpopupform.cpp \
     main.cpp \
     mainwindow.cpp \
+    notlardialog.cpp \
     secdialog.cpp \
     servisdialog.cpp \
     servisgetdialog.cpp
 
 HEADERS += \
+    getNotlar.h \
     informationdialog.h \
     lineeditpopupform.h \
     mainwindow.h \
+    notlardialog.h \
     secdialog.h \
     servisdialog.h \
     servisgetdialog.h
 
 FORMS += \
+    getNotlar.ui \
     informationdialog.ui \
     lineeditpopupform.ui \
     mainwindow.ui \
+    notlardialog.ui \
     secdialog.ui \
     servisdialog.ui \
     servisgetdialog.ui
