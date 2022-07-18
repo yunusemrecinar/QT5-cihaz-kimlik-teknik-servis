@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QVBoxLayout>
+#include "notekledialog.h"
 #include <QMenu>
 
 ServisDialog::ServisDialog(QWidget *parent) :
@@ -11,6 +12,8 @@ ServisDialog::ServisDialog(QWidget *parent) :
     ui(new Ui::ServisDialog)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->width(),this->height());
+    this->setWindowTitle(" ");
 }
 
 ServisDialog::~ServisDialog()
@@ -83,7 +86,9 @@ void ServisDialog::on_pushButton_clicked()
         qry.bindValue(":notlar",notlar);
 
         if(qry.exec()) {
-            QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
+            NotEkleDialog *idNot = new NotEkleDialog();
+            idNot->initialize(servisNo);
+            idNot->show();
         }else {
             QMessageBox::information(this,"Not Inserted",qry.lastError().text());
         }
@@ -98,3 +103,9 @@ void ServisDialog::on_pushButton_clicked()
 
 }
 
+/*
+void ServisDialog::on_pushButton_2_clicked()
+{
+
+}
+*/

@@ -26,10 +26,12 @@ public slots:
     void initialize(QString s);
 private slots:
     //void onMessageSent(const QString &);
+    void on_pushButton_clicked();
+
 private:
     Ui::InformationDialog *ui;
     QString values;
-
+    QString seriNo;
     QMainWindow* _mainWindow;
 
     QSqlDatabase database;

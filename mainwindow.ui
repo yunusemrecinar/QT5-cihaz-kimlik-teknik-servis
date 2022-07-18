@@ -21,9 +21,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>50</y>
       <width>821</width>
-      <height>961</height>
+      <height>941</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -31,6 +31,23 @@
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>821</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>821</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="lineWidth">
      <number>1</number>
@@ -82,10 +99,15 @@
     <property name="geometry">
      <rect>
       <x>1060</x>
-      <y>10</y>
+      <y>50</y>
       <width>821</width>
-      <height>961</height>
+      <height>941</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QPushButton" name="getInformation">
@@ -194,6 +216,42 @@
     </property>
     <property name="text">
      <string>Servis Ekle</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>10</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Teknik Servis</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_cihazkimlik_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Cihaz Kimlik</string>
     </property>
    </widget>
   </widget>

@@ -7,7 +7,7 @@
 #include "servisdialog.h"
 #include "informationdialog.h"
 #include "servisgetdialog.h"
-
+#include <QTableView>
 
 #include <iostream>
 using namespace std;
@@ -19,8 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     ui->setupUi(this);
+    this->setWindowTitle("ANA MENÜ");
 
-
+    //QTableView *tabb = new QTableView;
+    //tabb->setModel(ui->tableView);
 
 }
 
@@ -53,6 +55,7 @@ void MainWindow::on_pushButton_load_clicked()
         qry -> exec();
         modal->setQuery(*qry);
         ui->tableView->setModel(modal);
+        ui->tableView->resizeColumnsToContents();
 
 
     }else {
@@ -167,7 +170,7 @@ void MainWindow::on_pushButton_servis_verigetir_clicked()
         qry -> exec();
         modal->setQuery(*qry);
         ui->tableView_teknikServis->setModel(modal);
-
+        ui->tableView_teknikServis->resizeColumnsToContents();
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");

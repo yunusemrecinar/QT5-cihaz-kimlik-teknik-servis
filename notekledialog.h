@@ -1,30 +1,31 @@
-#ifndef NOTLARDIALOG_H
-#define NOTLARDIALOG_H
+#ifndef NOTEKLEDIALOG_H
+#define NOTEKLEDIALOG_H
 
 #include <QDialog>
 #include <QSqlDatabase>
 
 namespace Ui {
-class notlarDialog;
+class NotEkleDialog;
 }
 
-class notlarDialog : public QDialog
+class NotEkleDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit notlarDialog(QWidget *parent = nullptr);
-    ~notlarDialog();
+    explicit NotEkleDialog(QWidget *parent = nullptr);
+    ~NotEkleDialog();
 public slots:
     void initialize(QString s);
 private slots:
     void on_pushButton_clicked();
 
 private:
-    Ui::notlarDialog *ui;
+    Ui::NotEkleDialog *ui;
+
     QSqlDatabase database;
 
     QString servisNo;
 };
 
-#endif // NOTLARDIALOG_H
+#endif // NOTEKLEDIALOG_H

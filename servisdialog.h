@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSqlDatabase>
+#include "notekledialog.h"
 
 namespace Ui {
 class ServisDialog;
@@ -18,6 +19,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::ServisDialog *ui;
@@ -35,6 +38,8 @@ private:
     QString testSuresi;
     QString sevkTarihi;
     QString notlar = "";
+
+    NotEkleDialog *idNot;
 
 };
 

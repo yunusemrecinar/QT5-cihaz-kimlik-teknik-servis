@@ -31,14 +31,19 @@
     <string>Teknik Servis</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QGroupBox" name="UIDNoBox">
    <property name="geometry">
     <rect>
      <x>570</x>
      <y>50</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
@@ -64,14 +69,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_3">
+  <widget class="QGroupBox" name="musteriAdiBox">
    <property name="geometry">
     <rect>
      <x>360</x>
      <y>160</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
@@ -97,14 +107,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QGroupBox" name="servisNoBox">
    <property name="geometry">
     <rect>
      <x>360</x>
      <y>50</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -130,14 +145,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_4">
+  <widget class="QGroupBox" name="ArizaTarifiBox">
    <property name="geometry">
     <rect>
      <x>570</x>
      <y>160</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
@@ -163,14 +183,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_5">
+  <widget class="QGroupBox" name="SevkBox">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>570</x>
      <y>270</y>
-     <width>220</width>
-     <height>82</height>
+     <width>191</width>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_7">
     <item>
@@ -218,14 +243,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_6">
+  <widget class="QGroupBox" name="GelisBox">
    <property name="geometry">
     <rect>
      <x>780</x>
      <y>50</y>
      <width>220</width>
-     <height>82</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_9">
     <item>
@@ -273,14 +303,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QGroupBox" name="BitisTarihBox">
    <property name="geometry">
     <rect>
      <x>360</x>
      <y>270</y>
-     <width>220</width>
-     <height>82</height>
+     <width>191</width>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
@@ -328,7 +363,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QGroupBox" name="DonanimBox">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -336,6 +371,11 @@
      <width>311</width>
      <height>518</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_8">
     <item>
@@ -484,14 +524,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_7">
+  <widget class="QGroupBox" name="TestBox">
    <property name="geometry">
     <rect>
      <x>360</x>
      <y>380</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_10">
     <item>
@@ -517,14 +562,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_8">
+  <widget class="QGroupBox" name="YapilanIslemBox">
    <property name="geometry">
     <rect>
      <x>780</x>
      <y>160</y>
      <width>221</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_11">
     <item>
@@ -553,37 +603,19 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>820</x>
+     <x>810</x>
      <y>480</y>
-     <width>161</width>
-     <height>61</height>
+     <width>171</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>18</pointsize>
+     <pointsize>20</pointsize>
     </font>
    </property>
    <property name="text">
     <string>Servis Ekle</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>480</y>
-     <width>161</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Not Ekle</string>
    </property>
   </widget>
  </widget>

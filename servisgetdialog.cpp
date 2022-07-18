@@ -13,6 +13,8 @@ ServisGetDialog::ServisGetDialog(QWidget *parent) :
     ui(new Ui::ServisGetDialog)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->width(),this->height());
+    this->setWindowTitle(" ");
 }
 
 ServisGetDialog::~ServisGetDialog()
@@ -69,6 +71,75 @@ void ServisGetDialog::on_pushButton_clicked()
    notlar->initialize(key);
    notlar->exec();
 
+
+}
+
+
+void ServisGetDialog::on_pushButton_2_clicked()
+{
+
+    database = QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName("localhost");
+    database.setUserName("root");
+    database.setPassword("");
+    database.setDatabaseName("modeo");
+
+    if(database.open()) {
+
+        QSqlQuery qry;
+        QString UIDNo = ui->UIDNo_1->text();
+        QString gelis = ui->gelisTarihi_1->text();
+        QString musteriAdi = ui->musteriAdi_1->text();
+        QString arizaTarif = ui->arizaTanimi_1->text();
+        QString yapilanIslem = ui->yapilanIslem_1->text();
+        QString bitis = ui->bitisTarihi1->text();
+        QString sevk = ui->sevkTarihi_1->text();
+        QString testSure = ui->testSuresi_1->text();
+        QString donanim = ui->donanim_->text();
+        QString notlar = ui->notlar_->text();
+
+        qry.prepare("UPDATE teknikservis SET `UID No` = '" + UIDNo + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Geliş Tarihi` = '" + gelis + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Arıza Tarifi` = '" + arizaTarif + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Yapılan İşlem` = '" + yapilanIslem + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Cihazla Gelen Malzemeler` = '" + donanim + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Tamir Bitiş Tarihi` = '" + bitis + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Test Süresi` = '" + testSure + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Sevk Tarihi` = '" + sevk + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "';");
+
+
+
+        if(qry.exec()) {
+            QMessageBox::information(this,"Inserted","Data Updated Succesfully");
+        }else {
+            QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+        }
+
+
+
+    }else {
+        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        cout << "Database not connected!" << endl;
+    }
+    database.close();
+    this->close();
 
 }
 

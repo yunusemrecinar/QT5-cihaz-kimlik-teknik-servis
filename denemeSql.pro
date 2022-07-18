@@ -14,6 +14,7 @@ SOURCES += \
     lineeditpopupform.cpp \
     main.cpp \
     mainwindow.cpp \
+    notekledialog.cpp \
     notlardialog.cpp \
     secdialog.cpp \
     servisdialog.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     informationdialog.h \
     lineeditpopupform.h \
     mainwindow.h \
+    notekledialog.h \
     notlardialog.h \
     secdialog.h \
     servisdialog.h \
@@ -34,6 +36,7 @@ FORMS += \
     informationdialog.ui \
     lineeditpopupform.ui \
     mainwindow.ui \
+    notekledialog.ui \
     notlardialog.ui \
     secdialog.ui \
     servisdialog.ui \

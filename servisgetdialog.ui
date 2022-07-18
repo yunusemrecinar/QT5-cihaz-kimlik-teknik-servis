@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>663</width>
-    <height>617</height>
+    <height>685</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,14 +31,19 @@
     <string>Teknik Servis</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget_5">
+  <widget class="QGroupBox" name="SevkBox">
    <property name="geometry">
     <rect>
      <x>250</x>
      <y>280</y>
      <width>220</width>
-     <height>82</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_8">
     <item>
@@ -54,28 +59,29 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QLineEdit" name="sevkTarihi_1">
-        <property name="font">
-         <font>
-          <pointsize>18</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QLineEdit" name="sevkTarihi_1">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QGroupBox" name="UIDBox">
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>60</y>
+     <y>49</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
@@ -101,14 +107,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_4">
+  <widget class="QGroupBox" name="ArizaTarifBox">
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>170</y>
+     <y>159</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_12">
     <item>
@@ -134,14 +145,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_8">
+  <widget class="QGroupBox" name="YapilanIslemBox">
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>170</y>
+     <y>159</y>
      <width>221</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_13">
     <item>
@@ -167,14 +183,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_2">
+  <widget class="QGroupBox" name="ServisNoBox">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>60</y>
+     <y>49</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_14">
     <item>
@@ -196,18 +217,26 @@
         <pointsize>18</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_6">
+  <widget class="QGroupBox" name="GelisBox">
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>60</y>
+     <y>51</y>
      <width>220</width>
-     <height>82</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_15">
     <item>
@@ -223,28 +252,29 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <item>
-       <widget class="QLineEdit" name="gelisTarihi_1">
-        <property name="font">
-         <font>
-          <pointsize>18</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QLineEdit" name="gelisTarihi_1">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_3">
+  <widget class="QGroupBox" name="MusteriAdiBox">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>170</y>
+     <y>159</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_16">
     <item>
@@ -270,14 +300,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_7">
+  <widget class="QGroupBox" name="TestSureBox">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>390</y>
      <width>191</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_17">
     <item>
@@ -303,14 +338,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_9">
+  <widget class="QGroupBox" name="BitisTarihBox">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>280</y>
      <width>220</width>
-     <height>82</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_18">
     <item>
@@ -326,28 +366,29 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QLineEdit" name="bitisTarihi1">
-        <property name="font">
-         <font>
-          <pointsize>18</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QLineEdit" name="bitisTarihi1">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_10">
+  <widget class="QGroupBox" name="DonanimBox">
    <property name="geometry">
     <rect>
      <x>220</x>
      <y>390</y>
      <width>431</width>
-     <height>80</height>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_19">
     <item>
@@ -373,14 +414,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget_11">
+  <widget class="QGroupBox" name="NotlarBox">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>490</y>
-     <width>191</width>
-     <height>80</height>
+     <y>500</y>
+     <width>641</width>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_20">
     <item>
@@ -402,6 +448,9 @@
         <pointsize>18</pointsize>
        </font>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>
@@ -409,19 +458,37 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>550</y>
-     <width>201</width>
-     <height>51</height>
+     <x>420</x>
+     <y>610</y>
+     <width>231</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>18</pointsize>
+     <pointsize>20</pointsize>
     </font>
    </property>
    <property name="text">
     <string>Notları Görüntüle</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>610</y>
+     <width>231</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Güncelle</string>
    </property>
   </widget>
  </widget>

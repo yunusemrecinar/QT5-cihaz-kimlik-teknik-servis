@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>notlarDialog</class>
- <widget class="QDialog" name="notlarDialog">
+ <class>NotEkleDialog</class>
+ <widget class="QDialog" name="NotEkleDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>449</width>
-    <height>505</height>
+    <width>630</width>
+    <height>625</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,45 +18,45 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>91</width>
-     <height>31</height>
+     <width>101</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>22</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>Notlar</string>
+    <string>Not Ekle</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="lineEdit">
+  <widget class="QTextEdit" name="textEdit">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>50</y>
-     <width>431</width>
-     <height>371</height>
+     <y>40</y>
+     <width>611</width>
+     <height>511</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>430</y>
-     <width>171</width>
-     <height>61</height>
+     <x>460</x>
+     <y>560</y>
+     <width>161</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>Güncelle</string>
+    <string>Ekle</string>
    </property>
   </widget>
  </widget>
