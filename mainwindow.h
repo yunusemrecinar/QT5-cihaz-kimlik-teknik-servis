@@ -28,6 +28,7 @@ public:
     static MainWindow selectedVal;
 
     QString mainWindowValue;
+    QSqlDatabase database1;
 
     QString serviceValue;
 
@@ -55,6 +56,10 @@ private slots:
 
     void on_tableView_teknikServis_activated(const QModelIndex &index);
 
+    void on_tableView_clicked(const QModelIndex &index);
+
+    void on_tableView_teknikServis_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 
@@ -66,8 +71,8 @@ private:
     ServisGetDialog *servisGetDialog;
 
     QSqlDatabase database;
-    QSqlDatabase database1;
-    QSqlDatabase database2;
+
+    //QSqlDatabase database2;
 
     QMenu *m_lineedit_menu;
     LineEditPopUpForm *m_lineedit_popup_form;

@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include "notekledialog.h"
 #include <QMenu>
+#include "mainwindow.h"
 
 ServisDialog::ServisDialog(QWidget *parent) :
     QDialog(parent),
@@ -14,6 +15,11 @@ ServisDialog::ServisDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(this->width(),this->height());
     this->setWindowTitle(" ");
+    database = QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName("localhost");
+    database.setUserName("root");
+    database.setPassword("");
+    database.setDatabaseName("modeo");
 }
 
 ServisDialog::~ServisDialog()
@@ -23,11 +29,7 @@ ServisDialog::~ServisDialog()
 
 void ServisDialog::on_pushButton_clicked()
 {
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+
 
     if(database.open()) {
         servisNo = ui->servisNo_->text();
@@ -98,7 +100,7 @@ void ServisDialog::on_pushButton_clicked()
     }
 
 
-    database.close();
+    //database.close();
     this->close();
 
 }

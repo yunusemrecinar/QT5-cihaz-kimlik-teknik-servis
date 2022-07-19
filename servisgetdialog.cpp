@@ -3,7 +3,7 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlError>
-#include "getNotlar.h"
+#include "mainwindow.h"
 
 #include <iostream>
 using namespace std;
@@ -14,6 +14,11 @@ ServisGetDialog::ServisGetDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setFixedSize(this->width(),this->height());
+    database = QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName("localhost");
+    database.setUserName("root");
+    database.setPassword("");
+    database.setDatabaseName("modeo");
     this->setWindowTitle(" ");
 }
 
@@ -24,11 +29,7 @@ ServisGetDialog::~ServisGetDialog()
 
 void ServisGetDialog::initialize(QString s) {
     key = s;
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+
 
 
     if(database.open()) {
@@ -61,7 +62,7 @@ void ServisGetDialog::initialize(QString s) {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
     }
-    database.close();
+    //database.close();
 
 }
 
@@ -78,11 +79,11 @@ void ServisGetDialog::on_pushButton_clicked()
 void ServisGetDialog::on_pushButton_2_clicked()
 {
 
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    //database = QSqlDatabase::addDatabase("QMYSQL");
+    //database.setHostName("localhost");
+    //database.setUserName("root");
+    //database.setPassword("");
+    //database.setDatabaseName("modeo");
 
     if(database.open()) {
 
@@ -138,7 +139,7 @@ void ServisGetDialog::on_pushButton_2_clicked()
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
     }
-    database.close();
+    //database.close();
     this->close();
 
 }
