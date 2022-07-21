@@ -29,11 +29,15 @@ public:
 
     QString mainWindowValue;
     QSqlDatabase database1;
-
+    QString hostName;
+    QString userName;
+    QString password;
+    QString dbName;
     QString serviceValue;
+    QString rowCount;
 
 public slots:
-
+    void readFile(QString filename);
 signals:
     void notifyMessageSent(const QString& message);
 private slots:
@@ -41,6 +45,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_load_clicked();
+
+    //void readFile(QString filename);
 
     void on_pushButton_2_clicked();
 

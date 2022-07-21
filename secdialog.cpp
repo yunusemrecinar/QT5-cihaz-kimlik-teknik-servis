@@ -2,7 +2,7 @@
 #include "ui_secdialog.h"
 #include <QMessageBox>
 #include <QSqlQuery>
-
+#include "mainwindow.h"
 #include "lineeditpopupform.h"
 #include <QVBoxLayout>
 #include <QMenu>
@@ -18,7 +18,7 @@ SecDialog::SecDialog(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    this->setFixedSize(this->width(),this->height());
+    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle(" ");
     //ui->verticalLayout_7->layout()->
     //ui->test_durum_->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -43,11 +43,12 @@ SecDialog::~SecDialog()
 
 void SecDialog::on_pushButton_clicked()
 {
+    MainWindow w;
     database1 = QSqlDatabase::addDatabase("QMYSQL");
-    database1.setHostName("localhost");
-    database1.setUserName("root");
-    database1.setPassword("");
-    database1.setDatabaseName("modeo");
+    database1.setHostName(w.hostName);
+    database1.setUserName(w.userName);
+    database1.setPassword(w.password);
+    database1.setDatabaseName(w.dbName);
 
     if(database1.open()) {
         QString model;

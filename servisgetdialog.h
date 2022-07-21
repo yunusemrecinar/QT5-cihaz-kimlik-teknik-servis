@@ -18,9 +18,10 @@ public:
     ~ServisGetDialog();
 
     QString key;
+    QString indexValue;
 
 public slots:
-    void initialize(QString s);
+    void initialize(QString s,QString index);
 private slots:
     void on_pushButton_clicked();
 

@@ -4,9 +4,10 @@
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
-
+#include <QMessageBox>
 #include <iostream>
 using namespace std;
+
 
 int main(int argc, char *argv[])
 {

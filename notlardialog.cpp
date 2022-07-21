@@ -3,6 +3,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QMessageBox>
+#include "mainwindow.h"
 #include <QSqlError>
 
 #include <iostream>
@@ -13,7 +14,7 @@ notlarDialog::notlarDialog(QWidget *parent) :
     ui(new Ui::notlarDialog)
 {
     ui->setupUi(this);
-    this->setFixedSize(this->width(),this->height());
+    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle(" ");
 }
 
@@ -25,11 +26,12 @@ notlarDialog::~notlarDialog()
 void notlarDialog::initialize(QString s) {
 
     servisNo = s;
+    MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    database.setHostName(w.hostName);
+    database.setUserName(w.userName);
+    database.setPassword(w.password);
+    database.setDatabaseName(w.dbName);
 
     if(database.open()) {
 
@@ -58,11 +60,12 @@ void notlarDialog::initialize(QString s) {
 
 void notlarDialog::on_pushButton_clicked()
 {
+    MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    database.setHostName(w.hostName);
+    database.setUserName(w.userName);
+    database.setPassword(w.password);
+    database.setDatabaseName(w.dbName);
 
     if(database.open()) {
 

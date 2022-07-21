@@ -13,13 +13,14 @@ ServisDialog::ServisDialog(QWidget *parent) :
     ui(new Ui::ServisDialog)
 {
     ui->setupUi(this);
-    this->setFixedSize(this->width(),this->height());
+    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle(" ");
+    MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    database.setHostName(w.hostName);
+    database.setUserName(w.userName);
+    database.setPassword(w.password);
+    database.setDatabaseName(w.dbName);
 }
 
 ServisDialog::~ServisDialog()

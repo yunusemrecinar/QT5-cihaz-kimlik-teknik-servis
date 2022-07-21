@@ -9,7 +9,7 @@ InformationDialog::InformationDialog(QWidget *parent) :
     ui(new Ui::InformationDialog)
 {
     ui->setupUi(this);
-    this->setFixedSize(this->width(),this->height());
+    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle(" ");
     MainWindow w;
     //ui->inf->setText("21");
@@ -58,11 +58,12 @@ InformationDialog::~InformationDialog()
 }
 void InformationDialog::initialize(QString s) {
     //ui->inf->setText(s);
+    MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    database.setHostName(w.hostName);
+    database.setUserName(w.userName);
+    database.setPassword(w.password);
+    database.setDatabaseName(w.dbName);
     seriNo = s;
 
     if(database.open()) {
@@ -125,12 +126,12 @@ void InformationDialog::on_btnLauncher_clicked() {
 
 void InformationDialog::on_pushButton_clicked()
 {
-
+    MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    database.setHostName(w.hostName);
+    database.setUserName(w.userName);
+    database.setPassword(w.password);
+    database.setDatabaseName(w.dbName);
 
     if(database.open()) {
 

@@ -2,6 +2,7 @@
 #include "ui_notekledialog.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include "mainwindow.h"
 #include <QMessageBox>
 #include <QSqlError>
 
@@ -13,7 +14,7 @@ NotEkleDialog::NotEkleDialog(QWidget *parent) :
     ui(new Ui::NotEkleDialog)
 {
     ui->setupUi(this);
-    this->setFixedSize(this->width(),this->height());
+    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle("");
 }
 
@@ -24,12 +25,12 @@ NotEkleDialog::~NotEkleDialog()
 
 void NotEkleDialog::on_pushButton_clicked()
 {
-
+    MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    database.setHostName(w.hostName);
+    database.setUserName(w.userName);
+    database.setPassword(w.password);
+    database.setDatabaseName(w.dbName);
 
     if(database.open()) {
 

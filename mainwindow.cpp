@@ -8,6 +8,7 @@
 #include "informationdialog.h"
 #include "servisgetdialog.h"
 #include <QTableView>
+#include <QScrollArea>
 
 #include <iostream>
 using namespace std;
@@ -17,18 +18,88 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow),
       _information(nullptr)
 {
-
     ui->setupUi(this);
+
+    readFile("test.txt");
+
     this->setWindowTitle("ANA MENÜ");
     ui->pushButton_servis_verigetir->setVisible(false);
     database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
+    database.setHostName(hostName);
+    database.setUserName(userName);
+    database.setPassword(password);
+    database.setDatabaseName(dbName);
+
+    //ui->label_cihazkimlik_2->setText(hostName+"+"+userName+"+"+password.trimmed()+"+"+dbName);
     //QTableView *tabb = new QTableView;
     //tabb->setModel(ui->tableView);
 
+}
+
+void MainWindow::readFile(QString filename)
+{
+    QFile file(filename);
+    if(!file.exists())
+    {
+        hostName = "localhost";
+        userName = "root";
+        password = "";
+        dbName = "modeo";
+        //qCritical() << "File not found!";
+    }
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        //qCritical() << file.errorString();
+    }
+
+    QTextStream stream(&file);
+    bool first = true;
+    bool second = false;
+    bool third = false;
+    bool fourth = false;
+    while(!stream.atEnd()) {
+        if(first) {
+            QString temp1 = stream.readLine();
+            QStringList temp = temp1.split("=");
+            hostName = temp.value(temp.length()-1).trimmed();
+            first = false;
+            second = true;
+        }
+        else if(second) {
+            QString temp1 = stream.readLine();
+            QStringList temp = temp1.split("=");
+            userName = temp.value(temp.length()-1).trimmed();
+            second = false;
+            third = true;
+        }
+        else if(third) {
+            QString temp1 = stream.readLine();
+            QStringList temp = temp1.split("=");
+            password = temp.value(temp.length()-1).trimmed();
+            third = false;
+            fourth = true;
+        }
+        else if(fourth) {
+            QString temp1 = stream.readLine();
+            QStringList temp = temp1.split("=");
+            dbName = temp.value(temp.length()-1).trimmed();
+            break;
+        }
+        /*else if(count == 1) {
+            QStringList temp = stream.readLine().split("=");
+            userName = temp.value(temp.length()-1);
+            count++;
+        }else if(count == 2) {
+            QStringList temp = stream.readLine().split("=");
+            password = temp.value(temp.length()-1);
+            count++;
+        }else if(count == 3) {
+            QStringList temp = stream.readLine().split("=");
+            dbName = temp.value(temp.length()-1);
+            count++;
+        }*/
+
+    }
 }
 
 MainWindow::~MainWindow()
@@ -44,15 +115,15 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_load_clicked()
 {
 
-    database1 = QSqlDatabase::addDatabase("QMYSQL");
-    database1.setHostName("localhost");
-    database1.setUserName("root");
-    database1.setPassword("");
-    database1.setDatabaseName("modeo");
+    database = QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName(hostName);
+    database.setUserName(userName);
+    database.setPassword(password);
+    database.setDatabaseName(dbName);
     //database1.open();
     QSqlQueryModel * modal = new QSqlQueryModel();
 
-    if(database1.open()) {
+    if(database.open()) {
 
         QSqlQuery* qry = new QSqlQuery(database1);
 
@@ -181,7 +252,7 @@ void MainWindow::on_getInformation_clicked()
 void MainWindow::on_pushButton_servis_bilgial_clicked()
 {
     ServisGetDialog *servisDialog = new ServisGetDialog();
-    servisDialog->initialize(serviceValue);
+    servisDialog->initialize(serviceValue, rowCount);
     servisDialog->exec();
 }
 void MainWindow::on_pushButton_servis_verigetir_clicked()
@@ -238,7 +309,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
     QSqlQueryModel * modal = new QSqlQueryModel();
 
-    if(database1.open()) {
+    if(database.open()) {
 
         QSqlQuery* qry = new QSqlQuery(database1);
 
@@ -260,6 +331,12 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
 {
     QString value = ui->tableView_teknikServis->model()->data(index).toString();
+    int row = ui->tableView_teknikServis->currentIndex().row();
+    int row2 = ui->tableView_teknikServis->currentIndex().column();
+    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,row2-1)).toString();
+
     serviceValue = value;
+    rowCount = rowValue;
+
 }
 
