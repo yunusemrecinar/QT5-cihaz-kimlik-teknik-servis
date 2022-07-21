@@ -13,7 +13,6 @@ ServisGetDialog::ServisGetDialog(QWidget *parent) :
     ui(new Ui::ServisGetDialog)
 {
     ui->setupUi(this);
-    //this->setFixedSize(this->width(),this->height());
     MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
     database.setHostName(w.hostName);
@@ -32,8 +31,6 @@ ServisGetDialog::~ServisGetDialog()
 void ServisGetDialog::initialize(QString s, QString index) {
     key = s;
     indexValue = index;
-    //ui->label->setText(index);
-
 
     if(database.open()) {
 
@@ -58,35 +55,24 @@ void ServisGetDialog::initialize(QString s, QString index) {
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
         }
-        //qDebug() << (modal->rowCount());
-
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected servisget");
         cout << "Database not connected!" << endl;
     }
-    //database.close();
 
 }
 
 void ServisGetDialog::on_pushButton_clicked()
 {
    notlarDialog *notlar = new notlarDialog();
-   notlar->initialize(key);
+   notlar->initialize(key,indexValue);
    notlar->exec();
-
-
 }
 
 
 void ServisGetDialog::on_pushButton_2_clicked()
 {
-
-    //database = QSqlDatabase::addDatabase("QMYSQL");
-    //database.setHostName("localhost");
-    //database.setUserName("root");
-    //database.setPassword("");
-    //database.setDatabaseName("modeo");
 
     if(database.open()) {
 

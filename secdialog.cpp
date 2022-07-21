@@ -18,21 +18,7 @@ SecDialog::SecDialog(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    //this->setFixedSize(this->width(),this->height());
-    this->setWindowTitle(" ");
-    //ui->verticalLayout_7->layout()->
-    //ui->test_durum_->setContextMenuPolicy(Qt::CustomContextMenu);
-    //m_lineedit_menu = new QMenu(this);
-    //m_lineedit_popup_form = new LineEditPopUpForm(this);
-    //m_lineedit_popup_form->set_lineedit(ui->test_durum_);
-    //QVBoxLayout *lineedit_layout = new QVBoxLayout;
-    //lineedit_layout->addWidget(m_lineedit_popup_form);
-    //m_lineedit_menu->setLayout(lineedit_layout);
-    //connect(ui->test_durum_, &QLineEdit::customContextMenuRequested, [&](const QPoint &p)
-    //{
-    //    m_lineedit_menu->popup(mapToGlobal(p));
-    //    m_lineedit_menu->setGeometry(860,540,145,167);
-    //});
+    this->setWindowTitle(" ");    
 
 }
 
@@ -68,6 +54,7 @@ void SecDialog::on_pushButton_clicked()
             model = ui->model7_->text();
         }
         QString cihazSeriNo = ui->cihaz_seri_no->text();
+
         QString anakartNo = ui->anakart_->text();
         QString modemKarti = ui-> modem_karti_->text();
         QString lcdKarti = ui->lcd_karti_->text();

@@ -14,7 +14,6 @@ NotEkleDialog::NotEkleDialog(QWidget *parent) :
     ui(new Ui::NotEkleDialog)
 {
     ui->setupUi(this);
-    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle("");
 }
 

@@ -30,9 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
     database.setPassword(password);
     database.setDatabaseName(dbName);
 
-    //ui->label_cihazkimlik_2->setText(hostName+"+"+userName+"+"+password.trimmed()+"+"+dbName);
-    //QTableView *tabb = new QTableView;
-    //tabb->setModel(ui->tableView);
 
 }
 
@@ -45,11 +42,11 @@ void MainWindow::readFile(QString filename)
         userName = "root";
         password = "";
         dbName = "modeo";
-        //qCritical() << "File not found!";
+
     }
     if(!file.open(QIODevice::ReadOnly))
     {
-        //qCritical() << file.errorString();
+
     }
 
     QTextStream stream(&file);
@@ -84,21 +81,7 @@ void MainWindow::readFile(QString filename)
             QStringList temp = temp1.split("=");
             dbName = temp.value(temp.length()-1).trimmed();
             break;
-        }
-        /*else if(count == 1) {
-            QStringList temp = stream.readLine().split("=");
-            userName = temp.value(temp.length()-1);
-            count++;
-        }else if(count == 2) {
-            QStringList temp = stream.readLine().split("=");
-            password = temp.value(temp.length()-1);
-            count++;
-        }else if(count == 3) {
-            QStringList temp = stream.readLine().split("=");
-            dbName = temp.value(temp.length()-1);
-            count++;
-        }*/
-
+        }        
     }
 }
 
@@ -106,7 +89,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -120,7 +102,6 @@ void MainWindow::on_pushButton_load_clicked()
     database.setUserName(userName);
     database.setPassword(password);
     database.setDatabaseName(dbName);
-    //database1.open();
     QSqlQueryModel * modal = new QSqlQueryModel();
 
     if(database.open()) {
@@ -141,7 +122,6 @@ void MainWindow::on_pushButton_load_clicked()
 
 }
 
-
 void MainWindow::on_pushButton_2_clicked()
 {
     //SecDialog secdialog;
@@ -150,100 +130,9 @@ void MainWindow::on_pushButton_2_clicked()
     secdialog = new SecDialog(this);
     secdialog->show();
 }
-/*
-void MainWindow::on_getInformation_clicked() {
-    QString message(ui->label->text());
-    emit notifyMessageSent(message);
-}
-void MainWindow::on_tableView_teknikServis_activated(const QModelIndex &index)
-{
-    QString value = ui->tableView_teknikServis->model()->data(index).toString();
-    serviceValue = value;
-}
-
-void MainWindow::on_tableView_activated(const QModelIndex &index)
-{
-    QString value = ui->tableView->model()->data(index).toString();
-    mainWindowValue = value;
-
-    database1 = QSqlDatabase::addDatabase("QMYSQL");
-    database1.setHostName("localhost");
-    database1.setUserName("root");
-    database1.setPassword("");
-    database1.setDatabaseName("modeo");
-
-    QSqlQueryModel * modal = new QSqlQueryModel();
-
-    if(database1.open()) {
-
-        QSqlQuery* qry = new QSqlQuery(database1);
-
-        qry ->prepare("select * from teknikservis where `Servis No` = " + mainWindowValue);
-        qry -> exec();
-        modal->setQuery(*qry);
-        ui->tableView_teknikServis->setModel(modal);
-        ui->tableView_teknikServis->resizeColumnsToContents();
-
-
-    }else {
-        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
-        cout << "Database not connected!" << endl;
-    }
-    database1.close();
-    //ui->label->setText(value);
-
-    QString value = ui->tableView->model()->data(index).toString();
-
-    ui->label->setText(value);
-    qDebug() << (value);
-    selectedValue = value;
-    qDebug() << (selectedValue);
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
-
-    QSqlQueryModel * modal = new QSqlQueryModel();
-
-    if(database.open()) {
-        QSqlQuery* qry = new QSqlQuery(database);
-
-        qry ->prepare("select `Uretim Tarihi`, `Durumu` from cihazkimlik where `Cihaz Seri No` = "+value);
-        qry->exec();
-        modal->setQuery(*qry);
-        ui->tableView_teknikServis->setModel(modal);
-
-    }
-
-
-
-}
-*/
-
 
 void MainWindow::on_getInformation_clicked()
 {
-    //InformationDialog informationDialog;
-    //informationDialog.setModal(true);
-    //informationDialog.exec();
-
-    // üstteki gibi yaptığımızda açılan yeni ekran kapanmadan bi önceki ekran tıklanmaz hala gelir.
-    // alttaki gibi yaptığımızda açılan yeni ekrana bakmadan farklı ekranlara geçebiliriz.
-    //selectedVal = ui->label->text();
-    //QString message(ui->label->text());
-    //emit notifyMessageSent(message);
-/*
-    if(_information) {
-        _information = new InformationDialog(this);
-
-        connect(this,SIGNAL(on_getInformation_clicked),
-                _information, SLOT(onMessageSent));
-
-    }
-
-    informationdialog = new InformationDialog(this);
-    informationdialog->show();*/
     InformationDialog *inform = new InformationDialog();
     inform->initialize(mainWindowValue);
     inform->exec();
@@ -255,6 +144,7 @@ void MainWindow::on_pushButton_servis_bilgial_clicked()
     servisDialog->initialize(serviceValue, rowCount);
     servisDialog->exec();
 }
+
 void MainWindow::on_pushButton_servis_verigetir_clicked()
 {
     //database2 = QSqlDatabase::addDatabase("QMYSQL");
@@ -279,9 +169,7 @@ void MainWindow::on_pushButton_servis_verigetir_clicked()
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
     }
-    //database1.close();
 }
-
 
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
@@ -289,23 +177,10 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
     servisDialog->show();
 }
 
-
-
-
-
-
-
-
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
     QString value = ui->tableView->model()->data(index).toString();
     mainWindowValue = value;
-
-    //database1 = QSqlDatabase::addDatabase("QMYSQL");
-    //database1.setHostName("localhost");
-    //database1.setUserName("root");
-    //database1.setPassword("");
-    //database1.setDatabaseName("modeo");
 
     QSqlQueryModel * modal = new QSqlQueryModel();
 
@@ -327,7 +202,6 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
 }
 
-
 void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
 {
     QString value = ui->tableView_teknikServis->model()->data(index).toString();
@@ -339,4 +213,3 @@ void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
     rowCount = rowValue;
 
 }
-

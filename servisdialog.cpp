@@ -13,7 +13,6 @@ ServisDialog::ServisDialog(QWidget *parent) :
     ui(new Ui::ServisDialog)
 {
     ui->setupUi(this);
-    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle(" ");
     MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
@@ -100,15 +99,7 @@ void ServisDialog::on_pushButton_clicked()
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
     }
 
-
-    //database.close();
     this->close();
 
 }
 
-/*
-void ServisDialog::on_pushButton_2_clicked()
-{
-
-}
-*/

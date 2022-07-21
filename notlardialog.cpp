@@ -14,7 +14,6 @@ notlarDialog::notlarDialog(QWidget *parent) :
     ui(new Ui::notlarDialog)
 {
     ui->setupUi(this);
-    //this->setFixedSize(this->width(),this->height());
     this->setWindowTitle(" ");
 }
 
@@ -23,9 +22,10 @@ notlarDialog::~notlarDialog()
     delete ui;
 }
 
-void notlarDialog::initialize(QString s) {
+void notlarDialog::initialize(QString s, QString sira) {
 
     servisNo = s;
+    data = sira;
     MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
     database.setHostName(w.hostName);
@@ -37,7 +37,7 @@ void notlarDialog::initialize(QString s) {
 
         QSqlQuery* qry = new QSqlQuery(database);
 
-        qry ->prepare("select Notlar from teknikservis where `Servis No` = '" + s + "'");
+        qry ->prepare("select Notlar from teknikservis where `Servis No` = '" + servisNo + "' AND `Sıra` = '" + data +"';");
 
         if(qry->exec()) {
 
@@ -48,8 +48,6 @@ void notlarDialog::initialize(QString s) {
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
         }
-        //qDebug() << (modal->rowCount());
-
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
@@ -71,7 +69,7 @@ void notlarDialog::on_pushButton_clicked()
 
         QSqlQuery qry;
         QString not1 = ui->lineEdit->toPlainText();
-        qry.prepare("UPDATE teknikservis SET Notlar = '" + not1 + "' WHERE `Servis No` = '" + servisNo + "'");
+        qry.prepare("UPDATE teknikservis SET Notlar = '" + not1 + "' WHERE `Servis No` = '" + servisNo + "' AND `Sıra` = '" + data +"';");
         qry.bindValue(":not",not1);
 
         if(qry.exec()) {

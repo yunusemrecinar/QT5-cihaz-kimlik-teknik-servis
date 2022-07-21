@@ -16,14 +16,14 @@ public:
     explicit notlarDialog(QWidget *parent = nullptr);
     ~notlarDialog();
 public slots:
-    void initialize(QString s);
+    void initialize(QString s, QString sira);
 private slots:
     void on_pushButton_clicked();
 
 private:
     Ui::notlarDialog *ui;
     QSqlDatabase database;
-
+    QString data;
     QString servisNo;
 };
 

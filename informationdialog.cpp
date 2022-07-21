@@ -9,44 +9,9 @@ InformationDialog::InformationDialog(QWidget *parent) :
     ui(new Ui::InformationDialog)
 {
     ui->setupUi(this);
-    //this->setFixedSize(this->width(),this->height());
+
     this->setWindowTitle(" ");
     MainWindow w;
-    //ui->inf->setText("21");
-
-    //ui->inf->setText(w.getLabel());
-/*
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    database.setPassword("");
-    database.setDatabaseName("modeo");
-
-
-    if(database.open()) {
-
-        QSqlQuery* qry = new QSqlQuery(database);
-
-        qry ->prepare("select * from cihazkimlik where Model = '" +ui->inf->text() +"'");
-        QMessageBox::information(this, "Not Connected", ui->inf->text());
-        if(qry->exec()) {
-            while(qry->next()) {
-                ui->model_->setText(qry->value(0).toString());
-
-            }
-        }else {
-            QMessageBox::critical(this, tr("error::"), qry->lastError().text());
-        }
-        //qDebug() << (modal->rowCount());
-
-
-    }else {
-        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
-        cout << "Database not connected!" << endl;
-    }
-    database.close();*/
-
-
 
 }
 
@@ -57,7 +22,7 @@ InformationDialog::~InformationDialog()
     delete ui;
 }
 void InformationDialog::initialize(QString s) {
-    //ui->inf->setText(s);
+
     MainWindow w;
     database = QSqlDatabase::addDatabase("QMYSQL");
     database.setHostName(w.hostName);
@@ -95,8 +60,6 @@ void InformationDialog::initialize(QString s) {
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
         }
-        //qDebug() << (modal->rowCount());
-
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
@@ -104,25 +67,7 @@ void InformationDialog::initialize(QString s) {
     }
     database.close();
 }
-/*
-void InformationDialog::onMessageSent(const QString & message) {
-    cout << "Data sent!" << endl;
-    ui->inf->setText(message);
-}*/
 
-
-/*
-void InformationDialog::on_btnLauncher_clicked() {
-    if(_mainWindow) {
-        _mainWindow = new MainWindow(this);
-
-
-        connect(_mainWindow,&MainWindow::notifyMessageSent,
-                this,&InformationDialog::onMessageSent);
-    }
-    _mainWindow->show();
-}
-*/
 
 void InformationDialog::on_pushButton_clicked()
 {
