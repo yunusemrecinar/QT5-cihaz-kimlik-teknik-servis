@@ -16,17 +16,8 @@ class ServisDialog : public QDialog
 public:
     explicit ServisDialog(QWidget *parent = nullptr);
     ~ServisDialog();
-
-private slots:
-    void on_pushButton_clicked();
-
-    void on_pushButton_2_clicked();
-
-private:
-    Ui::ServisDialog *ui;
-
-    QSqlDatabase database;
-
+    QString notSakla;
+    QString notlar = "";
     QString malzemeler = "";
     QString servisNo;
     QString UIDno;
@@ -37,7 +28,19 @@ private:
     QString tamirBitisTarihi;
     QString testSuresi;
     QString sevkTarihi;
-    QString notlar = "";
+    bool check = true;
+public slots:
+    void initialize(QSqlDatabase d,QString sNo);
+private slots:
+    void on_pushButton_clicked();
+
+    //void on_pushButton_2_clicked();
+
+private:
+    Ui::ServisDialog *ui;
+
+    QSqlDatabase database;
+
 
     NotEkleDialog *idNot;
 

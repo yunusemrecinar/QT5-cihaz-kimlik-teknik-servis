@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include <QMainWindow>
-
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QMessageBox>
@@ -23,7 +22,7 @@ public:
     void onMessageSent(const QString &);
     ~InformationDialog();
 public slots:
-    void initialize(QString s);
+    void initialize(QString s, QSqlDatabase d);
 private slots:
     //void onMessageSent(const QString &);
     void on_pushButton_clicked();

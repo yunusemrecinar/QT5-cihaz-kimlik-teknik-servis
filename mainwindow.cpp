@@ -21,14 +21,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     readFile("test.txt");
+    addColumns();
 
     this->setWindowTitle("ANA MENÜ");
     ui->pushButton_servis_verigetir->setVisible(false);
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(hostName);
-    database.setUserName(userName);
-    database.setPassword(password);
-    database.setDatabaseName(dbName);
 
 
 }
@@ -97,51 +93,79 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_load_clicked()
 {
 
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(hostName);
-    database.setUserName(userName);
-    database.setPassword(password);
-    database.setDatabaseName(dbName);
-    QSqlQueryModel * modal = new QSqlQueryModel();
+    //database = QSqlDatabase::addDatabase("QMYSQL");
+    //database.setHostName(hostName);
+    //database.setUserName(userName);
+    //database.setPassword(password);
+    //database.setDatabaseName(dbName);
+    //modal = new QSqlQueryModel();
+    QSqlQueryModel *model = new QSqlQueryModel();
 
-    if(database.open()) {
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
 
-        QSqlQuery* qry = new QSqlQuery(database1);
+        //model = new QSqlQueryModel();
 
+        //setValue("select * from cihazkimlik");
+        //ui->tableView->setModel(model);
         qry ->prepare("select * from cihazkimlik");
         qry -> exec();
-        modal->setQuery(*qry);
-        ui->tableView->setModel(modal);
+        model->setQuery(*qry);
+        ui->tableView->setModel(model);
         ui->tableView->resizeColumnsToContents();
-
-
+        //modal->submit();
+        foreach(int col, columnsToHide)
+            ui->tableView->hideColumn(col);
+        //columnsToHide.append(0);
     }else {
-        QMessageBox::information(this, "Not Connected", database1.lastError().text());
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 
 }
 
+void MainWindow::addColumns() {
+    columnsToHide.append(2);
+    columnsToHide.append(4);
+    columnsToHide.append(5);
+    columnsToHide.append(6);
+    columnsToHide.append(8);
+    columnsToHide.append(9);
+    columnsToHide.append(10);
+    columnsToHide.append(11);
+    columnsToHide.append(12);
+    columnsToHide.append(13);
+    columnsToHide.append(15);
+    columnsToHide.append(16);
+    columnsToHide.append(17);
+}
+//QSqlQueryModel* MainWindow::setValue(QString value) {
+//    model->setQuery(value);
+//
+//    return model;
+    //model->setQuery(value);
+//}
 void MainWindow::on_pushButton_2_clicked()
 {
     //SecDialog secdialog;
     //secdialog.setModal(true);
     //secdialog.exec();
     secdialog = new SecDialog(this);
-    secdialog->show();
+    secdialog->initialize(database);
+    secdialog->show();    
 }
 
 void MainWindow::on_getInformation_clicked()
 {
     InformationDialog *inform = new InformationDialog();
-    inform->initialize(mainWindowValue);
-    inform->exec();
+    inform->initialize(mainWindowValue,database);
+    inform->show();
 }
 
 void MainWindow::on_pushButton_servis_bilgial_clicked()
 {
     ServisGetDialog *servisDialog = new ServisGetDialog();
-    servisDialog->initialize(serviceValue, rowCount);
+    servisDialog->initialize(rowCount, database);
     servisDialog->exec();
 }
 
@@ -174,6 +198,7 @@ void MainWindow::on_pushButton_servis_verigetir_clicked()
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
     servisDialog = new ServisDialog(this);
+    servisDialog->initialize(database,mainWindowValue);
     servisDialog->show();
 }
 
@@ -206,8 +231,7 @@ void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
 {
     QString value = ui->tableView_teknikServis->model()->data(index).toString();
     int row = ui->tableView_teknikServis->currentIndex().row();
-    int row2 = ui->tableView_teknikServis->currentIndex().column();
-    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,row2-1)).toString();
+    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
 
     serviceValue = value;
     rowCount = rowValue;

@@ -21,7 +21,7 @@ public:
     QString indexValue;
 
 public slots:
-    void initialize(QString s,QString index);
+    void initialize(QString index, QSqlDatabase d);
 private slots:
     void on_pushButton_clicked();
 

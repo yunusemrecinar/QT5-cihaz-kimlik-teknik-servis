@@ -22,22 +22,17 @@ notlarDialog::~notlarDialog()
     delete ui;
 }
 
-void notlarDialog::initialize(QString s, QString sira) {
+void notlarDialog::initialize(QString sira, QSqlDatabase d) {
 
-    servisNo = s;
+    //servisNo = s;
+    database = d;
     data = sira;
-    MainWindow w;
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(w.hostName);
-    database.setUserName(w.userName);
-    database.setPassword(w.password);
-    database.setDatabaseName(w.dbName);
 
-    if(database.open()) {
+    if(database.isOpen()) {
 
         QSqlQuery* qry = new QSqlQuery(database);
 
-        qry ->prepare("select Notlar from teknikservis where `Servis No` = '" + servisNo + "' AND `Sıra` = '" + data +"';");
+        qry ->prepare("select Notlar from teknikservis where `Sıra` = '" + data +"';");
 
         if(qry->exec()) {
 
@@ -53,23 +48,17 @@ void notlarDialog::initialize(QString s, QString sira) {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
     }
-    database.close();
+
 }
 
 void notlarDialog::on_pushButton_clicked()
 {
-    MainWindow w;
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(w.hostName);
-    database.setUserName(w.userName);
-    database.setPassword(w.password);
-    database.setDatabaseName(w.dbName);
 
-    if(database.open()) {
+    if(database.isOpen()) {
 
         QSqlQuery qry;
         QString not1 = ui->lineEdit->toPlainText();
-        qry.prepare("UPDATE teknikservis SET Notlar = '" + not1 + "' WHERE `Servis No` = '" + servisNo + "' AND `Sıra` = '" + data +"';");
+        qry.prepare("UPDATE teknikservis SET Notlar = '" + not1 + "' WHERE `Sıra` = '" + data + "';");
         qry.bindValue(":not",not1);
 
         if(qry.exec()) {
@@ -84,7 +73,7 @@ void notlarDialog::on_pushButton_clicked()
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
     }
-    database.close();
+
     this->close();
 
 }

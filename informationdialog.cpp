@@ -11,7 +11,10 @@ InformationDialog::InformationDialog(QWidget *parent) :
     ui->setupUi(this);
 
     this->setWindowTitle(" ");
-    MainWindow w;
+    //MainWindow w;
+    //ui->Model->setText(QString::number(w.database.isOpen()));
+    //w.database.open();
+    //ui->cihazSeriNo->setText(QString::number(w.database.isOpen()));
 
 }
 
@@ -21,17 +24,19 @@ InformationDialog::~InformationDialog()
 {
     delete ui;
 }
-void InformationDialog::initialize(QString s) {
-
-    MainWindow w;
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(w.hostName);
-    database.setUserName(w.userName);
-    database.setPassword(w.password);
-    database.setDatabaseName(w.dbName);
+void InformationDialog::initialize(QString s,QSqlDatabase d) {
+    database = d;
+    //ainWindow w;
+    //database = w.database;
+    //database = w.database;
+    //database = QSqlDatabase::addDatabase("QMYSQL");
+    //database.setHostName(w.hostName);
+    //database.setUserName(w.userName);
+    //database.setPassword(w.password);
+    //database.setDatabaseName(w.dbName);
     seriNo = s;
 
-    if(database.open()) {
+    if(database.isOpen()) {
 
         QSqlQuery* qry = new QSqlQuery(database);
 
@@ -62,23 +67,23 @@ void InformationDialog::initialize(QString s) {
         }
 
     }else {
-        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        QMessageBox::information(this, "Not Connected", "Database Is Not Connected1");
         cout << "Database not connected!" << endl;
     }
-    database.close();
+    //database.close();
 }
 
 
 void InformationDialog::on_pushButton_clicked()
 {
-    MainWindow w;
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(w.hostName);
-    database.setUserName(w.userName);
-    database.setPassword(w.password);
-    database.setDatabaseName(w.dbName);
 
-    if(database.open()) {
+    //database = QSqlDatabase::addDatabase("QMYSQL");
+    //database.setHostName(w.hostName);
+    //database.setUserName(w.userName);
+    //database.setPassword(w.password);
+    //database.setDatabaseName(w.dbName);
+
+    if(database.isOpen()) {
 
         QSqlQuery qry;
         QString model = ui->model_->text();
@@ -128,16 +133,16 @@ void InformationDialog::on_pushButton_clicked()
         qry.prepare("UPDATE cihazkimlik SET `Modem Seri Num 4` = '" + modemSeri4 + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE cihazkimlik SET `Modem Seri Num 5` = '" + modemSeri5 + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");        qry.exec();
+        qry.prepare("UPDATE cihazkimlik SET `Modem Seri Num 5` = '" + modemSeri5 + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE cihazkimlik SET `Modem Seri Num 6` = '" + modemSeri6 + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");        qry.exec();
+        qry.prepare("UPDATE cihazkimlik SET `Modem Seri Num 6` = '" + modemSeri6 + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE cihazkimlik SET `Uretim Tarihi` = '" + uretimTarih + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");        qry.exec();
+        qry.prepare("UPDATE cihazkimlik SET `Uretim Tarihi` = '" + uretimTarih + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE cihazkimlik SET `Test Durumu` = '" + test + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");        qry.exec();
+        qry.prepare("UPDATE cihazkimlik SET `Test Durumu` = '" + test + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Degisen Parcalar` = '" + degisenParca + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no->text() + "';");
@@ -157,7 +162,7 @@ void InformationDialog::on_pushButton_clicked()
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
     }
-    database.close();
+
     this->close();
 
 }

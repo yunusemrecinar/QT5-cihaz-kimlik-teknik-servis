@@ -22,13 +22,14 @@ class SecDialog : public QDialog
 public:
     explicit SecDialog(QWidget *parent = nullptr);
     ~SecDialog();
-
+public slots:
+    void initialize(QSqlDatabase d);
 private slots:
     void on_pushButton_clicked();
 
 private:
     Ui::SecDialog *ui;
-    QSqlDatabase database1;
+    QSqlDatabase database;
 
     QMenu *m_lineedit_menu;
     LineEditPopUpForm *m_lineedit_popup_form;

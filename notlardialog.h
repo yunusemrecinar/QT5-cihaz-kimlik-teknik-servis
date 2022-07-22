@@ -16,7 +16,7 @@ public:
     explicit notlarDialog(QWidget *parent = nullptr);
     ~notlarDialog();
 public slots:
-    void initialize(QString s, QString sira);
+    void initialize(QString sira, QSqlDatabase d);
 private slots:
     void on_pushButton_clicked();
 

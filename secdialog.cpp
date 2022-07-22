@@ -16,27 +16,42 @@ SecDialog::SecDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SecDialog)
 {
-
     ui->setupUi(this);
-    this->setWindowTitle(" ");    
-
+    ui->cihaz_seri_no->setMaxLength(9);
+    ui->cihaz_seri_no->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->UIDNo_1->setMaxLength(12);
+    ui->modemSeri1_->setMaxLength(15);
+    ui->modemSeri2_->setMaxLength(15);
+    ui->modemSeri3_->setMaxLength(15);
+    ui->modemSeri4_->setMaxLength(15);
+    ui->modemSeri5_->setMaxLength(15);
+    ui->modemSeri6_->setMaxLength(15);
+    ui->modemSeri1_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->modemSeri2_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->modemSeri3_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->modemSeri4_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->modemSeri5_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->modemSeri6_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    this->setWindowTitle(" ");
+    //ui->label_2->setText(QString::number(w.database.isOpen()));
 }
 
 SecDialog::~SecDialog()
 {
     delete ui;
 }
-
+void SecDialog::initialize(QSqlDatabase d) {
+    database = d;
+}
 void SecDialog::on_pushButton_clicked()
 {
-    MainWindow w;
-    database1 = QSqlDatabase::addDatabase("QMYSQL");
-    database1.setHostName(w.hostName);
-    database1.setUserName(w.userName);
-    database1.setPassword(w.password);
-    database1.setDatabaseName(w.dbName);
+    //database1 = QSqlDatabase::addDatabase("QMYSQL");
+    //database1.setHostName(w.hostName);
+    //database1.setUserName(w.userName);
+    //database1.setPassword(w.password);
+    //database1.setDatabaseName(w.dbName);
 
-    if(database1.open()) {
+    if(database.isOpen()) {
         QString model;
         if(ui->model1_->isChecked()) {
             model = ui->model1_->text();
@@ -54,8 +69,15 @@ void SecDialog::on_pushButton_clicked()
             model = ui->model7_->text();
         }
         QString cihazSeriNo = ui->cihaz_seri_no->text();
-
-        QString anakartNo = ui->anakart_->text();
+        QString uidNo = ui->UIDNo_1->text();
+        QString anakartNo;
+        if(ui->anakart_1->isChecked()) {
+           anakartNo = ui->anakart_1->text();
+        }else if(ui->anakart_2->isChecked()) {
+            anakartNo = ui->anakart_2->text();
+        }else if(ui->anakart_3->isChecked()) {
+            anakartNo = ui->anakart_3->text();
+        }
         QString modemKarti = ui-> modem_karti_->text();
         QString lcdKarti = ui->lcd_karti_->text();
         QString sarjKarti = ui->sarj_karti_->text();
@@ -75,16 +97,17 @@ void SecDialog::on_pushButton_clicked()
         QSqlQuery qry;
 
         qry.prepare("INSERT INTO cihazkimlik(`Model`,`Cihaz Seri No`,`Anakart No`,"
-                    "`Modem Kartı`,`Lcd Kartı`,`Şarj Kartı`,`Durumu`,`Modem Seri Num 1`,"
+                    "`UID No`,`Modem Kartı`,`Lcd Kartı`,`Şarj Kartı`,`Durumu`,`Modem Seri Num 1`,"
                     "`Modem Seri Num 2`,`Modem Seri Num 3`,`Modem Seri Num 4`,`Modem Seri Num 5`,"
                     "`Modem Seri Num 6`,`Uretim Tarihi`,`Test Durumu`,`Degisen Parcalar`,`Notlar`) "
-                    "VALUES(:model,:cihazSeriNo,:anakartNo,"
+                    "VALUES(:model,:cihazSeriNo,:anakartNo,:uidNo,"
                     ":modemKarti,:lcdKarti,:sarjKarti,:durumu,:modemSeriNum1,"
                     ":modemSeriNum2,:modemSeriNum3,:modemSeriNum4,:modemSeriNum5,"
                     ":modemSeriNum6,:uretimTarihi,:testDurumu,:degisenParcalar,:notlar)");
         qry.bindValue(":model",model);
         qry.bindValue(":cihazSeriNo",cihazSeriNo);
         qry.bindValue(":anakartNo",anakartNo);
+        qry.bindValue(":uidNo",uidNo);
         qry.bindValue(":modemKarti",modemKarti);
         qry.bindValue(":lcdKarti",lcdKarti);
         qry.bindValue(":sarjKarti",sarjKarti);
@@ -112,7 +135,6 @@ void SecDialog::on_pushButton_clicked()
     }
 
 
-    database1.close();
     this->close();
 }
 

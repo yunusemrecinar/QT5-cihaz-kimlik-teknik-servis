@@ -1,4 +1,4 @@
-#include "servisdialog.h"
+    #include "servisdialog.h"
 #include "ui_servisdialog.h"
 #include <QMessageBox>
 #include <QSqlQuery>
@@ -14,31 +14,28 @@ ServisDialog::ServisDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle(" ");
-    MainWindow w;
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(w.hostName);
-    database.setUserName(w.userName);
-    database.setPassword(w.password);
-    database.setDatabaseName(w.dbName);
 }
 
 ServisDialog::~ServisDialog()
 {
     delete ui;
 }
-
+void ServisDialog::initialize(QSqlDatabase d,QString sNo) {
+    ui->servisNo_->setText(sNo);
+    database = d;
+}
 void ServisDialog::on_pushButton_clicked()
 {
 
-
     if(database.open()) {
+
         servisNo = ui->servisNo_->text();
-        UIDno = ui->UIDNo_->text();
         gelisTarihi = ui->gelisTarihiYear_->text() + "-" + ui->gelisTarihiMonth_->text() + "-" + ui->gelisTarihiDay_->text();
         musteriAdi = ui->musteriAdi_->text();
         arizaTarifi = ui->arizaTanimi_->text();
         yapilanIslem = ui->yapilanIslem_->text();
         malzemeler = "";
+
         if(ui->donanim_1->isChecked()) {
             malzemeler += ui->donanim_1->text() + ", ";
         }if(ui->donanim_2->isChecked()) {
@@ -67,8 +64,8 @@ void ServisDialog::on_pushButton_clicked()
         sevkTarihi = ui->sevkTarihiDay_->text() + "." + ui->sevkTarihiMonth_->text() + "." + ui->sevkTarihiYear_->text();
         notlar = "";
 
-        QSqlQuery qry;
-
+        //QSqlQuery qry;
+        /*
         qry.prepare("INSERT INTO teknikservis(`Servis No`,`UID No`,`Geliş Tarihi`,"
                     "`Müşteri Adı`,`Arıza Tarifi`,`Yapılan İşlem`,`Cihazla Gelen Malzemeler`,"
                     "`Tamir Bitiş Tarihi`,`Test Süresi`,`Sevk Tarihi`,`Notlar`)"
@@ -85,21 +82,29 @@ void ServisDialog::on_pushButton_clicked()
         qry.bindValue(":tamirBitisTarih",tamirBitisTarihi);
         qry.bindValue(":testSuresi",testSuresi);
         qry.bindValue(":sevkTarihi",sevkTarihi);
-        qry.bindValue(":notlar",notlar);
 
         if(qry.exec()) {
-            NotEkleDialog *idNot = new NotEkleDialog();
-            idNot->initialize(servisNo);
-            idNot->show();
+            QMessageBox::information(this,"Inserted", "Data Inserted Succesfully");
         }else {
             QMessageBox::information(this,"Not Inserted",qry.lastError().text());
         }
+*/
 
+
+        NotEkleDialog *idNot = new NotEkleDialog();
+        idNot->initialize(servisNo,database,malzemeler,UIDno,gelisTarihi,
+                          musteriAdi,arizaTarifi,yapilanIslem,
+                          tamirBitisTarihi,testSuresi,sevkTarihi);
+        idNot->show();
+
+
+
+        this->close();
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
     }
 
-    this->close();
+
 
 }
 

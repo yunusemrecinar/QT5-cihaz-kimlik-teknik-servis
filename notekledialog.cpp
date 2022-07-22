@@ -24,37 +24,57 @@ NotEkleDialog::~NotEkleDialog()
 
 void NotEkleDialog::on_pushButton_clicked()
 {
-    MainWindow w;
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName(w.hostName);
-    database.setUserName(w.userName);
-    database.setPassword(w.password);
-    database.setDatabaseName(w.dbName);
 
-    if(database.open()) {
+    if(database.isOpen()) {
 
         QSqlQuery qry;
         QString not1 = ui->textEdit->toPlainText();
-        qry.prepare("UPDATE teknikservis SET Notlar = ':not' WHERE `Servis No` = '" + servisNo + "'");
-        qry.bindValue(":not",not1);
+
+        qry.prepare("INSERT INTO teknikservis(`Servis No`,`Geliş Tarihi`,"
+                            "`Müşteri Adı`,`Arıza Tarifi`,`Yapılan İşlem`,`Cihazla Gelen Malzemeler`,"
+                            "`Tamir Bitiş Tarihi`,`Test Süresi`,`Sevk Tarihi`,`Notlar`)"
+                            "VALUES(:servisNo,:uidNo,:gelisTarihi,"
+                            ":musteriAdi,:arizaTarifi,:yapilanIslem,:malzemeler,"
+                            ":tamirBitisTarih,:testSuresi,:sevkTarihi,:notlar)");
+                qry.bindValue(":servisNo",servisNo);
+                qry.bindValue(":gelisTarihi",gelisTarihi);
+                qry.bindValue(":musteriAdi",musteriAdi);
+                qry.bindValue(":arizaTarifi",arizaTarifi);
+                qry.bindValue(":yapilanIslem",yapilanIslem);
+                qry.bindValue(":malzemeler",malzemeler);
+                qry.bindValue(":tamirBitisTarih",tamirBitisTarihi);
+                qry.bindValue(":testSuresi",testSuresi);
+                qry.bindValue(":sevkTarihi",sevkTarihi);
+                qry.bindValue(":notlar",not1);
 
         if(qry.exec()) {
-            QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
+            QMessageBox::information(this,"Inserted", "Data Inserted Succesfully");
         }else {
-            QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+            QMessageBox::information(this,"Not Inserted","+"+qry.lastError().text());
         }
-
-
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
     }
-    database.close();
+
     this->close();
 
 }
 
-void NotEkleDialog::initialize(QString s) {
+void NotEkleDialog::initialize(QString s, QSqlDatabase d,QString malzemeler,
+                               QString UIDno,QString gelisTarihi,QString musteriAdi,
+                               QString arizaTarifi,QString yapilanIslem,
+                               QString tamirBitisTarihi,QString testSuresi,QString sevkTarihi) {
     servisNo = s;
+    database = d;
+    this->malzemeler = malzemeler;
+    this->UIDno = UIDno;
+    this->gelisTarihi = gelisTarihi;
+    this->musteriAdi = musteriAdi;
+    this->arizaTarifi = arizaTarifi;
+    this->yapilanIslem = yapilanIslem;
+    this->tamirBitisTarihi = tamirBitisTarihi;
+    this->testSuresi = testSuresi;
+    this->sevkTarihi = sevkTarihi;
 }

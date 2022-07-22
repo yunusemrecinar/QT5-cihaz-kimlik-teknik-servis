@@ -28,7 +28,10 @@ public:
     static MainWindow selectedVal;
 
     QString mainWindowValue;
+
     QSqlDatabase database1;
+    QSqlDatabase database;
+
     QString hostName;
     QString userName;
     QString password;
@@ -38,11 +41,14 @@ public:
 
 public slots:
     void readFile(QString filename);
+    //QSqlQueryModel* setValue(QString qry);
 signals:
     void notifyMessageSent(const QString& message);
 private slots:
 
     void on_pushButton_clicked();
+
+    void addColumns();
 
     void on_pushButton_load_clicked();
 
@@ -50,7 +56,7 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-    void on_tableView_activated(const QModelIndex &index);
+    //void on_tableView_activated(const QModelIndex &index);
 
     void on_getInformation_clicked();
 
@@ -60,7 +66,7 @@ private slots:
 
     void on_pushButton_servis_bilgial_clicked();
 
-    void on_tableView_teknikServis_activated(const QModelIndex &index);
+    //void on_tableView_teknikServis_activated(const QModelIndex &index);
 
     void on_tableView_clicked(const QModelIndex &index);
 
@@ -76,8 +82,8 @@ private:
     ServisDialog *servisDialog;
     ServisGetDialog *servisGetDialog;
 
-    QSqlDatabase database;
 
+    QList<int> columnsToHide;
     //QSqlDatabase database2;
 
     QMenu *m_lineedit_menu;
