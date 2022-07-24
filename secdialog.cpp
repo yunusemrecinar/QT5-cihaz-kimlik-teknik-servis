@@ -6,6 +6,7 @@
 #include "lineeditpopupform.h"
 #include <QVBoxLayout>
 #include <QMenu>
+#include <QComboBox>
 
 #include <iostream>
 using namespace std;
@@ -17,6 +18,15 @@ SecDialog::SecDialog(QWidget *parent) :
     ui(new Ui::SecDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle(" ");
+    changes();
+}
+
+SecDialog::~SecDialog()
+{
+    delete ui;
+}
+void SecDialog::changes() {
     ui->cihaz_seri_no->setMaxLength(9);
     ui->cihaz_seri_no->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
     ui->UIDNo_1->setMaxLength(12);
@@ -32,58 +42,92 @@ SecDialog::SecDialog(QWidget *parent) :
     ui->modemSeri4_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
     ui->modemSeri5_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
     ui->modemSeri6_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
-    this->setWindowTitle(" ");
-    //ui->label_2->setText(QString::number(w.database.isOpen()));
+    ui->date_day->setMaximum(31);
+    ui->date_day->setMinimum(1);
+    ui->date_day->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->date_month->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->date_month->setMaximum(12);
+    ui->date_month->setMinimum(1);
+    ui->date_year->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->date_year->setMaximum(QDate::currentDate().year());
+    ui->date_year->setMinimum(1);
+    ui->date_day->clear();
+    ui->date_month->clear();
+    ui->date_year->clear();
+    QStringList commandsAnakartNo = {"MDO-01-v02-6-b/2013","MHD-b1-v0.1/2014","MHD-b1-v02015sp0004/"};
+    ui->anakart_->addItems(commandsAnakartNo);
+    connect(ui->anakart_, &QComboBox::currentTextChanged, this, &SecDialog::commandChanged);
+    QStringList commandsModemKart = {"MD10-02-v04/2012","MHD-B2-v0.1/2014","MHD-B2-v0.1/000"};
+    ui->modem_karti_->addItems(commandsModemKart);
+    connect(ui->modem_karti_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedModemKart);
+    QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
+    ui->durum_->addItems(commandsDurum);
+    connect(ui->anakart_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedDurum);
+    QStringList commandsSarjKarti = {"MHD-B7-v.0.0","MHD-B7-v2"};
+    ui->sarj_karti_->addItems(commandsSarjKarti);
+    connect(ui->sarj_karti_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedSarjKarti);
+    QStringList commandsLcdKarti = {"MHD-B5-v0.0/811/2014","MHD-B5-v0.0"};
+    ui->lcd_karti_->addItems(commandsLcdKarti);
+    connect(ui->lcd_karti_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedLcdKarti);
+    QStringList commandsModel = {"Mobiot Cihazı","Server Cihazı","ML33+ Modeo Cihazı","ML33 Modeo Cihazı","ML22 Modeo Cihazı","ML21 Modeo Cihazı","ML11 Modeo Cihazı"};
+    ui->model_->addItems(commandsModel);
+    connect(ui->model_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedModel);
 }
-
-SecDialog::~SecDialog()
-{
-    delete ui;
+void SecDialog::commandChangedModel(const QString& command_text) {
+    model = command_text;
+}
+void SecDialog::commandChangedLcdKarti(const QString& command_text) {
+    lcdKarti = command_text;
+}
+void SecDialog::commandChangedSarjKarti(const QString& command_text) {
+    sarjKarti = command_text;
+}
+void SecDialog::commandChangedDurum(const QString& command_text) {
+    durum = command_text;
+}
+void SecDialog::commandChanged(const QString& command_text) {
+    anakartNo = command_text;
+}
+void SecDialog::commandChangedModemKart(const QString& command_text) {
+    modemKarti = command_text;
 }
 void SecDialog::initialize(QSqlDatabase d) {
     database = d;
 }
+void SecDialog::degisenParca() {
+    if(ui->degisenParca_1->isChecked())
+        degisenParcalar += ui->degisenParca_1->text() +  ",";
+    if(ui->degisenParca_2->isChecked())
+        degisenParcalar += ui->degisenParca_2->text() + ",";
+    if(ui->degisenParca_3->isChecked())
+        degisenParcalar += ui->degisenParca_3->text() + ",";
+    if(ui->degisenParca_4->isChecked())
+        degisenParcalar += ui->degisenParca_4->text() + ",";
+    if(ui->degisenParca_5->isChecked())
+        degisenParcalar += ui->degisenParca_5->text() + ",";
+    if(ui->degisenParca_6->isChecked())
+        degisenParcalar += ui->degisenParca_6->text() + ",";
+    if(ui->degisenParca_7->isChecked())
+        degisenParcalar += ui->degisenParca_7->text() + ",";
+    if(ui->degisenParca_8->isChecked())
+        degisenParcalar += ui->degisenParca_8->text() + ",";
+    if(ui->degisenParca_9->isChecked())
+        degisenParcalar += ui->degisenParca_9->text() + ",";
+    if(ui->degisenParca_10->isChecked())
+        degisenParcalar += ui->degisenParca_10->text() + ",";
+    if(ui->degisenParca_11->isChecked())
+        degisenParcalar += ui->degisenParca_11->text() + ",";
+    if(ui->degisenParca_12->isChecked())
+        degisenParcalar += ui->degisenParca_12->text() + ",";
+}
 void SecDialog::on_pushButton_clicked()
 {
-    //database1 = QSqlDatabase::addDatabase("QMYSQL");
-    //database1.setHostName(w.hostName);
-    //database1.setUserName(w.userName);
-    //database1.setPassword(w.password);
-    //database1.setDatabaseName(w.dbName);
 
     if(database.isOpen()) {
-        QString model;
-        if(ui->model1_->isChecked()) {
-            model = ui->model1_->text();
-        }else if(ui->model2_->isChecked()) {
-            model = ui->model2_->text();
-        }else if(ui->model3_->isChecked()) {
-            model = ui->model3_->text();
-        }else if(ui->model4_->isChecked()) {
-            model = ui->model4_->text();
-        }else if(ui->model5_->isChecked()) {
-            model = ui->model5_->text();
-        }else if(ui->model6_->isChecked()) {
-            model = ui->model6_->text();
-        }else if(ui->model7_->isChecked()) {
-            model = ui->model7_->text();
-        }
-        QString cihazSeriNo = ui->cihaz_seri_no->text();
-        QString uidNo = ui->UIDNo_1->text();
-        QString anakartNo;
-        if(ui->anakart_1->isChecked()) {
-           anakartNo = ui->anakart_1->text();
-        }else if(ui->anakart_2->isChecked()) {
-            anakartNo = ui->anakart_2->text();
-        }else if(ui->anakart_3->isChecked()) {
-            anakartNo = ui->anakart_3->text();
-        }
-        QString modemKarti = ui-> modem_karti_->text();
-        QString lcdKarti = ui->lcd_karti_->text();
-        QString sarjKarti = ui->sarj_karti_->text();
-        QString durum = ui->durum_->text();
-        QString uretimTarihi = ui->date_day->text() + "." + ui->date_month->text() + "." + ui->date_year->text();
 
+        QString cihazSeriNo = ui->cihaz_seri_no->text();
+        QString uidNo = ui->UIDNo_1->text();       
+        QString uretimTarihi = ui->date_day->text() + "." + ui->date_month->text() + "." + ui->date_year->text();
         QString modemSeri1 = ui->modemSeri1_->text();
         QString modemSeri2 = ui->modemSeri2_->text();
         QString modemSeri3 = ui->modemSeri3_->text();
@@ -91,8 +135,8 @@ void SecDialog::on_pushButton_clicked()
         QString modemSeri5 = ui->modemSeri5_->text();
         QString modemSeri6 = ui->modemSeri6_->text();
         QString testDurumu = ui->test_durum_->text();
-        QString degisenParcalar = ui->degisenParcalar_->text();
-        QString notlar = ui->notlar_->text();
+        degisenParca();
+        QString notlar = ui->notlar_->toPlainText();
 
         QSqlQuery qry;
 

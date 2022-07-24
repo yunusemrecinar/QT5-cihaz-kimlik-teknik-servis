@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     addColumns();
 
     this->setWindowTitle("ANA MENÜ");
-    ui->pushButton_servis_verigetir->setVisible(false);
+    //ui->pushButton_servis_verigetir->setVisible(false);
 
 
 }
@@ -86,19 +86,37 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+
+
+void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        //model = new QSqlQueryModel();
+
+        //setValue("select * from cihazkimlik");
+        //ui->tableView->setModel(model);
+        qry ->prepare("select * from cihazkimlik where `Cihaz Seri No` LIKE '" + arg1 + "%'");
+        qry -> exec();
+        model->setQuery(*qry);
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+        //modal->submit();
+        foreach(int col, columnsToHide)
+            ui->tableView->hideColumn(col);
+        //columnsToHide.append(0);
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
 }
 
 void MainWindow::on_pushButton_load_clicked()
 {
 
-    //database = QSqlDatabase::addDatabase("QMYSQL");
-    //database.setHostName(hostName);
-    //database.setUserName(userName);
-    //database.setPassword(password);
-    //database.setDatabaseName(dbName);
-    //modal = new QSqlQueryModel();
     QSqlQueryModel *model = new QSqlQueryModel();
 
     if(database.isOpen()) {
@@ -139,12 +157,7 @@ void MainWindow::addColumns() {
     columnsToHide.append(16);
     columnsToHide.append(17);
 }
-//QSqlQueryModel* MainWindow::setValue(QString value) {
-//    model->setQuery(value);
-//
-//    return model;
-    //model->setQuery(value);
-//}
+
 void MainWindow::on_pushButton_2_clicked()
 {
     //SecDialog secdialog;
@@ -155,44 +168,11 @@ void MainWindow::on_pushButton_2_clicked()
     secdialog->show();    
 }
 
-void MainWindow::on_getInformation_clicked()
-{
-    InformationDialog *inform = new InformationDialog();
-    inform->initialize(mainWindowValue,database);
-    inform->show();
-}
-
 void MainWindow::on_pushButton_servis_bilgial_clicked()
 {
     ServisGetDialog *servisDialog = new ServisGetDialog();
     servisDialog->initialize(rowCount, database);
     servisDialog->exec();
-}
-
-void MainWindow::on_pushButton_servis_verigetir_clicked()
-{
-    //database2 = QSqlDatabase::addDatabase("QMYSQL");
-    //database2.setHostName("localhost");
-    //database2.setUserName("root");
-    //database2.setPassword("");
-    //database2.setDatabaseName("modeo");
-
-    QSqlQueryModel * modal = new QSqlQueryModel();
-
-    if(database1.open()) {
-
-        QSqlQuery* qry = new QSqlQuery(database1);
-
-        qry ->prepare("select * from teknikservis");
-        qry -> exec();
-        modal->setQuery(*qry);
-        ui->tableView_teknikServis->setModel(modal);
-        ui->tableView_teknikServis->resizeColumnsToContents();
-
-    }else {
-        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
-        cout << "Database not connected!" << endl;
-    }
 }
 
 void MainWindow::on_pushButton_servis_ekle_clicked()
@@ -237,3 +217,14 @@ void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
     rowCount = rowValue;
 
 }
+
+void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    QString value = ui->tableView->model()->data(index).toString();
+    mainWindowValue = value;
+
+    InformationDialog *inform = new InformationDialog();
+    inform->initialize(mainWindowValue,database);
+    inform->show();
+}
+

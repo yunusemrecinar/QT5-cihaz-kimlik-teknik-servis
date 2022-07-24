@@ -46,7 +46,7 @@ signals:
     void notifyMessageSent(const QString& message);
 private slots:
 
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
 
     void addColumns();
 
@@ -58,9 +58,9 @@ private slots:
 
     //void on_tableView_activated(const QModelIndex &index);
 
-    void on_getInformation_clicked();
+    //void on_getInformation_clicked();
 
-    void on_pushButton_servis_verigetir_clicked();
+    //void on_pushButton_servis_verigetir_clicked();
 
     void on_pushButton_servis_ekle_clicked();
 
@@ -71,6 +71,10 @@ private slots:
     void on_tableView_clicked(const QModelIndex &index);
 
     void on_tableView_teknikServis_clicked(const QModelIndex &index);
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_tableView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
