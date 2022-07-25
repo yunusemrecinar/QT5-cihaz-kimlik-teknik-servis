@@ -25,9 +25,11 @@ public slots:
 private slots:
 
     void on_pushButton_2_clicked();
-
+    void donanimlar();
 private:
     Ui::ServisGetDialog *ui;
+
+    QString donanim;
 
     QSqlDatabase database;
 

@@ -81,25 +81,25 @@ void ServisDialog::on_pushButton_clicked()
         malzemeler = "";
 
         if(ui->donanim_1->isChecked()) {
-            malzemeler += ui->donanim_1->text() + ", ";
+            malzemeler += ui->donanim_1->text() + ",";
         }if(ui->donanim_2->isChecked()) {
-            malzemeler += ui->donanim_2->text() + ", ";
+            malzemeler += ui->donanim_2->text() + ",";
         }if(ui->donanim_3->isChecked()) {
-            malzemeler += ui->donanim_3->text() + ", ";
+            malzemeler += ui->donanim_3->text() + ",";
         }if(ui->donanim_4->isChecked()) {
-            malzemeler += ui->donanim_4->text() + ", ";
+            malzemeler += ui->donanim_4->text() + ",";
         }if(ui->donanim_5->isChecked()) {
-            malzemeler += ui->donanim_5->text() + ", ";
+            malzemeler += ui->donanim_5->text() + ",";
         }if(ui->donanim_6->isChecked()) {
-            malzemeler += ui->donanim_6->text() + ", ";
+            malzemeler += ui->donanim_6->text() + ",";
         }if(ui->donanim_7->isChecked()) {
-            malzemeler += ui->donanim_7->text() + ", ";
+            malzemeler += ui->donanim_7->text() + ",";
         }if(ui->donanim_8->isChecked()) {
-            malzemeler += ui->donanim_8->text() + ", ";
+            malzemeler += ui->donanim_8->text() + ",";
         }if(ui->donanim_9->isChecked()) {
-            malzemeler += ui->donanim_9->text() + ", ";
+            malzemeler += ui->donanim_9->text() + ",";
         }if(ui->donanim_10->isChecked()) {
-            malzemeler += ui->donanim_10->text() + ", ";
+            malzemeler += ui->donanim_10->text() + ",";
         }if(ui->donanim_11->isChecked()) {
             malzemeler += ui->donanim_11->text();
         }
@@ -113,7 +113,7 @@ void ServisDialog::on_pushButton_clicked()
         qry.prepare("INSERT INTO teknikservis(`Cihaz Seri No`,`Geliş Tarihi`,"
                     "`Müşteri Adı`,`Arıza Tarifi`,`Yapılan İşlem`,`Cihazla Gelen Malzemeler`,"
                     "`Tamir Bitiş Tarihi`,`Test Süresi`,`Sevk Tarihi`,`Notlar`)"
-                    "VALUES(:servisNo,:uidNo,:gelisTarihi,"
+                    "VALUES(:servisNo,:gelisTarihi,"
                     ":musteriAdi,:arizaTarifi,:yapilanIslem,:malzemeler,"
                     ":tamirBitisTarih,:testSuresi,:sevkTarihi,:notlar)");
         qry.bindValue(":servisNo",servisNo);

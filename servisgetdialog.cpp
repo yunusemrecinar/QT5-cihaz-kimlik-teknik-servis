@@ -40,7 +40,41 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                 ui->musteriAdi_1->setText(qry->value(3).toString());
                 ui->arizaTanimi_1->setText(qry->value(4).toString());
                 ui->yapilanIslem_1->setText(qry->value(5).toString());
-                ui->donanim_->setText(qry->value(6).toString());
+                QList<QString> list = qry->value(6).toString().split(",");
+                if(list.contains(ui->donanim_1->text())) {
+                    ui->donanim_1->setChecked(true);
+                }
+                if(list.contains(ui->donanim_2->text())) {
+                    ui->donanim_2->setChecked(true);
+                }
+                if(list.contains(ui->donanim_3->text())) {
+                    ui->donanim_3->setChecked(true);
+                }
+                if(list.contains(ui->donanim_4->text())) {
+                    ui->donanim_4->setChecked(true);
+                }
+                if(list.contains(ui->donanim_5->text())) {
+                    ui->donanim_5->setChecked(true);
+                }
+                if(list.contains(ui->donanim_6->text())) {
+                    ui->donanim_6->setChecked(true);
+                }
+                if(list.contains(ui->donanim_7->text())) {
+                    ui->donanim_7->setChecked(true);
+                }
+                if(list.contains(ui->donanim_8->text())) {
+                    ui->donanim_8->setChecked(true);
+                }
+                if(list.contains(ui->donanim_9->text())) {
+                    ui->donanim_9->setChecked(true);
+                }
+                if(list.contains(ui->donanim_10->text())) {
+                    ui->donanim_10->setChecked(true);
+                }
+                if(list.contains(ui->donanim_11->text())) {
+                    ui->donanim_11->setChecked(true);
+                }
+
                 ui->bitisTarihi1->setText(qry->value(7).toString());
                 ui->testSuresi_1->setText(qry->value(8).toString());
                 ui->sevkTarihi_1->setText(qry->value(9).toString());
@@ -57,7 +91,31 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
 
 }
 
-
+void ServisGetDialog::donanimlar() {
+    if(ui->donanim_1->isChecked()) {
+        donanim += ui->donanim_1->text() + ",";
+    }if(ui->donanim_2->isChecked()) {
+        donanim += ui->donanim_2->text() + ",";
+    }if(ui->donanim_3->isChecked()) {
+        donanim += ui->donanim_3->text() + ",";
+    }if(ui->donanim_4->isChecked()) {
+        donanim += ui->donanim_4->text() + ",";
+    }if(ui->donanim_5->isChecked()) {
+        donanim += ui->donanim_5->text() + ",";
+    }if(ui->donanim_6->isChecked()) {
+        donanim += ui->donanim_6->text() + ",";
+    }if(ui->donanim_7->isChecked()) {
+        donanim += ui->donanim_7->text() + ",";
+    }if(ui->donanim_8->isChecked()) {
+        donanim += ui->donanim_8->text() + ",";
+    }if(ui->donanim_9->isChecked()) {
+        donanim += ui->donanim_9->text() + ",";
+    }if(ui->donanim_10->isChecked()) {
+        donanim += ui->donanim_10->text() + ",";
+    }if(ui->donanim_11->isChecked()) {
+        donanim += ui->donanim_11->text();
+    }
+}
 void ServisGetDialog::on_pushButton_2_clicked()
 {
 
@@ -71,7 +129,7 @@ void ServisGetDialog::on_pushButton_2_clicked()
         QString bitis = ui->bitisTarihi1->text();
         QString sevk = ui->sevkTarihi_1->text();
         QString testSure = ui->testSuresi_1->text();
-        QString donanim = ui->donanim_->text();
+        donanimlar();
         QString notlar = ui->notlar_->toPlainText();
 
 
