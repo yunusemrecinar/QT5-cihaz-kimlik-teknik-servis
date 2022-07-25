@@ -118,7 +118,7 @@ void SecDialog::degisenParca() {
     if(ui->degisenParca_11->isChecked())
         degisenParcalar += ui->degisenParca_11->text() + ",";
     if(ui->degisenParca_12->isChecked())
-        degisenParcalar += ui->degisenParca_12->text() + ",";
+        degisenParcalar += ui->degisenParca_12->text();
 }
 void SecDialog::on_pushButton_clicked()
 {

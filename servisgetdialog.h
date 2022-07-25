@@ -23,7 +23,6 @@ public:
 public slots:
     void initialize(QString index, QSqlDatabase d);
 private slots:
-    void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 

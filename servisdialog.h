@@ -31,6 +31,7 @@ public:
     bool check = true;
 public slots:
     void initialize(QSqlDatabase d,QString sNo);
+    void changes();
 private slots:
     void on_pushButton_clicked();
 

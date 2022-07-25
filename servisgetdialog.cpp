@@ -57,13 +57,6 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
 
 }
 
-void ServisGetDialog::on_pushButton_clicked()
-{
-   notlarDialog *notlar = new notlarDialog();
-   notlar->initialize(indexValue, database);
-   notlar->exec();
-}
-
 
 void ServisGetDialog::on_pushButton_2_clicked()
 {
@@ -79,32 +72,34 @@ void ServisGetDialog::on_pushButton_2_clicked()
         QString sevk = ui->sevkTarihi_1->text();
         QString testSure = ui->testSuresi_1->text();
         QString donanim = ui->donanim_->text();
-        QString notlar = ui->notlar_->text();
+        QString notlar = ui->notlar_->toPlainText();
 
 
-        qry.prepare("UPDATE teknikservis SET `Geliş Tarihi` = '" + gelis + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Geliş Tarihi` = '" + gelis + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Arıza Tarifi` = '" + arizaTarif + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Arıza Tarifi` = '" + arizaTarif + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Yapılan İşlem` = '" + yapilanIslem + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Yapılan İşlem` = '" + yapilanIslem + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Cihazla Gelen Malzemeler` = '" + donanim + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Cihazla Gelen Malzemeler` = '" + donanim + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Tamir Bitiş Tarihi` = '" + bitis + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Tamir Bitiş Tarihi` = '" + bitis + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Test Süresi` = '" + testSure + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Test Süresi` = '" + testSure + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Sevk Tarihi` = '" + sevk + "' WHERE `Servis No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
-
+        qry.prepare("UPDATE teknikservis SET `Sevk Tarihi` = '" + sevk + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Notlar` = '" + notlar + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
 
 
         if(qry.exec()) {

@@ -92,18 +92,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_servis_bilgial">
-          <property name="font">
-           <font>
-            <pointsize>18</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Bilgileri Al</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="pushButton_servis_ekle">
           <property name="font">
            <font>

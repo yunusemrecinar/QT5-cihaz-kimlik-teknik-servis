@@ -30,7 +30,7 @@ void NotEkleDialog::on_pushButton_clicked()
         QSqlQuery qry;
         QString not1 = ui->textEdit->toPlainText();
 
-        qry.prepare("INSERT INTO teknikservis(`Servis No`,`Geliş Tarihi`,"
+        qry.prepare("INSERT INTO teknikservis(`Cihaz Seri No`,`Geliş Tarihi`,"
                             "`Müşteri Adı`,`Arıza Tarifi`,`Yapılan İşlem`,`Cihazla Gelen Malzemeler`,"
                             "`Tamir Bitiş Tarihi`,`Test Süresi`,`Sevk Tarihi`,`Notlar`)"
                             "VALUES(:servisNo,:uidNo,:gelisTarihi,"

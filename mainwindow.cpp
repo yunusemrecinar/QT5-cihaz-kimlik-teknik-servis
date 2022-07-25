@@ -168,13 +168,19 @@ void MainWindow::on_pushButton_2_clicked()
     secdialog->show();    
 }
 
-void MainWindow::on_pushButton_servis_bilgial_clicked()
+void MainWindow::on_tableView_teknikServis_doubleClicked(const QModelIndex &index)
 {
+    QString value = ui->tableView_teknikServis->model()->data(index).toString();
+    int row = ui->tableView_teknikServis->currentIndex().row();
+    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
+
+    serviceValue = value;
+    rowCount = rowValue;
+
     ServisGetDialog *servisDialog = new ServisGetDialog();
     servisDialog->initialize(rowCount, database);
     servisDialog->exec();
 }
-
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
     servisDialog = new ServisDialog(this);
@@ -193,7 +199,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
         QSqlQuery* qry = new QSqlQuery(database1);
 
-        qry ->prepare("select * from teknikservis where `Servis No` = " + mainWindowValue);
+        qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue);
         qry -> exec();
         modal->setQuery(*qry);
         ui->tableView_teknikServis->setModel(modal);
@@ -227,4 +233,6 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
     inform->initialize(mainWindowValue,database);
     inform->show();
 }
+
+
 

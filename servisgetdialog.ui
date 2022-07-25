@@ -6,384 +6,390 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>703</width>
-    <height>675</height>
+    <width>1072</width>
+    <height>649</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Teknik Servis</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QGroupBox" name="ServisNoBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_14">
-          <item>
-           <widget class="QLabel" name="servisNo_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Servis No</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="servisNo_1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="GelisBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_15">
-          <item>
-           <widget class="QLabel" name="gelisTarihi_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Geliş Tarihi</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="gelisTarihi_1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QGroupBox" name="MusteriAdiBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_16">
-          <item>
-           <widget class="QLabel" name="musteriAdi_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Müşteri Adı</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="musteriAdi_1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="ArizaTarifBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <widget class="QLabel" name="arizaTanimi_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Arıza Tarifi</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="arizaTanimi_1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="YapilanIslemBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_13">
-          <item>
-           <widget class="QLabel" name="yapilanIslem_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Yapılan İşlem</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="yapilanIslem_1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QGroupBox" name="BitisTarihBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_18">
-          <item>
-           <widget class="QLabel" name="bitisTarihi_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Tamir Bitiş Tarihi</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="bitisTarihi1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="SevkBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="QLabel" name="sevkTarihi_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Sevk Tarihi</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="sevkTarihi_1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <widget class="QGroupBox" name="TestSureBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_17">
-          <item>
-           <widget class="QLabel" name="testSuresi_2">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Test Süresi</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="testSuresi_1">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="DonanimBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_19">
-          <item>
-           <widget class="QLabel" name="donanim">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Cihazla Gelen Donanımlar</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="donanim_">
-            <property name="font">
-             <font>
-              <pointsize>18</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="NotlarBox">
-       <property name="styleSheet">
-        <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_20">
-        <item>
-         <widget class="QLabel" name="notlar">
-          <property name="font">
-           <font>
-            <pointsize>18</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Notlar</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="notlar_">
-          <property name="font">
-           <font>
-            <pointsize>18</pointsize>
-           </font>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="font">
-          <font>
-           <pointsize>20</pointsize>
-          </font>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Teknik Servis</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QGroupBox" name="ServisNoBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <item>
+               <widget class="QLabel" name="servisNo_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Cihaz Seri No</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="servisNo_1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="GelisBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_15">
+              <item>
+               <widget class="QLabel" name="gelisTarihi_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Geliş Tarihi</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="gelisTarihi_1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QGroupBox" name="MusteriAdiBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_16">
+              <item>
+               <widget class="QLabel" name="musteriAdi_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Müşteri Adı</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="musteriAdi_1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="ArizaTarifBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_12">
+              <item>
+               <widget class="QLabel" name="arizaTanimi_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Arıza Tarifi</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="arizaTanimi_1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="YapilanIslemBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_13">
+              <item>
+               <widget class="QLabel" name="yapilanIslem_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Yapılan İşlem</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="yapilanIslem_1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QGroupBox" name="BitisTarihBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_18">
+              <item>
+               <widget class="QLabel" name="bitisTarihi_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Tamir Bitiş Tarihi</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="bitisTarihi1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="SevkBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <item>
+               <widget class="QLabel" name="sevkTarihi_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Sevk Tarihi</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="sevkTarihi_1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QGroupBox" name="TestSureBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_17">
+              <item>
+               <widget class="QLabel" name="testSuresi_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Test Süresi</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="testSuresi_1">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="DonanimBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_19">
+              <item>
+               <widget class="QLabel" name="donanim">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Cihazla Gelen Donanımlar</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="donanim_">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="NotlarBox">
+         <property name="styleSheet">
+          <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
          </property>
-         <property name="text">
-          <string>Güncelle</string>
-         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_20">
+          <item>
+           <widget class="QLabel" name="notlar">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Notlar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="notlar_">
+            <property name="minimumSize">
+             <size>
+              <width>350</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
@@ -392,14 +398,33 @@ border: 2px solid grey;
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QLabel" name="label">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>60</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <pointsize>20</pointsize>
+           <pointsize>26</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Notları Görüntüle</string>
+          <string>Güncelle</string>
          </property>
         </widget>
        </item>

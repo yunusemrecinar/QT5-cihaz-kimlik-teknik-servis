@@ -14,8 +14,52 @@ ServisDialog::ServisDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle(" ");
-}
+    changes();
 
+
+
+}
+void ServisDialog::changes() {
+    ui->gelisTarihiDay_->setMaximum(31);
+    ui->gelisTarihiDay_->setMinimum(1);
+    ui->gelisTarihiDay_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->gelisTarihiMonth_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->gelisTarihiMonth_->setMaximum(12);
+    ui->gelisTarihiMonth_->setMinimum(1);
+    ui->gelisTarihiYear_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->gelisTarihiYear_->setMaximum(QDate::currentDate().year());
+    ui->gelisTarihiYear_->setMinimum(1);
+    ui->gelisTarihiDay_->clear();
+    ui->gelisTarihiMonth_->clear();
+    ui->gelisTarihiYear_->clear();
+
+    ui->sevkTarihiDay_->setMaximum(31);
+    ui->sevkTarihiDay_->setMinimum(1);
+    ui->sevkTarihiDay_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->sevkTarihiMonth_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->sevkTarihiMonth_->setMaximum(12);
+    ui->sevkTarihiMonth_->setMinimum(1);
+    ui->sevkTarihiYear_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->sevkTarihiYear_->setMaximum(QDate::currentDate().year());
+    ui->sevkTarihiYear_->setMinimum(1);
+    ui->sevkTarihiDay_->clear();
+    ui->sevkTarihiMonth_->clear();
+    ui->sevkTarihiYear_->clear();
+
+    ui->bitisTarihiDay_->setMaximum(31);
+    ui->bitisTarihiDay_->setMinimum(1);
+    ui->bitisTarihiDay_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->bitisTarihiMonth_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->bitisTarihiMonth_->setMaximum(12);
+    ui->bitisTarihiMonth_->setMinimum(1);
+    ui->bitisTarihiYear_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->bitisTarihiYear_->setMaximum(QDate::currentDate().year());
+    ui->bitisTarihiYear_->setMinimum(1);
+    ui->bitisTarihiDay_->clear();
+    ui->bitisTarihiMonth_->clear();
+    ui->bitisTarihiYear_->clear();
+
+}
 ServisDialog::~ServisDialog()
 {
     delete ui;
@@ -62,18 +106,17 @@ void ServisDialog::on_pushButton_clicked()
         tamirBitisTarihi = ui->bitisTarihiDay_->text(); + "." + ui->bitisTarihiMonth_->text() + "." + ui->bitisTarihiYear_->text();
         testSuresi = ui->testSuresi_->text();
         sevkTarihi = ui->sevkTarihiDay_->text() + "." + ui->sevkTarihiMonth_->text() + "." + ui->sevkTarihiYear_->text();
-        notlar = "";
+        notlar = ui->notlar_->toPlainText();
 
-        //QSqlQuery qry;
-        /*
-        qry.prepare("INSERT INTO teknikservis(`Servis No`,`UID No`,`Geliş Tarihi`,"
+        QSqlQuery qry;
+
+        qry.prepare("INSERT INTO teknikservis(`Cihaz Seri No`,`Geliş Tarihi`,"
                     "`Müşteri Adı`,`Arıza Tarifi`,`Yapılan İşlem`,`Cihazla Gelen Malzemeler`,"
                     "`Tamir Bitiş Tarihi`,`Test Süresi`,`Sevk Tarihi`,`Notlar`)"
                     "VALUES(:servisNo,:uidNo,:gelisTarihi,"
                     ":musteriAdi,:arizaTarifi,:yapilanIslem,:malzemeler,"
                     ":tamirBitisTarih,:testSuresi,:sevkTarihi,:notlar)");
         qry.bindValue(":servisNo",servisNo);
-        qry.bindValue(":uidNo",UIDno);
         qry.bindValue(":gelisTarihi",gelisTarihi);
         qry.bindValue(":musteriAdi",musteriAdi);
         qry.bindValue(":arizaTarifi",arizaTarifi);
@@ -82,22 +125,13 @@ void ServisDialog::on_pushButton_clicked()
         qry.bindValue(":tamirBitisTarih",tamirBitisTarihi);
         qry.bindValue(":testSuresi",testSuresi);
         qry.bindValue(":sevkTarihi",sevkTarihi);
+        qry.bindValue(":notlar",notlar);
 
         if(qry.exec()) {
             QMessageBox::information(this,"Inserted", "Data Inserted Succesfully");
         }else {
             QMessageBox::information(this,"Not Inserted",qry.lastError().text());
         }
-*/
-
-
-        NotEkleDialog *idNot = new NotEkleDialog();
-        idNot->initialize(servisNo,database,malzemeler,UIDno,gelisTarihi,
-                          musteriAdi,arizaTarifi,yapilanIslem,
-                          tamirBitisTarihi,testSuresi,sevkTarihi);
-        idNot->show();
-
-
 
         this->close();
     }else {

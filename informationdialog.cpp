@@ -46,11 +46,13 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 ui->modemSeri4_1->setText(qry->value(11).toString());
                 ui->modemSeri5_1->setText(qry->value(12).toString());
                 ui->modemSeri6_1->setText(qry->value(13).toString());
+
                 QList<QString> date = qry->value(14).toString().split(".");
                 ui->date_day->setValue(date.at(0).toInt());
                 ui->date_month->setValue(date.at(1).toInt());
                 ui->date_year->setValue(date.at(2).toInt());
                 ui->test_durum_1->setText(qry->value(15).toString());
+
                 QList<QString> degisenParcalarList = qry->value(16).toString().split(",");
 
                 if(degisenParcalarList.contains(ui->degisenParca_1->text())) {
@@ -89,6 +91,7 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 if(degisenParcalarList.contains(ui->degisenParca_12->text())) {
                     ui->degisenParca_12->setChecked(true);
                 }
+
                 ui->notlar_1->setText(qry->value(17).toString());
             }
         }else {

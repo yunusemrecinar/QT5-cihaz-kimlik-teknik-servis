@@ -64,7 +64,7 @@ private slots:
 
     void on_pushButton_servis_ekle_clicked();
 
-    void on_pushButton_servis_bilgial_clicked();
+    //void on_pushButton_servis_bilgial_clicked();
 
     //void on_tableView_teknikServis_activated(const QModelIndex &index);
 
@@ -75,6 +75,8 @@ private slots:
     void on_lineEdit_textChanged(const QString &arg1);
 
     void on_tableView_doubleClicked(const QModelIndex &index);
+
+    void on_tableView_teknikServis_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
