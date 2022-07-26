@@ -72,6 +72,9 @@ void SecDialog::changes() {
     QStringList commandsModel = {"Mobiot Cihazı","Server Cihazı","ML33+ Modeo Cihazı","ML33 Modeo Cihazı","ML22 Modeo Cihazı","ML21 Modeo Cihazı","ML11 Modeo Cihazı"};
     ui->model_->addItems(commandsModel);
     connect(ui->model_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedModel);
+    QStringList testDurum = {"Test Edilecek","Lab Testi Yapıldı","Saha Testi Yapıldı"};
+    ui->test_durum_->addItems(testDurum);
+    connect(ui->test_durum_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedTestDurum);
 }
 void SecDialog::commandChangedModel(const QString& command_text) {
     model = command_text;
@@ -94,32 +97,10 @@ void SecDialog::commandChangedModemKart(const QString& command_text) {
 void SecDialog::initialize(QSqlDatabase d) {
     database = d;
 }
-void SecDialog::degisenParca() {
-    if(ui->degisenParca_1->isChecked())
-        degisenParcalar += ui->degisenParca_1->text() +  ",";
-    if(ui->degisenParca_2->isChecked())
-        degisenParcalar += ui->degisenParca_2->text() + ",";
-    if(ui->degisenParca_3->isChecked())
-        degisenParcalar += ui->degisenParca_3->text() + ",";
-    if(ui->degisenParca_4->isChecked())
-        degisenParcalar += ui->degisenParca_4->text() + ",";
-    if(ui->degisenParca_5->isChecked())
-        degisenParcalar += ui->degisenParca_5->text() + ",";
-    if(ui->degisenParca_6->isChecked())
-        degisenParcalar += ui->degisenParca_6->text() + ",";
-    if(ui->degisenParca_7->isChecked())
-        degisenParcalar += ui->degisenParca_7->text() + ",";
-    if(ui->degisenParca_8->isChecked())
-        degisenParcalar += ui->degisenParca_8->text() + ",";
-    if(ui->degisenParca_9->isChecked())
-        degisenParcalar += ui->degisenParca_9->text() + ",";
-    if(ui->degisenParca_10->isChecked())
-        degisenParcalar += ui->degisenParca_10->text() + ",";
-    if(ui->degisenParca_11->isChecked())
-        degisenParcalar += ui->degisenParca_11->text() + ",";
-    if(ui->degisenParca_12->isChecked())
-        degisenParcalar += ui->degisenParca_12->text();
+void SecDialog::commandChangedTestDurum(const QString& command_text) {
+    testDurumu = command_text;
 }
+
 void SecDialog::on_pushButton_clicked()
 {
 
@@ -134,8 +115,6 @@ void SecDialog::on_pushButton_clicked()
         QString modemSeri4 = ui->modemSeri4_->text();
         QString modemSeri5 = ui->modemSeri5_->text();
         QString modemSeri6 = ui->modemSeri6_->text();
-        QString testDurumu = ui->test_durum_->text();
-        degisenParca();
         QString notlar = ui->notlar_->toPlainText();
 
         QSqlQuery qry;

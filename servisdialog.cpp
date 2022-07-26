@@ -32,37 +32,34 @@ void ServisDialog::changes() {
     ui->gelisTarihiDay_->clear();
     ui->gelisTarihiMonth_->clear();
     ui->gelisTarihiYear_->clear();
+    ui->gelisTarihiDay_->setValue(QDate::currentDate().day());
+    ui->gelisTarihiMonth_->setValue(QDate::currentDate().month());
+    ui->gelisTarihiYear_->setValue(QDate::currentDate().year());
 
-    ui->sevkTarihiDay_->setMaximum(31);
-    ui->sevkTarihiDay_->setMinimum(1);
-    ui->sevkTarihiDay_->setButtonSymbols(QAbstractSpinBox::NoButtons);
-    ui->sevkTarihiMonth_->setButtonSymbols(QAbstractSpinBox::NoButtons);
-    ui->sevkTarihiMonth_->setMaximum(12);
-    ui->sevkTarihiMonth_->setMinimum(1);
-    ui->sevkTarihiYear_->setButtonSymbols(QAbstractSpinBox::NoButtons);
-    ui->sevkTarihiYear_->setMaximum(QDate::currentDate().year());
-    ui->sevkTarihiYear_->setMinimum(1);
-    ui->sevkTarihiDay_->clear();
-    ui->sevkTarihiMonth_->clear();
-    ui->sevkTarihiYear_->clear();
+    ui->tarih_saat->setMaximum(23);
+    ui->tarih_saat->setMinimum(0);
+    ui->tarih_saat->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->tarih_dakika->setMaximum(59);
+    ui->tarih_dakika->setMinimum(0);
+    ui->tarih_dakika->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->tarih_dakika->setValue(QTime::currentTime().minute());
+    ui->tarih_saat->setValue(QTime::currentTime().hour());
 
-    ui->bitisTarihiDay_->setMaximum(31);
-    ui->bitisTarihiDay_->setMinimum(1);
-    ui->bitisTarihiDay_->setButtonSymbols(QAbstractSpinBox::NoButtons);
-    ui->bitisTarihiMonth_->setButtonSymbols(QAbstractSpinBox::NoButtons);
-    ui->bitisTarihiMonth_->setMaximum(12);
-    ui->bitisTarihiMonth_->setMinimum(1);
-    ui->bitisTarihiYear_->setButtonSymbols(QAbstractSpinBox::NoButtons);
-    ui->bitisTarihiYear_->setMaximum(QDate::currentDate().year());
-    ui->bitisTarihiYear_->setMinimum(1);
-    ui->bitisTarihiDay_->clear();
-    ui->bitisTarihiMonth_->clear();
-    ui->bitisTarihiYear_->clear();
+    ui->testSuresi_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->testSuresi_->setMaximum(12);
+    ui->testSuresi_->setMinimum(1);
+    ui->testSuresi_->clear();
 
+    QStringList commandsOlay = {"Geldi","Test","Gitti","Onarıldı"};
+    ui->olay_->addItems(commandsOlay);
+    connect(ui->olay_, &QComboBox::currentTextChanged, this, &ServisDialog::commandChangedOlay);
 }
 ServisDialog::~ServisDialog()
 {
     delete ui;
+}
+void ServisDialog::commandChangedOlay(const QString& command_text) {
+    olay = command_text;
 }
 void ServisDialog::initialize(QSqlDatabase d,QString sNo) {
     ui->servisNo_->setText(sNo);
@@ -74,11 +71,12 @@ void ServisDialog::on_pushButton_clicked()
     if(database.open()) {
 
         servisNo = ui->servisNo_->text();
-        gelisTarihi = ui->gelisTarihiYear_->text() + "-" + ui->gelisTarihiMonth_->text() + "-" + ui->gelisTarihiDay_->text();
+        tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text();
+        saat = ui->tarih_saat->text() + ":" + ui->tarih_dakika->text();
         musteriAdi = ui->musteriAdi_->text();
-        arizaTarifi = ui->arizaTanimi_->text();
-        yapilanIslem = ui->yapilanIslem_->text();
-        malzemeler = "";
+        olay = ui->olay_->currentText();
+        arizaTarifi = ui->arizaTanimi_->toPlainText();
+        yapilanIslem = ui->yapilanIslem_->toPlainText();
 
         if(ui->donanim_1->isChecked()) {
             malzemeler += ui->donanim_1->text() + ",";
@@ -103,28 +101,54 @@ void ServisDialog::on_pushButton_clicked()
         }if(ui->donanim_11->isChecked()) {
             malzemeler += ui->donanim_11->text();
         }
-        tamirBitisTarihi = ui->bitisTarihiDay_->text(); + "." + ui->bitisTarihiMonth_->text() + "." + ui->bitisTarihiYear_->text();
-        testSuresi = ui->testSuresi_->text();
-        sevkTarihi = ui->sevkTarihiDay_->text() + "." + ui->sevkTarihiMonth_->text() + "." + ui->sevkTarihiYear_->text();
+
+        if(ui->degisenParca_1->isChecked()) {
+            degisenParcalar += ui->degisenParca_1->text() + ",";
+        }if(ui->degisenParca_2->isChecked()) {
+            degisenParcalar += ui->degisenParca_2->text() + ",";
+        }if(ui->degisenParca_3->isChecked()) {
+            degisenParcalar += ui->degisenParca_3->text() + ",";
+        }if(ui->degisenParca_4->isChecked()) {
+            degisenParcalar += ui->degisenParca_4->text() + ",";
+        }if(ui->degisenParca_5->isChecked()) {
+            degisenParcalar += ui->degisenParca_5->text() + ",";
+        }if(ui->degisenParca_6->isChecked()) {
+            degisenParcalar += ui->degisenParca_6->text() + ",";
+        }if(ui->degisenParca_7->isChecked()) {
+            degisenParcalar += ui->degisenParca_7->text() + ",";
+        }if(ui->degisenParca_8->isChecked()) {
+            degisenParcalar += ui->degisenParca_8->text() + ",";
+        }if(ui->degisenParca_9->isChecked()) {
+            degisenParcalar += ui->degisenParca_9->text() + ",";
+        }if(ui->degisenParca_10->isChecked()) {
+            degisenParcalar += ui->degisenParca_10->text() + ",";
+        }if(ui->degisenParca_11->isChecked()) {
+            degisenParcalar += ui->degisenParca_11->text();
+        }if(ui->degisenParca_12->isChecked()) {
+            degisenParcalar += ui->degisenParca_12->text();
+        }
+
+        testSuresi = ui->testSuresi_->text();        
         notlar = ui->notlar_->toPlainText();
 
         QSqlQuery qry;
 
-        qry.prepare("INSERT INTO teknikservis(`Cihaz Seri No`,`Geliş Tarihi`,"
-                    "`Müşteri Adı`,`Arıza Tarifi`,`Yapılan İşlem`,`Cihazla Gelen Malzemeler`,"
-                    "`Tamir Bitiş Tarihi`,`Test Süresi`,`Sevk Tarihi`,`Notlar`)"
-                    "VALUES(:servisNo,:gelisTarihi,"
-                    ":musteriAdi,:arizaTarifi,:yapilanIslem,:malzemeler,"
-                    ":tamirBitisTarih,:testSuresi,:sevkTarihi,:notlar)");
+        qry.prepare("INSERT INTO teknikservis(`Cihaz Seri No`,`Tarih`,"
+                    "`Saat`,`Müşteri Adı`,`Olay`,`Arıza Tarifi`,`Yapılan İşlem`,"
+                    "`Cihazla Gelen Malzemeler`,`Degisen Parcalar`,`Test Süresi`,`Notlar`)"
+                    "VALUES(:servisNo,:tarih,"
+                    ":saat,:musteriAdi,:olay,:arizaTarifi,:yapilanIslem,"
+                    ":malzemeler,:degisenParcalar,:testSuresi,:notlar)");
         qry.bindValue(":servisNo",servisNo);
-        qry.bindValue(":gelisTarihi",gelisTarihi);
+        qry.bindValue(":tarih",tarih);
+        qry.bindValue(":saat",saat);
         qry.bindValue(":musteriAdi",musteriAdi);
+        qry.bindValue(":olay",olay);
         qry.bindValue(":arizaTarifi",arizaTarifi);
         qry.bindValue(":yapilanIslem",yapilanIslem);
         qry.bindValue(":malzemeler",malzemeler);
-        qry.bindValue(":tamirBitisTarih",tamirBitisTarihi);
+        qry.bindValue(":degisenParcalar",degisenParcalar);
         qry.bindValue(":testSuresi",testSuresi);
-        qry.bindValue(":sevkTarihi",sevkTarihi);
         qry.bindValue(":notlar",notlar);
 
         if(qry.exec()) {

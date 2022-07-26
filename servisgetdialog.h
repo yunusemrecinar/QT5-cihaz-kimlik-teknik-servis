@@ -19,13 +19,16 @@ public:
 
     QString key;
     QString indexValue;
-
+    QString degisenParcalar = "";
+    QString olay;
 public slots:
     void initialize(QString index, QSqlDatabase d);
 private slots:
-
-    void on_pushButton_2_clicked();
+    void changes();
+    void on_pushButton_clicked();
     void donanimlar();
+    void degisenParca();
+    void commandChangedOlay(const QString& command_text);
 private:
     Ui::ServisGetDialog *ui;
 

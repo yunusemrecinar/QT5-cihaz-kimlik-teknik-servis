@@ -48,6 +48,8 @@ private slots:
 
     //void on_pushButton_clicked();
 
+    void hideColumns();
+
     void addColumns();
 
     void on_pushButton_load_clicked();
@@ -88,7 +90,7 @@ private:
     ServisDialog *servisDialog;
     ServisGetDialog *servisGetDialog;
 
-
+    QList<int> columnsToHideService;
     QList<int> columnsToHide;
     //QSqlDatabase database2;
 

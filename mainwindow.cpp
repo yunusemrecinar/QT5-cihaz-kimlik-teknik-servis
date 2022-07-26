@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     readFile("test.txt");
     addColumns();
+    hideColumns();
 
     this->setWindowTitle("ANA MENÜ");
     //ui->pushButton_servis_verigetir->setVisible(false);
@@ -142,6 +143,14 @@ void MainWindow::on_pushButton_load_clicked()
 
 }
 
+void MainWindow::hideColumns() {
+    columnsToHideService.append(1);
+    columnsToHideService.append(3);
+    columnsToHideService.append(6);
+    columnsToHideService.append(8);
+    columnsToHideService.append(9);
+    columnsToHideService.append(10);
+}
 void MainWindow::addColumns() {
     columnsToHide.append(2);
     columnsToHide.append(4);
@@ -168,19 +177,7 @@ void MainWindow::on_pushButton_2_clicked()
     secdialog->show();    
 }
 
-void MainWindow::on_tableView_teknikServis_doubleClicked(const QModelIndex &index)
-{
-    QString value = ui->tableView_teknikServis->model()->data(index).toString();
-    int row = ui->tableView_teknikServis->currentIndex().row();
-    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
 
-    serviceValue = value;
-    rowCount = rowValue;
-
-    ServisGetDialog *servisDialog = new ServisGetDialog();
-    servisDialog->initialize(rowCount, database);
-    servisDialog->exec();
-}
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
     servisDialog = new ServisDialog(this);
@@ -190,11 +187,14 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    QString value = ui->tableView->model()->data(index).toString();
-    mainWindowValue = value;
+    //QString value = ui->tableView->model()->data(index).toString();
+    int row = ui->tableView->currentIndex().row();
+    QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
 
+    mainWindowValue = rowValue;
+    ui->servisLabel->setText("Teknik Servis (" + mainWindowValue + ")");
     QSqlQueryModel * modal = new QSqlQueryModel();
-
+    QSqlQueryModel * modalLog = new QSqlQueryModel();
     if(database.open()) {
 
         QSqlQuery* qry = new QSqlQuery(database1);
@@ -205,6 +205,16 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
         ui->tableView_teknikServis->setModel(modal);
         ui->tableView_teknikServis->resizeColumnsToContents();
 
+        foreach(int col, columnsToHideService)
+            ui->tableView_teknikServis->hideColumn(col);
+
+        qry->clear();
+        qry ->prepare("select * from loglar where `Cihaz Seri No` = " + mainWindowValue);
+        qry -> exec();
+        modalLog->setQuery(*qry);
+        ui->tableView_log->setModel(modalLog);
+        ui->tableView_log->resizeColumnsToContents();
+        ui->tableView_log->hideColumn(0);
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
@@ -212,27 +222,42 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     }
 
 }
-
-void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
-{
-    QString value = ui->tableView_teknikServis->model()->data(index).toString();
-    int row = ui->tableView_teknikServis->currentIndex().row();
-    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
-
-    serviceValue = value;
-    rowCount = rowValue;
-
-}
-
 void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 {
-    QString value = ui->tableView->model()->data(index).toString();
-    mainWindowValue = value;
+    //QString value = ui->tableView->model()->data(index).toString();
+    int row = ui->tableView->currentIndex().row();
+    QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
+
+    mainWindowValue = rowValue;
 
     InformationDialog *inform = new InformationDialog();
     inform->initialize(mainWindowValue,database);
     inform->show();
 }
+void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
+{
+    //QString value = ui->tableView_teknikServis->model()->data(index).toString();
+    int row = ui->tableView_teknikServis->currentIndex().row();
+    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
+
+    //serviceValue = value;
+    rowCount = rowValue;
+
+}
+void MainWindow::on_tableView_teknikServis_doubleClicked(const QModelIndex &index)
+{
+    //QString value = ui->tableView_teknikServis->model()->data(index).toString();
+    int row = ui->tableView_teknikServis->currentIndex().row();
+    QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
+
+    //serviceValue = value;
+    rowCount = rowValue;
+
+    ServisGetDialog *servisDialog = new ServisGetDialog();
+    servisDialog->initialize(rowCount, database);
+    servisDialog->exec();
+}
+
 
 
 

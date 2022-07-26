@@ -13,15 +13,43 @@ ServisGetDialog::ServisGetDialog(QWidget *parent) :
     ui(new Ui::ServisGetDialog)
 {
     ui->setupUi(this);
-
     this->setWindowTitle(" ");
+    changes();
 }
 
 ServisGetDialog::~ServisGetDialog()
 {
     delete ui;
 }
+void ServisGetDialog::changes() {
+    ui->gelisTarihiDay_->setMaximum(31);
+    ui->gelisTarihiDay_->setMinimum(1);
+    ui->gelisTarihiDay_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->gelisTarihiMonth_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->gelisTarihiMonth_->setMaximum(12);
+    ui->gelisTarihiMonth_->setMinimum(1);
+    ui->gelisTarihiYear_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->gelisTarihiYear_->setMaximum(QDate::currentDate().year());
+    ui->gelisTarihiYear_->setMinimum(1);
+    ui->gelisTarihiDay_->clear();
+    ui->gelisTarihiMonth_->clear();
+    ui->gelisTarihiYear_->clear();
 
+    ui->tarih_dakika->setMaximum(59);
+    ui->tarih_dakika->setMinimum(0);
+    ui->tarih_dakika->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->tarih_saat->setMaximum(23);
+    ui->tarih_saat->setMinimum(0);
+    ui->tarih_saat->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+    QStringList commandsOlay = {"Geldi","Test","Gitti","Onarıldı"};
+    ui->olay_->addItems(commandsOlay);
+    connect(ui->olay_, &QComboBox::currentTextChanged, this, &ServisGetDialog::commandChangedOlay);
+}
+
+void ServisGetDialog::commandChangedOlay(const QString& command_text) {
+    olay = command_text;
+}
 void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
     //key = s;
     indexValue = index;
@@ -35,12 +63,24 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
 
         if(qry->exec()) {
             while(qry->next()) {
-                ui->servisNo_1->setText(qry->value(1).toString()); 
-                ui->gelisTarihi_1->setText(qry->value(2).toString());
-                ui->musteriAdi_1->setText(qry->value(3).toString());
-                ui->arizaTanimi_1->setText(qry->value(4).toString());
-                ui->yapilanIslem_1->setText(qry->value(5).toString());
-                QList<QString> list = qry->value(6).toString().split(",");
+                ui->servisNo_->setText(qry->value(1).toString());
+
+                if(qry->value(2).toString().contains(".")) {
+                    QList<QString> date = qry->value(2).toString().split(".");
+                    ui->gelisTarihiDay_->setValue(date.at(0).toInt());
+                    ui->gelisTarihiMonth_->setValue(date.at(1).toInt());
+                    ui->gelisTarihiYear_->setValue(date.at(2).toInt());
+                }
+                if(qry->value(3).toString().contains(":")) {
+                    QList<QString> time = qry->value(3).toString().split(":");
+                    ui->tarih_saat->setValue(time.at(0).toInt());
+                    ui->tarih_dakika->setValue(time.at(1).toInt());
+                }
+                ui->musteriAdi_->setText(qry->value(4).toString());
+                ui->olay_->setCurrentText(qry->value(5).toString());
+                ui->arizaTanimi_->setText(qry->value(6).toString());
+                ui->yapilanIslem_->setText(qry->value(7).toString());
+                QList<QString> list = qry->value(8).toString().split(",");
                 if(list.contains(ui->donanim_1->text())) {
                     ui->donanim_1->setChecked(true);
                 }
@@ -75,10 +115,48 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                     ui->donanim_11->setChecked(true);
                 }
 
-                ui->bitisTarihi1->setText(qry->value(7).toString());
-                ui->testSuresi_1->setText(qry->value(8).toString());
-                ui->sevkTarihi_1->setText(qry->value(9).toString());
-                ui->notlar_->setText(qry->value(10).toString());
+                QList<QString> degisenParcalarList = qry->value(9).toString().split(",");
+
+                if(degisenParcalarList.contains(ui->degisenParca_1->text())) {
+                    ui->degisenParca_1->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_2->text())) {
+                    ui->degisenParca_2->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_3->text())) {
+                    ui->degisenParca_3->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_4->text())) {
+                    ui->degisenParca_4->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_5->text())) {
+                    ui->degisenParca_5->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_6->text())) {
+                    ui->degisenParca_6->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_7->text())) {
+                    ui->degisenParca_7->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_8->text())) {
+                    ui->degisenParca_8->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_9->text())) {
+                    ui->degisenParca_9->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_10->text())) {
+                    ui->degisenParca_10->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_11->text())) {
+                    ui->degisenParca_11->setChecked(true);
+                }
+                if(degisenParcalarList.contains(ui->degisenParca_12->text())) {
+                    ui->degisenParca_12->setChecked(true);
+                }
+
+                ui->testSuresi_->setValue(qry->value(10).toInt());
+
+                ui->notlar_->setText(qry->value(11).toString());
             }
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
@@ -116,48 +194,80 @@ void ServisGetDialog::donanimlar() {
         donanim += ui->donanim_11->text();
     }
 }
-void ServisGetDialog::on_pushButton_2_clicked()
+void ServisGetDialog::degisenParca() {
+    if(ui->degisenParca_1->isChecked())
+        degisenParcalar += ui->degisenParca_1->text() +  ",";
+    if(ui->degisenParca_2->isChecked())
+        degisenParcalar += ui->degisenParca_2->text() + ",";
+    if(ui->degisenParca_3->isChecked())
+        degisenParcalar += ui->degisenParca_3->text() + ",";
+    if(ui->degisenParca_4->isChecked())
+        degisenParcalar += ui->degisenParca_4->text() + ",";
+    if(ui->degisenParca_5->isChecked())
+        degisenParcalar += ui->degisenParca_5->text() + ",";
+    if(ui->degisenParca_6->isChecked())
+        degisenParcalar += ui->degisenParca_6->text() + ",";
+    if(ui->degisenParca_7->isChecked())
+        degisenParcalar += ui->degisenParca_7->text() + ",";
+    if(ui->degisenParca_8->isChecked())
+        degisenParcalar += ui->degisenParca_8->text() + ",";
+    if(ui->degisenParca_9->isChecked())
+        degisenParcalar += ui->degisenParca_9->text() + ",";
+    if(ui->degisenParca_10->isChecked())
+        degisenParcalar += ui->degisenParca_10->text() + ",";
+    if(ui->degisenParca_11->isChecked())
+        degisenParcalar += ui->degisenParca_11->text() + ",";
+    if(ui->degisenParca_12->isChecked())
+        degisenParcalar += ui->degisenParca_12->text() + ",";
+}
+void ServisGetDialog::on_pushButton_clicked()
 {
 
     if(database.isOpen()) {
 
         QSqlQuery qry;
-        QString gelis = ui->gelisTarihi_1->text();
-        QString musteriAdi = ui->musteriAdi_1->text();
-        QString arizaTarif = ui->arizaTanimi_1->text();
-        QString yapilanIslem = ui->yapilanIslem_1->text();
-        QString bitis = ui->bitisTarihi1->text();
-        QString sevk = ui->sevkTarihi_1->text();
-        QString testSure = ui->testSuresi_1->text();
+        QString tarih;
+        tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text();
+        QString saat;
+        saat = ui->tarih_saat->text() + ":" + ui->tarih_dakika->text();
+        QString musteriAdi = ui->musteriAdi_->text();
+        olay = ui->olay_->currentText();
+        QString arizaTarif = ui->arizaTanimi_->toPlainText();
+        QString yapilanIslem = ui->yapilanIslem_->toPlainText();
         donanimlar();
+        degisenParca();
+        QString testSure = ui->testSuresi_->text();
         QString notlar = ui->notlar_->toPlainText();
 
 
-        qry.prepare("UPDATE teknikservis SET `Geliş Tarihi` = '" + gelis + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Tarih` = '" + tarih + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Saat` = '" + saat + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Arıza Tarifi` = '" + arizaTarif + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Yapılan İşlem` = '" + yapilanIslem + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Olay` = '" + olay + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Cihazla Gelen Malzemeler` = '" + donanim + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Arıza Tarifi` = '" + arizaTarif + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Tamir Bitiş Tarihi` = '" + bitis + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Yapılan İşlem` = '" + yapilanIslem + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Test Süresi` = '" + testSure + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Cihazla Gelen Malzemeler` = '" + donanim + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Sevk Tarihi` = '" + sevk + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Degisen Parcalar` = '" + degisenParcalar + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Notlar` = '" + notlar + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_1->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Test Süresi` = '" + testSure + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE teknikservis SET `Notlar` = '" + notlar + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
 
 
         if(qry.exec()) {

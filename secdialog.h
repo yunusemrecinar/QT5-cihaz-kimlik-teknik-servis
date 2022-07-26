@@ -32,7 +32,7 @@ private slots:
     void commandChangedSarjKarti(const QString& command_text);
     void commandChangedLcdKarti(const QString& command_text);
     void commandChangedModel(const QString& command_text);
-    void degisenParca();
+    void commandChangedTestDurum(const QString& command_text);
     void changes();
 private:
     Ui::SecDialog *ui;
@@ -45,6 +45,7 @@ private:
     QString lcdKarti = "MHD-B5-v0.0/811/2014";
     QString model = "Mobiot Cihazı";
     QString degisenParcalar = "";
+    QString testDurumu = "Test Edilecek";
 
     QMenu *m_lineedit_menu;
     LineEditPopUpForm *m_lineedit_popup_form;

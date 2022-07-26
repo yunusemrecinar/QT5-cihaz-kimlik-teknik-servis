@@ -1,5 +1,5 @@
 #include "database.h"
-#include <QFile>>
+#include <QFile>
 #include <QTextStream>
 
 database::database()

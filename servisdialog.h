@@ -17,24 +17,26 @@ public:
     explicit ServisDialog(QWidget *parent = nullptr);
     ~ServisDialog();
     QString notSakla;
-    QString notlar = "";
+
+    QString servisNo = "";
+    QString tarih = "";
+    QString saat = "";
+    QString musteriAdi = "";
+    QString olay = "";
+    QString arizaTarifi = "";
+    QString yapilanIslem = "";
     QString malzemeler = "";
-    QString servisNo;
-    QString UIDno;
-    QString gelisTarihi;
-    QString musteriAdi;
-    QString arizaTarifi;
-    QString yapilanIslem;
-    QString tamirBitisTarihi;
-    QString testSuresi;
-    QString sevkTarihi;
+    QString degisenParcalar = "";
+    QString testSuresi = "";
+    QString notlar = "";
+
     bool check = true;
 public slots:
     void initialize(QSqlDatabase d,QString sNo);
     void changes();
 private slots:
     void on_pushButton_clicked();
-
+    void commandChangedOlay(const QString& command_text);
     //void on_pushButton_2_clicked();
 
 private:

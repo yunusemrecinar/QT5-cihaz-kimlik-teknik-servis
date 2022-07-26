@@ -1,4 +1,4 @@
-#include "informationdialog.h"
+﻿#include "informationdialog.h"
 #include "ui_informationdialog.h"
 #include "mainwindow.h"
 #include <iostream>
@@ -47,52 +47,22 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 ui->modemSeri5_1->setText(qry->value(12).toString());
                 ui->modemSeri6_1->setText(qry->value(13).toString());
 
-                QList<QString> date = qry->value(14).toString().split(".");
-                ui->date_day->setValue(date.at(0).toInt());
-                ui->date_month->setValue(date.at(1).toInt());
-                ui->date_year->setValue(date.at(2).toInt());
-                ui->test_durum_1->setText(qry->value(15).toString());
-
-                QList<QString> degisenParcalarList = qry->value(16).toString().split(",");
-
-                if(degisenParcalarList.contains(ui->degisenParca_1->text())) {
-                    ui->degisenParca_1->setChecked(true);
+                if(qry->value(14).toString().contains(".")) {
+                    QList<QString> date = qry->value(14).toString().split(".");
+                    ui->date_day->setValue(date.at(0).toInt());
+                    ui->date_month->setValue(date.at(1).toInt());
+                    ui->date_year->setValue(date.at(2).toInt());
                 }
-                if(degisenParcalarList.contains(ui->degisenParca_2->text())) {
-                    ui->degisenParca_2->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_3->text())) {
-                    ui->degisenParca_3->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_4->text())) {
-                    ui->degisenParca_4->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_5->text())) {
-                    ui->degisenParca_5->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_6->text())) {
-                    ui->degisenParca_6->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_7->text())) {
-                    ui->degisenParca_7->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_8->text())) {
-                    ui->degisenParca_8->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_9->text())) {
-                    ui->degisenParca_9->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_10->text())) {
-                    ui->degisenParca_10->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_11->text())) {
-                    ui->degisenParca_11->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_12->text())) {
-                    ui->degisenParca_12->setChecked(true);
-                }
-
-                ui->notlar_1->setText(qry->value(17).toString());
+                ui->test_durum_->setCurrentText(qry->value(15).toString());
+                ui->notlar_1->setText(qry->value(16).toString());
+                oldModel = ui->model_1->currentText();
+                oldLcdKart = ui->lcd_karti_1->currentText();
+                oldSarjKart = ui->sarj_karti_1->currentText();
+                oldDurum = ui->durum_1->currentText();
+                oldAnakartNo = ui->anakart_1->currentText();
+                oldModemKart = ui->modem_karti_1->currentText();
+                oldTestDurum = ui->test_durum_->currentText();
+                oldUidNo = ui->UIDNo_1->text();
             }
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
@@ -150,6 +120,12 @@ void InformationDialog::changes() {
     QStringList commandsModel = {"Mobiot Cihazı","Server Cihazı","ML33+ Modeo Cihazı","ML33 Modeo Cihazı","ML22 Modeo Cihazı","ML21 Modeo Cihazı","ML11 Modeo Cihazı"};
     ui->model_1->addItems(commandsModel);
     connect(ui->model_1, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedModel);
+    QStringList commandTestDurum = {"Test Edilecek","Lab Testi Yapıldı","Saha Testi Yapıldı"};
+    ui->test_durum_->addItems(commandTestDurum);
+    connect(ui->test_durum_, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedTestDurum);
+}
+void InformationDialog::commandChangedTestDurum(const QString& command_text) {
+    durum = command_text;
 }
 void InformationDialog::commandChangedModel(const QString& command_text) {
     model = command_text;
@@ -169,32 +145,7 @@ void InformationDialog::commandChanged(const QString& command_text) {
 void InformationDialog::commandChangedModemKart(const QString& command_text) {
     modemKart = command_text;
 }
-void InformationDialog::degisenParca() {
-    if(ui->degisenParca_1->isChecked())
-        degisenParcalar += ui->degisenParca_1->text() +  ",";
-    if(ui->degisenParca_2->isChecked())
-        degisenParcalar += ui->degisenParca_2->text() + ",";
-    if(ui->degisenParca_3->isChecked())
-        degisenParcalar += ui->degisenParca_3->text() + ",";
-    if(ui->degisenParca_4->isChecked())
-        degisenParcalar += ui->degisenParca_4->text() + ",";
-    if(ui->degisenParca_5->isChecked())
-        degisenParcalar += ui->degisenParca_5->text() + ",";
-    if(ui->degisenParca_6->isChecked())
-        degisenParcalar += ui->degisenParca_6->text() + ",";
-    if(ui->degisenParca_7->isChecked())
-        degisenParcalar += ui->degisenParca_7->text() + ",";
-    if(ui->degisenParca_8->isChecked())
-        degisenParcalar += ui->degisenParca_8->text() + ",";
-    if(ui->degisenParca_9->isChecked())
-        degisenParcalar += ui->degisenParca_9->text() + ",";
-    if(ui->degisenParca_10->isChecked())
-        degisenParcalar += ui->degisenParca_10->text() + ",";
-    if(ui->degisenParca_11->isChecked())
-        degisenParcalar += ui->degisenParca_11->text() + ",";
-    if(ui->degisenParca_12->isChecked())
-        degisenParcalar += ui->degisenParca_12->text() + ",";
-}
+
 void InformationDialog::on_pushButton_clicked()
 {
 
@@ -214,13 +165,13 @@ void InformationDialog::on_pushButton_clicked()
         QString modemSeri5 = ui->modemSeri5_1->text();
         QString modemSeri6 = ui->modemSeri6_1->text();
         QString durum = ui->durum_1->currentText();
+        QString uidNo = ui->UIDNo_1->text();
         QString uretimTarih;
         QString uretimTarihDay = ui->date_day->text();
         QString uretimTarihMonth = ui->date_month->text();
         QString uretimTarihYear = ui->date_year->text();
         uretimTarih = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
-        QString test = ui->test_durum_1->text();
-        degisenParca();
+        QString test = ui->test_durum_->currentText();
         QString notlar = ui->notlar_1->toPlainText();
 
         qry.prepare("UPDATE cihazkimlik SET `Model` = '" + model + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
@@ -239,6 +190,9 @@ void InformationDialog::on_pushButton_clicked()
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Durumu` = '" + durum + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlik SET `UID No` = '" + uidNo + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Modem Seri Num 1` = '" + modemSeri1 + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
@@ -264,16 +218,111 @@ void InformationDialog::on_pushButton_clicked()
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Test Durumu` = '" + test + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
         qry.exec();
-        qry.clear();
-        qry.prepare("UPDATE cihazkimlik SET `Degisen Parcalar` = '" + degisenParcalar + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
-        qry.exec();
-        qry.clear();
+        qry.clear();        
         qry.prepare("UPDATE cihazkimlik SET `Notlar` = '" + notlar + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
 
-        if(qry.exec()) {
-            QMessageBox::information(this,"Inserted","Data Updated Succesfully");
-        }else {
-            QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+        //if(qry.exec()) {
+        //    QMessageBox::information(this,"Inserted","Data Updated Succesfully");
+        //}else {
+        //    QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+        //}
+        qry.clear();
+        if(QString::compare(oldUidNo, ui->UIDNo_1->text(), Qt::CaseInsensitive)) {
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.prepare("INSERT INTO `loglar` (`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldUidNo);
+            qry.bindValue(":yeniDeger",ui->UIDNo_1->text());
+            qry.bindValue(":degisen","UIDNo Değişti");
+            ui->Model_2->setText(QString::number(countUidNo));
+            qry.exec();
+            qry.clear();
+
+        }if(QString::compare(oldDurum, ui->durum_1->currentText(), Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldDurum);
+            qry.bindValue(":yeniDeger",ui->durum_1->currentText());
+            qry.bindValue(":degisen","Durum Değişti");
+            qry.exec();
+            qry.clear();
+        }if(QString::compare(oldTestDurum, ui->test_durum_->currentText(), Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldTestDurum);
+            qry.bindValue(":yeniDeger",ui->test_durum_->currentText());
+            qry.bindValue(":degisen","Test Durum Değişti");
+            qry.exec();
+            qry.clear();
+
+        }if(QString::compare(oldModemKart, ui->modem_karti_1->currentText(), Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldModemKart);
+            qry.bindValue(":yeniDeger",ui->modem_karti_1->currentText());
+            qry.bindValue(":degisen","Modem Kartı Değişti");
+            qry.exec();
+            qry.clear();
+
+        }if(QString::compare(oldModel, ui->model_1->currentText(), Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldModel);
+            qry.bindValue(":yeniDeger",ui->model_1->currentText());
+            qry.bindValue(":degisen","Model Değişti");
+            qry.exec();
+            qry.clear();
+
+        }if(QString::compare(oldAnakartNo, ui->anakart_1->currentText(),Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldAnakartNo);
+            qry.bindValue(":yeniDeger",ui->anakart_1->currentText());
+            qry.bindValue(":degisen","Anakart Değişti");
+            qry.exec();
+            qry.clear();
+
+        }if(QString::compare(oldLcdKart, ui->lcd_karti_1->currentText(), Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldLcdKart);
+            qry.bindValue(":yeniDeger",ui->lcd_karti_1->currentText());
+            qry.bindValue(":degisen","Lcd Kartı Değişti");
+            qry.exec();
+            qry.clear();
+
+        }if(QString::compare(oldSarjKart, ui->sarj_karti_1->currentText(), Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldSarjKart);
+            qry.bindValue(":yeniDeger",ui->sarj_karti_1->currentText());
+            qry.bindValue(":degisen","Şarj Kartı Değişti");
+            qry.exec();
+            qry.clear();
+
         }
 
 
@@ -285,5 +334,39 @@ void InformationDialog::on_pushButton_clicked()
 
     this->close();
 
+}
+
+
+void InformationDialog::on_anakart_1_currentTextChanged(const QString &arg1)
+{
+    countAnakart++;
+}
+void InformationDialog::on_model_1_currentTextChanged(const QString &arg1)
+{
+    countModel++;
+}
+void InformationDialog::on_modem_karti_1_currentTextChanged(const QString &arg1)
+{
+    countModemKarti++;
+}
+void InformationDialog::on_durum_1_currentTextChanged(const QString &arg1)
+{
+    countDurum++;
+}
+void InformationDialog::on_test_durum__currentTextChanged(const QString &arg1)
+{
+    countTestDurum++;
+}
+void InformationDialog::on_sarj_karti_1_currentTextChanged(const QString &arg1)
+{
+    countSarjKarti++;
+}
+void InformationDialog::on_lcd_karti_1_currentTextChanged(const QString &arg1)
+{
+    countLcdKarti++;
+}
+void InformationDialog::on_UIDNo_1_textChanged(const QString &arg1)
+{
+    countUidNo++;
 }
 
