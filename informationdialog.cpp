@@ -32,29 +32,29 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
 
         if(qry->exec()) {
             while(qry->next()) {
-                ui->model_1->setCurrentText(qry->value(0).toString());
-                ui->cihaz_seri_no_2->setText(qry->value(1).toString());
-                ui->anakart_1->setCurrentText(qry->value(2).toString());
-                ui->UIDNo_1->setText(qry->value(3).toString());
-                ui->modem_karti_1->setCurrentText(qry->value(4).toString());
-                ui->lcd_karti_1->setCurrentText(qry->value(5).toString());
-                ui->sarj_karti_1->setCurrentText(qry->value(6).toString());
-                ui->durum_1->setCurrentText(qry->value(7).toString());
-                ui->modemSeri1_1->setText(qry->value(8).toString());
-                ui->modemSeri2_1->setText(qry->value(9).toString());
-                ui->modemSeri3_1->setText(qry->value(10).toString());
-                ui->modemSeri4_1->setText(qry->value(11).toString());
-                ui->modemSeri5_1->setText(qry->value(12).toString());
-                ui->modemSeri6_1->setText(qry->value(13).toString());
+                ui->model_1->setCurrentText(qry->value(1).toString());
+                ui->cihaz_seri_no_2->setText(qry->value(2).toString());
+                ui->anakart_1->setCurrentText(qry->value(3).toString());
+                ui->UIDNo_1->setText(qry->value(4).toString());
+                ui->modem_karti_1->setCurrentText(qry->value(5).toString());
+                ui->lcd_karti_1->setCurrentText(qry->value(6).toString());
+                ui->sarj_karti_1->setCurrentText(qry->value(7).toString());
+                ui->durum_1->setCurrentText(qry->value(8).toString());
+                ui->modemSeri1_1->setText(qry->value(9).toString());
+                ui->modemSeri2_1->setText(qry->value(10).toString());
+                ui->modemSeri3_1->setText(qry->value(11).toString());
+                ui->modemSeri4_1->setText(qry->value(12).toString());
+                ui->modemSeri5_1->setText(qry->value(13).toString());
+                ui->modemSeri6_1->setText(qry->value(14).toString());
 
-                if(qry->value(14).toString().contains(".")) {
-                    QList<QString> date = qry->value(14).toString().split(".");
+                if(qry->value(15).toString().contains(".")) {
+                    QList<QString> date = qry->value(15).toString().split(".");
                     ui->date_day->setValue(date.at(0).toInt());
                     ui->date_month->setValue(date.at(1).toInt());
                     ui->date_year->setValue(date.at(2).toInt());
                 }
-                ui->test_durum_->setCurrentText(qry->value(15).toString());
-                ui->notlar_1->setText(qry->value(16).toString());
+                ui->test_durum_->setCurrentText(qry->value(16).toString());
+                ui->notlar_1->setText(qry->value(17).toString());
                 oldModel = ui->model_1->currentText();
                 oldLcdKart = ui->lcd_karti_1->currentText();
                 oldSarjKart = ui->sarj_karti_1->currentText();
@@ -336,37 +336,4 @@ void InformationDialog::on_pushButton_clicked()
 
 }
 
-
-void InformationDialog::on_anakart_1_currentTextChanged(const QString &arg1)
-{
-    countAnakart++;
-}
-void InformationDialog::on_model_1_currentTextChanged(const QString &arg1)
-{
-    countModel++;
-}
-void InformationDialog::on_modem_karti_1_currentTextChanged(const QString &arg1)
-{
-    countModemKarti++;
-}
-void InformationDialog::on_durum_1_currentTextChanged(const QString &arg1)
-{
-    countDurum++;
-}
-void InformationDialog::on_test_durum__currentTextChanged(const QString &arg1)
-{
-    countTestDurum++;
-}
-void InformationDialog::on_sarj_karti_1_currentTextChanged(const QString &arg1)
-{
-    countSarjKarti++;
-}
-void InformationDialog::on_lcd_karti_1_currentTextChanged(const QString &arg1)
-{
-    countLcdKarti++;
-}
-void InformationDialog::on_UIDNo_1_textChanged(const QString &arg1)
-{
-    countUidNo++;
-}
 

@@ -520,7 +520,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 3</string>
+               <string>IMEI 3</string>
               </property>
              </widget>
             </item>
@@ -532,7 +532,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 5</string>
+               <string>IMEI 5</string>
               </property>
              </widget>
             </item>
@@ -571,7 +571,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 1</string>
+               <string>IMEI 1</string>
               </property>
              </widget>
             </item>
@@ -583,7 +583,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 4</string>
+               <string>IMEI 4</string>
               </property>
              </widget>
             </item>
@@ -595,7 +595,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 2</string>
+               <string>IMEI 2</string>
               </property>
              </widget>
             </item>
@@ -625,7 +625,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 6</string>
+               <string>IMEI 6</string>
               </property>
              </widget>
             </item>
@@ -678,7 +678,7 @@ border:2px solid grey;
              <widget class="QTextEdit" name="notlar_">
               <property name="font">
                <font>
-                <pointsize>16</pointsize>
+                <pointsize>18</pointsize>
                </font>
               </property>
              </widget>

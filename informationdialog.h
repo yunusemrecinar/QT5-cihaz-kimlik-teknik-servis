@@ -58,23 +58,6 @@ private slots:
     void commandChangedLcdKarti(const QString& command_text);
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
-    void on_anakart_1_currentTextChanged(const QString &arg1);
-
-
-
-    void on_model_1_currentTextChanged(const QString &arg1);
-
-    void on_modem_karti_1_currentTextChanged(const QString &arg1);
-
-    void on_durum_1_currentTextChanged(const QString &arg1);
-
-    void on_test_durum__currentTextChanged(const QString &arg1);
-
-    void on_sarj_karti_1_currentTextChanged(const QString &arg1);
-
-    void on_lcd_karti_1_currentTextChanged(const QString &arg1);
-
-    void on_UIDNo_1_textChanged(const QString &arg1);
 
 private:
     Ui::InformationDialog *ui;

@@ -33,7 +33,8 @@ private slots:
     void commandChangedLcdKarti(const QString& command_text);
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
-    void changes();
+    void changes();   
+
 private:
     Ui::SecDialog *ui;
     QSqlDatabase database;
@@ -44,11 +45,14 @@ private:
     QString durum = "SATIŞ";
     QString lcdKarti = "MHD-B5-v0.0/811/2014";
     QString model = "Mobiot Cihazı";
-    QString degisenParcalar = "";
     QString testDurumu = "Test Edilecek";
 
     QMenu *m_lineedit_menu;
     LineEditPopUpForm *m_lineedit_popup_form;
+
+    bool checkSeriNo = false;
+    bool checkUIDNo = false;
+    bool checkIMEI = false;
 };
 
 #endif // SECDIALOG_H

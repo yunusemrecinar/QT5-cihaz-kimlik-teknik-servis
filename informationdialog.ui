@@ -523,7 +523,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 3</string>
+               <string>IMEI 3</string>
               </property>
              </widget>
             </item>
@@ -535,7 +535,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 5</string>
+               <string>IMEI 5</string>
               </property>
              </widget>
             </item>
@@ -574,7 +574,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 1</string>
+               <string>IMEI 1</string>
               </property>
              </widget>
             </item>
@@ -586,7 +586,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 4</string>
+               <string>IMEI 4</string>
               </property>
              </widget>
             </item>
@@ -598,7 +598,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 2</string>
+               <string>IMEI 2</string>
               </property>
              </widget>
             </item>
@@ -628,7 +628,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="text">
-               <string>Modem Seri 6</string>
+               <string>IMEI6</string>
               </property>
              </widget>
             </item>
@@ -678,7 +678,13 @@ border:2px solid grey;
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="notlar_1"/>
+             <widget class="QTextEdit" name="notlar_1">
+              <property name="font">
+               <font>
+                <pointsize>16</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -687,7 +693,7 @@ border:2px solid grey;
           <widget class="QPushButton" name="pushButton">
            <property name="font">
             <font>
-             <pointsize>18</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="styleSheet">

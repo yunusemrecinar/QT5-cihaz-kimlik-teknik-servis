@@ -23,7 +23,6 @@ public:
     QString saat = "";
     QString musteriAdi = "";
     QString olay = "";
-    QString arizaTarifi = "";
     QString yapilanIslem = "";
     QString malzemeler = "";
     QString degisenParcalar = "";
@@ -37,7 +36,33 @@ public slots:
 private slots:
     void on_pushButton_clicked();
     void commandChangedOlay(const QString& command_text);
+    void commandChangedMusteriAdi(const QString& command_text);
+
     //void on_pushButton_2_clicked();
+
+
+
+    void on_donanim_1_clicked();
+
+    void on_donanim_2_clicked();
+
+    void on_donanim_3_clicked();
+
+    void on_donanim_4_clicked();
+
+    void on_donanim_8_clicked();
+
+    void on_donanim_7_clicked();
+
+    void on_donanim_9_clicked();
+
+    void on_donanim_5_clicked();
+
+    void on_donanim_6_clicked();
+
+    void on_donanim_11_clicked();
+
+    void on_donanim_10_clicked();
 
 private:
     Ui::ServisDialog *ui;

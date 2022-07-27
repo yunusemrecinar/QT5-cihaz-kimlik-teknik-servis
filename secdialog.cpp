@@ -62,14 +62,14 @@ void SecDialog::changes() {
     connect(ui->modem_karti_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedModemKart);
     QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
     ui->durum_->addItems(commandsDurum);
-    connect(ui->anakart_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedDurum);
+    connect(ui->durum_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedDurum);
     QStringList commandsSarjKarti = {"MHD-B7-v.0.0","MHD-B7-v2"};
     ui->sarj_karti_->addItems(commandsSarjKarti);
     connect(ui->sarj_karti_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedSarjKarti);
     QStringList commandsLcdKarti = {"MHD-B5-v0.0/811/2014","MHD-B5-v0.0"};
     ui->lcd_karti_->addItems(commandsLcdKarti);
     connect(ui->lcd_karti_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedLcdKarti);
-    QStringList commandsModel = {"Mobiot Cihazı","Server Cihazı","ML33+ Modeo Cihazı","ML33 Modeo Cihazı","ML22 Modeo Cihazı","ML21 Modeo Cihazı","ML11 Modeo Cihazı"};
+    QStringList commandsModel = {"ML33+ Modeo Cihazı","Mobiot Cihazı","Server Cihazı","ML33 Modeo Cihazı","ML22 Modeo Cihazı","ML21 Modeo Cihazı","ML11 Modeo Cihazı"};
     ui->model_->addItems(commandsModel);
     connect(ui->model_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedModel);
     QStringList testDurum = {"Test Edilecek","Lab Testi Yapıldı","Saha Testi Yapıldı"};
@@ -117,16 +117,25 @@ void SecDialog::on_pushButton_clicked()
         QString modemSeri6 = ui->modemSeri6_->text();
         QString notlar = ui->notlar_->toPlainText();
 
+        if(ui->modemSeri1_->text().length() == 15 && ui->modemSeri2_->text().length() == 15 && ui->modemSeri3_->text().length() == 15 &&
+                ui->modemSeri4_->text().length() == 15 && ui->modemSeri5_->text().length() == 15 && ui->modemSeri6_->text().length() == 15) {
+            checkIMEI = true;
+        }if(ui->cihaz_seri_no->text().length() == 9) {
+            checkSeriNo = true;
+        }if(ui->UIDNo_1->text().length() == 12) {
+            checkUIDNo = true;
+        }
+
         QSqlQuery qry;
 
         qry.prepare("INSERT INTO cihazkimlik(`Model`,`Cihaz Seri No`,`Anakart No`,"
                     "`UID No`,`Modem Kartı`,`Lcd Kartı`,`Şarj Kartı`,`Durumu`,`Modem Seri Num 1`,"
                     "`Modem Seri Num 2`,`Modem Seri Num 3`,`Modem Seri Num 4`,`Modem Seri Num 5`,"
-                    "`Modem Seri Num 6`,`Uretim Tarihi`,`Test Durumu`,`Degisen Parcalar`,`Notlar`) "
+                    "`Modem Seri Num 6`,`Uretim Tarihi`,`Test Durumu`,`Notlar`) "
                     "VALUES(:model,:cihazSeriNo,:anakartNo,:uidNo,"
                     ":modemKarti,:lcdKarti,:sarjKarti,:durumu,:modemSeriNum1,"
                     ":modemSeriNum2,:modemSeriNum3,:modemSeriNum4,:modemSeriNum5,"
-                    ":modemSeriNum6,:uretimTarihi,:testDurumu,:degisenParcalar,:notlar)");
+                    ":modemSeriNum6,:uretimTarihi,:testDurumu,:notlar)");
         qry.bindValue(":model",model);
         qry.bindValue(":cihazSeriNo",cihazSeriNo);
         qry.bindValue(":anakartNo",anakartNo);
@@ -143,13 +152,16 @@ void SecDialog::on_pushButton_clicked()
         qry.bindValue(":modemSeriNum6",modemSeri6);
         qry.bindValue(":uretimTarihi",uretimTarihi);
         qry.bindValue(":testDurumu",testDurumu);
-        qry.bindValue(":degisenParcalar",degisenParcalar);
         qry.bindValue(":notlar",notlar);
-
-        if(qry.exec()) {
-            QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
+        if(checkIMEI && checkSeriNo && checkUIDNo) {
+            if(qry.exec()) {
+                QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
+                this->close();
+            }else {
+                QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+            }
         }else {
-            QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+            QMessageBox::information(this,"Error","IMEI, UIDNo, Cihaz Seri No bilgileri eksik!!");
         }
 
     }else {
@@ -157,7 +169,6 @@ void SecDialog::on_pushButton_clicked()
         cout << "Database not connected!" << endl;
     }
 
-
-    this->close();
 }
+
 

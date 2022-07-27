@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include "lineeditpopupform.h"
+#include "musteri.h"
 #include "secdialog.h"
 #include "servisdialog.h"
 #include "informationdialog.h"
@@ -109,6 +110,7 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
         foreach(int col, columnsToHide)
             ui->tableView->hideColumn(col);
         //columnsToHide.append(0);
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
         cout << "Database not connected!" << endl;
@@ -135,7 +137,7 @@ void MainWindow::on_pushButton_load_clicked()
         //modal->submit();
         foreach(int col, columnsToHide)
             ui->tableView->hideColumn(col);
-        //columnsToHide.append(0);
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
         cout << "Database not connected!" << endl;
@@ -152,17 +154,17 @@ void MainWindow::hideColumns() {
     columnsToHideService.append(10);
 }
 void MainWindow::addColumns() {
-    columnsToHide.append(2);
-    columnsToHide.append(4);
+    columnsToHide.append(0);
+    columnsToHide.append(3);
     columnsToHide.append(5);
     columnsToHide.append(6);
-    columnsToHide.append(8);
+    columnsToHide.append(7);
     columnsToHide.append(9);
     columnsToHide.append(10);
     columnsToHide.append(11);
     columnsToHide.append(12);
     columnsToHide.append(13);
-    columnsToHide.append(15);
+    columnsToHide.append(14);
     columnsToHide.append(16);
     columnsToHide.append(17);
 }
@@ -189,7 +191,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
-    QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
+    QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
 
     mainWindowValue = rowValue;
     ui->servisLabel->setText("Teknik Servis (" + mainWindowValue + ")");
@@ -197,7 +199,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     QSqlQueryModel * modalLog = new QSqlQueryModel();
     if(database.open()) {
 
-        QSqlQuery* qry = new QSqlQuery(database1);
+        QSqlQuery* qry = new QSqlQuery(database);
 
         qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue);
         qry -> exec();
@@ -207,7 +209,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
         foreach(int col, columnsToHideService)
             ui->tableView_teknikServis->hideColumn(col);
-
+        ui->tableView_teknikServis->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         qry->clear();
         qry ->prepare("select * from loglar where `Cihaz Seri No` = " + mainWindowValue);
         qry -> exec();
@@ -215,6 +217,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
         ui->tableView_log->setModel(modalLog);
         ui->tableView_log->resizeColumnsToContents();
         ui->tableView_log->hideColumn(0);
+        ui->tableView_log->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
@@ -226,7 +229,7 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 {
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
-    QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
+    QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
 
     mainWindowValue = rowValue;
 
@@ -258,6 +261,10 @@ void MainWindow::on_tableView_teknikServis_doubleClicked(const QModelIndex &inde
     servisDialog->exec();
 }
 
-
-
+void MainWindow::on_pushButton_clicked()
+{
+    Musteri *musteri = new Musteri();
+    musteri->initialize(database);
+    musteri->show();
+}
 
