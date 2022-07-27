@@ -17,10 +17,15 @@ public:
     explicit Musteri(QWidget *parent = nullptr);
     ~Musteri();
     bool checkSeriNo = false;
+    QString rowId;
 public slots:
     void initialize(QSqlDatabase d);
 private slots:
     void on_pushButton_clicked();
+
+    void on_tableView_clicked(const QModelIndex &index);
+
+    void on_pushButton_sil_clicked();
 
 private:
     QSqlDatabase database;

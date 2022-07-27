@@ -21,7 +21,6 @@ public:
     QString servisNo = "";
     QString tarih = "";
     QString saat = "";
-    QString musteriAdi = "";
     QString olay = "";
     QString yapilanIslem = "";
     QString malzemeler = "";
@@ -36,7 +35,7 @@ public slots:
 private slots:
     void on_pushButton_clicked();
     void commandChangedOlay(const QString& command_text);
-    void commandChangedMusteriAdi(const QString& command_text);
+
 
     //void on_pushButton_2_clicked();
 

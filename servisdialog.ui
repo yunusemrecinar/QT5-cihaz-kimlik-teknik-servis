@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1450</width>
+    <width>1448</width>
     <height>972</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_17">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_12">
      <item>
@@ -21,7 +21,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="teknikServis">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -31,6 +31,7 @@
            <property name="font">
             <font>
              <pointsize>20</pointsize>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -419,83 +420,71 @@ border: 2px solid grey;
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
-              <widget class="QGroupBox" name="servisNoBox">
-               <property name="styleSheet">
-                <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout">
-                <item>
-                 <widget class="QLabel" name="servisNo">
-                  <property name="font">
-                   <font>
-                    <pointsize>18</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Cihaz Seri No</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="servisNo_">
-                  <property name="minimumSize">
-                   <size>
-                    <width>230</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>18</pointsize>
-                   </font>
-                  </property>
-                  <property name="readOnly">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QGroupBox" name="musteriAdiBox">
+              <widget class="QGroupBox" name="olayBox">
                <property name="minimumSize">
                 <size>
-                 <width>0</width>
+                 <width>250</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="styleSheet">
                 <string notr="true">QGroupBox {
-border: 2px solid grey;
+border:2px solid grey;
 }</string>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_4">
+               <layout class="QVBoxLayout" name="verticalLayout_30">
                 <item>
-                 <widget class="QLabel" name="musteriAdi">
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
+                 <widget class="QLabel" name="olay">
                   <property name="font">
                    <font>
                     <pointsize>18</pointsize>
                    </font>
                   </property>
                   <property name="text">
-                   <string>Müşteri Adı</string>
+                   <string>Olay</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="musteriAdi_">
-                  <property name="enabled">
-                   <bool>true</bool>
+                 <widget class="QComboBox" name="olay_">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>20</pointsize>
+                   </font>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="TestBox">
+               <property name="styleSheet">
+                <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <item>
+                 <widget class="QLabel" name="testSuresi">
+                  <property name="font">
+                   <font>
+                    <pointsize>18</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Test Süresi(saat)</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="testSuresi_">
                   <property name="font">
                    <font>
                     <pointsize>18</pointsize>
@@ -507,34 +496,96 @@ border: 2px solid grey;
               </widget>
              </item>
              <item>
-              <widget class="QGroupBox" name="GelisBox">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>200</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_9">
+              <widget class="QGroupBox" name="groupBox">
+               <layout class="QVBoxLayout" name="verticalLayout_13">
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_15">
+                 <widget class="QLabel" name="gelisTarihi">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>18</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Tarih</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_13">
+                   <widget class="QSpinBox" name="gelisTarihiDay_">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <pointsize>18</pointsize>
+                     </font>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="gelisTarihiMonth_">
+                    <property name="font">
+                     <font>
+                      <pointsize>18</pointsize>
+                     </font>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="gelisTarihiYear_">
+                    <property name="font">
+                     <font>
+                      <pointsize>18</pointsize>
+                     </font>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_14">
+                  <item>
+                   <widget class="QLabel" name="label_6">
+                    <property name="font">
+                     <font>
+                      <pointsize>18</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Saat</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_8">
+                    <property name="spacing">
+                     <number>2</number>
+                    </property>
                     <item>
-                     <widget class="QLabel" name="gelisTarihi">
+                     <widget class="QSpinBox" name="tarih_saat">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
                         <height>40</height>
                        </size>
                       </property>
@@ -543,97 +594,16 @@ border: 2px solid grey;
                         <pointsize>18</pointsize>
                        </font>
                       </property>
-                      <property name="text">
-                       <string>Tarih</string>
-                      </property>
                      </widget>
                     </item>
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_3">
-                      <property name="spacing">
-                       <number>2</number>
+                     <widget class="QSpinBox" name="tarih_dakika">
+                      <property name="font">
+                       <font>
+                        <pointsize>18</pointsize>
+                       </font>
                       </property>
-                      <item>
-                       <widget class="QSpinBox" name="gelisTarihiDay_">
-                        <property name="minimumSize">
-                         <size>
-                          <width>0</width>
-                          <height>40</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <pointsize>18</pointsize>
-                         </font>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QSpinBox" name="gelisTarihiMonth_">
-                        <property name="font">
-                         <font>
-                          <pointsize>18</pointsize>
-                         </font>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QSpinBox" name="gelisTarihiYear_">
-                        <property name="font">
-                         <font>
-                          <pointsize>18</pointsize>
-                         </font>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QVBoxLayout" name="verticalLayout_14">
-                      <item>
-                       <widget class="QLabel" name="label_6">
-                        <property name="font">
-                         <font>
-                          <pointsize>18</pointsize>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Saat</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_8">
-                        <property name="spacing">
-                         <number>2</number>
-                        </property>
-                        <item>
-                         <widget class="QSpinBox" name="tarih_saat">
-                          <property name="minimumSize">
-                           <size>
-                            <width>0</width>
-                            <height>40</height>
-                           </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>18</pointsize>
-                           </font>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QSpinBox" name="tarih_dakika">
-                          <property name="font">
-                           <font>
-                            <pointsize>18</pointsize>
-                           </font>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -848,7 +818,7 @@ border: 2px solid grey;
                  </font>
                 </property>
                 <property name="text">
-                 <string>Yapılan İşlem</string>
+                 <string>Yapılan İşlem / Arıza Tarifi</string>
                 </property>
                </widget>
               </item>
@@ -869,90 +839,6 @@ border: 2px solid grey;
               </item>
              </layout>
             </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
-               <item>
-                <widget class="QGroupBox" name="olayBox">
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QGroupBox {
-border:2px solid grey;
-}</string>
-                 </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_30">
-                  <item>
-                   <widget class="QLabel" name="olay">
-                    <property name="font">
-                     <font>
-                      <pointsize>18</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Olay</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="olay_">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <pointsize>20</pointsize>
-                     </font>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="TestBox">
-                 <property name="styleSheet">
-                  <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-                 </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_10">
-                  <item>
-                   <widget class="QLabel" name="testSuresi">
-                    <property name="font">
-                     <font>
-                      <pointsize>18</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Test Süresi(saat)</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="testSuresi_">
-                    <property name="font">
-                     <font>
-                      <pointsize>18</pointsize>
-                     </font>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
            </item>
           </layout>
          </item>

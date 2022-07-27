@@ -75,6 +75,10 @@ void SecDialog::changes() {
     QStringList testDurum = {"Test Edilecek","Lab Testi Yapıldı","Saha Testi Yapıldı"};
     ui->test_durum_->addItems(testDurum);
     connect(ui->test_durum_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedTestDurum);
+
+}
+void SecDialog::commandChangedMusteriAdi(const QString& command_text) {
+    musteriAdi = command_text;
 }
 void SecDialog::commandChangedModel(const QString& command_text) {
     model = command_text;
@@ -96,6 +100,18 @@ void SecDialog::commandChangedModemKart(const QString& command_text) {
 }
 void SecDialog::initialize(QSqlDatabase d) {
     database = d;
+
+    QList<QString> commandsMusteri;
+
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        qry ->prepare("select * from müsteri");
+        if(qry -> exec()) {
+            while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
+        }
+    }
+    ui->musteriAdi_1->addItems(commandsMusteri);
+    connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedMusteriAdi);
 }
 void SecDialog::commandChangedTestDurum(const QString& command_text) {
     testDurumu = command_text;
@@ -106,8 +122,15 @@ void SecDialog::on_pushButton_clicked()
 
     if(database.isOpen()) {
 
+        model = ui->model_->currentText();
         QString cihazSeriNo = ui->cihaz_seri_no->text();
-        QString uidNo = ui->UIDNo_1->text();       
+        anakartNo = ui->anakart_->currentText();
+        QString uidNo = ui->UIDNo_1->text();
+        modemKarti = ui->modem_karti_->currentText();
+        lcdKarti = ui->lcd_karti_->currentText();
+        sarjKarti = ui->sarj_karti_->currentText();
+        durum = ui->durum_->currentText();
+        testDurumu = ui->test_durum_->currentText();
         QString uretimTarihi = ui->date_day->text() + "." + ui->date_month->text() + "." + ui->date_year->text();
         QString modemSeri1 = ui->modemSeri1_->text();
         QString modemSeri2 = ui->modemSeri2_->text();
@@ -115,6 +138,7 @@ void SecDialog::on_pushButton_clicked()
         QString modemSeri4 = ui->modemSeri4_->text();
         QString modemSeri5 = ui->modemSeri5_->text();
         QString modemSeri6 = ui->modemSeri6_->text();
+        musteriAdi = ui->musteriAdi_1->currentText();
         QString notlar = ui->notlar_->toPlainText();
 
         if(ui->modemSeri1_->text().length() == 15 && ui->modemSeri2_->text().length() == 15 && ui->modemSeri3_->text().length() == 15 &&
@@ -129,11 +153,11 @@ void SecDialog::on_pushButton_clicked()
         QSqlQuery qry;
 
         qry.prepare("INSERT INTO cihazkimlik(`Model`,`Cihaz Seri No`,`Anakart No`,"
-                    "`UID No`,`Modem Kartı`,`Lcd Kartı`,`Şarj Kartı`,`Durumu`,`Modem Seri Num 1`,"
+                    "`UID No`,`Modem Kartı`,`Lcd Kartı`,`Şarj Kartı`,`Durumu`,`Müşteri Adı`,`Modem Seri Num 1`,"
                     "`Modem Seri Num 2`,`Modem Seri Num 3`,`Modem Seri Num 4`,`Modem Seri Num 5`,"
                     "`Modem Seri Num 6`,`Uretim Tarihi`,`Test Durumu`,`Notlar`) "
                     "VALUES(:model,:cihazSeriNo,:anakartNo,:uidNo,"
-                    ":modemKarti,:lcdKarti,:sarjKarti,:durumu,:modemSeriNum1,"
+                    ":modemKarti,:lcdKarti,:sarjKarti,:durumu,:musteriAdi,:modemSeriNum1,"
                     ":modemSeriNum2,:modemSeriNum3,:modemSeriNum4,:modemSeriNum5,"
                     ":modemSeriNum6,:uretimTarihi,:testDurumu,:notlar)");
         qry.bindValue(":model",model);
@@ -144,6 +168,7 @@ void SecDialog::on_pushButton_clicked()
         qry.bindValue(":lcdKarti",lcdKarti);
         qry.bindValue(":sarjKarti",sarjKarti);
         qry.bindValue(":durumu",durum);
+        qry.bindValue(":musteriAdi",musteriAdi);
         qry.bindValue(":modemSeriNum1",modemSeri1);
         qry.bindValue(":modemSeriNum2",modemSeri2);
         qry.bindValue(":modemSeriNum3",modemSeri3);

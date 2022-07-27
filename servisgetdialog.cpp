@@ -108,21 +108,12 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
 
         QSqlQuery* qry = new QSqlQuery(database);
 
-        QList<QString> commandsMusteri;
-        qry ->prepare("select * from müsteri");
-        if(qry -> exec()) {
-            while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
-        }
-        ui->musteriAdi_->addItems(commandsMusteri);
-        connect(ui->musteriAdi_, &QComboBox::currentTextChanged, this, &ServisGetDialog::commandChangedMusteriAdi);
-
-        qry->clear();
-
         qry ->prepare("select * from teknikservis where `Sıra` = '" + indexValue +"'");
 
         if(qry->exec()) {
             while(qry->next()) {
-                ui->servisNo_->setText(qry->value(1).toString());
+                seriNo = qry->value(1).toString();
+                ui->teknikServis->setText("Teknik Servis (" + seriNo + ")");
 
                 if(qry->value(2).toString().contains(".")) {
                     QList<QString> date = qry->value(2).toString().split(".");
@@ -135,10 +126,9 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                     ui->tarih_saat->setValue(time.at(0).toInt());
                     ui->tarih_dakika->setValue(time.at(1).toInt());
                 }
-                ui->musteriAdi_->setCurrentText(qry->value(4).toString());
-                ui->olay_->setCurrentText(qry->value(5).toString());
-                ui->yapilanIslem_->setText(qry->value(6).toString());
-                QList<QString> list = qry->value(7).toString().split(",");
+                ui->olay_->setCurrentText(qry->value(4).toString());
+                ui->yapilanIslem_->setText(qry->value(5).toString());
+                QList<QString> list = qry->value(6).toString().split(",");
                 int length = 0;
                 for(int i = 0; i < list.size(); i++) {
                     length = list.at(i).length();
@@ -190,7 +180,7 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                 }
 
 
-                QList<QString> degisenParcalarList = qry->value(8).toString().split(",");
+                QList<QString> degisenParcalarList = qry->value(7).toString().split(",");
 
                 if(degisenParcalarList.contains(ui->degisenParca_1->text())) {
                     ui->degisenParca_1->setChecked(true);
@@ -229,9 +219,9 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                     ui->degisenParca_12->setChecked(true);
                 }
 
-                ui->testSuresi_->setValue(qry->value(9).toInt());
+                ui->testSuresi_->setValue(qry->value(8).toInt());
 
-                ui->notlar_->setText(qry->value(10).toString());
+                ui->notlar_->setText(qry->value(9).toString());
             }
         }
 
@@ -242,9 +232,7 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
     }
 
 }
-void ServisGetDialog::commandChangedMusteriAdi(const QString& command_text) {
-    musteriAdi = command_text;
-}
+
 void ServisGetDialog::donanimlar() {
     if(ui->donanim_1->isChecked()) {
         donanim += ui->donanim_1->text() + ui->donanim_1Num->text() + ",";
@@ -306,7 +294,6 @@ void ServisGetDialog::on_pushButton_clicked()
         tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text();
         QString saat;
         saat = ui->tarih_saat->text() + ":" + ui->tarih_dakika->text();
-        musteriAdi = ui->musteriAdi_->currentText();
         olay = ui->olay_->currentText();
         QString yapilanIslem = ui->yapilanIslem_->toPlainText();
         donanimlar();
@@ -315,31 +302,28 @@ void ServisGetDialog::on_pushButton_clicked()
         QString notlar = ui->notlar_->toPlainText();
 
 
-        qry.prepare("UPDATE teknikservis SET `Tarih` = '" + tarih + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Tarih` = '" + tarih + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Saat` = '" + saat + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Saat` = '" + saat + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Olay` = '" + olay + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Olay` = '" + olay + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Yapılan İşlem` = '" + yapilanIslem + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Yapılan İşlem` = '" + yapilanIslem + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Cihazla Gelen Malzemeler` = '" + donanim + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Cihazla Gelen Malzemeler` = '" + donanim + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Degisen Parcalar` = '" + degisenParcalar + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Degisen Parcalar` = '" + degisenParcalar + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Test Süresi` = '" + testSure + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Test Süresi` = '" + testSure + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
-        qry.exec();
-        qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Notlar` = '" + notlar + "' WHERE `Cihaz Seri No` = '" + ui->servisNo_->text() + "' AND `Sıra` = '" + indexValue +"';");
+        qry.prepare("UPDATE teknikservis SET `Notlar` = '" + notlar + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
 
 
         if(qry.exec()) {

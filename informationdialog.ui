@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1036</width>
+    <width>897</width>
     <height>978</height>
    </rect>
   </property>
@@ -165,41 +165,92 @@ border: 2px solid grey;
           </widget>
          </item>
          <item>
-          <widget class="QGroupBox" name="TestDurumBox_2">
-           <property name="styleSheet">
-            <string notr="true">QGroupBox {
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QGroupBox" name="TestDurumBox_2">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_22">
-            <item>
-             <widget class="QLabel" name="testDurumu_2">
-              <property name="font">
-               <font>
-                <pointsize>18</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">verticalLayout_6 {
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_22">
+              <item>
+               <widget class="QLabel" name="testDurumu_2">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">verticalLayout_6 {
 border:1px;
 }</string>
-              </property>
-              <property name="text">
-               <string>Test Durumu</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="test_durum_">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
+                </property>
+                <property name="text">
+                 <string>Test Durumu</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="test_durum_">
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="musteriAdiBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QLabel" name="musteriAdi">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Müşteri Adı</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="musteriAdi_">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
           <widget class="QGroupBox" name="uretimTarihBox_2">

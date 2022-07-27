@@ -67,7 +67,9 @@ void Musteri::on_pushButton_clicked()
         }else {
             QMessageBox::information(this,"Error", "Cihaz Seri Numarasını Kontrol Edin!!");
         }
-
+        ui->textEditIsim->clear();
+        ui->textEditAdres->clear();
+        ui->cihazSeriNo->clear();
         qry.clear();
 
         QSqlQueryModel *model = new QSqlQueryModel();
@@ -96,5 +98,44 @@ void Musteri::on_pushButton_clicked()
         cout << "Database not connected!" << endl;
     }
 
+}
+
+
+void Musteri::on_tableView_clicked(const QModelIndex &index)
+{
+    int row = ui->tableView->currentIndex().row();
+    rowId = ui->tableView->model()->data(ui->tableView->model()->index(row,0)).toString();
+}
+
+
+void Musteri::on_pushButton_sil_clicked()
+{
+    QSqlQuery qry;
+
+    qry.prepare("DELETE FROM müsteri WHERE `Id` = " + rowId);
+    qry.exec();
+
+    qry.clear();
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        //model = new QSqlQueryModel();
+
+        //setValue("select * from cihazkimlik");
+        //ui->tableView->setModel(model);
+        qry ->prepare("select * from müsteri");
+        qry -> exec();
+        model->setQuery(*qry);
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
 }
 

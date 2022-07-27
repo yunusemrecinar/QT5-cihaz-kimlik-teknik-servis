@@ -22,6 +22,7 @@ class SecDialog : public QDialog
 public:
     explicit SecDialog(QWidget *parent = nullptr);
     ~SecDialog();
+    QString musteriAdi;
 public slots:
     void initialize(QSqlDatabase d);
 private slots:
@@ -33,6 +34,7 @@ private slots:
     void commandChangedLcdKarti(const QString& command_text);
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
+    void commandChangedMusteriAdi(const QString& command_text);
     void changes();   
 
 private:

@@ -43,6 +43,7 @@ public:
 
     QString tarihLog = "";
 
+    QString musteriAdi;
 
 public slots:
     void initialize(QString s, QSqlDatabase d);
@@ -58,6 +59,8 @@ private slots:
     void commandChangedLcdKarti(const QString& command_text);
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
+
+    void commandChangedMusteriAdi(const QString& command_text);
 
 private:
     Ui::InformationDialog *ui;

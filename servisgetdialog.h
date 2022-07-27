@@ -21,7 +21,8 @@ public:
     QString indexValue;
     QString degisenParcalar = "";
     QString olay;
-    QString musteriAdi;
+    QString seriNo;
+
 public slots:
     void initialize(QString index, QSqlDatabase d);
 private slots:
@@ -30,7 +31,6 @@ private slots:
     void donanimlar();
     void degisenParca();
     void commandChangedOlay(const QString& command_text);
-    void commandChangedMusteriAdi(const QString& command_text);
 
     void on_donanim_1_clicked();
 

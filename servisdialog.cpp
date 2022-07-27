@@ -52,7 +52,7 @@ void ServisDialog::changes() {
 
     QStringList commandsOlay = {"Geldi","Test","Gitti","Onarıldı"};
     ui->olay_->addItems(commandsOlay);
-    connect(ui->olay_, &QComboBox::currentTextChanged, this, &ServisDialog::commandChangedMusteriAdi);
+    connect(ui->olay_, &QComboBox::currentTextChanged, this, &ServisDialog::commandChangedOlay);
 
     ui->donanim_1Num->setButtonSymbols(QAbstractSpinBox::NoButtons);
     ui->donanim_2Num->setButtonSymbols(QAbstractSpinBox::NoButtons);
@@ -109,34 +109,19 @@ ServisDialog::~ServisDialog()
 void ServisDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
 }
-void ServisDialog::commandChangedMusteriAdi(const QString& command_text) {
-    musteriAdi = command_text;
-}
+
 void ServisDialog::initialize(QSqlDatabase d,QString sNo) {
-    ui->servisNo_->setText(sNo);
-    database = d;
-
-    QList<QString> commandsMusteri;
-
-    if(database.isOpen()) {
-        QSqlQuery* qry = new QSqlQuery(database);
-        qry ->prepare("select * from müsteri WHERE `Cihaz Seri No` = '" + sNo + "';");
-        if(qry -> exec()) {
-            while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
-        }
-    }
-    ui->musteriAdi_->addItems(commandsMusteri);
-    connect(ui->musteriAdi_, &QComboBox::currentTextChanged, this, &ServisDialog::commandChangedMusteriAdi);
+    ui->teknikServis->setText("Teknik Servis (" + sNo + ")");
+    servisNo = sNo;
+    database = d;   
 }
 void ServisDialog::on_pushButton_clicked()
 {
 
     if(database.open()) {
 
-        servisNo = ui->servisNo_->text();
         tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text();
         saat = ui->tarih_saat->text() + ":" + ui->tarih_dakika->text();
-        musteriAdi = ui->musteriAdi_->currentText();
         olay = ui->olay_->currentText();
         yapilanIslem = ui->yapilanIslem_->toPlainText();
 
@@ -196,15 +181,14 @@ void ServisDialog::on_pushButton_clicked()
         QSqlQuery qry;
 
         qry.prepare("INSERT INTO teknikservis(`Cihaz Seri No`,`Tarih`,"
-                    "`Saat`,`Müşteri Adı`,`Olay`,`Yapılan İşlem`,"
+                    "`Saat`,`Olay`,`Yapılan İşlem`,"
                     "`Cihazla Gelen Malzemeler`,`Degisen Parcalar`,`Test Süresi`,`Notlar`)"
                     "VALUES(:servisNo,:tarih,"
-                    ":saat,:musteriAdi,:olay,:yapilanIslem,"
+                    ":saat,:olay,:yapilanIslem,"
                     ":malzemeler,:degisenParcalar,:testSuresi,:notlar)");
         qry.bindValue(":servisNo",servisNo);
         qry.bindValue(":tarih",tarih);
         qry.bindValue(":saat",saat);
-        qry.bindValue(":musteriAdi",musteriAdi);
         qry.bindValue(":olay",olay);
         qry.bindValue(":yapilanIslem",yapilanIslem);
         qry.bindValue(":malzemeler",malzemeler);

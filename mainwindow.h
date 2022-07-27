@@ -9,6 +9,7 @@
 #include "informationdialog.h"
 #include "servisdialog.h"
 #include "servisgetdialog.h"
+#include <QTimer>
 
 class QMenu;
 class LineEditPopUpForm;
@@ -41,12 +42,19 @@ public:
 
 public slots:
     void readFile(QString filename);
+
+    void myfunction();
     //QSqlQueryModel* setValue(QString qry);
 signals:
     void notifyMessageSent(const QString& message);
 private slots:
 
     //void on_pushButton_clicked();
+    void refresh();
+
+    void refreshLog();
+
+    void refreshServis();
 
     void hideColumns();
 
@@ -98,5 +106,7 @@ private:
 
     QMenu *m_lineedit_menu;
     LineEditPopUpForm *m_lineedit_popup_form;
+
+    QTimer *timer;
 };
 #endif // MAINWINDOW_H

@@ -2,6 +2,7 @@
 #include "ui_informationdialog.h"
 #include "mainwindow.h"
 #include <iostream>
+#include <QTime>
 using namespace std;
 
 InformationDialog::InformationDialog(QWidget *parent) :
@@ -20,6 +21,9 @@ InformationDialog::~InformationDialog()
 {
     delete ui;
 }
+void InformationDialog::commandChangedMusteriAdi(const QString& command_text) {
+    musteriAdi = command_text;
+}
 void InformationDialog::initialize(QString s,QSqlDatabase d) {
     database = d;
     seriNo = s;
@@ -27,6 +31,16 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
     if(database.isOpen()) {
 
         QSqlQuery* qry = new QSqlQuery(database);
+
+        QList<QString> commandsMusteri;
+        qry ->prepare("select * from müsteri");
+        if(qry -> exec()) {
+            while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
+        }
+        ui->musteriAdi_->addItems(commandsMusteri);
+        connect(ui->musteriAdi_, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedMusteriAdi);
+
+        qry->clear();
 
         qry ->prepare("select * from cihazkimlik where `Cihaz Seri No` = '" + seriNo + "'");
 
@@ -40,21 +54,22 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 ui->lcd_karti_1->setCurrentText(qry->value(6).toString());
                 ui->sarj_karti_1->setCurrentText(qry->value(7).toString());
                 ui->durum_1->setCurrentText(qry->value(8).toString());
-                ui->modemSeri1_1->setText(qry->value(9).toString());
-                ui->modemSeri2_1->setText(qry->value(10).toString());
-                ui->modemSeri3_1->setText(qry->value(11).toString());
-                ui->modemSeri4_1->setText(qry->value(12).toString());
-                ui->modemSeri5_1->setText(qry->value(13).toString());
-                ui->modemSeri6_1->setText(qry->value(14).toString());
+                ui->musteriAdi_->setCurrentText(qry->value(9).toString());
+                ui->modemSeri1_1->setText(qry->value(10).toString());
+                ui->modemSeri2_1->setText(qry->value(11).toString());
+                ui->modemSeri3_1->setText(qry->value(12).toString());
+                ui->modemSeri4_1->setText(qry->value(13).toString());
+                ui->modemSeri5_1->setText(qry->value(14).toString());
+                ui->modemSeri6_1->setText(qry->value(15).toString());
 
-                if(qry->value(15).toString().contains(".")) {
-                    QList<QString> date = qry->value(15).toString().split(".");
+                if(qry->value(16).toString().contains(".")) {
+                    QList<QString> date = qry->value(16).toString().split(".");
                     ui->date_day->setValue(date.at(0).toInt());
                     ui->date_month->setValue(date.at(1).toInt());
                     ui->date_year->setValue(date.at(2).toInt());
                 }
-                ui->test_durum_->setCurrentText(qry->value(16).toString());
-                ui->notlar_1->setText(qry->value(17).toString());
+                ui->test_durum_->setCurrentText(qry->value(17).toString());
+                ui->notlar_1->setText(qry->value(18).toString());
                 oldModel = ui->model_1->currentText();
                 oldLcdKart = ui->lcd_karti_1->currentText();
                 oldSarjKart = ui->sarj_karti_1->currentText();
@@ -158,6 +173,7 @@ void InformationDialog::on_pushButton_clicked()
         QString modemKart = ui->modem_karti_1->currentText();
         QString lcdKart = ui->lcd_karti_1->currentText();
         QString sarjKart = ui->sarj_karti_1->currentText();
+        musteriAdi = ui->musteriAdi_->currentText();
         QString modemSeri1 = ui->modemSeri1_1->text();
         QString modemSeri2 = ui->modemSeri2_1->text();
         QString modemSeri3 = ui->modemSeri3_1->text();
@@ -181,6 +197,9 @@ void InformationDialog::on_pushButton_clicked()
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Modem Kartı` = '" + modemKart + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlik SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Lcd Kartı` = '" + lcdKart + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
@@ -228,7 +247,8 @@ void InformationDialog::on_pushButton_clicked()
         //}
         qry.clear();
         if(QString::compare(oldUidNo, ui->UIDNo_1->text(), Qt::CaseInsensitive)) {
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());
             qry.prepare("INSERT INTO `loglar` (`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
             qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
@@ -243,8 +263,8 @@ void InformationDialog::on_pushButton_clicked()
         }if(QString::compare(oldDurum, ui->durum_1->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
             qry.bindValue(":tarih",tarihLog);
             qry.bindValue(":eskiDeger",oldDurum);
             qry.bindValue(":yeniDeger",ui->durum_1->currentText());
@@ -254,8 +274,8 @@ void InformationDialog::on_pushButton_clicked()
         }if(QString::compare(oldTestDurum, ui->test_durum_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
             qry.bindValue(":tarih",tarihLog);
             qry.bindValue(":eskiDeger",oldTestDurum);
             qry.bindValue(":yeniDeger",ui->test_durum_->currentText());
@@ -266,8 +286,8 @@ void InformationDialog::on_pushButton_clicked()
         }if(QString::compare(oldModemKart, ui->modem_karti_1->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
             qry.bindValue(":tarih",tarihLog);
             qry.bindValue(":eskiDeger",oldModemKart);
             qry.bindValue(":yeniDeger",ui->modem_karti_1->currentText());
@@ -278,8 +298,8 @@ void InformationDialog::on_pushButton_clicked()
         }if(QString::compare(oldModel, ui->model_1->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
             qry.bindValue(":tarih",tarihLog);
             qry.bindValue(":eskiDeger",oldModel);
             qry.bindValue(":yeniDeger",ui->model_1->currentText());
@@ -290,8 +310,8 @@ void InformationDialog::on_pushButton_clicked()
         }if(QString::compare(oldAnakartNo, ui->anakart_1->currentText(),Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
             qry.bindValue(":tarih",tarihLog);
             qry.bindValue(":eskiDeger",oldAnakartNo);
             qry.bindValue(":yeniDeger",ui->anakart_1->currentText());
@@ -302,8 +322,8 @@ void InformationDialog::on_pushButton_clicked()
         }if(QString::compare(oldLcdKart, ui->lcd_karti_1->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
             qry.bindValue(":tarih",tarihLog);
             qry.bindValue(":eskiDeger",oldLcdKart);
             qry.bindValue(":yeniDeger",ui->lcd_karti_1->currentText());
@@ -314,8 +334,8 @@ void InformationDialog::on_pushButton_clicked()
         }if(QString::compare(oldSarjKart, ui->sarj_karti_1->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) ;
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
             qry.bindValue(":tarih",tarihLog);
             qry.bindValue(":eskiDeger",oldSarjKart);
             qry.bindValue(":yeniDeger",ui->sarj_karti_1->currentText());

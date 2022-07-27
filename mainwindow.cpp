@@ -10,6 +10,7 @@
 #include "servisgetdialog.h"
 #include <QTableView>
 #include <QScrollArea>
+#include <QDebug>
 
 #include <iostream>
 using namespace std;
@@ -25,7 +26,10 @@ MainWindow::MainWindow(QWidget *parent)
     addColumns();
     hideColumns();
 
-    this->setWindowTitle("ANA MENÜ");
+    //timer = new QTimer(this);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(myfunction()));
+    //timer->start(1000);
+    this->setWindowTitle("ANA MENÜ");   
     //ui->pushButton_servis_verigetir->setVisible(false);
 
 
@@ -83,6 +87,32 @@ void MainWindow::readFile(QString filename)
     }
 }
 
+void MainWindow::myfunction()
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        //model = new QSqlQueryModel();
+
+        //setValue("select * from cihazkimlik");
+        //ui->tableView->setModel(model);
+        qry ->prepare("select * from cihazkimlik");
+        qry -> exec();
+        model->setQuery(*qry);
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+        //modal->submit();
+        foreach(int col, columnsToHide)
+            ui->tableView->hideColumn(col);
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -120,28 +150,7 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 void MainWindow::on_pushButton_load_clicked()
 {
 
-    QSqlQueryModel *model = new QSqlQueryModel();
-
-    if(database.isOpen()) {
-        QSqlQuery* qry = new QSqlQuery(database);
-
-        //model = new QSqlQueryModel();
-
-        //setValue("select * from cihazkimlik");
-        //ui->tableView->setModel(model);
-        qry ->prepare("select * from cihazkimlik");
-        qry -> exec();
-        model->setQuery(*qry);
-        ui->tableView->setModel(model);
-        ui->tableView->resizeColumnsToContents();
-        //modal->submit();
-        foreach(int col, columnsToHide)
-            ui->tableView->hideColumn(col);
-        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    }else {
-        QMessageBox::information(this, "Not Connected", database.lastError().text());
-        cout << "Database not connected!" << endl;
-    }
+    refresh();
 
 }
 
@@ -149,6 +158,7 @@ void MainWindow::hideColumns() {
     columnsToHideService.append(1);
     columnsToHideService.append(3);
     columnsToHideService.append(6);
+    columnsToHideService.append(7);
     columnsToHideService.append(8);
     columnsToHideService.append(9);
     columnsToHideService.append(10);
@@ -165,8 +175,9 @@ void MainWindow::addColumns() {
     columnsToHide.append(12);
     columnsToHide.append(13);
     columnsToHide.append(14);
-    columnsToHide.append(16);
+    columnsToHide.append(15);
     columnsToHide.append(17);
+    columnsToHide.append(18);
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -176,15 +187,16 @@ void MainWindow::on_pushButton_2_clicked()
     //secdialog.exec();
     secdialog = new SecDialog(this);
     secdialog->initialize(database);
-    secdialog->show();    
+    secdialog->exec();
+    refresh();
 }
-
 
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
     servisDialog = new ServisDialog(this);
     servisDialog->initialize(database,mainWindowValue);
-    servisDialog->show();
+    servisDialog->exec();
+    refreshServis();
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
@@ -195,34 +207,9 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
     mainWindowValue = rowValue;
     ui->servisLabel->setText("Teknik Servis (" + mainWindowValue + ")");
-    QSqlQueryModel * modal = new QSqlQueryModel();
-    QSqlQueryModel * modalLog = new QSqlQueryModel();
-    if(database.open()) {
 
-        QSqlQuery* qry = new QSqlQuery(database);
-
-        qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue);
-        qry -> exec();
-        modal->setQuery(*qry);
-        ui->tableView_teknikServis->setModel(modal);
-        ui->tableView_teknikServis->resizeColumnsToContents();
-
-        foreach(int col, columnsToHideService)
-            ui->tableView_teknikServis->hideColumn(col);
-        ui->tableView_teknikServis->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-        qry->clear();
-        qry ->prepare("select * from loglar where `Cihaz Seri No` = " + mainWindowValue);
-        qry -> exec();
-        modalLog->setQuery(*qry);
-        ui->tableView_log->setModel(modalLog);
-        ui->tableView_log->resizeColumnsToContents();
-        ui->tableView_log->hideColumn(0);
-        ui->tableView_log->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-    }else {
-        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
-        cout << "Database not connected!" << endl;
-    }
+    refreshServis();
+    refreshLog();
 
 }
 void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
@@ -235,7 +222,10 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 
     InformationDialog *inform = new InformationDialog();
     inform->initialize(mainWindowValue,database);
-    inform->show();
+    inform->exec();
+    refresh();
+    refreshLog();
+
 }
 void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
 {
@@ -259,6 +249,7 @@ void MainWindow::on_tableView_teknikServis_doubleClicked(const QModelIndex &inde
     ServisGetDialog *servisDialog = new ServisGetDialog();
     servisDialog->initialize(rowCount, database);
     servisDialog->exec();
+    refreshServis();
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -267,4 +258,59 @@ void MainWindow::on_pushButton_clicked()
     musteri->initialize(database);
     musteri->show();
 }
+void MainWindow::refresh() {
+    QSqlQueryModel *model = new QSqlQueryModel();
 
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        //model = new QSqlQueryModel();
+
+        //setValue("select * from cihazkimlik");
+        //ui->tableView->setModel(model);
+        qry ->prepare("select * from cihazkimlik");
+        qry -> exec();
+        model->setQuery(*qry);
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+        //modal->submit();
+        foreach(int col, columnsToHide)
+            ui->tableView->hideColumn(col);
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
+
+void MainWindow::refreshLog() {
+    QSqlQuery* qry = new QSqlQuery(database);
+    QSqlQueryModel * modalLog = new QSqlQueryModel();
+
+    qry ->prepare("select * from loglar where `Cihaz Seri No` = " + mainWindowValue);
+    qry -> exec();
+    modalLog->setQuery(*qry);
+    ui->tableView_log->setModel(modalLog);
+    ui->tableView_log->resizeColumnsToContents();
+    ui->tableView_log->hideColumn(0);
+    ui->tableView_log->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void MainWindow::refreshServis() {
+    QSqlQueryModel * modal = new QSqlQueryModel();
+
+    if(database.open()) {
+
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue);
+        qry -> exec();
+        modal->setQuery(*qry);
+        ui->tableView_teknikServis->setModel(modal);
+        ui->tableView_teknikServis->resizeColumnsToContents();
+
+        foreach(int col, columnsToHideService)
+            ui->tableView_teknikServis->hideColumn(col);
+        ui->tableView_teknikServis->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    }
+}
