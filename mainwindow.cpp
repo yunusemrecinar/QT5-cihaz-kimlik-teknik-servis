@@ -292,6 +292,7 @@ void MainWindow::refreshLog() {
     modalLog->setQuery(*qry);
     ui->tableView_log->setModel(modalLog);
     ui->tableView_log->resizeColumnsToContents();
+    ui->tableView_log->resizeRowsToContents();
     ui->tableView_log->hideColumn(0);
     ui->tableView_log->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }

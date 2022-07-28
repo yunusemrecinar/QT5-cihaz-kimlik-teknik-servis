@@ -182,6 +182,9 @@
             <pointsize>16</pointsize>
            </font>
           </property>
+          <property name="alternatingRowColors">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
        </layout>

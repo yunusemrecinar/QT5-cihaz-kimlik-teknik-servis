@@ -33,6 +33,7 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
         QSqlQuery* qry = new QSqlQuery(database);
 
         QList<QString> commandsMusteri;
+        commandsMusteri.append("");
         qry ->prepare("select * from müsteri");
         if(qry -> exec()) {
             while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
@@ -54,25 +55,27 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 ui->lcd_karti_1->setCurrentText(qry->value(6).toString());
                 ui->sarj_karti_1->setCurrentText(qry->value(7).toString());
                 ui->durum_1->setCurrentText(qry->value(8).toString());
-                ui->musteriAdi_->setCurrentText(qry->value(9).toString());
-                ui->modemSeri1_1->setText(qry->value(10).toString());
-                ui->modemSeri2_1->setText(qry->value(11).toString());
-                ui->modemSeri3_1->setText(qry->value(12).toString());
-                ui->modemSeri4_1->setText(qry->value(13).toString());
-                ui->modemSeri5_1->setText(qry->value(14).toString());
-                ui->modemSeri6_1->setText(qry->value(15).toString());
+                ui->modemTipi_->setCurrentText(qry->value(9).toString());
+                ui->musteriAdi_->setCurrentText(qry->value(10).toString());
+                ui->modemSeri1_1->setText(qry->value(11).toString());
+                ui->modemSeri2_1->setText(qry->value(12).toString());
+                ui->modemSeri3_1->setText(qry->value(13).toString());
+                ui->modemSeri4_1->setText(qry->value(14).toString());
+                ui->modemSeri5_1->setText(qry->value(15).toString());
+                ui->modemSeri6_1->setText(qry->value(16).toString());
 
-                if(qry->value(16).toString().contains(".")) {
-                    QList<QString> date = qry->value(16).toString().split(".");
+                if(qry->value(17).toString().contains(".")) {
+                    QList<QString> date = qry->value(17).toString().split(".");
                     ui->date_day->setValue(date.at(0).toInt());
                     ui->date_month->setValue(date.at(1).toInt());
                     ui->date_year->setValue(date.at(2).toInt());
                 }
-                ui->test_durum_->setCurrentText(qry->value(17).toString());
-                ui->notlar_1->setText(qry->value(18).toString());
+                ui->test_durum_->setCurrentText(qry->value(18).toString());
+                ui->notlar_1->setText(qry->value(19).toString());
                 oldModel = ui->model_1->currentText();
                 oldLcdKart = ui->lcd_karti_1->currentText();
                 oldSarjKart = ui->sarj_karti_1->currentText();
+                oldModemTipi = ui->modemTipi_->currentText();
                 oldDurum = ui->durum_1->currentText();
                 oldAnakartNo = ui->anakart_1->currentText();
                 oldModemKart = ui->modem_karti_1->currentText();
@@ -138,6 +141,12 @@ void InformationDialog::changes() {
     QStringList commandTestDurum = {"Test Edilecek","Lab Testi Yapıldı","Saha Testi Yapıldı"};
     ui->test_durum_->addItems(commandTestDurum);
     connect(ui->test_durum_, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedTestDurum);
+    QStringList commandModemTipi = {"Sierra / MC7304","Quectel / EC25-EC","Simcom / SIM7600G"};
+    ui->modemTipi_->addItems(commandModemTipi);
+    connect(ui->modemTipi_, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedModemTipi);
+}
+void InformationDialog::commandChangedModemTipi(const QString& command_text) {
+    modemTipi = command_text;
 }
 void InformationDialog::commandChangedTestDurum(const QString& command_text) {
     durum = command_text;
@@ -181,6 +190,7 @@ void InformationDialog::on_pushButton_clicked()
         QString modemSeri5 = ui->modemSeri5_1->text();
         QString modemSeri6 = ui->modemSeri6_1->text();
         QString durum = ui->durum_1->currentText();
+        modemTipi = ui->modemTipi_->currentText();
         QString uidNo = ui->UIDNo_1->text();
         QString uretimTarih;
         QString uretimTarihDay = ui->date_day->text();
@@ -209,6 +219,9 @@ void InformationDialog::on_pushButton_clicked()
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Durumu` = '" + durum + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlik SET `Modem Tipi` = '" + modemTipi + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `UID No` = '" + uidNo + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
@@ -269,6 +282,17 @@ void InformationDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldDurum);
             qry.bindValue(":yeniDeger",ui->durum_1->currentText());
             qry.bindValue(":degisen","Durum Değişti");
+            qry.exec();
+            qry.clear();
+        }if(QString::compare(oldModemTipi, ui->modemTipi_->currentText(), Qt::CaseInsensitive)) {
+            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
+                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
+            qry.bindValue(":tarih",tarihLog);
+            qry.bindValue(":eskiDeger",oldModemTipi);
+            qry.bindValue(":yeniDeger",ui->modemTipi_->currentText());
+            qry.bindValue(":degisen","Modem Tipi Değişti");
             qry.exec();
             qry.clear();
         }if(QString::compare(oldTestDurum, ui->test_durum_->currentText(), Qt::CaseInsensitive)) {

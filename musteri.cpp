@@ -30,6 +30,7 @@ void Musteri::initialize(QSqlDatabase d) {
         modal->setQuery(*qry);
         ui->tableView->setModel(modal);
         ui->tableView->resizeColumnsToContents();
+        ui->tableView->resizeRowsToContents();
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     }else {
@@ -52,18 +53,40 @@ void Musteri::on_pushButton_clicked()
         QString cihazSeriNo = ui->cihazSeriNo->text();
         QSqlQuery qry;
 
+        int count;
+        QString temp = "";
         if(ui->cihazSeriNo->text().length() == 9) {
                     checkSeriNo = true;
                 }
-
-        qry.prepare("INSERT INTO müsteri(`İsim`,`Adres`,`Cihaz Seri No`) "
-                    "VALUES(:isim,:adres,:cihazSeriNo)");
-        qry.bindValue(":isim",isim);
-        qry.bindValue(":adres",adres);
-        qry.bindValue(":cihazSeriNo",cihazSeriNo);
-
         if(checkSeriNo) {
+            qry.prepare("SELECT COUNT(*) FROM `müsteri` WHERE `İsim` = '" + isim + "';");
             qry.exec();
+            while(qry.next()) {
+                count = qry.value(0).toInt();
+            }
+            qry.clear();
+            if(count == 1) {
+                qry.prepare("SELECT `Cihaz Seri No` FROM `müsteri` WHERE İsim = '" + isim + "';");
+                qry.exec();
+                while(qry.next()) {
+                    temp = qry.value(0).toString();
+                }
+                temp += "\n"+cihazSeriNo;
+                qry.clear();
+                qry.prepare("UPDATE `müsteri` SET `Cihaz Seri No` = '"+temp+"' WHERE İsim = '" + isim + "';");
+                qry.exec();
+            }else {
+
+
+                qry.prepare("INSERT INTO müsteri(`İsim`,`Adres`,`Cihaz Seri No`) "
+                            "VALUES(:isim,:adres,:cihazSeriNo)");
+                qry.bindValue(":isim",isim);
+                qry.bindValue(":adres",adres);
+                qry.bindValue(":cihazSeriNo",cihazSeriNo);
+
+
+                qry.exec();
+            }
         }else {
             QMessageBox::information(this,"Error", "Cihaz Seri Numarasını Kontrol Edin!!");
         }
@@ -86,6 +109,7 @@ void Musteri::on_pushButton_clicked()
             model->setQuery(*qry);
             ui->tableView->setModel(model);
             ui->tableView->resizeColumnsToContents();
+            ui->tableView->resizeRowsToContents();
             ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
         }else {

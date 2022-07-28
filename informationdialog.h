@@ -31,6 +31,7 @@ public:
     QString oldModemKart = "";
     QString oldUidNo = "";
     QString oldTestDurum = "";
+    QString oldModemTipi = "";
 
     int countAnakart = 0;
     int countModel = 0;
@@ -59,7 +60,7 @@ private slots:
     void commandChangedLcdKarti(const QString& command_text);
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
-
+    void commandChangedModemTipi(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);
 
 private:
@@ -74,6 +75,7 @@ private:
     QString durum;
     QString anakartNo;
     QString modemKart;
+    QString modemTipi;
 
     QSqlDatabase database;
 };

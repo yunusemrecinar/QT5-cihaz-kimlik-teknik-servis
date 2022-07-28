@@ -35,6 +35,7 @@ private slots:
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);
+    void commandChangedModemTipi(const QString& command_text);
     void changes();   
 
 private:
@@ -48,6 +49,7 @@ private:
     QString lcdKarti = "MHD-B5-v0.0/811/2014";
     QString model = "Mobiot Cihazı";
     QString testDurumu = "Test Edilecek";
+    QString modemTipi = "";
 
     QMenu *m_lineedit_menu;
     LineEditPopUpForm *m_lineedit_popup_form;

@@ -496,7 +496,12 @@ border: 2px solid grey;
               </widget>
              </item>
              <item>
-              <widget class="QGroupBox" name="">
+              <widget class="QGroupBox" name="groupBox">
+               <property name="styleSheet">
+                <string notr="true">QGroupBox {
+border:2px solid grey;
+}</string>
+               </property>
                <layout class="QVBoxLayout" name="verticalLayout_21" stretch="0,0,0">
                 <property name="leftMargin">
                  <number>9</number>
