@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     w.database.setPassword(w.password);
     w.database.setDatabaseName(w.dbName);
     w.database.open();
+    w.refresh();
     w.show();
     return a.exec();
 }

@@ -21,17 +21,12 @@ MainWindow::MainWindow(QWidget *parent)
       _information(nullptr)
 {
     ui->setupUi(this);
-
     readFile("test.txt");
     addColumns();
     hideColumns();
 
-    //timer = new QTimer(this);
-    //connect(timer, SIGNAL(timeout()), this, SLOT(myfunction()));
-    //timer->start(1000);
     this->setWindowTitle("ANA MENÜ");   
-    //ui->pushButton_servis_verigetir->setVisible(false);
-
+    ui->toolBar->addWidget(ui->pushButton);
 
 }
 
@@ -147,21 +142,14 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
     }
 }
 
-void MainWindow::on_pushButton_load_clicked()
-{
-
-    refresh();
-
-}
-
 void MainWindow::hideColumns() {
+    columnsToHideService.append(0);
     columnsToHideService.append(1);
     columnsToHideService.append(3);
     columnsToHideService.append(6);
     columnsToHideService.append(7);
     columnsToHideService.append(8);
     columnsToHideService.append(9);
-    columnsToHideService.append(10);
 }
 void MainWindow::addColumns() {
     columnsToHide.append(0);
@@ -176,7 +164,7 @@ void MainWindow::addColumns() {
     columnsToHide.append(13);
     columnsToHide.append(14);
     columnsToHide.append(15);
-    columnsToHide.append(17);
+    columnsToHide.append(16);
     columnsToHide.append(18);
 }
 
@@ -189,6 +177,7 @@ void MainWindow::on_pushButton_2_clicked()
     secdialog->initialize(database);
     secdialog->exec();
     refresh();
+    ui->lineEdit->clear();
 }
 
 void MainWindow::on_pushButton_servis_ekle_clicked()

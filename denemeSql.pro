@@ -61,3 +61,6 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Desktop/ -llibmys
 
 INCLUDEPATH += $$PWD/../../Desktop
 DEPENDPATH += $$PWD/../../Desktop
+
+RESOURCES += \
+    images.qrc

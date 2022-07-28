@@ -44,13 +44,15 @@ public slots:
     void readFile(QString filename);
 
     void myfunction();
+
+    void refresh();
     //QSqlQueryModel* setValue(QString qry);
 signals:
     void notifyMessageSent(const QString& message);
 private slots:
 
     //void on_pushButton_clicked();
-    void refresh();
+
 
     void refreshLog();
 
@@ -59,8 +61,6 @@ private slots:
     void hideColumns();
 
     void addColumns();
-
-    void on_pushButton_load_clicked();
 
     //void readFile(QString filename);
 
