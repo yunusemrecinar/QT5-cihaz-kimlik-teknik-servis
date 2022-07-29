@@ -120,8 +120,9 @@ void ServisDialog::on_pushButton_clicked()
 
     if(database.open()) {
 
-        tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text();
+
         saat = ui->tarih_saat->text() + ":" + ui->tarih_dakika->text();
+        tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text() + " " + saat;
         olay = ui->olay_->currentText();
         yapilanIslem = ui->yapilanIslem_->toPlainText();
 
@@ -181,14 +182,13 @@ void ServisDialog::on_pushButton_clicked()
         QSqlQuery qry;
 
         qry.prepare("INSERT INTO teknikservis(`Cihaz Seri No`,`Tarih`,"
-                    "`Saat`,`Olay`,`Yapılan İşlem`,"
+                    "`Olay`,`Yapılan İşlem`,"
                     "`Cihazla Gelen Malzemeler`,`Degisen Parcalar`,`Test Süresi`,`Notlar`)"
                     "VALUES(:servisNo,:tarih,"
-                    ":saat,:olay,:yapilanIslem,"
+                    ":olay,:yapilanIslem,"
                     ":malzemeler,:degisenParcalar,:testSuresi,:notlar)");
         qry.bindValue(":servisNo",servisNo);
         qry.bindValue(":tarih",tarih);
-        qry.bindValue(":saat",saat);
         qry.bindValue(":olay",olay);
         qry.bindValue(":yapilanIslem",yapilanIslem);
         qry.bindValue(":malzemeler",malzemeler);

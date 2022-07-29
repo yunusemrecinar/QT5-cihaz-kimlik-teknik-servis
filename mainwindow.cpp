@@ -11,6 +11,9 @@
 #include <QTableView>
 #include <QScrollArea>
 #include <QDebug>
+#include "toolbardialog.h"
+
+
 
 #include <iostream>
 using namespace std;
@@ -27,6 +30,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setWindowTitle("ANA MENÜ");   
     ui->toolBar->addWidget(ui->pushButton);
+    ui->toolBar->addWidget(ui->pushButton_modemTipi);
+    ui->toolBar->addWidget(ui->pushButton_Model);
+    ui->lineEdit->setPlaceholderText("Filtrele");
+    ui->lineEdit->setReadOnly(1);
+
 
 }
 
@@ -126,7 +134,7 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 
         //setValue("select * from cihazkimlik");
         //ui->tableView->setModel(model);
-        qry ->prepare("select * from cihazkimlik where `Cihaz Seri No` LIKE '" + arg1 + "%'");
+        qry ->prepare("select * from cihazkimlik where `Cihaz Seri No` LIKE '" + arg1 + "%' OR `Müşteri Adı` LIKE '" + arg1 + "%'");
         qry -> exec();
         model->setQuery(*qry);
         ui->tableView->setModel(model);
@@ -145,11 +153,11 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 void MainWindow::hideColumns() {
     columnsToHideService.append(0);
     columnsToHideService.append(1);
-    columnsToHideService.append(3);
+    columnsToHideService.append(5);
     columnsToHideService.append(6);
     columnsToHideService.append(7);
     columnsToHideService.append(8);
-    columnsToHideService.append(9);
+
 }
 void MainWindow::addColumns() {
     columnsToHide.append(0);
@@ -166,6 +174,7 @@ void MainWindow::addColumns() {
     columnsToHide.append(15);
     columnsToHide.append(16);
     columnsToHide.append(18);
+    columnsToHide.append(19);
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -222,7 +231,6 @@ void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
     int row = ui->tableView_teknikServis->currentIndex().row();
     QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
 
-    //serviceValue = value;
     rowCount = rowValue;
 
 }
@@ -285,7 +293,14 @@ void MainWindow::refreshLog() {
     ui->tableView_log->hideColumn(0);
     ui->tableView_log->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
+void MainWindow::resizeEvent(QResizeEvent* event) {
 
+    QMainWindow::resizeEvent(event);
+        ui->tableView_teknikServis->setColumnWidth(2,150);
+        ui->tableView_teknikServis->setColumnWidth(3,80);
+        ui->tableView_teknikServis->setColumnWidth(4,ui->tableView_teknikServis->width()-230);
+
+}
 void MainWindow::refreshServis() {
     QSqlQueryModel * modal = new QSqlQueryModel();
 
@@ -293,14 +308,48 @@ void MainWindow::refreshServis() {
 
         QSqlQuery* qry = new QSqlQuery(database);
 
-        qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue);
+        qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue + " ORDER BY Tarih DESC;");
         qry -> exec();
         modal->setQuery(*qry);
         ui->tableView_teknikServis->setModel(modal);
         ui->tableView_teknikServis->resizeColumnsToContents();
-
+        ui->tableView_teknikServis->resizeRowsToContents();
         foreach(int col, columnsToHideService)
             ui->tableView_teknikServis->hideColumn(col);
-        ui->tableView_teknikServis->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        //ui->tableView_teknikServis->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->tableView_teknikServis->setColumnWidth(2,150);
+        ui->tableView_teknikServis->setColumnWidth(3,80);
+        ui->tableView_teknikServis->setColumnWidth(4,ui->tableView_teknikServis->width()-230);
     }
 }
+
+void MainWindow::on_pushButton_modemTipi_clicked()
+{
+    ToolBarDialog *toolbar = new ToolBarDialog();
+    toolbar->initialize(database, ui->pushButton_modemTipi->text(), "modemtipi");
+    toolbar->show();
+}
+
+
+void MainWindow::on_pushButton_Model_clicked()
+{
+    ToolBarDialog *toolbar = new ToolBarDialog();
+    toolbar->initialize(database, ui->pushButton_Model->text(), "model");
+    toolbar->show();
+}
+
+
+void MainWindow::on_lineEdit_selectionChanged()
+{
+    ui->lineEdit->setText("");
+    ui->lineEdit->setReadOnly(0);
+}
+
+
+void MainWindow::on_splitter_splitterMoved(int pos, int index)
+{
+    ui->tableView_teknikServis->setColumnWidth(2,150);
+    ui->tableView_teknikServis->setColumnWidth(3,80);
+    ui->tableView_teknikServis->setColumnWidth(4,ui->tableView_teknikServis->width()-230);
+}
+

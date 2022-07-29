@@ -115,20 +115,22 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                 seriNo = qry->value(1).toString();
                 ui->teknikServis->setText("Teknik Servis (" + seriNo + ")");
 
-                if(qry->value(2).toString().contains(".")) {
-                    QList<QString> date = qry->value(2).toString().split(".");
+                if(qry->value(2).toString().contains(" ")) {
+                    QList<QString> dateTime = qry->value(2).toString().split(" ");
+
+                    QList<QString> date = dateTime.at(0).split(".");
                     ui->gelisTarihiDay_->setValue(date.at(0).toInt());
                     ui->gelisTarihiMonth_->setValue(date.at(1).toInt());
                     ui->gelisTarihiYear_->setValue(date.at(2).toInt());
-                }
-                if(qry->value(3).toString().contains(":")) {
-                    QList<QString> time = qry->value(3).toString().split(":");
+
+                    QList<QString> time = dateTime.at(1).split(":");
                     ui->tarih_saat->setValue(time.at(0).toInt());
                     ui->tarih_dakika->setValue(time.at(1).toInt());
+
                 }
-                ui->olay_->setCurrentText(qry->value(4).toString());
-                ui->yapilanIslem_->setText(qry->value(5).toString());
-                QList<QString> list = qry->value(6).toString().split(",");
+                ui->olay_->setCurrentText(qry->value(3).toString());
+                ui->yapilanIslem_->setText(qry->value(4).toString());
+                QList<QString> list = qry->value(5).toString().split(",");
                 int length = 0;
                 for(int i = 0; i < list.size(); i++) {
                     length = list.at(i).length();
@@ -180,7 +182,7 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                 }
 
 
-                QList<QString> degisenParcalarList = qry->value(7).toString().split(",");
+                QList<QString> degisenParcalarList = qry->value(6).toString().split(",");
 
                 if(degisenParcalarList.contains(ui->degisenParca_1->text())) {
                     ui->degisenParca_1->setChecked(true);
@@ -219,9 +221,9 @@ void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
                     ui->degisenParca_12->setChecked(true);
                 }
 
-                ui->testSuresi_->setValue(qry->value(8).toInt());
+                ui->testSuresi_->setValue(qry->value(7).toInt());
 
-                ui->notlar_->setText(qry->value(9).toString());
+                ui->notlar_->setText(qry->value(8).toString());
             }
         }
 
@@ -291,9 +293,10 @@ void ServisGetDialog::on_pushButton_clicked()
 
         QSqlQuery qry;
         QString tarih;
-        tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text();
+
         QString saat;
         saat = ui->tarih_saat->text() + ":" + ui->tarih_dakika->text();
+        tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text() + " " + saat;
         olay = ui->olay_->currentText();
         QString yapilanIslem = ui->yapilanIslem_->toPlainText();
         donanimlar();
@@ -303,9 +306,6 @@ void ServisGetDialog::on_pushButton_clicked()
 
 
         qry.prepare("UPDATE teknikservis SET `Tarih` = '" + tarih + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
-        qry.exec();
-        qry.clear();
-        qry.prepare("UPDATE teknikservis SET `Saat` = '" + saat + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE teknikservis SET `Olay` = '" + olay + "' WHERE `Cihaz Seri No` = '" + seriNo + "' AND `Sıra` = '" + indexValue +"';");

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>881</width>
-    <height>978</height>
+    <height>980</height>
    </rect>
   </property>
   <property name="font">
@@ -352,16 +352,10 @@ border:2px solid grey;
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="anakart_1">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QLineEdit" name="anakart_1">
               <property name="font">
                <font>
-                <pointsize>20</pointsize>
+                <pointsize>18</pointsize>
                </font>
               </property>
              </widget>
@@ -487,22 +481,10 @@ border:2px solid grey;
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="modem_karti_1">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>350</width>
-                <height>0</height>
-               </size>
-              </property>
+             <widget class="QLineEdit" name="modem_karti_1">
               <property name="font">
                <font>
-                <pointsize>20</pointsize>
+                <pointsize>18</pointsize>
                </font>
               </property>
              </widget>
@@ -531,16 +513,10 @@ border:2px solid grey;
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="sarj_karti_1">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QLineEdit" name="sarj_karti_1">
               <property name="font">
                <font>
-                <pointsize>20</pointsize>
+                <pointsize>18</pointsize>
                </font>
               </property>
              </widget>
@@ -569,16 +545,10 @@ border:2px solid grey;
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="lcd_karti_1">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QLineEdit" name="lcd_karti_1">
               <property name="font">
                <font>
-                <pointsize>20</pointsize>
+                <pointsize>18</pointsize>
                </font>
               </property>
              </widget>

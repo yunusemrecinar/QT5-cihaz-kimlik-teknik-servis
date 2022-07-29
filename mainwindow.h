@@ -53,6 +53,7 @@ private slots:
 
     //void on_pushButton_clicked();
 
+    void resizeEvent(QResizeEvent* event);
 
     void refreshLog();
 
@@ -89,6 +90,14 @@ private slots:
     void on_tableView_teknikServis_doubleClicked(const QModelIndex &index);
 
     void on_pushButton_clicked();
+
+    void on_pushButton_modemTipi_clicked();
+
+    void on_pushButton_Model_clicked();
+
+    void on_lineEdit_selectionChanged();
+
+    void on_splitter_splitterMoved(int pos, int index);
 
 private:
     Ui::MainWindow *ui;

@@ -19,7 +19,8 @@ SOURCES += \
     notlardialog.cpp \
     secdialog.cpp \
     servisdialog.cpp \
-    servisgetdialog.cpp
+    servisgetdialog.cpp \
+    toolbardialog.cpp
 
 HEADERS += \
     database.h \
@@ -31,7 +32,8 @@ HEADERS += \
     notlardialog.h \
     secdialog.h \
     servisdialog.h \
-    servisgetdialog.h
+    servisgetdialog.h \
+    toolbardialog.h
 
 FORMS += \
     informationdialog.ui \
@@ -42,7 +44,8 @@ FORMS += \
     notlardialog.ui \
     secdialog.ui \
     servisdialog.ui \
-    servisgetdialog.ui
+    servisgetdialog.ui \
+    toolbardialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

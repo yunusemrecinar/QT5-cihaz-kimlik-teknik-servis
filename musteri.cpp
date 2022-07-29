@@ -21,7 +21,7 @@ void Musteri::initialize(QSqlDatabase d) {
     database = d;
 
     QSqlQueryModel * modal = new QSqlQueryModel();
-    if(database.open()) {
+    if(database.isOpen()) {
 
         QSqlQuery* qry = new QSqlQuery(database);
 

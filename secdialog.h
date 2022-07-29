@@ -23,15 +23,17 @@ public:
     explicit SecDialog(QWidget *parent = nullptr);
     ~SecDialog();
     QString musteriAdi;
+    QList<QString> commandsMusteri;
+    QList<QString> commandsModel;
+    QList<QString> commandsModemTipi;
 public slots:
     void initialize(QSqlDatabase d);
 private slots:
+    void addModels();
+    void addMusteri();
+    void addModemTipi();
     void on_pushButton_clicked();
-    void commandChanged(const QString& command_text);
-    void commandChangedModemKart(const QString& command_text);
     void commandChangedDurum(const QString& command_text);
-    void commandChangedSarjKarti(const QString& command_text);
-    void commandChangedLcdKarti(const QString& command_text);
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);
@@ -55,8 +57,7 @@ private:
     LineEditPopUpForm *m_lineedit_popup_form;
 
     bool checkSeriNo = false;
-    bool checkUIDNo = false;
-    bool checkIMEI = false;
+
 };
 
 #endif // SECDIALOG_H

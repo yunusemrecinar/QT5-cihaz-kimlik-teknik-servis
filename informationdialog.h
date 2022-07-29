@@ -53,11 +53,7 @@ private slots:
     void on_pushButton_clicked();
 
     void changes();
-    void commandChanged(const QString& command_text);
-    void commandChangedModemKart(const QString& command_text);
-    void commandChangedDurum(const QString& command_text);
-    void commandChangedSarjKarti(const QString& command_text);
-    void commandChangedLcdKarti(const QString& command_text);
+    void commandChangedDurum(const QString& command_text);   
     void commandChangedModel(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
     void commandChangedModemTipi(const QString& command_text);
