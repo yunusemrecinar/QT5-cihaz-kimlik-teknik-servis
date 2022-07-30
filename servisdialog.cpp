@@ -120,8 +120,19 @@ void ServisDialog::on_pushButton_clicked()
 
     if(database.open()) {
 
-
-        saat = ui->tarih_saat->text() + ":" + ui->tarih_dakika->text();
+        QString dakikaTemp = "";
+        QString saatTemp = "";
+        if(ui->tarih_dakika->text().length() == 1) {
+            dakikaTemp = "0" + ui->tarih_dakika->text();
+        }else {
+            dakikaTemp = ui->tarih_dakika->text();
+        }
+        if(ui->tarih_saat->text().length() == 1) {
+            saatTemp = "0" + ui->tarih_saat->text();
+        }else {
+            saatTemp = ui->tarih_saat->text();
+        }
+        saat = saatTemp + ":" + dakikaTemp;
         tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text() + " " + saat;
         olay = ui->olay_->currentText();
         yapilanIslem = ui->yapilanIslem_->toPlainText();

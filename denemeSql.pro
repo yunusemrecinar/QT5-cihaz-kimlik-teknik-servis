@@ -20,6 +20,7 @@ SOURCES += \
     secdialog.cpp \
     servisdialog.cpp \
     servisgetdialog.cpp \
+    simkartlar.cpp \
     toolbardialog.cpp
 
 HEADERS += \
@@ -33,6 +34,7 @@ HEADERS += \
     secdialog.h \
     servisdialog.h \
     servisgetdialog.h \
+    simkartlar.h \
     toolbardialog.h
 
 FORMS += \
@@ -45,6 +47,7 @@ FORMS += \
     secdialog.ui \
     servisdialog.ui \
     servisgetdialog.ui \
+    simkartlar.ui \
     toolbardialog.ui
 
 # Default rules for deployment.

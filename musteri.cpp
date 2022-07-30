@@ -29,6 +29,7 @@ void Musteri::initialize(QSqlDatabase d) {
         qry -> exec();
         modal->setQuery(*qry);
         ui->tableView->setModel(modal);
+        ui->tableView->hideColumn(0);
         ui->tableView->resizeColumnsToContents();
         ui->tableView->resizeRowsToContents();
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

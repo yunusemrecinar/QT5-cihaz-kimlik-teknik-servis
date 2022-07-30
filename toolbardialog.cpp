@@ -74,7 +74,6 @@ void ToolBarDialog::on_pushButtonSil_clicked()
         QSqlQuery qry;
 
                 qry.prepare("DELETE FROM `" + databaseName_ +"` WHERE name = '" + rowLocation + "';");
-                qry.bindValue(":isim",ui->lineEdit->text());
                 qry.exec();
 
         refresh();

@@ -12,6 +12,7 @@
 #include <QScrollArea>
 #include <QDebug>
 #include "toolbardialog.h"
+#include "simkartlar.h"
 
 
 
@@ -23,15 +24,20 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow),
       _information(nullptr)
 {
-    ui->setupUi(this);
-    readFile("test.txt");
+    ui->setupUi(this);   
+
     addColumns();
     hideColumns();
 
-    this->setWindowTitle("ANA MENÜ");   
+    this->setWindowTitle("ANA MENÜ");
     ui->toolBar->addWidget(ui->pushButton);
+    ui->toolBar->addSeparator();
     ui->toolBar->addWidget(ui->pushButton_modemTipi);
+    ui->toolBar->addSeparator();
     ui->toolBar->addWidget(ui->pushButton_Model);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addWidget(ui->pushButton_simKart);
+
     ui->lineEdit->setPlaceholderText("Filtrele");
     ui->lineEdit->setReadOnly(1);
 
@@ -88,6 +94,102 @@ void MainWindow::readFile(QString filename)
             break;
         }        
     }
+}
+
+void MainWindow::userCheck(QString filename) {
+
+    QFile nameFile(filename);
+
+    if(!nameFile.exists()) {
+        check = 0;
+    }else {
+        check = 1;
+    }
+    if(!nameFile.open(QIODevice::ReadOnly)) {
+
+    }
+    bool control = false;
+    if(check == 1){
+        QTextStream in(&nameFile);
+        while(!in.atEnd()) {
+            isim = in.readLine();
+        }
+        if(database.isOpen()) {
+            QSqlQuery* qry = new QSqlQuery(database);
+            qry->prepare("Select * FROM kullanıcılar");
+            qry -> exec();
+
+            while(qry->next()) {
+                name = qry->value(0).toString();
+
+                if(QString::compare(isim,name,Qt::CaseInsensitive) == 0) {
+                    ui->hosgeldin->setText(name + " Hoş Geldin!!");
+                    check = 1;
+                    control = true;
+                    break;
+                }
+            }
+
+        }else {
+            QMessageBox::information(this,"DATABASE ERROR",database.lastError().text());
+        }
+    }
+
+    if(control == false) {
+        check = 0;
+        QMessageBox::information(this,"HATA","Kullanıcı Adı Yanlış!!");
+    }
+
+    /*
+    QFile file(filename);
+
+    if(!file.exists()) {
+        check = 0;
+    }else {
+        check = 1;
+    }
+    if(check == 1) {
+
+    QTextStream stream2(&file);
+    while(!stream2.atEnd()) {
+         name = stream2.readLine().trimmed();
+    }
+    QMessageBox::information(this,"Error+"," 123"+name+" ");
+    if(!file.open(QIODevice::ReadOnly))
+    {
+
+    }
+    if(database.isOpen()) {
+
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        qry ->prepare("select * from `kullanıcılar`");
+        qry -> exec();
+
+        while(qry->next()) {
+            if(QString::compare(name,qry->value(0).toString(),Qt::CaseInsensitive) == 0) {
+                isim = qry->value(0).toString();
+                ui->hosgeldin->setText(isim + " Hoş Geldin!!");
+                QMessageBox::information(this,"Error",isim);
+                check = 1;
+                break;
+            }else {
+                check = 0;
+            }
+
+        }
+
+    }else {
+        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        cout << "Database not connected!" << endl;
+    }
+
+    }
+    if(check == 0)
+        QMessageBox::information(this,"Error","Kullanıcı Bulunamadı!!");
+
+
+    */
 }
 
 void MainWindow::myfunction()
@@ -327,7 +429,7 @@ void MainWindow::on_pushButton_modemTipi_clicked()
 {
     ToolBarDialog *toolbar = new ToolBarDialog();
     toolbar->initialize(database, ui->pushButton_modemTipi->text(), "modemtipi");
-    toolbar->show();
+    toolbar->exec();
 }
 
 
@@ -335,7 +437,7 @@ void MainWindow::on_pushButton_Model_clicked()
 {
     ToolBarDialog *toolbar = new ToolBarDialog();
     toolbar->initialize(database, ui->pushButton_Model->text(), "model");
-    toolbar->show();
+    toolbar->exec();
 }
 
 
@@ -351,5 +453,13 @@ void MainWindow::on_splitter_splitterMoved(int pos, int index)
     ui->tableView_teknikServis->setColumnWidth(2,150);
     ui->tableView_teknikServis->setColumnWidth(3,80);
     ui->tableView_teknikServis->setColumnWidth(4,ui->tableView_teknikServis->width()-230);
+}
+
+
+void MainWindow::on_pushButton_simKart_clicked()
+{
+    SimKartlar *toolbar = new SimKartlar();
+    toolbar->initialize(database);
+    toolbar->exec();
 }
 

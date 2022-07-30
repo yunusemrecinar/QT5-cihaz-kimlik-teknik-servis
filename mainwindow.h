@@ -30,9 +30,14 @@ public:
 
     QString mainWindowValue;
 
+    int check = 0;
+
+    QString isim;
+
     QSqlDatabase database1;
     QSqlDatabase database;
 
+    QString name;
     QString hostName;
     QString userName;
     QString password;
@@ -42,6 +47,8 @@ public:
 
 public slots:
     void readFile(QString filename);
+
+    void userCheck(QString filename);
 
     void myfunction();
 
@@ -98,6 +105,8 @@ private slots:
     void on_lineEdit_selectionChanged();
 
     void on_splitter_splitterMoved(int pos, int index);
+
+    void on_pushButton_simKart_clicked();
 
 private:
     Ui::MainWindow *ui;
