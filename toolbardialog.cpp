@@ -84,7 +84,7 @@ void ToolBarDialog::on_pushButtonSil_clicked()
 }
 
 
-void ToolBarDialog::on_tableView_clicked(const QModelIndex &index)
+void ToolBarDialog::on_tableView_clicked()
 {
     int row = ui->tableView->currentIndex().row();
     rowLocation = ui->tableView->model()->data(ui->tableView->model()->index(row,0)).toString();

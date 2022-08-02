@@ -7,6 +7,9 @@
 #include <QVBoxLayout>
 #include <QMenu>
 #include <QComboBox>
+#include "musteri.h"
+#include "mobiotdialog.h"
+#include "serverdialog.h"
 
 #include <iostream>
 using namespace std;
@@ -105,7 +108,21 @@ void SecDialog::commandChangedMusteriAdi(const QString& command_text) {
     musteriAdi = command_text;
 }
 void SecDialog::commandChangedModel(const QString& command_text) {
-    model = command_text;
+
+    if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
+        ServerDialog *serverDialog = new ServerDialog();
+        serverDialog->initialize(database);
+        this->close();
+        serverDialog->exec();
+    }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
+        MobiotDialog *mobiotDialog = new MobiotDialog();
+        mobiotDialog->initialize(database);
+        this->close();
+        mobiotDialog->exec();
+    }else {
+        model = command_text;
+    }
+
 }
 void SecDialog::commandChangedDurum(const QString& command_text) {
     durum = command_text;
@@ -116,7 +133,6 @@ void SecDialog::commandChangedTestDurum(const QString& command_text) {
 void SecDialog::initialize(QSqlDatabase d) {
     database = d;
 
-    addMusteri();
     addModels();
     addModemTipi();
     addMusteri();
@@ -198,4 +214,12 @@ void SecDialog::on_pushButton_clicked()
 
 }
 
+
+
+void SecDialog::on_model__currentTextChanged()
+{
+    //Musteri *musteri = new Musteri();
+    //this->close();
+    //musteri->exec();
+}
 

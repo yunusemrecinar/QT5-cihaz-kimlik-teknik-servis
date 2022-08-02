@@ -77,16 +77,23 @@ void Musteri::on_pushButton_clicked()
                 qry.prepare("UPDATE `müsteri` SET `Cihaz Seri No` = '"+temp+"' WHERE İsim = '" + isim + "';");
                 qry.exec();
             }else {
-
-
-                qry.prepare("INSERT INTO müsteri(`İsim`,`Adres`,`Cihaz Seri No`) "
-                            "VALUES(:isim,:adres,:cihazSeriNo)");
-                qry.bindValue(":isim",isim);
-                qry.bindValue(":adres",adres);
-                qry.bindValue(":cihazSeriNo",cihazSeriNo);
-
-
+                qry.prepare("SELECT `Cihaz Seri No` FROM `müsteri`");
                 qry.exec();
+                QList<QString> list;
+                while(qry.next()) { list.append(qry.value(0).toString()); }
+
+                if(list.contains(cihazSeriNo)){
+                    QMessageBox::information(this,"HATA","Bir Cihaz Seri No birden çok müşteriye ait olamaz!!");
+                }else {
+                    qry.clear();
+                    qry.prepare("INSERT INTO müsteri(`İsim`,`Adres`,`Cihaz Seri No`) "
+                                "VALUES(:isim,:adres,:cihazSeriNo)");
+                    qry.bindValue(":isim",isim);
+                    qry.bindValue(":adres",adres);
+                    qry.bindValue(":cihazSeriNo",cihazSeriNo);
+
+                    qry.exec();
+                }
             }
         }else {
             QMessageBox::information(this,"Error", "Cihaz Seri Numarasını Kontrol Edin!!");

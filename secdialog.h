@@ -40,6 +40,8 @@ private slots:
     void commandChangedModemTipi(const QString& command_text);
     void changes();   
 
+    void on_model__currentTextChanged();
+
 private:
     Ui::SecDialog *ui;
     QSqlDatabase database;

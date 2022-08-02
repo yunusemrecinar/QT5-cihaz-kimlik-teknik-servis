@@ -106,7 +106,7 @@ void SimKartlar::on_pushButtonSil_clicked()
 }
 
 
-void SimKartlar::on_tableView_clicked(const QModelIndex &index)
+void SimKartlar::on_tableView_clicked()
 {
     int row = ui->tableView->currentIndex().row();
     rowLocation = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();

@@ -53,6 +53,11 @@ public slots:
     void myfunction();
 
     void refresh();
+
+    void refreshMobiot();
+
+    void refreshServer();
+
     //QSqlQueryModel* setValue(QString qry);
 signals:
     void notifyMessageSent(const QString& message);
@@ -67,6 +72,10 @@ private slots:
     void refreshServis();
 
     void hideColumns();
+
+    void hideColumnsMobiot();
+
+    void hideColumnsServer();
 
     void addColumns();
 
@@ -86,15 +95,15 @@ private slots:
 
     //void on_tableView_teknikServis_activated(const QModelIndex &index);
 
-    void on_tableView_clicked(const QModelIndex &index);
+    void on_tableView_clicked();
 
-    void on_tableView_teknikServis_clicked(const QModelIndex &index);
+    void on_tableView_teknikServis_clicked();
 
     void on_lineEdit_textChanged(const QString &arg1);
 
-    void on_tableView_doubleClicked(const QModelIndex &index);
+    void on_tableView_doubleClicked();
 
-    void on_tableView_teknikServis_doubleClicked(const QModelIndex &index);
+    void on_tableView_teknikServis_doubleClicked();
 
     void on_pushButton_clicked();
 
@@ -104,9 +113,15 @@ private slots:
 
     void on_lineEdit_selectionChanged();
 
-    void on_splitter_splitterMoved(int pos, int index);
+    void on_splitter_splitterMoved();
 
     void on_pushButton_simKart_clicked();
+
+    void on_pushButton_modeoGetir_clicked();
+
+    void on_pushButton_mobiotGetir_clicked();
+
+    void on_pushButton_serverGetir_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -120,11 +135,17 @@ private:
 
     QList<int> columnsToHideService;
     QList<int> columnsToHide;
+    QList<int> columnsToHideMobiot;
+    QList<int> columnsToHideServer;
     //QSqlDatabase database2;
 
     QMenu *m_lineedit_menu;
     LineEditPopUpForm *m_lineedit_popup_form;
 
     QTimer *timer;
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQueryModel *modelMobiot = new QSqlQueryModel();
+    QSqlQueryModel *modelServer = new QSqlQueryModel();
 };
 #endif // MAINWINDOW_H

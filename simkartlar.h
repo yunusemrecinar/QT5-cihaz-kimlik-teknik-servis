@@ -26,7 +26,7 @@ private slots:
     void refresh();
     void on_pushButtonEkle_clicked();
     void on_pushButtonSil_clicked();
-    void on_tableView_clicked(const QModelIndex &index);
+    void on_tableView_clicked();
 };
 
 #endif // SIMKARTLAR_H

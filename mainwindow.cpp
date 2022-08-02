@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     addColumns();
     hideColumns();
+    hideColumnsMobiot();
+    hideColumnsServer();
 
     this->setWindowTitle("ANA MENÜ");
     ui->toolBar->addWidget(ui->pushButton);
@@ -139,57 +141,6 @@ void MainWindow::userCheck(QString filename) {
         check = 0;
         QMessageBox::information(this,"HATA","Kullanıcı Adı Yanlış!!");
     }
-
-    /*
-    QFile file(filename);
-
-    if(!file.exists()) {
-        check = 0;
-    }else {
-        check = 1;
-    }
-    if(check == 1) {
-
-    QTextStream stream2(&file);
-    while(!stream2.atEnd()) {
-         name = stream2.readLine().trimmed();
-    }
-    QMessageBox::information(this,"Error+"," 123"+name+" ");
-    if(!file.open(QIODevice::ReadOnly))
-    {
-
-    }
-    if(database.isOpen()) {
-
-        QSqlQuery* qry = new QSqlQuery(database);
-
-        qry ->prepare("select * from `kullanıcılar`");
-        qry -> exec();
-
-        while(qry->next()) {
-            if(QString::compare(name,qry->value(0).toString(),Qt::CaseInsensitive) == 0) {
-                isim = qry->value(0).toString();
-                ui->hosgeldin->setText(isim + " Hoş Geldin!!");
-                QMessageBox::information(this,"Error",isim);
-                check = 1;
-                break;
-            }else {
-                check = 0;
-            }
-
-        }
-
-    }else {
-        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
-        cout << "Database not connected!" << endl;
-    }
-
-    }
-    if(check == 0)
-        QMessageBox::information(this,"Error","Kullanıcı Bulunamadı!!");
-
-
-    */
 }
 
 void MainWindow::myfunction()
@@ -259,7 +210,32 @@ void MainWindow::hideColumns() {
     columnsToHideService.append(6);
     columnsToHideService.append(7);
     columnsToHideService.append(8);
+}
 
+void MainWindow::hideColumnsMobiot() {
+    columnsToHideMobiot.append(0);
+    columnsToHideMobiot.append(3);
+    columnsToHideMobiot.append(5);
+    columnsToHideMobiot.append(6);
+    columnsToHideMobiot.append(9);
+    columnsToHideMobiot.append(10);
+    columnsToHideMobiot.append(11);
+    columnsToHideMobiot.append(12);
+    columnsToHideMobiot.append(13);
+}
+
+void MainWindow::hideColumnsServer()
+{
+    columnsToHideServer.append(0);
+    columnsToHideServer.append(3);
+    columnsToHideServer.append(4);
+    columnsToHideServer.append(8);
+    columnsToHideServer.append(9);
+    columnsToHideServer.append(10);
+    columnsToHideServer.append(11);
+    columnsToHideServer.append(12);
+    columnsToHideServer.append(13);
+    columnsToHideServer.append(14);
 }
 void MainWindow::addColumns() {
     columnsToHide.append(0);
@@ -299,7 +275,7 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
     refreshServis();
 }
 
-void MainWindow::on_tableView_clicked(const QModelIndex &index)
+void MainWindow::on_tableView_clicked()
 {
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
@@ -312,7 +288,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     refreshLog();
 
 }
-void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
+void MainWindow::on_tableView_doubleClicked()
 {
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
@@ -327,7 +303,7 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
     refreshLog();
 
 }
-void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
+void MainWindow::on_tableView_teknikServis_clicked()
 {
     //QString value = ui->tableView_teknikServis->model()->data(index).toString();
     int row = ui->tableView_teknikServis->currentIndex().row();
@@ -336,7 +312,7 @@ void MainWindow::on_tableView_teknikServis_clicked(const QModelIndex &index)
     rowCount = rowValue;
 
 }
-void MainWindow::on_tableView_teknikServis_doubleClicked(const QModelIndex &index)
+void MainWindow::on_tableView_teknikServis_doubleClicked()
 {
     //QString value = ui->tableView_teknikServis->model()->data(index).toString();
     int row = ui->tableView_teknikServis->currentIndex().row();
@@ -357,22 +333,62 @@ void MainWindow::on_pushButton_clicked()
     musteri->initialize(database);
     musteri->show();
 }
+void MainWindow::refreshServer() {
+    model->clear();
+    modelMobiot->clear();
+
+    if(database.isOpen()) {
+        QSqlQuery* qryServer = new QSqlQuery(database);
+
+        qryServer ->prepare("select * from cihazkimlikserver");
+        qryServer -> exec();
+        modelServer->clear();
+        modelServer->setQuery(*qryServer);
+        ui->tableView->setModel(modelServer);
+        ui->tableView->resizeColumnsToContents();
+
+        foreach(int col, columnsToHideServer)
+            ui->tableView->hideColumn(col);
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
+void MainWindow::refreshMobiot() {
+    model->clear();
+    modelServer->clear();
+
+    if(database.isOpen()) {
+        QSqlQuery* qryMobiot = new QSqlQuery(database);
+
+        qryMobiot ->prepare("select * from cihazkimlikmobiot");
+        qryMobiot -> exec();
+        modelMobiot->clear();
+        modelMobiot->setQuery(*qryMobiot);
+        ui->tableView->setModel(modelMobiot);
+        ui->tableView->resizeColumnsToContents();
+
+        foreach(int col, columnsToHideMobiot)
+            ui->tableView->hideColumn(col);
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
 void MainWindow::refresh() {
-    QSqlQueryModel *model = new QSqlQueryModel();
+    modelMobiot->clear();
+    modelServer->clear();
 
     if(database.isOpen()) {
         QSqlQuery* qry = new QSqlQuery(database);
 
-        //model = new QSqlQueryModel();
-
-        //setValue("select * from cihazkimlik");
-        //ui->tableView->setModel(model);
         qry ->prepare("select * from cihazkimlik");
         qry -> exec();
         model->setQuery(*qry);
         ui->tableView->setModel(model);
         ui->tableView->resizeColumnsToContents();
-        //modal->submit();
         foreach(int col, columnsToHide)
             ui->tableView->hideColumn(col);
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -448,7 +464,7 @@ void MainWindow::on_lineEdit_selectionChanged()
 }
 
 
-void MainWindow::on_splitter_splitterMoved(int pos, int index)
+void MainWindow::on_splitter_splitterMoved()
 {
     ui->tableView_teknikServis->setColumnWidth(2,150);
     ui->tableView_teknikServis->setColumnWidth(3,80);
@@ -461,5 +477,23 @@ void MainWindow::on_pushButton_simKart_clicked()
     SimKartlar *toolbar = new SimKartlar();
     toolbar->initialize(database);
     toolbar->exec();
+}
+
+
+void MainWindow::on_pushButton_modeoGetir_clicked()
+{
+    refresh();
+}
+
+
+void MainWindow::on_pushButton_mobiotGetir_clicked()
+{
+    refreshMobiot();
+}
+
+
+void MainWindow::on_pushButton_serverGetir_clicked()
+{
+    refreshServer();
 }
 

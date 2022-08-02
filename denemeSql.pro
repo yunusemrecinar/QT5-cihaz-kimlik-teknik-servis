@@ -14,10 +14,12 @@ SOURCES += \
     lineeditpopupform.cpp \
     main.cpp \
     mainwindow.cpp \
+    mobiotdialog.cpp \
     musteri.cpp \
     notekledialog.cpp \
     notlardialog.cpp \
     secdialog.cpp \
+    serverdialog.cpp \
     servisdialog.cpp \
     servisgetdialog.cpp \
     simkartlar.cpp \
@@ -28,10 +30,12 @@ HEADERS += \
     informationdialog.h \
     lineeditpopupform.h \
     mainwindow.h \
+    mobiotdialog.h \
     musteri.h \
     notekledialog.h \
     notlardialog.h \
     secdialog.h \
+    serverdialog.h \
     servisdialog.h \
     servisgetdialog.h \
     simkartlar.h \
@@ -41,10 +45,12 @@ FORMS += \
     informationdialog.ui \
     lineeditpopupform.ui \
     mainwindow.ui \
+    mobiotdialog.ui \
     musteri.ui \
     notekledialog.ui \
     notlardialog.ui \
     secdialog.ui \
+    serverdialog.ui \
     servisdialog.ui \
     servisgetdialog.ui \
     simkartlar.ui \
