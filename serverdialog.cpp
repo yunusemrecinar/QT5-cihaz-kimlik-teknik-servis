@@ -110,7 +110,7 @@ void ServerDialog::on_pushButton_clicked()
         kasaTipi = ui->kasaTipi_->currentText();
         uidNo = ui->UIDNo_1->text();
         decklink = ui->decklink_->currentText();
-        ram = ui->ram_->text();
+        ram = ui->ram_->text() + "GB";
         testDurumu = ui->test_durum_->currentText();
         musteriAdi = ui->musteriAdi_1->currentText();
         islemci = ui->islemci_->text();

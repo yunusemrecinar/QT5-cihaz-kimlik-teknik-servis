@@ -88,7 +88,7 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected1");
         cout << "Database not connected!" << endl;
     }
-    //database.close();
+
 }
 void InformationDialog::changes() {
     ui->cihaz_seri_no_2->setMaxLength(9);
@@ -233,7 +233,7 @@ void InformationDialog::on_pushButton_clicked()
         qry.exec();
         qry.clear();        
         qry.prepare("UPDATE cihazkimlik SET `Notlar` = '" + notlar + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
-
+        qry.exec();
 
         qry.clear();
         if(QString::compare(oldUidNo, ui->UIDNo_1->text(), Qt::CaseInsensitive)) {

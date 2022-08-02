@@ -13,8 +13,7 @@
 #include <QDebug>
 #include "toolbardialog.h"
 #include "simkartlar.h"
-
-
+#include "informationmobiotdialog.h"
 
 #include <iostream>
 using namespace std;
@@ -293,14 +292,25 @@ void MainWindow::on_tableView_doubleClicked()
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
     QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
-
+    QString model = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
     mainWindowValue = rowValue;
 
-    InformationDialog *inform = new InformationDialog();
-    inform->initialize(mainWindowValue,database);
-    inform->exec();
-    refresh();
-    refreshLog();
+    if(QString::compare("Server",model,Qt::CaseInsensitive) == 0) {
+
+    }else if(QString::compare("Mobiot",model,Qt::CaseInsensitive) == 0) {
+        InformationMobiotDialog *informMobiot = new InformationMobiotDialog();
+        informMobiot->initialize(mainWindowValue,database);
+        informMobiot->exec();
+        refreshMobiot();
+        refreshLog();
+
+    }else {
+        InformationDialog *inform = new InformationDialog();
+        inform->initialize(mainWindowValue,database);
+        inform->exec();
+        refresh();
+        refreshLog();
+    }
 
 }
 void MainWindow::on_tableView_teknikServis_clicked()

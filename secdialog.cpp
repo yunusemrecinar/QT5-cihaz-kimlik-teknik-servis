@@ -110,12 +110,12 @@ void SecDialog::commandChangedMusteriAdi(const QString& command_text) {
 void SecDialog::commandChangedModel(const QString& command_text) {
 
     if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
-        ServerDialog *serverDialog = new ServerDialog();
+        serverDialog = new ServerDialog();
         serverDialog->initialize(database);
         this->close();
         serverDialog->exec();
     }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
-        MobiotDialog *mobiotDialog = new MobiotDialog();
+        mobiotDialog = new MobiotDialog();
         mobiotDialog->initialize(database);
         this->close();
         mobiotDialog->exec();

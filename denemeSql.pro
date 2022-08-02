@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     database.cpp \
     informationdialog.cpp \
+    informationmobiotdialog.cpp \
     lineeditpopupform.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
 HEADERS += \
     database.h \
     informationdialog.h \
+    informationmobiotdialog.h \
     lineeditpopupform.h \
     mainwindow.h \
     mobiotdialog.h \
@@ -43,6 +45,7 @@ HEADERS += \
 
 FORMS += \
     informationdialog.ui \
+    informationmobiotdialog.ui \
     lineeditpopupform.ui \
     mainwindow.ui \
     mobiotdialog.ui \

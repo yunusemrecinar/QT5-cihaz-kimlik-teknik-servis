@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QDialog>
 #include <QMenu>
+#include "serverdialog.h"
+#include "mobiotdialog.h"
 
 
 class QMenu;
@@ -60,6 +62,8 @@ private:
 
     bool checkSeriNo = false;
 
+    ServerDialog *serverDialog;
+    MobiotDialog *mobiotDialog;
 };
 
 #endif // SECDIALOG_H
