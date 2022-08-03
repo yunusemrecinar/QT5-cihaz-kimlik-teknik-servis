@@ -59,6 +59,3 @@ There are two service interfaces. This is the one of them for the server service
 ![servisget](https://user-images.githubusercontent.com/66219795/182599020-bfe5b284-3a4c-43fa-ab99-660823554201.png)
 After they finish changing things. Click the 'Güncelle'(Update) button and done.
 
-
-
-## The whole project are **13.907** lines of code if anyone is curious.(Including the codes of the interfaces)
