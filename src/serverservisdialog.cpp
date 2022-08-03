@@ -104,13 +104,7 @@ void ServerServisDialog::on_pushButton_clicked()
             malzemeler += ui->donanim_2->text() + ui->donanim_2Num->text() + ",";
         }if(ui->donanim_3->isChecked()) {
             malzemeler += ui->donanim_3->text() + ui->donanim_3Num->text() + ",";
-        }
-
-        if(ui->degisenParca_1->isChecked()) {
-            degisenParcalar += ui->degisenParca_1->text() + ",";
-        }if(ui->degisenParca_2->isChecked()) {
-            degisenParcalar += ui->degisenParca_2->text() + ",";
-        }
+        }        
 
         testSuresi = ui->testSuresi_->text();
         notlar = ui->notlar_->toPlainText();

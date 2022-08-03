@@ -27,7 +27,6 @@ private slots:
     void changes();
 
     void donanimlar();
-    void degisenParca();
     void commandChangedOlay(const QString& command_text);
     void on_pushButton_clicked();
 

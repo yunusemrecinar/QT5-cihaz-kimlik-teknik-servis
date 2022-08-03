@@ -71,7 +71,9 @@ void SecDialog::changes() {
     ui->UIDBox->setVisible(false);
     ui->DurumBox->setVisible(false);
     ui->ModemTipiBox->setVisible(false);
+
     ui->model_->setCurrentText("");
+    ui->model_->setPlaceholderText("Model Seçiniz!");
 
     QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
     ui->durum_->addItems(commandsDurum);
@@ -142,6 +144,19 @@ void SecDialog::commandChangedModel(const QString& command_text) {
             mobiotDialog->exec();
         }else {
             model = command_text;
+            ui->AnakartNoBox->setVisible(true);
+            ui->CihazSeriNoBox->setVisible(true);
+            ui->modemSeriNoBox->setVisible(true);
+            ui->ModemKartBox->setVisible(true);
+            ui->LcdKartBox->setVisible(true);
+            ui->SarjKartBox->setVisible(true);
+            ui->uretimTarihBox->setVisible(true);
+            ui->musteriAdiBox->setVisible(true);
+            ui->NotlarBox->setVisible(true);
+            ui->TestDurumBox->setVisible(true);
+            ui->UIDBox->setVisible(true);
+            ui->DurumBox->setVisible(true);
+            ui->ModemTipiBox->setVisible(true);
         }
 
     }
@@ -159,7 +174,6 @@ void SecDialog::initialize(QSqlDatabase d) {
     addModels();
     addModemTipi();
     addMusteri();
-    //ui->model_->clear();
 }
 
 void SecDialog::on_pushButton_clicked()

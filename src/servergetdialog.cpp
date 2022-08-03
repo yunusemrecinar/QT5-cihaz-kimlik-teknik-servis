@@ -75,13 +75,6 @@ void ServerGetDialog::initialize(QString index, QSqlDatabase d)
 
                 QList<QString> degisenParcalarList = qry->value(6).toString().split(",");
 
-                if(degisenParcalarList.contains(ui->degisenParca_1->text())) {
-                    ui->degisenParca_1->setChecked(true);
-                }
-                if(degisenParcalarList.contains(ui->degisenParca_2->text())) {
-                    ui->degisenParca_2->setChecked(true);
-                }
-
                 ui->testSuresi_->setValue(qry->value(7).toInt());
 
                 ui->notlar_->setText(qry->value(8).toString());
@@ -148,12 +141,6 @@ void ServerGetDialog::donanimlar() {
         donanim += ui->donanim_3->text() + ui->donanim_3Num->text() + ",";
     }
 }
-void ServerGetDialog::degisenParca() {
-    if(ui->degisenParca_1->isChecked())
-        degisenParcalar += ui->degisenParca_1->text() +  ",";
-    if(ui->degisenParca_2->isChecked())
-        degisenParcalar += ui->degisenParca_2->text() + ",";
-}
 
 void ServerGetDialog::on_pushButton_clicked()
 {
@@ -168,7 +155,6 @@ void ServerGetDialog::on_pushButton_clicked()
         olay = ui->olay_->currentText();
         QString yapilanIslem = ui->yapilanIslem_->toPlainText();
         donanimlar();
-        degisenParca();
         QString testSure = ui->testSuresi_->text();
         QString notlar = ui->notlar_->toPlainText();
 
