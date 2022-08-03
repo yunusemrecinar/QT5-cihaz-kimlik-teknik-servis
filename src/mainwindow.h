@@ -10,6 +10,7 @@
 #include "servisdialog.h"
 #include "servisgetdialog.h"
 #include <QTimer>
+#include "serverservisdialog.h"
 
 class QMenu;
 class LineEditPopUpForm;
@@ -132,6 +133,7 @@ private:
     SecDialog *secdialog;
     ServisDialog *servisDialog;
     ServisGetDialog *servisGetDialog;
+    ServerServisDialog *serverServisDialog;
 
     QList<int> columnsToHideService;
     QList<int> columnsToHide;

@@ -271,10 +271,17 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
-    servisDialog = new ServisDialog(this);
-    servisDialog->initialize(database,mainWindowValue);
-    servisDialog->exec();
-    refreshServis();
+    if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
+        serverServisDialog = new ServerServisDialog(this);
+        serverServisDialog->initialize(database, mainWindowValue);
+        serverServisDialog->exec();
+        refreshServis();
+    }else {
+        servisDialog = new ServisDialog(this);
+        servisDialog->initialize(database,mainWindowValue);
+        servisDialog->exec();
+        refreshServis();
+    }
 }
 
 void MainWindow::on_tableView_clicked()
@@ -282,7 +289,7 @@ void MainWindow::on_tableView_clicked()
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
     QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
-
+    cihazModel = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
     mainWindowValue = rowValue;
     ui->servisLabel->setText("Teknik Servis (" + mainWindowValue + ")");
 
@@ -295,7 +302,7 @@ void MainWindow::on_tableView_doubleClicked()
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
     QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
-    cihazModel = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
+
     mainWindowValue = rowValue;
 
     if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
