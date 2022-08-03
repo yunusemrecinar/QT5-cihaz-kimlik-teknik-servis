@@ -6,12 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1128</width>
+    <width>1132</width>
     <height>744</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+  background-color: #94B49F ;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>

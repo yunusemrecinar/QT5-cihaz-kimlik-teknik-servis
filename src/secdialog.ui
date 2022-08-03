@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>872</width>
-    <height>989</height>
+    <height>999</height>
    </rect>
   </property>
   <property name="font">
@@ -17,6 +17,11 @@
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+  background-color: #94B49F ;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_19">
    <item>
@@ -33,6 +38,9 @@
         <font>
          <pointsize>20</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Cihaz Kimlik</string>
@@ -83,9 +91,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">verticalLayout_6 {
-border:1px;
-}</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>Model</string>
@@ -126,9 +132,7 @@ border:2px solid grey;
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">verticalLayout_6 {
-border:1px;
-}</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>Cihaz Seri No</string>
@@ -161,6 +165,9 @@ border: 2px solid grey;
                <font>
                 <pointsize>18</pointsize>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>UID No</string>
@@ -361,6 +368,9 @@ border:2px solid grey;
                 <pointsize>18</pointsize>
                </font>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="text">
                <string>Anakart No</string>
               </property>
@@ -401,9 +411,7 @@ border:2px solid grey;
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">verticalLayout_6 {
-border:1px;
-}</string>
+                 <string notr="true"/>
                 </property>
                 <property name="text">
                  <string>Durum</string>
@@ -460,6 +468,9 @@ border:2px solid grey;
                   <pointsize>18</pointsize>
                  </font>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Modem Tipi</string>
                 </property>
@@ -505,6 +516,9 @@ border:2px solid grey;
                <font>
                 <pointsize>18</pointsize>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>Modem Kartı</string>

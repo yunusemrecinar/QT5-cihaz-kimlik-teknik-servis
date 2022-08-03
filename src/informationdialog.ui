@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>881</width>
-    <height>980</height>
+    <height>1004</height>
    </rect>
   </property>
   <property name="font">
@@ -17,6 +17,11 @@
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+  background-color: #94B49F ;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+  background-color: #94B49F ;
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -187,15 +192,21 @@
          <item>
           <widget class="QPushButton" name="pushButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
            <property name="minimumSize">
             <size>
-             <width>140</width>
-             <height>0</height>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
             </size>
            </property>
            <property name="font">
@@ -203,26 +214,56 @@
              <pointsize>20</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">#pushButton{
+background-color: transparent;
+border-image: url(:/img/plusIcon.png);
+background: none;
+border: none;
+background-repeat: none;
+}</string>
+           </property>
            <property name="text">
-            <string>Ekle</string>
+            <string/>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_sil">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
            </property>
            <property name="font">
             <font>
              <pointsize>20</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">#pushButton_sil{
+background-color: transparent;
+border-image: url(:/img/minusIcon.png);
+background: none;
+border: none;
+background-repeat: none;
+}</string>
+           </property>
            <property name="text">
-            <string>Sil</string>
+            <string/>
            </property>
           </widget>
          </item>
