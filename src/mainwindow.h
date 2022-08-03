@@ -147,5 +147,7 @@ private:
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQueryModel *modelMobiot = new QSqlQueryModel();
     QSqlQueryModel *modelServer = new QSqlQueryModel();
+
+    QString cihazModel;
 };
 #endif // MAINWINDOW_H

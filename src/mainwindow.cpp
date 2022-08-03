@@ -15,6 +15,8 @@
 #include "simkartlar.h"
 #include "informationmobiotdialog.h"
 #include "informationserverdialog.h"
+#include "servergetdialog.h"
+#include "serverservisdialog.h"
 
 #include <iostream>
 using namespace std;
@@ -293,16 +295,16 @@ void MainWindow::on_tableView_doubleClicked()
     //QString value = ui->tableView->model()->data(index).toString();
     int row = ui->tableView->currentIndex().row();
     QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
-    QString model = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
+    cihazModel = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
     mainWindowValue = rowValue;
 
-    if(QString::compare("Server",model,Qt::CaseInsensitive) == 0) {
+    if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
         InformationServerDialog *informServer = new InformationServerDialog();
         informServer->initialize(mainWindowValue, database);
         informServer->exec();
         refreshServer();
         refreshLog();
-    }else if(QString::compare("Mobiot",model,Qt::CaseInsensitive) == 0) {
+    }else if(QString::compare("Mobiot",cihazModel,Qt::CaseInsensitive) == 0) {
         InformationMobiotDialog *informMobiot = new InformationMobiotDialog();
         informMobiot->initialize(mainWindowValue,database);
         informMobiot->exec();
@@ -320,7 +322,6 @@ void MainWindow::on_tableView_doubleClicked()
 }
 void MainWindow::on_tableView_teknikServis_clicked()
 {
-    //QString value = ui->tableView_teknikServis->model()->data(index).toString();
     int row = ui->tableView_teknikServis->currentIndex().row();
     QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
 
@@ -329,17 +330,22 @@ void MainWindow::on_tableView_teknikServis_clicked()
 }
 void MainWindow::on_tableView_teknikServis_doubleClicked()
 {
-    //QString value = ui->tableView_teknikServis->model()->data(index).toString();
     int row = ui->tableView_teknikServis->currentIndex().row();
     QString rowValue = ui->tableView_teknikServis->model()->data(ui->tableView_teknikServis->model()->index(row,0)).toString();
-
-    //serviceValue = value;
     rowCount = rowValue;
 
-    ServisGetDialog *servisDialog = new ServisGetDialog();
-    servisDialog->initialize(rowCount, database);
-    servisDialog->exec();
-    refreshServis();
+    if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
+        ServerGetDialog *serverDialog = new ServerGetDialog();
+        serverDialog->initialize(rowCount, database);
+        serverDialog->exec();
+        refreshServis();
+
+    }else {
+        ServisGetDialog *servisDialog = new ServisGetDialog();
+        servisDialog->initialize(rowCount, database);
+        servisDialog->exec();
+        refreshServis();
+    }
 }
 
 void MainWindow::on_pushButton_clicked()

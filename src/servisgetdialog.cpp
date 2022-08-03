@@ -100,7 +100,7 @@ void ServisGetDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
 }
 void ServisGetDialog::initialize(QString index, QSqlDatabase d) {
-    //key = s;
+
     indexValue = index;
     database = d;
 

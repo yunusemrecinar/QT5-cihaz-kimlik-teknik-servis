@@ -22,6 +22,8 @@ SOURCES += \
     notlardialog.cpp \
     secdialog.cpp \
     serverdialog.cpp \
+    servergetdialog.cpp \
+    serverservisdialog.cpp \
     servisdialog.cpp \
     servisgetdialog.cpp \
     simkartlar.cpp \
@@ -40,6 +42,8 @@ HEADERS += \
     notlardialog.h \
     secdialog.h \
     serverdialog.h \
+    servergetdialog.h \
+    serverservisdialog.h \
     servisdialog.h \
     servisgetdialog.h \
     simkartlar.h \
@@ -57,6 +61,8 @@ FORMS += \
     notlardialog.ui \
     secdialog.ui \
     serverdialog.ui \
+    servergetdialog.ui \
+    serverservisdialog.ui \
     servisdialog.ui \
     servisgetdialog.ui \
     simkartlar.ui \
