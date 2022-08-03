@@ -5,7 +5,7 @@
 ![arayüzResim](https://user-images.githubusercontent.com/66219795/182590758-ff54e0fd-4d4f-4c6a-813a-e2491758d137.png)
 
 
-Since people who will use it want Turkish, there are Turkish terms in the interface
+There are Turkish terms because the people who will use it want Turkish.
 ## Features
 
  - MySQL Connection
