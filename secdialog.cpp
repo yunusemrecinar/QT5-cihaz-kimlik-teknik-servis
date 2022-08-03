@@ -58,6 +58,21 @@ void SecDialog::changes() {
     ui->date_month->clear();
     ui->date_year->clear();
 
+    ui->AnakartNoBox->setVisible(false);
+    ui->CihazSeriNoBox->setVisible(false);
+    ui->modemSeriNoBox->setVisible(false);
+    ui->ModemKartBox->setVisible(false);
+    ui->LcdKartBox->setVisible(false);
+    ui->SarjKartBox->setVisible(false);
+    ui->uretimTarihBox->setVisible(false);
+    ui->musteriAdiBox->setVisible(false);
+    ui->NotlarBox->setVisible(false);
+    ui->TestDurumBox->setVisible(false);
+    ui->UIDBox->setVisible(false);
+    ui->DurumBox->setVisible(false);
+    ui->ModemTipiBox->setVisible(false);
+    ui->model_->setCurrentText("");
+
     QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
     ui->durum_->addItems(commandsDurum);
     connect(ui->durum_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedDurum);
@@ -109,18 +124,26 @@ void SecDialog::commandChangedMusteriAdi(const QString& command_text) {
 }
 void SecDialog::commandChangedModel(const QString& command_text) {
 
-    if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
-        serverDialog = new ServerDialog();
-        serverDialog->initialize(database);
-        this->close();
-        serverDialog->exec();
-    }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
-        mobiotDialog = new MobiotDialog();
-        mobiotDialog->initialize(database);
-        this->close();
-        mobiotDialog->exec();
-    }else {
-        model = command_text;
+    count++;
+
+    if(count != 0) {
+
+
+
+        if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
+            serverDialog = new ServerDialog();
+            serverDialog->initialize(database);
+            this->close();
+            serverDialog->exec();
+        }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
+            mobiotDialog = new MobiotDialog();
+            mobiotDialog->initialize(database);
+            this->close();
+            mobiotDialog->exec();
+        }else {
+            model = command_text;
+        }
+
     }
 
 }
@@ -136,6 +159,7 @@ void SecDialog::initialize(QSqlDatabase d) {
     addModels();
     addModemTipi();
     addMusteri();
+    //ui->model_->clear();
 }
 
 void SecDialog::on_pushButton_clicked()
@@ -223,3 +247,6 @@ void SecDialog::on_model__currentTextChanged()
     //musteri->exec();
 }
 
+void SecDialog::checkModelChosen() {
+
+}

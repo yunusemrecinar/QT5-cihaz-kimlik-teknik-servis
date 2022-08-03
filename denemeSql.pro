@@ -12,6 +12,7 @@ SOURCES += \
     database.cpp \
     informationdialog.cpp \
     informationmobiotdialog.cpp \
+    informationserverdialog.cpp \
     lineeditpopupform.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     database.h \
     informationdialog.h \
     informationmobiotdialog.h \
+    informationserverdialog.h \
     lineeditpopupform.h \
     mainwindow.h \
     mobiotdialog.h \
@@ -46,6 +48,7 @@ HEADERS += \
 FORMS += \
     informationdialog.ui \
     informationmobiotdialog.ui \
+    informationserverdialog.ui \
     lineeditpopupform.ui \
     mainwindow.ui \
     mobiotdialog.ui \

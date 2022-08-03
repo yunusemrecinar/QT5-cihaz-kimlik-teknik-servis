@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InformationDialog</class>
- <widget class="QDialog" name="InformationDialog">
+ <class>InformationServerDialog</class>
+ <widget class="QDialog" name="InformationServerDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>881</width>
-    <height>980</height>
+    <width>856</width>
+    <height>910</height>
    </rect>
-  </property>
-  <property name="font">
-   <font>
-    <pointsize>14</pointsize>
-   </font>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_12">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_17">
+    <layout class="QVBoxLayout" name="verticalLayout_14">
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -35,16 +30,16 @@
         </font>
        </property>
        <property name="text">
-        <string>Modeo</string>
+        <string>Cihaz Kimlik</string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_18">
+        <layout class="QVBoxLayout" name="verticalLayout_16">
          <item>
-          <widget class="QGroupBox" name="ModelBox_2">
+          <widget class="QGroupBox" name="ModelBox">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -56,9 +51,9 @@
 border:2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_19">
+           <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <widget class="QLabel" name="Model_2">
+             <widget class="QLabel" name="Model">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -75,17 +70,18 @@ border:1px;
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="model_1">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QLineEdit" name="model_">
               <property name="font">
                <font>
-                <pointsize>20</pointsize>
+                <pointsize>24</pointsize>
+                <bold>true</bold>
                </font>
+              </property>
+              <property name="text">
+               <string>Server</string>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -93,15 +89,15 @@ border:1px;
           </widget>
          </item>
          <item>
-          <widget class="QGroupBox" name="CihazSeriNoBox_2">
+          <widget class="QGroupBox" name="CihazSeriNoBox">
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_20">
+           <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
-             <widget class="QLabel" name="cihazSeriNo_2">
+             <widget class="QLabel" name="cihazSeriNo">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -118,14 +114,11 @@ border:1px;
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="cihaz_seri_no_2">
+             <widget class="QLineEdit" name="cihaz_seri_no">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
                </font>
-              </property>
-              <property name="readOnly">
-               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -139,7 +132,7 @@ border:1px;
 border: 2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_21">
+           <layout class="QVBoxLayout" name="verticalLayout_15">
             <item>
              <widget class="QLabel" name="UIDNo_2">
               <property name="font">
@@ -165,17 +158,17 @@ border: 2px solid grey;
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QGroupBox" name="TestDurumBox_2">
+            <widget class="QGroupBox" name="TestDurumBox">
              <property name="styleSheet">
               <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_22">
+             <layout class="QVBoxLayout" name="verticalLayout_8">
               <item>
-               <widget class="QLabel" name="testDurumu_2">
+               <widget class="QLabel" name="testDurumu">
                 <property name="font">
                  <font>
                   <pointsize>18</pointsize>
@@ -216,9 +209,9 @@ border:1px;
 border: 2px solid grey;
 }</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_4">
+             <layout class="QVBoxLayout" name="verticalLayout_10">
               <item>
-               <widget class="QLabel" name="musteriAdi">
+               <widget class="QLabel" name="musteriAdi_2">
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -236,7 +229,7 @@ border: 2px solid grey;
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="musteriAdi_">
+               <widget class="QComboBox" name="musteriAdi_1">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -253,15 +246,15 @@ border: 2px solid grey;
           </layout>
          </item>
          <item>
-          <widget class="QGroupBox" name="uretimTarihBox_2">
+          <widget class="QGroupBox" name="uretimTarihBox">
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_23">
+           <layout class="QVBoxLayout" name="verticalLayout_11">
             <item>
-             <widget class="QLabel" name="uretim_tarih_2">
+             <widget class="QLabel" name="uretim_tarih">
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
@@ -273,7 +266,7 @@ border:2px solid grey;
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <layout class="QHBoxLayout" name="horizontalLayout">
               <property name="spacing">
                <number>1</number>
               </property>
@@ -330,29 +323,29 @@ border:2px solid grey;
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_25">
+        <layout class="QVBoxLayout" name="verticalLayout_13">
          <item>
-          <widget class="QGroupBox" name="AnakartNoBox_2">
+          <widget class="QGroupBox" name="AnakartNoBox">
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_26">
+           <layout class="QVBoxLayout" name="verticalLayout">
             <item>
-             <widget class="QLabel" name="anakart_2">
+             <widget class="QLabel" name="anakart">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>AnakartNo</string>
+               <string>Anakart No</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="anakart_1">
+             <widget class="QLineEdit" name="anakart_">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -364,17 +357,28 @@ border:2px solid grey;
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
-            <widget class="QGroupBox" name="DurumBox_2">
+            <widget class="QGroupBox" name="DurumBox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_28">
+             <layout class="QVBoxLayout" name="verticalLayout_9">
               <item>
-               <widget class="QLabel" name="Durum_2">
+               <widget class="QLabel" name="Durum">
                 <property name="font">
                  <font>
                   <pointsize>18</pointsize>
@@ -391,7 +395,7 @@ border:1px;
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="durum_1">
+               <widget class="QComboBox" name="durum_">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -400,7 +404,7 @@ border:1px;
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>20</pointsize>
+                  <pointsize>18</pointsize>
                  </font>
                 </property>
                </widget>
@@ -410,12 +414,23 @@ border:1px;
            </item>
            <item>
             <widget class="QGroupBox" name="verticalGroupBox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_24">
+             <layout class="QVBoxLayout" name="verticalLayout_18">
               <property name="leftMargin">
                <number>9</number>
               </property>
@@ -429,28 +444,34 @@ border:2px solid grey;
                <number>9</number>
               </property>
               <item>
-               <widget class="QLabel" name="modemTipi">
+               <widget class="QLabel" name="kasaTipi">
                 <property name="font">
                  <font>
                   <pointsize>18</pointsize>
                  </font>
                 </property>
                 <property name="text">
-                 <string>Modem Tipi</string>
+                 <string>Kasa Tipi</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="modemTipi_">
+               <widget class="QComboBox" name="kasaTipi_">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>42</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
-                  <pointsize>20</pointsize>
+                  <pointsize>18</pointsize>
                  </font>
                 </property>
                </widget>
@@ -461,59 +482,148 @@ border:2px solid grey;
           </layout>
          </item>
          <item>
-          <widget class="QGroupBox" name="ModemKartBox_2">
-           <property name="styleSheet">
-            <string notr="true">QGroupBox {
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QGroupBox" name="verticalGroupBox_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>212</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_27">
-            <item>
-             <widget class="QLabel" name="modem_karti_2">
-              <property name="font">
-               <font>
-                <pointsize>18</pointsize>
-               </font>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_19">
+              <property name="leftMargin">
+               <number>9</number>
               </property>
-              <property name="text">
-               <string>Modem Kartı</string>
+              <property name="topMargin">
+               <number>9</number>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="modem_karti_1">
-              <property name="font">
-               <font>
-                <pointsize>18</pointsize>
-               </font>
+              <property name="rightMargin">
+               <number>9</number>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
+              <property name="bottomMargin">
+               <number>9</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="decklink">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Decklink</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="decklink_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>42</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="ModemKartBox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border:2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QLabel" name="ram">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>RAM (GB)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="ram_">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QGroupBox" name="SarjKartBox_2">
+          <widget class="QGroupBox" name="SarjKartBox">
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_29">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <widget class="QLabel" name="sarj_karti_2">
+             <widget class="QLabel" name="islemci">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Şarj Kartı</string>
+               <string>İşlemci</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="sarj_karti_1">
+             <widget class="QLineEdit" name="islemci_">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -531,21 +641,21 @@ border:2px solid grey;
 border:2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_30">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QLabel" name="lcd_karti_2">
+             <widget class="QLabel" name="hdd">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>LCD Kart</string>
+               <string>HDD</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lcd_karti_1">
+             <widget class="QLineEdit" name="hdd_">
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -561,178 +671,19 @@ border:2px solid grey;
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QGroupBox" name="modemSeriNoBox">
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-border:2px solid grey;
-}</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_31">
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="font">
-             <font>
-              <pointsize>20</pointsize>
-             </font>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="text">
-             <string>Modem Seri Numaraları</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <item row="2" column="0">
-             <widget class="QLabel" name="modemSeri3_2">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>IMEI 3</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="modemSeri5_2">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>IMEI 5</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="modemSeri2_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLineEdit" name="modemSeri4_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QLineEdit" name="modemSeri5_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="modemSeri1_2">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>IMEI 1</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="modemSeri4_2">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>IMEI 4</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="modemSeri2_2">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>IMEI 2</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="modemSeri1_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="modemSeri3_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="modemSeri6_2">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>IMEI6</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QLineEdit" name="modemSeri6_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_32">
+        <layout class="QVBoxLayout" name="verticalLayout_17">
          <item>
-          <widget class="QGroupBox" name="NotlarBox_2">
+          <widget class="QGroupBox" name="NotlarBox">
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_33">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QLabel" name="notlar_2">
+             <widget class="QLabel" name="notlar">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -753,10 +704,10 @@ border:2px solid grey;
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="notlar_1">
+             <widget class="QTextEdit" name="notlar_">
               <property name="font">
                <font>
-                <pointsize>16</pointsize>
+                <pointsize>18</pointsize>
                </font>
               </property>
              </widget>
@@ -768,7 +719,7 @@ border:2px solid grey;
           <widget class="QPushButton" name="pushButton">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="styleSheet">

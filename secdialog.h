@@ -28,6 +28,8 @@ public:
     QList<QString> commandsMusteri;
     QList<QString> commandsModel;
     QList<QString> commandsModemTipi;
+
+    int count = 0;
 public slots:
     void initialize(QSqlDatabase d);
 private slots:
@@ -43,6 +45,9 @@ private slots:
     void changes();   
 
     void on_model__currentTextChanged();
+
+    void checkModelChosen();
+
 
 private:
     Ui::SecDialog *ui;
@@ -64,6 +69,8 @@ private:
 
     ServerDialog *serverDialog;
     MobiotDialog *mobiotDialog;
+
+    bool modelChosen = false;
 };
 
 #endif // SECDIALOG_H

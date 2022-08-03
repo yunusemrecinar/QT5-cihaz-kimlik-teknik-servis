@@ -204,7 +204,7 @@ void InformationMobiotDialog::on_pushButton_clicked()
 
         qry.clear();
         if(QString::compare(oldUidNo, ui->UIDNo_1->text(), Qt::CaseInsensitive)) {
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().year()) + "  "
                     + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());
             qry.prepare("INSERT INTO `loglar` (`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
@@ -219,7 +219,7 @@ void InformationMobiotDialog::on_pushButton_clicked()
         }if(QString::compare(oldDurum, ui->durum_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().year()) + "  "
                     + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());
             qry.bindValue(":seriNo",ui->cihaz_seri_no->text());
             qry.bindValue(":tarih",tarihLog);
@@ -231,7 +231,7 @@ void InformationMobiotDialog::on_pushButton_clicked()
         }if(QString::compare(oldModemTipi, ui->modemTipi_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().year()) + "  "
                     + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());
             qry.bindValue(":seriNo",ui->cihaz_seri_no->text());
             qry.bindValue(":tarih",tarihLog);
@@ -243,7 +243,7 @@ void InformationMobiotDialog::on_pushButton_clicked()
         }if(QString::compare(oldTestDurum, ui->test_durum_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().year()) + "  "
                     + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());
             qry.bindValue(":seriNo",ui->cihaz_seri_no->text());
             qry.bindValue(":tarih",tarihLog);
@@ -256,7 +256,7 @@ void InformationMobiotDialog::on_pushButton_clicked()
         }if(QString::compare(oldAnakartNo, ui->anakart_->text(),Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
                         "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().day()) + "  "
+            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().year()) + "  "
                     + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());
             qry.bindValue(":seriNo",ui->cihaz_seri_no->text());
             qry.bindValue(":tarih",tarihLog);

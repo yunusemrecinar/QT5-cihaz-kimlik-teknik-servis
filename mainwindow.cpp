@@ -14,6 +14,7 @@
 #include "toolbardialog.h"
 #include "simkartlar.h"
 #include "informationmobiotdialog.h"
+#include "informationserverdialog.h"
 
 #include <iostream>
 using namespace std;
@@ -296,7 +297,11 @@ void MainWindow::on_tableView_doubleClicked()
     mainWindowValue = rowValue;
 
     if(QString::compare("Server",model,Qt::CaseInsensitive) == 0) {
-
+        InformationServerDialog *informServer = new InformationServerDialog();
+        informServer->initialize(mainWindowValue, database);
+        informServer->exec();
+        refreshServer();
+        refreshLog();
     }else if(QString::compare("Mobiot",model,Qt::CaseInsensitive) == 0) {
         InformationMobiotDialog *informMobiot = new InformationMobiotDialog();
         informMobiot->initialize(mainWindowValue,database);
