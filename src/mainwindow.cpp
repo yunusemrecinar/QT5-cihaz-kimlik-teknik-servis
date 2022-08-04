@@ -45,7 +45,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit->setPlaceholderText("Filtrele");
     ui->lineEdit->setReadOnly(1);
 
-
 }
 
 void MainWindow::readFile(QString filename)

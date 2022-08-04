@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
-  background-color: #94B49F ;
+  background-color: #DFE8CC ;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
