@@ -1,5 +1,5 @@
 
-# QT5 Cihaz Kimlik Teknik Servis
+# QT5 Device and Technical Service
 
 ## Device Identification and Technical Service information is kept in custom MySQL and pulled into the created interface after checking username is in database or not. 
 ![1](https://user-images.githubusercontent.com/66219795/182785075-8dd3a605-7e5f-443a-9fff-d5557f042dad.png)
