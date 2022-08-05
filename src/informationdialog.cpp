@@ -45,7 +45,7 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
 
         if(qry->exec()) {
             while(qry->next()) {
-                ui->model_1->setCurrentText(qry->value(1).toString());
+                ui->model_1->setText(qry->value(1).toString());
                 ui->cihaz_seri_no_2->setText(qry->value(2).toString());
                 ui->anakart_1->setText(qry->value(3).toString());
                 ui->UIDNo_1->setText(qry->value(4).toString());
@@ -70,7 +70,6 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 }
                 ui->test_durum_->setCurrentText(qry->value(18).toString());
                 ui->notlar_1->setText(qry->value(19).toString());
-                oldModel = ui->model_1->currentText();
                 oldLcdKart = ui->lcd_karti_1->text();
                 oldSarjKart = ui->sarj_karti_1->text();
                 oldModemTipi = ui->modemTipi_->currentText();
@@ -123,9 +122,6 @@ void InformationDialog::changes() {
     ui->durum_1->addItems(commandsDurum);
     connect(ui->durum_1, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedDurum);
 
-    QStringList commandsModel = {"Mobiot Cihazı","Server Cihazı","ML33+ Modeo Cihazı","ML33 Modeo Cihazı","ML22 Modeo Cihazı","ML21 Modeo Cihazı","ML11 Modeo Cihazı"};
-    ui->model_1->addItems(commandsModel);
-    connect(ui->model_1, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedModel);
     QStringList commandTestDurum = {"Test Edilecek","Lab Testi Yapıldı","Saha Testi Yapıldı"};
     ui->test_durum_->addItems(commandTestDurum);
     connect(ui->test_durum_, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedTestDurum);
@@ -158,7 +154,7 @@ void InformationDialog::on_pushButton_clicked()
     if(database.isOpen()) {
 
         QSqlQuery qry;
-        QString model = ui->model_1->currentText();
+        QString model = ui->model_1->text();
         QString anakartNo = ui->anakart_1->text();
         QString modemKart = ui->modem_karti_1->text();
         QString lcdKart = ui->lcd_karti_1->text();
@@ -297,19 +293,6 @@ void InformationDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldModemKart);
             qry.bindValue(":yeniDeger",ui->modem_karti_1->text());
             qry.bindValue(":degisen","Modem Kartı Değişti");
-            qry.exec();
-            qry.clear();
-
-        }if(QString::compare(oldModel, ui->model_1->currentText(), Qt::CaseInsensitive)) {
-            qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
-                        "VALUES(:seriNo,:tarih,:eskiDeger,:yeniDeger,:degisen)");
-            tarihLog = QString::number(QDate::currentDate().day()) + "." + QString::number(QDate::currentDate().month()) + "." + QString::number(QDate::currentDate().year()) + "  "
-                    + QString::number(QTime::currentTime().hour()) + ":" + QString::number(QTime::currentTime().minute());
-            qry.bindValue(":seriNo",ui->cihaz_seri_no_2->text());
-            qry.bindValue(":tarih",tarihLog);
-            qry.bindValue(":eskiDeger",oldModel);
-            qry.bindValue(":yeniDeger",ui->model_1->currentText());
-            qry.bindValue(":degisen","Model Değişti");
             qry.exec();
             qry.clear();
 

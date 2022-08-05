@@ -23,13 +23,19 @@ public slots:
 private slots:
     void on_pushButton_clicked();
 
+    void refresh();
+
     void on_tableView_clicked(const QModelIndex &index);
 
     void on_pushButton_sil_clicked();
 
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
 private:
     QSqlDatabase database;
     Ui::Musteri *ui;
+
+    QString seriNo;
 };
 
 #endif // MUSTERI_H

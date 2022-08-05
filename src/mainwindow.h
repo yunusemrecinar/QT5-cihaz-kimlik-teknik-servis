@@ -39,6 +39,7 @@ public:
     QSqlDatabase database;
 
     QString name;
+
     QString hostName;
     QString userName;
     QString password;
@@ -73,6 +74,10 @@ private slots:
     void refreshServis();
 
     void hideColumns();
+
+    void addModels();
+
+    void addModemTipi();
 
     void hideColumnsMobiot();
 
@@ -151,5 +156,8 @@ private:
     QSqlQueryModel *modelServer = new QSqlQueryModel();
 
     QString cihazModel;
+
+    int countModel;
+    int countModemTipi;
 };
 #endif // MAINWINDOW_H

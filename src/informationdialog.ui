@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>881</width>
+    <width>913</width>
     <height>1004</height>
    </rect>
   </property>
@@ -80,17 +80,15 @@ border:1px;
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="model_1">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QLineEdit" name="model_1">
               <property name="font">
                <font>
-                <pointsize>20</pointsize>
+                <pointsize>24</pointsize>
+                <bold>true</bold>
                </font>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

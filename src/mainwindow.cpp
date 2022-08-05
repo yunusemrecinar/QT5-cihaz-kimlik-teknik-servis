@@ -2,7 +2,6 @@
 #include <QMessageBox>
 #include "ui_mainwindow.h"
 #include <QMessageBox>
-#include "lineeditpopupform.h"
 #include "musteri.h"
 #include "secdialog.h"
 #include "servisdialog.h"
@@ -44,6 +43,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->lineEdit->setPlaceholderText("Filtrele");
     ui->lineEdit->setReadOnly(1);
+    ui->tableView->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
+    //ui->tableView->horizontalHeader()->setStyleSheet("color: blue;");
+    ui->tableView_teknikServis->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
+    ui->tableView_log->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
 
 }
 
@@ -255,29 +258,56 @@ void MainWindow::addColumns() {
     columnsToHide.append(18);
     columnsToHide.append(19);
 }
-
+void MainWindow::addModels() {
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        qry ->prepare("select COUNT(*) from model");
+        if(qry -> exec()) {
+            while(qry->next()) {countModel = qry->value(0).toInt();}
+        }
+    }
+}
+void MainWindow::addModemTipi() {
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        qry ->prepare("select COUNT(*) from modemtipi");
+        if(qry -> exec()) {
+            while(qry->next()) {countModemTipi = qry->value(0).toInt();}
+        }
+    }
+}
 void MainWindow::on_pushButton_2_clicked()
 {
     //SecDialog secdialog;
     //secdialog.setModal(true);
     //secdialog.exec();
-    secdialog = new SecDialog(this);
-    secdialog->initialize(database);
-    secdialog->exec();
-    refresh();
-    ui->lineEdit->clear();
+    addModels();
+    addModemTipi();
+    if(countModel == 0 && countModemTipi == 0)
+        QMessageBox::information(this, "ERROR", "Ekleme yapmadan önce model ve modem tipi ekleyiniz!!");
+    else if(countModel == 0)
+        QMessageBox::information(this, "ERROR", "Ekleme yapmadan önce model ekleyiniz!!");
+    else if(countModemTipi == 0)
+        QMessageBox::information(this, "ERROR", "Ekleme yapmadan önce modem tipi ekleyiniz!!");
+    else{
+        secdialog = new SecDialog(this);
+        secdialog->initialize(database);
+        secdialog->exec();
+        refresh();
+        ui->lineEdit->clear();
+    }
 }
 
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
     if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
         serverServisDialog = new ServerServisDialog(this);
-        serverServisDialog->initialize(database, mainWindowValue);
+        serverServisDialog->initialize(database, mainWindowValue, name);
         serverServisDialog->exec();
         refreshServis();
     }else {
         servisDialog = new ServisDialog(this);
-        servisDialog->initialize(database,mainWindowValue);
+        servisDialog->initialize(database, mainWindowValue, name);
         servisDialog->exec();
         refreshServis();
     }

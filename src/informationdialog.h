@@ -23,7 +23,6 @@ public:
     ~InformationDialog();
 
     QString changesNotes = "";
-    QString oldModel = "";
     QString oldLcdKart = "";
     QString oldSarjKart = "";
     QString oldDurum = "";

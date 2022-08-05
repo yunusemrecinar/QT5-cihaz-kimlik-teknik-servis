@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlError>
+#include "informationmusteridialog.h"
 
 #include <iostream>
 using namespace std;
@@ -32,8 +33,8 @@ void Musteri::initialize(QSqlDatabase d) {
         ui->tableView->hideColumn(0);
         ui->tableView->resizeColumnsToContents();
         ui->tableView->resizeRowsToContents();
+        ui->tableView->resizeColumnsToContents();
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
@@ -103,27 +104,7 @@ void Musteri::on_pushButton_clicked()
         ui->cihazSeriNo->clear();
         qry.clear();
 
-        QSqlQueryModel *model = new QSqlQueryModel();
-
-        if(database.isOpen()) {
-            QSqlQuery* qry = new QSqlQuery(database);
-
-            //model = new QSqlQueryModel();
-
-            //setValue("select * from cihazkimlik");
-            //ui->tableView->setModel(model);
-            qry ->prepare("select * from müsteri");
-            qry -> exec();
-            model->setQuery(*qry);
-            ui->tableView->setModel(model);
-            ui->tableView->resizeColumnsToContents();
-            ui->tableView->resizeRowsToContents();
-            ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-        }else {
-            QMessageBox::information(this, "Not Connected", database.lastError().text());
-            cout << "Database not connected!" << endl;
-        }
+        refresh();
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
@@ -131,7 +112,29 @@ void Musteri::on_pushButton_clicked()
     }
 
 }
+void Musteri::refresh() {
+    QSqlQueryModel *model = new QSqlQueryModel();
 
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        //model = new QSqlQueryModel();
+
+        //setValue("select * from cihazkimlik");
+        //ui->tableView->setModel(model);
+        qry ->prepare("select * from müsteri");
+        qry -> exec();
+        model->setQuery(*qry);
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+        ui->tableView->resizeRowsToContents();
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
 
 void Musteri::on_tableView_clicked(const QModelIndex &index)
 {
@@ -169,5 +172,20 @@ void Musteri::on_pushButton_sil_clicked()
         QMessageBox::information(this, "Not Connected", database.lastError().text());
         cout << "Database not connected!" << endl;
     }
+}
+
+
+void Musteri::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    int row = ui->tableView->currentIndex().row();
+    QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,3)).toString();
+
+
+    seriNo = rowValue;
+
+    InformationMusteriDialog *musteriDialog = new InformationMusteriDialog();
+    musteriDialog->initialize(database, seriNo);
+    musteriDialog->exec();
+    refresh();
 }
 

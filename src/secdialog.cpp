@@ -3,7 +3,6 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "mainwindow.h"
-#include "lineeditpopupform.h"
 #include <QVBoxLayout>
 #include <QMenu>
 #include <QComboBox>
@@ -82,6 +81,7 @@ void SecDialog::changes() {
     QStringList testDurum = {"Test Edilecek","Lab Testi Yapıldı","Saha Testi Yapıldı"};
     ui->test_durum_->addItems(testDurum);
     connect(ui->test_durum_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedTestDurum);
+
 
 }
 void SecDialog::addModels() {

@@ -72,10 +72,11 @@ void ServerServisDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
 }
 
-void ServerServisDialog::initialize(QSqlDatabase d,QString sNo) {
+void ServerServisDialog::initialize(QSqlDatabase d, QString sNo, QString username) {
     ui->teknikServis->setText("Teknik Servis (" + sNo + ")");
     servisNo = sNo;
     database = d;
+    name = username;
 }
 void ServerServisDialog::on_pushButton_clicked()
 {
@@ -96,7 +97,10 @@ void ServerServisDialog::on_pushButton_clicked()
         saat = saatTemp + ":" + dakikaTemp;
         tarih = ui->gelisTarihiDay_->text() + "." + ui->gelisTarihiMonth_->text() + "." + ui->gelisTarihiYear_->text() + " " + saat;
         olay = ui->olay_->currentText();
-        yapilanIslem = ui->yapilanIslem_->toPlainText();
+        if(ui->yapilanIslem_->toPlainText().length() != 0)
+            yapilanIslem = name + ": "  + ui->yapilanIslem_->toPlainText();
+        else
+            ui->yapilanIslem_->toPlainText();
 
         if(ui->donanim_1->isChecked()) {
             malzemeler += ui->donanim_1->text() + ui->donanim_1Num->text() + ",";
@@ -107,7 +111,10 @@ void ServerServisDialog::on_pushButton_clicked()
         }        
 
         testSuresi = ui->testSuresi_->text();
-        notlar = ui->notlar_->toPlainText();
+        if(ui->notlar_->toPlainText().length() != 0)
+            notlar = name + ": "  + ui->notlar_->toPlainText();
+        else
+            ui->notlar_->toPlainText();
 
         QSqlQuery qry;
 

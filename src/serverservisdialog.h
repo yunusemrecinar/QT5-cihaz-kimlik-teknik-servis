@@ -18,6 +18,8 @@ public:
 
     QString notSakla;
 
+    QString name;
+
     QString servisNo = "";
     QString tarih = "";
     QString saat = "";
@@ -30,7 +32,7 @@ public:
 
     bool check = true;
 public slots:
-    void initialize(QSqlDatabase d,QString sNo);
+    void initialize(QSqlDatabase d, QString sNo, QString username);
     void changes();
 private:
     Ui::ServerServisDialog *ui;

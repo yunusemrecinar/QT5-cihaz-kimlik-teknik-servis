@@ -111,6 +111,9 @@ border:2px solid grey;
                 <pointsize>20</pointsize>
                </font>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
              </widget>
             </item>
            </layout>
