@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>857</width>
-    <height>505</height>
+    <width>818</width>
+    <height>645</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,6 +24,12 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="musteriLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -47,6 +53,12 @@
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
@@ -65,16 +77,22 @@
             </item>
             <item>
              <widget class="QTextEdit" name="textEditIsim">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>100</height>
+                <height>140</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>100</height>
+                <height>16777215</height>
                </size>
               </property>
               <property name="font">
@@ -91,7 +109,7 @@
           <widget class="QGroupBox" name="verticalGroupBox_2">
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <property name="bottomMargin">
-             <number>38</number>
+             <number>9</number>
             </property>
             <item>
              <widget class="QLabel" name="label_2">
@@ -114,7 +132,7 @@
             <item>
              <widget class="QTextEdit" name="textEditAdres">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -128,7 +146,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>16777215</height>
                </size>
               </property>
               <property name="font">
@@ -145,9 +163,21 @@
        </item>
        <item>
         <widget class="QGroupBox" name="verticalGroupBox_3">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>116</height>
+          </size>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <pointsize>18</pointsize>

@@ -47,6 +47,8 @@ public:
     QString serviceValue;
     QString rowCount;
 
+    QString rowMusteri;
+
 public slots:
     void readFile(QString filename);
 

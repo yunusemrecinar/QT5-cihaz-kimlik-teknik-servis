@@ -129,6 +129,7 @@ void ServisDialog::addMusteri() {
             while(qry->next()) {
                 ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
                 musteriAdi = qry->value(0).toString();
+                ui->olay->setText(qry->value(0).toString());
             }
         }else {
             QMessageBox::information(this,"Error",qry->lastError().text());

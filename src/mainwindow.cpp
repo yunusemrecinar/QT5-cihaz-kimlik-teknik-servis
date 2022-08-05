@@ -308,6 +308,7 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
         refreshServis();
     }else {
         servisDialog = new ServisDialog();
+        servisDialog->musteriAdi = "asdas";
         servisDialog->initialize(database, mainWindowValue, name);
         servisDialog->exec();
         refreshServis();
@@ -321,6 +322,7 @@ void MainWindow::on_tableView_clicked()
     QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
     cihazModel = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
     mainWindowValue = rowValue;
+    rowMusteri = "";
     ui->servisLabel->setText("Teknik Servis (" + mainWindowValue + ")");
 
     refreshServis();

@@ -35,6 +35,7 @@ void Musteri::initialize(QSqlDatabase d) {
         ui->tableView->resizeRowsToContents();
         ui->tableView->resizeColumnsToContents();
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->tableView->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
         cout << "Database not connected!" << endl;
