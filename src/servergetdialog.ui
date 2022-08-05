@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1132</width>
-    <height>744</height>
+    <width>1275</width>
+    <height>826</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,7 +76,7 @@ border: 2px solid grey;
                    </font>
                   </property>
                   <property name="text">
-                   <string>Cihazla gelen donanımlar</string>
+                   <string>Cihazla gelen/giden donanımlar</string>
                   </property>
                  </widget>
                 </item>

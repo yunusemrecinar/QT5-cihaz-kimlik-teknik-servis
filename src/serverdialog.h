@@ -18,8 +18,10 @@ public:
     ~ServerDialog();
 
     QList<QString> commandsMusteri;
+    QList<QString> commandsModel;
 public slots:
     void initialize(QSqlDatabase d);
+    void commandChangedModel(const QString& command_text);
 private:
     Ui::ServerDialog *ui;
 
@@ -43,7 +45,7 @@ private:
     bool checkSeriNo = false;
 private slots:
     void changes();
-
+    void addModels();
     void addMusteri();
     void commandChangedDurum(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);

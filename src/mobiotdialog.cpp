@@ -48,13 +48,10 @@ void MobiotDialog::addModels() {
 void MobiotDialog::commandChangedModel(const QString& command_text) {
 
 
-
-
-
-
         if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
             ServerDialog *serverDialog = new ServerDialog();
             serverDialog->initialize(database);
+            serverDialog->commandChangedModel(command_text);
             this->close();
             serverDialog->exec();
         }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
@@ -69,8 +66,6 @@ void MobiotDialog::commandChangedModel(const QString& command_text) {
             secDialog->exec();
 
         }
-
-
 
 }
 void MobiotDialog::on_pushButton_clicked()

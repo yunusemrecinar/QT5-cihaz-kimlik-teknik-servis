@@ -12,6 +12,7 @@ ServerServisDialog::ServerServisDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     changes();
+
 }
 
 ServerServisDialog::~ServerServisDialog()
@@ -50,7 +51,7 @@ void ServerServisDialog::changes() {
     ui->testSuresi_->setMinimum(1);
     ui->testSuresi_->clear();
 
-    QStringList commandsOlay = {"Geldi","Test","Gitti","Onarıldı"};
+    QStringList commandsOlay = {"Geldi","Test","Demo verildi","Müşteriye verildi","Gitti","Onarıldı"};
     ui->olay_->addItems(commandsOlay);
     connect(ui->olay_, &QComboBox::currentTextChanged, this, &ServerServisDialog::commandChangedOlay);
 
@@ -67,6 +68,40 @@ void ServerServisDialog::changes() {
     ui->donanim_2Num->setMaximum(9);
     ui->donanim_3Num->setMaximum(9);
 
+
+
+}
+void ServerServisDialog::addMusteri() {
+    commandsMusteri.append("LAB");
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        qry ->prepare("select * from müsteri");
+        if(qry -> exec()) {
+            while(qry->next()) {
+                commandsMusteri.append(qry->value(1).toString());
+            }
+        }else {
+            QMessageBox::information(this,"Error",qry->lastError().text());
+        }
+        ui->musteriAdi_1->addItems(commandsMusteri);
+        connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &ServerServisDialog::commandChangedMusteriAdi);
+
+        qry->clear();
+        qry->prepare("SELECT İsim FROM müsteri WHERE `Cihaz Seri No` LIKE '%" + servisNo + "%';");
+        if(qry->exec()) {
+            while(qry->next()) {
+                ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
+            }
+        }
+    }else {
+        QMessageBox::information(this,"Error",database.lastError().text());
+    }
+
+}
+
+void ServerServisDialog::commandChangedMusteriAdi(const QString &command_text)
+{
+    musteriAdi = command_text;
 }
 void ServerServisDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
@@ -77,6 +112,8 @@ void ServerServisDialog::initialize(QSqlDatabase d, QString sNo, QString usernam
     servisNo = sNo;
     database = d;
     name = username;
+
+    addMusteri();
 }
 void ServerServisDialog::on_pushButton_clicked()
 {

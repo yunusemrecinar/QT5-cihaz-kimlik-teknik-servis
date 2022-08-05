@@ -26,7 +26,6 @@ void InformationServerDialog::initialize(QString s, QSqlDatabase d) {
     seriNo = s;
     database = d;
 
-    addMusteri();
 
     if(database.isOpen()) {
 
@@ -44,7 +43,7 @@ void InformationServerDialog::initialize(QString s, QSqlDatabase d) {
                 ui->decklink_->setCurrentText(qry->value(7).toString());
                 ui->kasaTipi_->setCurrentText(qry->value(8).toString());
                 ui->test_durum_->setCurrentText(qry->value(9).toString());
-                ui->musteriAdi_1->setCurrentText(qry->value(10).toString());
+                ui->musteriAdi_1->setText(qry->value(10).toString());
                 ui->durum_->setCurrentText(qry->value(11).toString());
                 if(qry->value(12).toString().contains(".")) {
                     QList<QString> date = qry->value(12).toString().split(".");
@@ -109,18 +108,6 @@ void InformationServerDialog::changes() {
     connect(ui->decklink_,&QComboBox::currentTextChanged, this, &InformationServerDialog::commandChangedDecklink);
 }
 
-void InformationServerDialog::addMusteri() {
-    commandsMusteri.append("LAB");
-    if(database.isOpen()) {
-        QSqlQuery* qry = new QSqlQuery(database);
-        qry ->prepare("select * from müsteri");
-        if(qry -> exec()) {
-            while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
-        }
-    }
-    ui->musteriAdi_1->addItems(commandsMusteri);
-    connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &InformationServerDialog::commandChangedMusteriAdi);
-}
 void InformationServerDialog::commandChangedDurum(const QString &command_text)
 {
     durum = command_text;
@@ -155,7 +142,7 @@ void InformationServerDialog::on_pushButton_clicked()
         QString anakartNo = ui->anakart_->text();
         QString uidNo = ui->UIDNo_1->text();
         QString testDrm = ui->test_durum_->currentText();
-        QString musteriAdi = ui->musteriAdi_1->currentText();
+        QString musteriAdi = ui->musteriAdi_1->text();
         QString durum = ui->durum_->currentText();
         QString uretimTarih;
         QString uretimTarihDay = ui->date_day->text();

@@ -18,7 +18,11 @@ public:
 
     QString notSakla;
 
+    QList<QString> commandsMusteri;
+
     QString name;
+
+    QString musteriAdi;
 
     QString servisNo = "";
     QString tarih = "";
@@ -42,6 +46,10 @@ private slots:
     void on_pushButton_clicked();
 
     void commandChangedOlay(const QString& command_text);
+
+    void addMusteri();
+
+    void commandChangedMusteriAdi(const QString& command_text);
 
     void on_donanim_1_clicked();
 

@@ -27,7 +27,6 @@ void InformationMobiotDialog::initialize(QString s, QSqlDatabase d)
     seriNo = s;
     database = d;
 
-    addMusteri();
     addModemTipi();
 
     if(database.isOpen()) {
@@ -42,7 +41,7 @@ void InformationMobiotDialog::initialize(QString s, QSqlDatabase d)
                 ui->anakart_->setText(qry->value(3).toString());
                 ui->UIDNo_1->setText(qry->value(4).toString());
                 ui->test_durum_->setCurrentText(qry->value(5).toString());
-                ui->musteriAdi_1->setCurrentText(qry->value(6).toString());
+                ui->musteriAdi_1->setText(qry->value(6).toString());
                 ui->durum_->setCurrentText(qry->value(7).toString());
                 if(qry->value(8).toString().contains(".")) {
                     QList<QString> date = qry->value(8).toString().split(".");
@@ -123,20 +122,7 @@ void InformationMobiotDialog::addModemTipi() {
     ui->modemTipi_->addItems(commandsModemTipi);
     connect(ui->modemTipi_, &QComboBox::currentTextChanged, this, &InformationMobiotDialog::commandChangedModemTipi);
 }
-void InformationMobiotDialog::addMusteri() {
-    commandsMusteri.append("LAB");
-    if(database.isOpen()) {
-        QSqlQuery* qry = new QSqlQuery(database);
-        qry ->prepare("select * from müsteri");
-        if(qry -> exec()) {
-            while(qry->next()) {
-                commandsMusteri.append(qry->value(1).toString());
-            }
-        }
-    }
-    ui->musteriAdi_1->addItems(commandsMusteri);
-    connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &InformationMobiotDialog::commandChangedMusteriAdi);
-}
+
 void InformationMobiotDialog::commandChangedModemTipi(const QString& command_text) {
     modemTipi = command_text;
 }
@@ -153,7 +139,7 @@ void InformationMobiotDialog::on_pushButton_clicked()
         QString anakartNo = ui->anakart_->text();
         QString uidNo = ui->UIDNo_1->text();
         QString testDrm = ui->test_durum_->currentText();
-        musteriAdi = ui->musteriAdi_1->currentText();
+        musteriAdi = ui->musteriAdi_1->text();
         QString durum = ui->durum_->currentText();
         QString uretimTarih;
         QString uretimTarihDay = ui->date_day->text();

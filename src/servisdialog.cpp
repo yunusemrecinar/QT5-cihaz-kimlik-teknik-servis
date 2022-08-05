@@ -110,11 +110,48 @@ void ServisDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
 }
 
+void ServisDialog::addMusteri() {
+    commandsMusteri.append("LAB");
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        qry ->prepare("select * from müsteri");
+        if(qry -> exec()) {
+            while(qry->next()) {
+                commandsMusteri.append(qry->value(1).toString());
+            }
+        }
+        ui->musteriAdi_1->addItems(commandsMusteri);
+        connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &ServisDialog::commandChangedMusteriAdi);
+
+        qry->clear();
+        qry->prepare("SELECT İsim FROM müsteri WHERE `Cihaz Seri No` LIKE '%" + servisNo + "%';");
+        if(qry->exec()) {
+            while(qry->next()) {
+                ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
+            }
+        }
+    }else {
+        QMessageBox::information(this,"Error", database.lastError().text());
+    }
+
+}
+
+void ServisDialog::commandChangedMusteriAdi(const QString &command_text)
+{
+    //musteriAdi = command_text;
+    QMessageBox::information(this,"Değişiklik","Müşteri Adını Değiştirdiniz. Yapılan İşleme Eklendi!");
+    QString temp = ui->yapilanIslem_->toPlainText() + "\nMüşteri değiştirildi. Eksi Müşteri: "+ musteriAdi + ", Yeni Müşteri: " + command_text;
+    musteriCheck = true;
+    ui->yapilanIslem_->setPlainText(temp);
+    musteriAdi = command_text;
+}
 void ServisDialog::initialize(QSqlDatabase d,QString sNo, QString username) {
     ui->teknikServis->setText("Teknik Servis (" + sNo + ")");
     servisNo = sNo;
-    database = d;   
+    database = d;
     name = username;
+
+    addMusteri();
 }
 void ServisDialog::on_pushButton_clicked()
 {
@@ -219,6 +256,17 @@ void ServisDialog::on_pushButton_clicked()
         }else {
             QMessageBox::information(this,"Not Inserted",qry.lastError().text());
         }
+
+        qry.clear();
+        if(musteriCheck) {
+            qry.prepare("UPDATE `cihazkimlik` SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
+            if(qry.exec()){
+                QMessageBox::information(this,"Updated", "Müşteri Adı Güncellendi!");
+            }else {
+                QMessageBox::information(this,"Error", qry.lastError().text());
+            }
+        }
+
 
         this->close();
     }else {

@@ -135,6 +135,7 @@ void SecDialog::commandChangedModel(const QString& command_text) {
         if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
             serverDialog = new ServerDialog();
             serverDialog->initialize(database);
+            serverDialog->commandChangedModel(command_text);
             this->close();
             serverDialog->exec();
         }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
@@ -176,11 +177,6 @@ void SecDialog::initialize(QSqlDatabase d) {
     addModels();
     addModemTipi();
     addMusteri();
-}
-
-void SecDialog::initializeTo(QSqlDatabase d, int count, QString command_text)
-{
-
 }
 
 void SecDialog::on_pushButton_clicked()

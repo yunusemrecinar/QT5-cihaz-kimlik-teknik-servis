@@ -20,6 +20,8 @@ public:
 
     QString name = "";
 
+    QList<QString> commandsMusteri;
+
     QString servisNo = "";
     QString tarih = "";
     QString saat = "";
@@ -29,6 +31,10 @@ public:
     QString degisenParcalar = "";
     QString testSuresi = "";
     QString notlar = "";
+
+    QString musteriAdi;
+
+    bool musteriCheck = false;
 
     bool check = true;
 public slots:
@@ -41,7 +47,9 @@ private slots:
 
     //void on_pushButton_2_clicked();
 
+    void addMusteri();
 
+    void commandChangedMusteriAdi(const QString& command_text);
 
     void on_donanim_1_clicked();
 

@@ -17,6 +17,7 @@
 #include "servergetdialog.h"
 #include "serverservisdialog.h"
 
+
 #include <iostream>
 using namespace std;
 
@@ -191,7 +192,7 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 
         //setValue("select * from cihazkimlik");
         //ui->tableView->setModel(model);
-        qry ->prepare("select * from cihazkimlik where `Cihaz Seri No` LIKE '" + arg1 + "%' OR `Müşteri Adı` LIKE '" + arg1 + "%'");
+        qry ->prepare("select * from cihazkimlik where `Cihaz Seri No` LIKE '" + arg1 + "%' OR `Müşteri Adı` LIKE '" + arg1 + "%' OR `Durumu` LIKE '" + arg1 + "%'");
         qry -> exec();
         model->setQuery(*qry);
         ui->tableView->setModel(model);
@@ -301,12 +302,12 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
     if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
-        serverServisDialog = new ServerServisDialog(this);
+        serverServisDialog = new ServerServisDialog();
         serverServisDialog->initialize(database, mainWindowValue, name);
         serverServisDialog->exec();
         refreshServis();
     }else {
-        servisDialog = new ServisDialog(this);
+        servisDialog = new ServisDialog();
         servisDialog->initialize(database, mainWindowValue, name);
         servisDialog->exec();
         refreshServis();

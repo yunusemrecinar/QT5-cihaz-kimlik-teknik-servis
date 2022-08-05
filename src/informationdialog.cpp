@@ -30,15 +30,6 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
 
         QSqlQuery* qry = new QSqlQuery(database);
 
-        QList<QString> commandsMusteri;
-        commandsMusteri.append("LAB");
-        qry ->prepare("select * from müsteri");
-        if(qry -> exec()) {
-            while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
-        }
-        ui->musteriAdi_->addItems(commandsMusteri);
-        connect(ui->musteriAdi_, &QComboBox::currentTextChanged, this, &InformationDialog::commandChangedMusteriAdi);
-
         qry->clear();
 
         qry ->prepare("select * from cihazkimlik where `Cihaz Seri No` = '" + seriNo + "'");
@@ -54,7 +45,7 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 ui->sarj_karti_1->setText(qry->value(7).toString());
                 ui->durum_1->setCurrentText(qry->value(8).toString());
                 ui->modemTipi_->setCurrentText(qry->value(9).toString());
-                ui->musteriAdi_->setCurrentText(qry->value(10).toString());
+                ui->musteriAdi_->setText(qry->value(10).toString());
                 ui->modemSeri1_1->setText(qry->value(11).toString());
                 ui->modemSeri2_1->setText(qry->value(12).toString());
                 ui->modemSeri3_1->setText(qry->value(13).toString());
@@ -159,7 +150,7 @@ void InformationDialog::on_pushButton_clicked()
         QString modemKart = ui->modem_karti_1->text();
         QString lcdKart = ui->lcd_karti_1->text();
         QString sarjKart = ui->sarj_karti_1->text();
-        musteriAdi = ui->musteriAdi_->currentText();
+        musteriAdi = ui->musteriAdi_->text();
         QString modemSeri1 = ui->modemSeri1_1->text();
         QString modemSeri2 = ui->modemSeri2_1->text();
         QString modemSeri3 = ui->modemSeri3_1->text();

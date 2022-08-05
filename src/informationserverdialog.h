@@ -56,7 +56,6 @@ private:
 private slots:
     void changes();
 
-    void addMusteri();
     void commandChangedDurum(const QString& command_text);
     void commandChangedTestDurum(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);

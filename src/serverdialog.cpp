@@ -4,6 +4,8 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlError>
+#include "mobiotdialog.h"
+#include "secdialog.h"
 
 #include <iostream>
 using namespace std;
@@ -26,6 +28,31 @@ void ServerDialog::initialize(QSqlDatabase d)
     database = d;
 
     addMusteri();
+    addModels();
+}
+
+void ServerDialog::commandChangedModel(const QString &command_text)
+{
+
+    if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
+        ui->model_->setCurrentText(command_text);
+    }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
+        MobiotDialog *mobiotDialog = new MobiotDialog();
+        mobiotDialog->initialize(database);
+        mobiotDialog->commandChangedModel(command_text);
+        this->close();
+        mobiotDialog->exec();
+    }else {
+        model = command_text;
+        SecDialog *secDialog = new SecDialog();
+        secDialog->initialize(database);
+        secDialog->count = 1;
+        secDialog->commandChangedModel(command_text);
+        this->close();
+        secDialog->exec();
+
+    }
+
 }
 
 void ServerDialog::changes() {
@@ -60,6 +87,17 @@ void ServerDialog::changes() {
     QStringList commandsDecklink = {"Quad","Studio 2","Studio 4K"};
     ui->decklink_->addItems(commandsDecklink);
     connect(ui->decklink_,&QComboBox::currentTextChanged, this, &ServerDialog::commandChangedDecklink);
+}
+void ServerDialog::addModels() {
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        qry ->prepare("select * from model");
+        if(qry -> exec()) {
+            while(qry->next()) {commandsModel.append(qry->value(0).toString());}
+        }
+    }
+    ui->model_->addItems(commandsModel);
+    connect(ui->model_, &QComboBox::currentTextChanged, this, &ServerDialog::commandChangedModel);
 }
 void ServerDialog::addMusteri() {
     commandsMusteri.append("LAB");
@@ -103,7 +141,7 @@ void ServerDialog::on_pushButton_clicked()
 
     if(database.isOpen()) {
 
-        model = ui->model_->text();
+        model = ui->model_->currentText();
         anakartNo = ui->anakart_->text();
         cihazSeriNo = ui->cihaz_seri_no->text();
         durum = ui->durum_->currentText();
