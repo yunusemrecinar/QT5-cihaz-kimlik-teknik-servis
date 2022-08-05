@@ -140,10 +140,12 @@ void SecDialog::commandChangedModel(const QString& command_text) {
         }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
             mobiotDialog = new MobiotDialog();
             mobiotDialog->initialize(database);
+            mobiotDialog->commandChangedModel(command_text);
             this->close();
             mobiotDialog->exec();
         }else {
             model = command_text;
+            ui->model_->setCurrentText(model);
             ui->AnakartNoBox->setVisible(true);
             ui->CihazSeriNoBox->setVisible(true);
             ui->modemSeriNoBox->setVisible(true);
@@ -174,6 +176,11 @@ void SecDialog::initialize(QSqlDatabase d) {
     addModels();
     addModemTipi();
     addMusteri();
+}
+
+void SecDialog::initializeTo(QSqlDatabase d, int count, QString command_text)
+{
+
 }
 
 void SecDialog::on_pushButton_clicked()

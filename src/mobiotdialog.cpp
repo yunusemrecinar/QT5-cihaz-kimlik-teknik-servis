@@ -4,6 +4,8 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlError>
+#include "secdialog.h"
+#include "serverdialog.h"
 
 #include <iostream>
 using namespace std;
@@ -27,8 +29,50 @@ void MobiotDialog::initialize(QSqlDatabase d)
 
     addMusteri();
     addModemTipi();
+    addModels();
+
 }
 
+void MobiotDialog::addModels() {
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        qry ->prepare("select * from model");
+        if(qry -> exec()) {
+            while(qry->next()) {commandsModel.append(qry->value(0).toString());}
+        }
+    }
+    ui->model_->addItems(commandsModel);
+    connect(ui->model_, &QComboBox::currentTextChanged, this, &MobiotDialog::commandChangedModel);
+}
+
+void MobiotDialog::commandChangedModel(const QString& command_text) {
+
+
+
+
+
+
+        if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
+            ServerDialog *serverDialog = new ServerDialog();
+            serverDialog->initialize(database);
+            this->close();
+            serverDialog->exec();
+        }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
+            ui->model_->setCurrentText(command_text);
+        }else {
+            model = command_text;
+            SecDialog *secDialog = new SecDialog();
+            secDialog->initialize(database);
+            secDialog->count = 1;
+            secDialog->commandChangedModel(command_text);
+            this->close();
+            secDialog->exec();
+
+        }
+
+
+
+}
 void MobiotDialog::on_pushButton_clicked()
 {
 

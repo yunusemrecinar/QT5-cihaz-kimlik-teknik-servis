@@ -21,7 +21,7 @@ public:
     QList<QString> commandsModemTipi;
 public slots:
     void initialize(QSqlDatabase d);
-
+    void commandChangedModel(const QString& command_text);
 private slots:
     void on_pushButton_clicked();
     void changes();
@@ -33,8 +33,12 @@ private slots:
     void commandChangedMusteriAdi(const QString& command_text);
     void commandChangedModemTipi(const QString& command_text);
 
+    void addModels();
+
 private:
     Ui::MobiotDialog *ui;
+
+    QList<QString> commandsModel;
 
     QSqlDatabase database;
 

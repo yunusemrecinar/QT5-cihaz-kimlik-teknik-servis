@@ -32,13 +32,14 @@ public:
     int count = 0;
 public slots:
     void initialize(QSqlDatabase d);
+    void commandChangedModel(const QString& command_text);
 private slots:
     void addModels();
     void addMusteri();
     void addModemTipi();
     void on_pushButton_clicked();
     void commandChangedDurum(const QString& command_text);
-    void commandChangedModel(const QString& command_text);
+
     void commandChangedTestDurum(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);
     void commandChangedModemTipi(const QString& command_text);
