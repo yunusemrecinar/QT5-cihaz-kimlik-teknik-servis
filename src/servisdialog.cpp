@@ -124,11 +124,14 @@ void ServisDialog::addMusteri() {
         connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &ServisDialog::commandChangedMusteriAdi);
 
         qry->clear();
-        qry->prepare("SELECT İsim FROM müsteri WHERE `Cihaz Seri No` LIKE '%" + servisNo + "%';");
+        qry->prepare("SELECT `Müşteri Adı` FROM cihazkimlik WHERE `Cihaz Seri No` LIKE '%" + servisNo + "%';");
         if(qry->exec()) {
             while(qry->next()) {
                 ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
+                musteriAdi = qry->value(0).toString();
             }
+        }else {
+            QMessageBox::information(this,"Error",qry->lastError().text());
         }
     }else {
         QMessageBox::information(this,"Error", database.lastError().text());
@@ -138,11 +141,16 @@ void ServisDialog::addMusteri() {
 
 void ServisDialog::commandChangedMusteriAdi(const QString &command_text)
 {
+    ui->musteriAdi_2->setText(command_text);
+    ui->gelisTarihi->setText(musteriAdi);
     //musteriAdi = command_text;
-    QMessageBox::information(this,"Değişiklik","Müşteri Adını Değiştirdiniz. Yapılan İşleme Eklendi!");
-    QString temp = ui->yapilanIslem_->toPlainText() + "\nMüşteri değiştirildi. Eksi Müşteri: "+ musteriAdi + ", Yeni Müşteri: " + command_text;
-    musteriCheck = true;
-    ui->yapilanIslem_->setPlainText(temp);
+    if(QString::compare(musteriAdi, command_text, Qt::CaseInsensitive)) {
+        QMessageBox::information(this,"Değişiklik","Müşteri Adını Değiştirdiniz. Yapılan İşleme Eklendi!");
+        QString temp = ui->yapilanIslem_->toPlainText() + "\nMüşteri değiştirildi. Eksi Müşteri: "+ musteriAdi + ", Yeni Müşteri: " + command_text;
+        musteriCheck = true;
+        ui->yapilanIslem_->setPlainText(temp);
+        musteriAdi = command_text;
+    }
     musteriAdi = command_text;
 }
 void ServisDialog::initialize(QSqlDatabase d,QString sNo, QString username) {
