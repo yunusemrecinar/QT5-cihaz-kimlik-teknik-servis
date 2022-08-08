@@ -57,6 +57,7 @@ private slots:
     void commandChangedTestDurum(const QString& command_text);
     void commandChangedModemTipi(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);
+    void getMusteri();
 
 private:
     Ui::InformationDialog *ui;

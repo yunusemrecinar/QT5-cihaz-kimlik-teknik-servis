@@ -42,12 +42,16 @@ public slots:
     void changes();
 private slots:
     void on_pushButton_clicked();
+
     void commandChangedOlay(const QString& command_text);
 
+    void setOrginalMusteri();
 
     //void on_pushButton_2_clicked();
 
     void addMusteri();
+
+    void insertNewMusteri(QString isim);
 
     void commandChangedMusteriAdi(const QString& command_text);
 
@@ -80,6 +84,8 @@ private:
 
 
     NotEkleDialog *idNot;
+
+    bool checkMusteriChange = false;
 
 };
 

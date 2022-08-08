@@ -86,21 +86,45 @@ void ServerServisDialog::addMusteri() {
         ui->musteriAdi_1->addItems(commandsMusteri);
         connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &ServerServisDialog::commandChangedMusteriAdi);
 
-        qry->clear();
-        qry->prepare("SELECT İsim FROM müsteri WHERE `Cihaz Seri No` LIKE '%" + servisNo + "%';");
-        if(qry->exec()) {
-            while(qry->next()) {
-                ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
-            }
-        }
     }else {
         QMessageBox::information(this,"Error",database.lastError().text());
     }
 
 }
 
+
+void ServerServisDialog::setOrginalMusteri() {
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        qry->prepare("SELECT İsim FROM müsteri WHERE `Cihaz Seri No` LIKE '%" + servisNo + "%';");
+        if(qry->exec()) {
+            if(qry->size() == 0) {
+                ui->musteriAdi_1->setCurrentText("LAB");
+                musteriAdi = "LAB";
+                checkMusteriChange = true;
+            }else {
+                while(qry->next()) {
+                    ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
+                    musteriAdi = qry->value(0).toString();
+                    checkMusteriChange = true;
+                }
+            }
+        }else {
+            QMessageBox::information(this,"Error",qry->lastError().text());
+        }
+    }
+
+}
 void ServerServisDialog::commandChangedMusteriAdi(const QString &command_text)
 {
+    if(QString::compare(musteriAdi, command_text, Qt::CaseInsensitive) && checkMusteriChange) {
+        QMessageBox::information(this,"Değişiklik","Müşteri Adını Değiştirdiniz. Yapılan İşleme Eklendi!");
+        QString temp = ui->yapilanIslem_->toPlainText() + "\nMüşteri değiştirildi. Eksi Müşteri: "+ musteriAdi + ", Yeni Müşteri: " + command_text;
+        musteriCheck = true;
+        ui->yapilanIslem_->setPlainText(temp);
+        musteriAdi = command_text;
+    }
     musteriAdi = command_text;
 }
 void ServerServisDialog::commandChangedOlay(const QString& command_text) {
@@ -114,6 +138,7 @@ void ServerServisDialog::initialize(QSqlDatabase d, QString sNo, QString usernam
     name = username;
 
     addMusteri();
+    setOrginalMusteri();
 }
 void ServerServisDialog::on_pushButton_clicked()
 {
@@ -174,6 +199,16 @@ void ServerServisDialog::on_pushButton_clicked()
             QMessageBox::information(this,"Inserted", "Data Inserted Succesfully");
         }else {
             QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+        }
+
+        qry.clear();
+        if(musteriCheck) {
+            qry.prepare("UPDATE `cihazkimlik` SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
+            if(qry.exec()){
+                QMessageBox::information(this,"Updated", "Müşteri Adı Güncellendi!");
+            }else {
+                QMessageBox::information(this,"Error", qry.lastError().text());
+            }
         }
 
         this->close();

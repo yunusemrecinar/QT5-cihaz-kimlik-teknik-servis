@@ -45,7 +45,7 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 ui->sarj_karti_1->setText(qry->value(7).toString());
                 ui->durum_1->setCurrentText(qry->value(8).toString());
                 ui->modemTipi_->setCurrentText(qry->value(9).toString());
-                ui->musteriAdi_->setText(qry->value(10).toString());
+                getMusteri();
                 ui->modemSeri1_1->setText(qry->value(11).toString());
                 ui->modemSeri2_1->setText(qry->value(12).toString());
                 ui->modemSeri3_1->setText(qry->value(13).toString());
@@ -135,7 +135,30 @@ void InformationDialog::commandChangedModel(const QString& command_text) {
 void InformationDialog::commandChangedDurum(const QString& command_text) {
     durum = command_text;
 }
+void InformationDialog::getMusteri() {
 
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        qry ->prepare("select İsim from müsteri where `Cihaz Seri No` LIKE '%" + seriNo + "%';");
+        if(qry -> exec()){
+            if(qry->size() == 0){
+                ui->musteriAdi_->setText("LAB");
+            }else {
+                while(qry->next()) {
+                    ui->musteriAdi_->setText(qry->value(0).toString());
+                }
+            }
+        }else {
+            QMessageBox::information(this,"Error", qry->lastError().text());
+        }
+
+
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
 
 
 void InformationDialog::on_pushButton_clicked()

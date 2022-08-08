@@ -35,11 +35,15 @@ public:
     QString notlar = "";
 
     bool check = true;
+
+    bool musteriCheck = false;
 public slots:
     void initialize(QSqlDatabase d, QString sNo, QString username);
     void changes();
 private:
     Ui::ServerServisDialog *ui;
+
+    bool checkMusteriChange = false;
 
     QSqlDatabase database;
 private slots:
@@ -48,6 +52,8 @@ private slots:
     void commandChangedOlay(const QString& command_text);
 
     void addMusteri();
+
+    void setOrginalMusteri();
 
     void commandChangedMusteriAdi(const QString& command_text);
 

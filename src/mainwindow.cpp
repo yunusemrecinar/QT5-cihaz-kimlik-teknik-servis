@@ -308,7 +308,6 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
         refreshServis();
     }else {
         servisDialog = new ServisDialog();
-        servisDialog->musteriAdi = "asdas";
         servisDialog->initialize(database, mainWindowValue, name);
         servisDialog->exec();
         refreshServis();
