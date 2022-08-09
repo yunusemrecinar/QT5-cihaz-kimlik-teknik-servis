@@ -31,6 +31,11 @@ private slots:
 
     void on_tableView_doubleClicked(const QModelIndex &index);
 
+    void on_lineEditSort_selectionChanged();
+
+    void on_lineEditSort_textChanged(const QString &arg1);
+
+
 private:
     QSqlDatabase database;
     Ui::Musteri *ui;

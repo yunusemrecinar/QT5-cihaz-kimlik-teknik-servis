@@ -88,7 +88,7 @@ border:1px;
                </font>
               </property>
               <property name="readOnly">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
              </widget>
             </item>

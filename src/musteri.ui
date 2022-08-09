@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
-    <height>796</height>
+    <width>723</width>
+    <height>846</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -282,6 +282,27 @@ background-repeat: none;
         </layout>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditSort">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit:focus
+{
+	border:  2px solid #000000;
+}</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QTableView" name="tableView">

@@ -16,6 +16,8 @@ Musteri::Musteri(QWidget *parent) :
     ui->setupUi(this);
     ui->cihazSeriNo->setMaxLength(9);
     ui->cihazSeriNo->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->lineEditSort->setPlaceholderText("Filtrele");
+    ui->lineEditSort->setReadOnly(1);
 }
 
 void Musteri::initialize(QSqlDatabase d) {
@@ -31,7 +33,6 @@ void Musteri::initialize(QSqlDatabase d) {
         modal->setQuery(*qry);
         ui->tableView->setModel(modal);
         ui->tableView->hideColumn(0);
-        ui->tableView->resizeColumnsToContents();
         ui->tableView->resizeRowsToContents();
         ui->tableView->resizeColumnsToContents();
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -47,6 +48,30 @@ Musteri::~Musteri()
     delete ui;
 }
 
+void Musteri::on_lineEditSort_selectionChanged()
+{
+    ui->lineEditSort->setText("");
+    ui->lineEditSort->setReadOnly(0);
+}
+void Musteri::on_lineEditSort_textChanged(const QString &arg1)
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        qry ->prepare("select * from müsteri where `Cihaz Seri No` LIKE '" + arg1 + "%' OR LOWER(`İsim`) LIKE '" + arg1.toLower() + "%';");
+        qry -> exec();
+        model->setQuery(*qry);
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+        ui->tableView->resizeRowsToContents();
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
 void Musteri::on_pushButton_clicked()
 {
     if(database.isOpen()) {
@@ -76,7 +101,7 @@ void Musteri::on_pushButton_clicked()
                 }
                 temp += "\n"+cihazSeriNo;
                 qry.clear();
-                qry.prepare("UPDATE `müsteri` SET `Cihaz Seri No` = '"+temp+"' WHERE İsim = '" + isim + "';");
+                qry.prepare("UPDATE `müsteri` SET `Cihaz Seri No` = '"+temp+"' WHERE İsim = '" + isim.trimmed() + "';");
                 qry.exec();
             }else {
                 qry.prepare("SELECT `Cihaz Seri No` FROM `müsteri`");
@@ -90,7 +115,7 @@ void Musteri::on_pushButton_clicked()
                     qry.clear();
                     qry.prepare("INSERT INTO müsteri(`İsim`,`Adres`,`Cihaz Seri No`) "
                                 "VALUES(:isim,:adres,:cihazSeriNo)");
-                    qry.bindValue(":isim",isim);
+                    qry.bindValue(":isim",isim.trimmed());
                     qry.bindValue(":adres",adres);
                     qry.bindValue(":cihazSeriNo",cihazSeriNo);
 
