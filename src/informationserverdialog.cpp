@@ -91,6 +91,45 @@ void InformationServerDialog::changes() {
     ui->date_month->clear();
     ui->date_year->clear();
 
+    ui->fatura_date_day_->setMaximum(31);
+    ui->fatura_date_day_->setMinimum(1);
+    ui->fatura_date_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setMaximum(12);
+    ui->fatura_date_month_->setMinimum(1);
+    ui->fatura_date_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_year_->setMaximum(QDate::currentDate().year());
+    ui->fatura_date_year_->setMinimum(1);
+    ui->fatura_date_day_->clear();
+    ui->fatura_date_month_->clear();
+    ui->fatura_date_year_->clear();
+
+    ui->garanti_start_day_->setMaximum(31);
+    ui->garanti_start_day_->setMinimum(1);
+    ui->garanti_start_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setMaximum(12);
+    ui->garanti_start_month_->setMinimum(1);
+    ui->garanti_start_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_start_year_->setMinimum(1);
+    ui->garanti_start_day_->clear();
+    ui->garanti_start_month_->clear();
+    ui->garanti_start_year_->clear();
+
+    ui->garanti_bitis_day_->setMaximum(31);
+    ui->garanti_bitis_day_->setMinimum(1);
+    ui->garanti_bitis_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setMaximum(12);
+    ui->garanti_bitis_month_->setMinimum(1);
+    ui->garanti_bitis_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_bitis_year_->setMinimum(1);
+    ui->garanti_bitis_day_->clear();
+    ui->garanti_bitis_month_->clear();
+    ui->garanti_bitis_year_->clear();
+
     QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
     ui->durum_->addItems(commandsDurum);
     connect(ui->durum_, &QComboBox::currentTextChanged, this, &InformationServerDialog::commandChangedDurum);

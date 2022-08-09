@@ -72,6 +72,45 @@ void ServerDialog::changes() {
     ui->date_month->clear();
     ui->date_year->clear();
 
+    ui->fatura_date_day_->setMaximum(31);
+    ui->fatura_date_day_->setMinimum(1);
+    ui->fatura_date_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setMaximum(12);
+    ui->fatura_date_month_->setMinimum(1);
+    ui->fatura_date_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_year_->setMaximum(QDate::currentDate().year());
+    ui->fatura_date_year_->setMinimum(1);
+    ui->fatura_date_day_->clear();
+    ui->fatura_date_month_->clear();
+    ui->fatura_date_year_->clear();
+
+    ui->garanti_start_day_->setMaximum(31);
+    ui->garanti_start_day_->setMinimum(1);
+    ui->garanti_start_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setMaximum(12);
+    ui->garanti_start_month_->setMinimum(1);
+    ui->garanti_start_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_start_year_->setMinimum(1);
+    ui->garanti_start_day_->clear();
+    ui->garanti_start_month_->clear();
+    ui->garanti_start_year_->clear();
+
+    ui->garanti_bitis_day_->setMaximum(31);
+    ui->garanti_bitis_day_->setMinimum(1);
+    ui->garanti_bitis_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setMaximum(12);
+    ui->garanti_bitis_month_->setMinimum(1);
+    ui->garanti_bitis_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_bitis_year_->setMinimum(1);
+    ui->garanti_bitis_day_->clear();
+    ui->garanti_bitis_month_->clear();
+    ui->garanti_bitis_year_->clear();
+
     QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
     ui->durum_->addItems(commandsDurum);
     connect(ui->durum_, &QComboBox::currentTextChanged, this, &ServerDialog::commandChangedDurum);
@@ -153,6 +192,10 @@ void ServerDialog::on_pushButton_clicked()
         musteriAdi = ui->musteriAdi_1->currentText();
         islemci = ui->islemci_->text();
         tarih = ui->date_day->text() + "." + ui->date_month->text() + "." + ui->date_year->text();
+        QString faturaKesim = ui->fatura_date_day_->text() + "." + ui->fatura_date_month_->text() + "." + ui->fatura_date_year_->text();
+        QString garantiBaslangic = ui->garanti_start_day_->text() + "." + ui->garanti_start_month_->text() + "." + ui->garanti_start_year_->text();
+        QString garantiBitis = ui->garanti_bitis_day_->text() + "." + ui->garanti_bitis_month_->text() + "." + ui->garanti_bitis_year_->text();
+
         hdd = ui->hdd_->text();
         notlar = ui->notlar_->toPlainText();
 
@@ -164,10 +207,10 @@ void ServerDialog::on_pushButton_clicked()
 
         qry.prepare("INSERT INTO cihazkimlikserver(`Model`,`Cihaz Seri No`,`Anakart No`,"
                     "`UID No`,`İşlemci`,`Ram`,`Decklink`,`Kasa Tipi`,`Test Durumu`,"
-                    "`Müşteri`,`Durum`,`Üretim Tarihi`,`HDD`,`Notlar`) "
+                    "`Müşteri`,`Durum`,`Üretim Tarihi`,`Fatura Kesim`,`Garanti Baslangic`,`Garanti Bitis`,`HDD`,`Notlar`) "
                     "VALUES(:model,:cihazSeriNo,:anakartNo,:uidNo,"
                     ":islemci,:ram,:decklink,:kasaTipi,:testDurumu,:musteri,:durum,"
-                    ":tarih,:hdd,:notlar)");
+                    ":tarih,:faturaKesim,:garantiBaslangic,:garantiBitis,:hdd,:notlar)");
         qry.bindValue(":model",model);
         qry.bindValue(":cihazSeriNo",cihazSeriNo);
         qry.bindValue(":anakartNo",anakartNo);
@@ -180,6 +223,9 @@ void ServerDialog::on_pushButton_clicked()
         qry.bindValue(":musteri",musteriAdi);
         qry.bindValue(":durum",durum);
         qry.bindValue(":tarih",tarih);
+        qry.bindValue(":faturaKesim",faturaKesim);
+        qry.bindValue(":garantiBaslangic",garantiBaslangic);
+        qry.bindValue(":garantiBitis",garantiBitis);
         qry.bindValue(":hdd",hdd);
         qry.bindValue(":notlar",notlar);
 

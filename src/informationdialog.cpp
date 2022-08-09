@@ -54,13 +54,34 @@ void InformationDialog::initialize(QString s,QSqlDatabase d) {
                 ui->modemSeri6_1->setText(qry->value(16).toString());
 
                 if(qry->value(17).toString().contains(".")) {
-                    QList<QString> date = qry->value(17).toString().split(".");
+                    QList<QString> faturaKesim = qry->value(17).toString().split(".");
+                    ui->fatura_date_day_->setValue(faturaKesim.at(0).toInt());
+                    ui->fatura_date_month_->setValue(faturaKesim.at(1).toInt());
+                    ui->fatura_date_year_->setValue(faturaKesim.at(2).toInt());
+                }
+
+                if(qry->value(18).toString().contains(".")) {
+                    QList<QString> garantiStart = qry->value(18).toString().split(".");
+                    ui->garanti_start_day_->setValue(garantiStart.at(0).toInt());
+                    ui->garanti_start_month_->setValue(garantiStart.at(1).toInt());
+                    ui->garanti_start_year_->setValue(garantiStart.at(2).toInt());
+                }
+
+                if(qry->value(19).toString().contains(".")) {
+                    QList<QString> garantiBitis = qry->value(19).toString().split(".");
+                    ui->garanti_bitis_day_->setValue(garantiBitis.at(0).toInt());
+                    ui->garanti_bitis_month_->setValue(garantiBitis.at(1).toInt());
+                    ui->garanti_bitis_year_->setValue(garantiBitis.at(2).toInt());
+                }
+
+                if(qry->value(20).toString().contains(".")) {
+                    QList<QString> date = qry->value(20).toString().split(".");
                     ui->date_day->setValue(date.at(0).toInt());
                     ui->date_month->setValue(date.at(1).toInt());
                     ui->date_year->setValue(date.at(2).toInt());
                 }
-                ui->test_durum_->setCurrentText(qry->value(18).toString());
-                ui->notlar_1->setText(qry->value(19).toString());
+                ui->test_durum_->setCurrentText(qry->value(21).toString());
+                ui->notlar_1->setText(qry->value(22).toString());
                 oldLcdKart = ui->lcd_karti_1->text();
                 oldSarjKart = ui->sarj_karti_1->text();
                 oldModemTipi = ui->modemTipi_->currentText();
@@ -108,6 +129,45 @@ void InformationDialog::changes() {
     ui->date_day->clear();
     ui->date_month->clear();
     ui->date_year->clear();
+
+    ui->fatura_date_day_->setMaximum(31);
+    ui->fatura_date_day_->setMinimum(1);
+    ui->fatura_date_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setMaximum(12);
+    ui->fatura_date_month_->setMinimum(1);
+    ui->fatura_date_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_year_->setMaximum(QDate::currentDate().year());
+    ui->fatura_date_year_->setMinimum(1);
+    ui->fatura_date_day_->clear();
+    ui->fatura_date_month_->clear();
+    ui->fatura_date_year_->clear();
+
+    ui->garanti_start_day_->setMaximum(31);
+    ui->garanti_start_day_->setMinimum(1);
+    ui->garanti_start_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setMaximum(12);
+    ui->garanti_start_month_->setMinimum(1);
+    ui->garanti_start_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_start_year_->setMinimum(1);
+    ui->garanti_start_day_->clear();
+    ui->garanti_start_month_->clear();
+    ui->garanti_start_year_->clear();
+
+    ui->garanti_bitis_day_->setMaximum(31);
+    ui->garanti_bitis_day_->setMinimum(1);
+    ui->garanti_bitis_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setMaximum(12);
+    ui->garanti_bitis_month_->setMinimum(1);
+    ui->garanti_bitis_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_bitis_year_->setMinimum(1);
+    ui->garanti_bitis_day_->clear();
+    ui->garanti_bitis_month_->clear();
+    ui->garanti_bitis_year_->clear();
 
     QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
     ui->durum_1->addItems(commandsDurum);
@@ -188,6 +248,9 @@ void InformationDialog::on_pushButton_clicked()
         QString uretimTarihMonth = ui->date_month->text();
         QString uretimTarihYear = ui->date_year->text();
         uretimTarih = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
+        QString faturaKesim = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
+        QString garantiStart = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
+        QString garantiBitis= uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
         QString test = ui->test_durum_->currentText();
         QString notlar = ui->notlar_1->toPlainText();
 
@@ -237,6 +300,15 @@ void InformationDialog::on_pushButton_clicked()
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Uretim Tarihi` = '" + uretimTarih + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlik SET `Fatura Kesim` = '" + faturaKesim + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlik SET `Garanti Baslangic` = '" + garantiStart + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlik SET `Garanti Bitis` = '" + garantiBitis + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlik SET `Test Durumu` = '" + test + "' WHERE `Cihaz Seri No` = '" + ui->cihaz_seri_no_2->text() + "';");
