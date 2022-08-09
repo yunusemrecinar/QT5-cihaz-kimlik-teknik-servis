@@ -83,7 +83,9 @@ void MobiotDialog::on_pushButton_clicked()
         imei1 = ui->modemSeri1_->text();
         imei2 = ui->modemSeri2_->text();
         imei3 = ui->modemSeri3_->text();
-
+        QString faturaKesim = ui->fatura_date_day_->text() + "." + ui->fatura_date_month_->text() + "." + ui->fatura_date_year_->text();
+        QString garantiBaslangic = ui->garanti_start_day_->text() + "." + ui->garanti_start_month_->text() + "." + ui->garanti_start_year_->text();
+        QString garantiBitis = ui->garanti_bitis_day_->text() + "." + ui->garanti_bitis_month_->text() + "." + ui->garanti_bitis_year_->text();
         musteriAdi = ui->musteriAdi_1->currentText();
         notlar = ui->notlar_->toPlainText();
 
@@ -95,10 +97,10 @@ void MobiotDialog::on_pushButton_clicked()
 
         qry.prepare("INSERT INTO cihazkimlikmobiot(`Model`,`Cihaz Seri No`,`Anakart No`,"
                     "`UID No`,`Test Durumu`,`Müşteri`,`Durum`,`Üretim Tarihi`,`Modem Tipi`,"
-                    "`IMEI 1`,`IMEI 2`,`IMEI 3`,`Notlar`) "
+                    "`IMEI 1`,`IMEI 2`,`IMEI 3`,`Fatura Kesim`,`Garanti Baslangic`,`Garanti Bitis`,`Notlar`) "
                     "VALUES(:model,:cihazSeriNo,:anakartNo,:uidNo,"
                     ":testDurumu,:musteri,:durum,:uretimTarih,:modemTipi,:imei1,:imei2,"
-                    ":imei3,:notlar)");
+                    ":imei3,:faturaKesim,:garantiBaslangic,:garantiBitis,:notlar)");
         qry.bindValue(":model",model);
         qry.bindValue(":cihazSeriNo",cihazSeriNo);
         qry.bindValue(":anakartNo",anakartNo);
@@ -111,6 +113,9 @@ void MobiotDialog::on_pushButton_clicked()
         qry.bindValue(":imei1",imei1);
         qry.bindValue(":imei2",imei2);
         qry.bindValue(":imei3",imei3);
+        qry.bindValue(":faturaKesim",faturaKesim);
+        qry.bindValue(":garantiBaslangic",garantiBaslangic);
+        qry.bindValue(":garantiBitis",garantiBitis);
         qry.bindValue(":notlar",notlar);
 
         if(checkSeriNo) {
@@ -154,6 +159,45 @@ void MobiotDialog::changes()
     ui->date_day->clear();
     ui->date_month->clear();
     ui->date_year->clear();
+
+    ui->fatura_date_day_->setMaximum(31);
+    ui->fatura_date_day_->setMinimum(1);
+    ui->fatura_date_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setMaximum(12);
+    ui->fatura_date_month_->setMinimum(1);
+    ui->fatura_date_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_year_->setMaximum(QDate::currentDate().year());
+    ui->fatura_date_year_->setMinimum(1);
+    ui->fatura_date_day_->clear();
+    ui->fatura_date_month_->clear();
+    ui->fatura_date_year_->clear();
+
+    ui->garanti_start_day_->setMaximum(31);
+    ui->garanti_start_day_->setMinimum(1);
+    ui->garanti_start_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setMaximum(12);
+    ui->garanti_start_month_->setMinimum(1);
+    ui->garanti_start_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_start_year_->setMinimum(1);
+    ui->garanti_start_day_->clear();
+    ui->garanti_start_month_->clear();
+    ui->garanti_start_year_->clear();
+
+    ui->garanti_bitis_day_->setMaximum(31);
+    ui->garanti_bitis_day_->setMinimum(1);
+    ui->garanti_bitis_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setMaximum(12);
+    ui->garanti_bitis_month_->setMinimum(1);
+    ui->garanti_bitis_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_bitis_year_->setMinimum(1);
+    ui->garanti_bitis_day_->clear();
+    ui->garanti_bitis_month_->clear();
+    ui->garanti_bitis_year_->clear();
 
     QStringList commandsDurum = {"SATIŞ","DEMO","STOK"};
     ui->durum_->addItems(commandsDurum);

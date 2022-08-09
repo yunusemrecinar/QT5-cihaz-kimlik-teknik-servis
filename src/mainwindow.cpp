@@ -245,11 +245,11 @@ void MainWindow::hideColumnsServer()
 void MainWindow::addColumns() {
     columnsToHide.append(0);
     columnsToHide.append(3);
+    columnsToHide.append(4);
     columnsToHide.append(5);
     columnsToHide.append(6);
     columnsToHide.append(7);
     columnsToHide.append(9);
-    columnsToHide.append(10);
     columnsToHide.append(11);
     columnsToHide.append(12);
     columnsToHide.append(13);

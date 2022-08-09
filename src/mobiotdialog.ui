@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>865</width>
+    <width>1168</width>
     <height>894</height>
    </rect>
   </property>
@@ -156,92 +156,42 @@ border: 2px solid grey;
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QGroupBox" name="TestDurumBox">
-             <property name="styleSheet">
-              <string notr="true">QGroupBox {
+          <widget class="QGroupBox" name="AnakartNoBox">
+           <property name="minimumSize">
+            <size>
+             <width>365</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QGroupBox {
 border:2px solid grey;
 }</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_8">
-              <item>
-               <widget class="QLabel" name="testDurumu">
-                <property name="font">
-                 <font>
-                  <pointsize>18</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">verticalLayout_6 {
-border:1px;
-}</string>
-                </property>
-                <property name="text">
-                 <string>Test Durumu</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="test_durum_">
-                <property name="font">
-                 <font>
-                  <pointsize>20</pointsize>
-                 </font>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="musteriAdiBox">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QGroupBox {
-border: 2px solid grey;
-}</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_10">
-              <item>
-               <widget class="QLabel" name="musteriAdi_2">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>18</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Müşteri Adı</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="musteriAdi_1">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>18</pointsize>
-                 </font>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="anakart">
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Anakart No</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="anakart_">
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </item>
          <item>
           <widget class="QGroupBox" name="uretimTarihBox">
@@ -322,44 +272,6 @@ border:2px solid grey;
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_13">
-         <item>
-          <widget class="QGroupBox" name="AnakartNoBox">
-           <property name="minimumSize">
-            <size>
-             <width>365</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QGroupBox {
-border:2px solid grey;
-}</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QLabel" name="anakart">
-              <property name="font">
-               <font>
-                <pointsize>18</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Anakart No</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="anakart_">
-              <property name="font">
-               <font>
-                <pointsize>18</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
@@ -474,6 +386,94 @@ border:2px solid grey;
           </layout>
          </item>
          <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QGroupBox" name="TestDurumBox">
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border:2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <item>
+               <widget class="QLabel" name="testDurumu">
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">verticalLayout_6 {
+border:1px;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Test Durumu</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="test_durum_">
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="musteriAdiBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QGroupBox {
+border: 2px solid grey;
+}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <widget class="QLabel" name="musteriAdi_2">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Müşteri Adı</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="musteriAdi_1">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
           <widget class="QGroupBox" name="modemSeriNoBox">
            <property name="styleSheet">
             <string notr="true">QGroupBox {
@@ -561,6 +561,235 @@ border:2px solid grey;
                 </property>
                 <property name="text">
                  <string>IMEI 1</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_19">
+         <item>
+          <widget class="QGroupBox" name="uretimTarihBox_2">
+           <property name="styleSheet">
+            <string notr="true">QGroupBox {
+border:2px solid grey;
+}</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_22">
+            <item>
+             <widget class="QLabel" name="uretim_tarih_2">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Fatura Kesim Tarihi</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <item>
+               <widget class="QSpinBox" name="fatura_date_day_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="fatura_date_month_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="fatura_date_year_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="uretimTarihBox_4">
+           <property name="styleSheet">
+            <string notr="true">QGroupBox {
+border:2px solid grey;
+}</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_23">
+            <item>
+             <widget class="QLabel" name="uretim_tarih_4">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Garanti Başlangıç Tarihi</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <item>
+               <widget class="QSpinBox" name="garanti_start_day_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="garanti_start_month_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="garanti_start_year_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="uretimTarihBox_3">
+           <property name="styleSheet">
+            <string notr="true">QGroupBox {
+border:2px solid grey;
+}</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_24">
+            <item>
+             <widget class="QLabel" name="uretim_tarih_3">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Garanti Bitiş Tarihi</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <item>
+               <widget class="QSpinBox" name="garanti_bitis_day_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="garanti_bitis_month_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="garanti_bitis_year_">
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
                 </property>
                </widget>
               </item>

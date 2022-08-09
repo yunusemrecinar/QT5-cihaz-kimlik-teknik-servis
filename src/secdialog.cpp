@@ -57,6 +57,45 @@ void SecDialog::changes() {
     ui->date_month->clear();
     ui->date_year->clear();
 
+    ui->fatura_date_day_->setMaximum(31);
+    ui->fatura_date_day_->setMinimum(1);
+    ui->fatura_date_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_month_->setMaximum(12);
+    ui->fatura_date_month_->setMinimum(1);
+    ui->fatura_date_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->fatura_date_year_->setMaximum(QDate::currentDate().year());
+    ui->fatura_date_year_->setMinimum(1);
+    ui->fatura_date_day_->clear();
+    ui->fatura_date_month_->clear();
+    ui->fatura_date_year_->clear();
+
+    ui->garanti_start_day_->setMaximum(31);
+    ui->garanti_start_day_->setMinimum(1);
+    ui->garanti_start_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_month_->setMaximum(12);
+    ui->garanti_start_month_->setMinimum(1);
+    ui->garanti_start_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_start_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_start_year_->setMinimum(1);
+    ui->garanti_start_day_->clear();
+    ui->garanti_start_month_->clear();
+    ui->garanti_start_year_->clear();
+
+    ui->garanti_bitis_day_->setMaximum(31);
+    ui->garanti_bitis_day_->setMinimum(1);
+    ui->garanti_bitis_day_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_month_->setMaximum(12);
+    ui->garanti_bitis_month_->setMinimum(1);
+    ui->garanti_bitis_year_->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    ui->garanti_bitis_year_->setMaximum(QDate::currentDate().year());
+    ui->garanti_bitis_year_->setMinimum(1);
+    ui->garanti_bitis_day_->clear();
+    ui->garanti_bitis_month_->clear();
+    ui->garanti_bitis_year_->clear();
+
     ui->AnakartNoBox->setVisible(false);
     ui->CihazSeriNoBox->setVisible(false);
     ui->modemSeriNoBox->setVisible(false);
@@ -70,6 +109,9 @@ void SecDialog::changes() {
     ui->UIDBox->setVisible(false);
     ui->DurumBox->setVisible(false);
     ui->ModemTipiBox->setVisible(false);
+    ui->faturaKesinBox->setVisible(false);
+    ui->garantiBaslangicBox->setVisible(false);
+    ui->garantiBitisBox->setVisible(false);
 
     ui->model_->setCurrentText("");
     ui->model_->setPlaceholderText("Model Seçiniz!");
@@ -160,6 +202,9 @@ void SecDialog::commandChangedModel(const QString& command_text) {
             ui->UIDBox->setVisible(true);
             ui->DurumBox->setVisible(true);
             ui->ModemTipiBox->setVisible(true);
+            ui->faturaKesinBox->setVisible(true);
+            ui->garantiBaslangicBox->setVisible(true);
+            ui->garantiBitisBox->setVisible(true);
         }
 
     }
@@ -201,6 +246,9 @@ void SecDialog::on_pushButton_clicked()
         QString modemSeri4 = ui->modemSeri4_->text();
         QString modemSeri5 = ui->modemSeri5_->text();
         QString modemSeri6 = ui->modemSeri6_->text();
+        QString faturaKesim = ui->fatura_date_day_->text() + "." + ui->fatura_date_month_->text() + "." + ui->fatura_date_year_->text();
+        QString garantiStart = ui->garanti_start_day_->text() + "." + ui->garanti_start_month_->text() + "." + ui->garanti_start_year_->text();
+        QString garantiBitis = ui->garanti_bitis_day_->text() + "." + ui->garanti_bitis_month_->text() + "." + ui->garanti_bitis_year_->text();
         musteriAdi = ui->musteriAdi_1->currentText();
         QString notlar = ui->notlar_->toPlainText();
 
@@ -213,11 +261,11 @@ void SecDialog::on_pushButton_clicked()
         qry.prepare("INSERT INTO cihazkimlik(`Model`,`Cihaz Seri No`,`Anakart No`,"
                     "`UID No`,`Modem Kartı`,`Lcd Kartı`,`Şarj Kartı`,`Durumu`,`Modem Tipi`,`Müşteri Adı`,`Modem Seri Num 1`,"
                     "`Modem Seri Num 2`,`Modem Seri Num 3`,`Modem Seri Num 4`,`Modem Seri Num 5`,"
-                    "`Modem Seri Num 6`,`Uretim Tarihi`,`Test Durumu`,`Notlar`) "
+                    "`Modem Seri Num 6`,`Fatura Kesim`,`Garanti Baslangic`,`Garanti Bitis`,`Uretim Tarihi`,`Test Durumu`,`Notlar`) "
                     "VALUES(:model,:cihazSeriNo,:anakartNo,:uidNo,"
                     ":modemKarti,:lcdKarti,:sarjKarti,:durumu,:modemTipi,:musteriAdi,:modemSeriNum1,"
                     ":modemSeriNum2,:modemSeriNum3,:modemSeriNum4,:modemSeriNum5,"
-                    ":modemSeriNum6,:uretimTarihi,:testDurumu,:notlar)");
+                    ":modemSeriNum6,:faturaKesim,:garantiStart,:garantiBitis,:uretimTarihi,:testDurumu,:notlar)");
         qry.bindValue(":model",model);
         qry.bindValue(":cihazSeriNo",cihazSeriNo);
         qry.bindValue(":anakartNo",anakartNo);
@@ -234,6 +282,9 @@ void SecDialog::on_pushButton_clicked()
         qry.bindValue(":modemSeriNum4",modemSeri4);
         qry.bindValue(":modemSeriNum5",modemSeri5);
         qry.bindValue(":modemSeriNum6",modemSeri6);
+        qry.bindValue(":faturaKesim",faturaKesim);
+        qry.bindValue(":garantiStart",garantiStart);
+        qry.bindValue(":garantiBitis",garantiBitis);
         qry.bindValue(":uretimTarihi",uretimTarihi);
         qry.bindValue(":testDurumu",testDurumu);
         qry.bindValue(":notlar",notlar);
