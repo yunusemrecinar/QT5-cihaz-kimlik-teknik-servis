@@ -220,13 +220,16 @@ void MainWindow::hideColumns() {
 void MainWindow::hideColumnsMobiot() {
     columnsToHideMobiot.append(0);
     columnsToHideMobiot.append(3);
+    columnsToHideMobiot.append(4);
     columnsToHideMobiot.append(5);
-    columnsToHideMobiot.append(6);
     columnsToHideMobiot.append(9);
     columnsToHideMobiot.append(10);
     columnsToHideMobiot.append(11);
     columnsToHideMobiot.append(12);
     columnsToHideMobiot.append(13);
+    columnsToHideMobiot.append(14);
+    columnsToHideMobiot.append(15);
+    columnsToHideMobiot.append(16);
 }
 
 void MainWindow::hideColumnsServer()
@@ -236,11 +239,13 @@ void MainWindow::hideColumnsServer()
     columnsToHideServer.append(4);
     columnsToHideServer.append(8);
     columnsToHideServer.append(9);
-    columnsToHideServer.append(10);
     columnsToHideServer.append(11);
     columnsToHideServer.append(12);
     columnsToHideServer.append(13);
     columnsToHideServer.append(14);
+    columnsToHideServer.append(15);
+    columnsToHideServer.append(16);
+    columnsToHideServer.append(17);
 }
 void MainWindow::addColumns() {
     columnsToHide.append(0);
@@ -256,8 +261,11 @@ void MainWindow::addColumns() {
     columnsToHide.append(14);
     columnsToHide.append(15);
     columnsToHide.append(16);
+    columnsToHide.append(17),
     columnsToHide.append(18);
     columnsToHide.append(19);
+    columnsToHide.append(21);
+    columnsToHide.append(22);
 }
 void MainWindow::addModels() {
     if(database.isOpen()) {
@@ -301,16 +309,21 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_servis_ekle_clicked()
 {
-    if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
-        serverServisDialog = new ServerServisDialog();
-        serverServisDialog->initialize(database, mainWindowValue, name);
-        serverServisDialog->exec();
-        refreshServis();
+
+    if(mainWindowValue.trimmed().length() != 0) {
+        if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
+            serverServisDialog = new ServerServisDialog();
+            serverServisDialog->initialize(database, mainWindowValue, name);
+            serverServisDialog->exec();
+            refreshServis();
+        }else {
+            servisDialog = new ServisDialog();
+            servisDialog->initialize(database, mainWindowValue, name);
+            servisDialog->exec();
+            refreshServis();
+        }
     }else {
-        servisDialog = new ServisDialog();
-        servisDialog->initialize(database, mainWindowValue, name);
-        servisDialog->exec();
-        refreshServis();
+        QMessageBox::information(this,"Error","Servis eklenecek cihazı seçiniz!!");
     }
 }
 
