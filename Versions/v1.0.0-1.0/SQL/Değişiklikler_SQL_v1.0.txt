@@ -1,0 +1,35 @@
+					v1.0 üstüne yapılan değişiklikler
+
+09.08.2022 --------> cihazkimik tablosuna fatura kesim, garanti baslangic ve garanti bitis eklendi.
+
+ALTER TABLE `cihazkimlik` ADD `Fatura Kesim` VARCHAR(10) NULL AFTER `Modem Seri Num 6`, 
+		           ADD `Garanti Baslangic` VARCHAR(10) NULL AFTER `Fatura Kesim`, 
+		           ADD `Garanti Bitis` VARCHAR(10) NULL AFTER `Garanti Baslangic`;
+
+
+09.08.2022 --------> cihazkimikmobiot tablosuna fatura kesim, garanti baslangic ve garanti bitis eklendi.
+
+ALTER TABLE `cihazkimlikmobiot` ADD `Fatura Kesim` VARCHAR(10) NULL AFTER `IMEI 3`, 
+			       ADD `Garanti Baslangic` VARCHAR(10) NULL AFTER `Fatura Kesim`, 
+			       ADD `Garanti Bitis` VARCHAR(10) NULL AFTER `Garanti Baslangic`;
+
+
+09.08.2022 --------> cihazkimikserver tablosuna fatura kesim, garanti baslangic, ve garanti bitis eklendi.
+
+ALTER TABLE `cihazkimlikserver` ADD `Fatura Kesim` VARCHAR(10) NULL AFTER `Üretim Tarihi`, 
+			     ADD `Garanti Baslangic` VARCHAR(10) NULL AFTER `Fatura Kesim`, 
+			     ADD `Garanti Bitis` VARCHAR(10) NULL AFTER `Garanti Baslangic`;
+
+
+10.08.2022 --------> teknikservis tablosunun default değerlerini null, 'yapılan işlem' sütununun veri yapısı text  olarak değiştirildi. 
+
+ALTER TABLE `teknikservis` 
+CHANGE `Sıra` `Sıra` INT(11) NOT NULL AUTO_INCREMENT, 
+CHANGE `Olay` `Olay` VARCHAR(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, 
+CHANGE `Yapılan İşlem` `Yapılan İşlem` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, 
+CHANGE `Cihazla Gelen Malzemeler` `Cihazla Gelen Malzemeler` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, 
+CHANGE `Degisen Parcalar` `Degisen Parcalar` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+CHANGE `Test Süresi` `Test Süresi` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, 
+CHANGE `Notlar` `Notlar` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL;
+
+

@@ -1,0 +1,19 @@
+					v.1.0.0 üstüne yapılan değişiklikler
+
+08.08.2022 --------> seçilen cihazın müşterisinin dialogta otomatik olarak gözükmeme hatası düzeltildi.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/47408839200625e822bce50daffed612608ba715
+
+09.08.2022 --------> müşterilerin gözüktüğü tablonun üstüne filtreleme özelliği konuldu. Küçük büyük harf önemsiz.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/66f11ba44c7edc66336d138eb38a44c78c85fd23
+
+09.08.2022 --------> modeo ve mobiot cihaz eklemelerine yeni 3 sütun(fatura kesim, garanti baslangic, garanti bitis) eklendi.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/0c5f9f726cee5a9dcb03e650b049128e65d0ef80
+
+09.08.2022 --------> server ekleme arayüzüne, ekli modeo ve mobiot cihaz bilgi görüntüleme ekranlarına yeni sütunlar entegre edildi.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/70e684ff483762b6c34b5179619f5a2e85ff91fe
+
+10.08.2022 --------> ekli server cihaz bilgilerini görüntüleme ekranına yeni sütunlar entegre edildi.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/e84acd522d0b9ab181c0fd03a6efd99398f0ed6e
+
+10.08.2022 --------> ana ekranda gözükmesi gereken sütunlar, yeni eklenen sütunlardan sonra düzenlendi.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/4ed0d9b4e77ce59f9552279aa00789abde76c63c
