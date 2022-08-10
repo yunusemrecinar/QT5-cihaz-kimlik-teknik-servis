@@ -248,9 +248,9 @@ void InformationDialog::on_pushButton_clicked()
         QString uretimTarihMonth = ui->date_month->text();
         QString uretimTarihYear = ui->date_year->text();
         uretimTarih = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
-        QString faturaKesim = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
-        QString garantiStart = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
-        QString garantiBitis= uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
+        QString faturaKesim = ui->fatura_date_day_->text() + "." + ui->fatura_date_month_->text() + "." + ui->fatura_date_year_->text();
+        QString garantiStart = ui->garanti_start_day_->text() + "." + ui->garanti_start_month_->text() + "." + ui->garanti_start_year_->text();
+        QString garantiBitis= ui->garanti_bitis_day_->text() + "." + ui->garanti_bitis_month_->text() + "." + ui->garanti_bitis_year_->text();
         QString test = ui->test_durum_->currentText();
         QString notlar = ui->notlar_1->toPlainText();
 

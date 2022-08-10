@@ -51,8 +51,26 @@ void InformationServerDialog::initialize(QString s, QSqlDatabase d) {
                     ui->date_month->setValue(date.at(1).toInt());
                     ui->date_year->setValue(date.at(2).toInt());
                 }
-                ui->hdd_->setText(qry->value(13).toString());
-                ui->notlar_->setText(qry->value(14).toString());
+                if(qry->value(13).toString().contains(".")) {
+                    QList<QString> faturaKesim = qry->value(13).toString().split(".");
+                    ui->fatura_date_day_->setValue(faturaKesim.at(0).toInt());
+                    ui->fatura_date_month_->setValue(faturaKesim.at(1).toInt());
+                    ui->fatura_date_year_->setValue(faturaKesim.at(2).toInt());
+                }
+                if(qry->value(14).toString().contains(".")) {
+                    QList<QString> garantiStart = qry->value(14).toString().split(".");
+                    ui->garanti_start_day_->setValue(garantiStart.at(0).toInt());
+                    ui->garanti_start_month_->setValue(garantiStart.at(1).toInt());
+                    ui->garanti_start_year_->setValue(garantiStart.at(2).toInt());
+                }
+                if(qry->value(15).toString().contains(".")) {
+                    QList<QString> garantiBitis = qry->value(15).toString().split(".");
+                    ui->garanti_bitis_day_->setValue(garantiBitis.at(0).toInt());
+                    ui->garanti_bitis_month_->setValue(garantiBitis.at(1).toInt());
+                    ui->garanti_bitis_year_->setValue(garantiBitis.at(2).toInt());
+                }
+                ui->hdd_->setText(qry->value(16).toString());
+                ui->notlar_->setText(qry->value(17).toString());
 
                 oldAnakartNo = ui->anakart_->text();
                 oldDurum = ui->durum_->currentText();
@@ -188,6 +206,9 @@ void InformationServerDialog::on_pushButton_clicked()
         QString uretimTarihMonth = ui->date_month->text();
         QString uretimTarihYear = ui->date_year->text();
         uretimTarih = uretimTarihDay + "." + uretimTarihMonth + "." + uretimTarihYear;
+        QString faturaKesim = ui->fatura_date_day_->text() + "." + ui->fatura_date_month_->text() + "." + ui->fatura_date_year_->text();
+        QString garantiBaslangic = ui->garanti_start_day_->text() + "." + ui->garanti_start_month_->text() + "." + ui->garanti_start_year_->text();
+        QString garantiBitis = ui->garanti_bitis_day_->text() + "." + ui->garanti_bitis_month_->text() + "." + ui->garanti_bitis_year_->text();
         QString kasaTipi = ui->kasaTipi_->currentText();
         QString decklink = ui->decklink_->currentText();
         QString ram = ui->ram_->text();
@@ -213,6 +234,15 @@ void InformationServerDialog::on_pushButton_clicked()
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlikserver SET `Üretim Tarihi` = '" + uretimTarih + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlikserver SET `Fatura Kesim` = '" + faturaKesim + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlikserver SET `Garanti Baslangic` = '" + garantiBaslangic + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlikserver SET `Garanti Bitis` = '" + garantiBitis + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlikserver SET `Kasa Tipi` = '" + kasaTipi + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");

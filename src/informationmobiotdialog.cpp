@@ -53,7 +53,25 @@ void InformationMobiotDialog::initialize(QString s, QSqlDatabase d)
                 ui->modemSeri1_->setText(qry->value(10).toString());
                 ui->modemSeri2_->setText(qry->value(11).toString());
                 ui->modemSeri3_->setText(qry->value(12).toString());
-                ui->notlar_->setText(qry->value(13).toString());
+                if(qry->value(13).toString().contains(".")) {
+                    QList<QString> date = qry->value(13).toString().split(".");
+                    ui->fatura_date_day_->setValue(date.at(0).toInt());
+                    ui->fatura_date_month_->setValue(date.at(1).toInt());
+                    ui->fatura_date_year_->setValue(date.at(2).toInt());
+                }
+                if(qry->value(14).toString().contains(".")) {
+                    QList<QString> date = qry->value(14).toString().split(".");
+                    ui->garanti_start_day_->setValue(date.at(0).toInt());
+                    ui->garanti_start_month_->setValue(date.at(1).toInt());
+                    ui->garanti_start_year_->setValue(date.at(2).toInt());
+                }
+                if(qry->value(15).toString().contains(".")) {
+                    QList<QString> date = qry->value(15).toString().split(".");
+                    ui->garanti_bitis_day_->setValue(date.at(0).toInt());
+                    ui->garanti_bitis_month_->setValue(date.at(1).toInt());
+                    ui->garanti_bitis_year_->setValue(date.at(2).toInt());
+                }
+                ui->notlar_->setText(qry->value(16).toString());
 
                 oldModemTipi = ui->modemTipi_->currentText();
                 oldDurum = ui->durum_->currentText();
@@ -189,6 +207,9 @@ void InformationMobiotDialog::on_pushButton_clicked()
         QString modemSeri1 = ui->modemSeri1_->text();
         QString modemSeri2 = ui->modemSeri2_->text();
         QString modemSeri3 = ui->modemSeri3_->text();
+        QString faturaKesim = ui->fatura_date_day_->text() + "." + ui->fatura_date_month_->text() + "." + ui->fatura_date_year_->text();
+        QString garantiStart = ui->garanti_start_day_->text() + "." + ui->garanti_start_month_->text() + "." + ui->garanti_start_year_->text();
+        QString garantiBitis = ui->garanti_bitis_day_->text() + "." + ui->garanti_bitis_month_->text() + "." + ui->garanti_bitis_year_->text();
         QString notlar = ui->notlar_->toPlainText();
 
         qry.prepare("UPDATE cihazkimlikmobiot SET `Model` = '" + model + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
@@ -210,6 +231,15 @@ void InformationMobiotDialog::on_pushButton_clicked()
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlikmobiot SET `Üretim Tarihi` = '" + uretimTarih + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlikmobiot SET `Fatura Kesim` = '" + faturaKesim + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlikmobiot SET `Garanti Baslangic` = '" + garantiStart + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
+        qry.exec();
+        qry.clear();
+        qry.prepare("UPDATE cihazkimlikmobiot SET `Garanti Bitis` = '" + garantiBitis + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
         qry.exec();
         qry.clear();
         qry.prepare("UPDATE cihazkimlikmobiot SET `Modem Tipi` = '" + modemTipi + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
