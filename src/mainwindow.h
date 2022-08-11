@@ -54,7 +54,7 @@ public slots:
 
     void userCheck(QString filename);
 
-    void myfunction();
+    void changes();
 
     void refresh();
 

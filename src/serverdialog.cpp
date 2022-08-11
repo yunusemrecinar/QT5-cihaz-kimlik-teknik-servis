@@ -205,6 +205,7 @@ void ServerDialog::on_pushButton_clicked()
         if(ui->cihaz_seri_no->text().length() == 9) {
             checkSeriNo = true;
         }
+        QMessageBox::information(this,"fdfs","asdsa" + QString::number(12) + "fdsfs");
 
         QSqlQuery qry;
 

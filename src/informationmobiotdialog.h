@@ -31,8 +31,10 @@ public:
     QString oldModemTipi = "";
 
     QString tarihLog = "";
+
+    QString username;
 public slots:
-    void initialize(QString s, QSqlDatabase d);
+    void initialize(QString s, QSqlDatabase d, QString username);
 
 
 private:
@@ -62,6 +64,8 @@ private slots:
     void commandChangedTestDurum(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);
     void commandChangedModemTipi(const QString& command_text);
+
+    void setLog(QString log);
 };
 
 #endif // INFORMATIONMOBIOTDIALOG_H

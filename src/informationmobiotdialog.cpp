@@ -22,10 +22,11 @@ InformationMobiotDialog::~InformationMobiotDialog()
     delete ui;
 }
 
-void InformationMobiotDialog::initialize(QString s, QSqlDatabase d)
+void InformationMobiotDialog::initialize(QString s, QSqlDatabase d,QString user)
 {
     seriNo = s;
     database = d;
+    username = user;
 
     addModemTipi();
 
@@ -81,14 +82,26 @@ void InformationMobiotDialog::initialize(QString s, QSqlDatabase d)
             }
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
+            setLog("[ERROR] informationmobiotdialog.cpp : " + qry->lastError().text());
         }
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected1");
+        setLog("[ERROR] informationmobiotdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
 
+void InformationMobiotDialog::setLog(QString content) {
+
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
 void InformationMobiotDialog::changes() {
 
     ui->cihaz_seri_no->setMaxLength(9);
@@ -174,7 +187,11 @@ void InformationMobiotDialog::addModemTipi() {
         qry ->prepare("select * from modemtipi");
         if(qry -> exec()) {
             while(qry->next()) {commandsModemTipi.append(qry->value(0).toString());}
+        }else{
+            setLog("[ERROR] informationmobiotdialog.cpp : " + qry->lastError().text());
         }
+    }else {
+        setLog("[ERROR] informationmobiotdialog.cpp : " + database.lastError().text());
     }
     ui->modemTipi_->addItems(commandsModemTipi);
     connect(ui->modemTipi_, &QComboBox::currentTextChanged, this, &InformationMobiotDialog::commandChangedModemTipi);
@@ -268,7 +285,11 @@ void InformationMobiotDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldUidNo);
             qry.bindValue(":yeniDeger",ui->UIDNo_1->text());
             qry.bindValue(":degisen","UIDNo Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın uid no'su değiştirildi.");
+            }else {
+                setLog("[ERROR] informationmobiotdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
 
         }if(QString::compare(oldDurum, ui->durum_->currentText(), Qt::CaseInsensitive)) {
@@ -281,7 +302,11 @@ void InformationMobiotDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldDurum);
             qry.bindValue(":yeniDeger",ui->durum_->currentText());
             qry.bindValue(":degisen","Durum Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın durumu değiştirildi.");
+            }else {
+                setLog("[ERROR] informationmobiotdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldModemTipi, ui->modemTipi_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -293,7 +318,11 @@ void InformationMobiotDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldModemTipi);
             qry.bindValue(":yeniDeger",ui->modemTipi_->currentText());
             qry.bindValue(":degisen","Modem Tipi Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın modem tipi değiştirildi.");
+            }else {
+                setLog("[ERROR] informationmobiotdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldTestDurum, ui->test_durum_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -305,7 +334,11 @@ void InformationMobiotDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldTestDurum);
             qry.bindValue(":yeniDeger",ui->test_durum_->currentText());
             qry.bindValue(":degisen","Test Durum Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın test durumu değiştirildi.");
+            }else {
+                setLog("[ERROR] informationmobiotdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
 
         }if(QString::compare(oldAnakartNo, ui->anakart_->text(),Qt::CaseInsensitive)) {
@@ -318,13 +351,18 @@ void InformationMobiotDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldAnakartNo);
             qry.bindValue(":yeniDeger",ui->anakart_->text());
             qry.bindValue(":degisen","Anakart Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın anakart no'su değiştirildi.");
+            }else {
+                setLog("[ERROR] informationmobiotdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
 
         }
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] informationmobiotdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 

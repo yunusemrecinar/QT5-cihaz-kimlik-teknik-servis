@@ -31,6 +31,7 @@ public:
     QString oldUidNo = "";
     QString oldTestDurum = "";
     QString oldModemTipi = "";
+    QString username = "";
 
     int countAnakart = 0;
     int countModel = 0;
@@ -46,7 +47,7 @@ public:
     QString musteriAdi;
 
 public slots:
-    void initialize(QString s, QSqlDatabase d);
+    void initialize(QString s, QSqlDatabase d, QString username);
 private slots:
     //void onMessageSent(const QString &);
     void on_pushButton_clicked();
@@ -58,6 +59,7 @@ private slots:
     void commandChangedModemTipi(const QString& command_text);
     void commandChangedMusteriAdi(const QString& command_text);
     void getMusteri();
+    void setLog(QString log);
 
 private:
     Ui::InformationDialog *ui;

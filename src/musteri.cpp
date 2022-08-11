@@ -20,8 +20,9 @@ Musteri::Musteri(QWidget *parent) :
     ui->lineEditSort->setReadOnly(1);
 }
 
-void Musteri::initialize(QSqlDatabase d) {
+void Musteri::initialize(QSqlDatabase d, QString user) {
     database = d;
+    username = user;
 
     QSqlQueryModel * modal = new QSqlQueryModel();
     if(database.isOpen()) {
@@ -210,7 +211,7 @@ void Musteri::on_tableView_doubleClicked(const QModelIndex &index)
     seriNo = rowValue;
 
     InformationMusteriDialog *musteriDialog = new InformationMusteriDialog();
-    musteriDialog->initialize(database, seriNo);
+    musteriDialog->initialize(database, seriNo,);
     musteriDialog->exec();
     refresh();
 }

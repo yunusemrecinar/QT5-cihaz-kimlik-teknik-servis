@@ -18,8 +18,9 @@ public:
     ~Musteri();
     bool checkSeriNo = false;
     QString rowId;
+    QString username;
 public slots:
-    void initialize(QSqlDatabase d);
+    void initialize(QSqlDatabase d, QString username);
 private slots:
     void on_pushButton_clicked();
 

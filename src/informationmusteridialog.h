@@ -16,11 +16,14 @@ class InformationMusteriDialog : public QDialog
 public:
     explicit InformationMusteriDialog(QWidget *parent = nullptr);
     ~InformationMusteriDialog();
+
+    QString username;
 public slots:
-    void initialize(QSqlDatabase d, QString s);
+    void initialize(QSqlDatabase d, QString s, QString username);
 private slots:
 
     void on_pushButton_clicked();
+    void setLog(QString log);
 
 private:
     Ui::InformationMusteriDialog *ui;

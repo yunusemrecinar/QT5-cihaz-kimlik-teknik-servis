@@ -32,22 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     hideColumns();
     hideColumnsMobiot();
     hideColumnsServer();
-
-    this->setWindowTitle("ANA MENÜ");
-    ui->toolBar->addWidget(ui->pushButton);
-    ui->toolBar->addSeparator();
-    ui->toolBar->addWidget(ui->pushButton_modemTipi);
-    ui->toolBar->addSeparator();
-    ui->toolBar->addWidget(ui->pushButton_Model);
-    ui->toolBar->addSeparator();
-    ui->toolBar->addWidget(ui->pushButton_simKart);
-
-    ui->lineEdit->setPlaceholderText("Filtrele");
-    ui->lineEdit->setReadOnly(1);
-    ui->tableView->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
-    //ui->tableView->horizontalHeader()->setStyleSheet("color: blue;");
-    ui->tableView_teknikServis->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
-    ui->tableView_log->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
+    changes();
 
 }
 
@@ -148,30 +133,22 @@ void MainWindow::userCheck(QString filename) {
     }
 }
 
-void MainWindow::myfunction()
+void MainWindow::changes()
 {
-    QSqlQueryModel *model = new QSqlQueryModel();
+    this->setWindowTitle("ANA MENÜ");
+    ui->toolBar->addWidget(ui->pushButton);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addWidget(ui->pushButton_modemTipi);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addWidget(ui->pushButton_Model);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addWidget(ui->pushButton_simKart);
 
-    if(database.isOpen()) {
-        QSqlQuery* qry = new QSqlQuery(database);
-
-        //model = new QSqlQueryModel();
-
-        //setValue("select * from cihazkimlik");
-        //ui->tableView->setModel(model);
-        qry ->prepare("select * from cihazkimlik");
-        qry -> exec();
-        model->setQuery(*qry);
-        ui->tableView->setModel(model);
-        ui->tableView->resizeColumnsToContents();
-        //modal->submit();
-        foreach(int col, columnsToHide)
-            ui->tableView->hideColumn(col);
-        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    }else {
-        QMessageBox::information(this, "Not Connected", database.lastError().text());
-        cout << "Database not connected!" << endl;
-    }
+    ui->lineEdit->setPlaceholderText("Filtrele");
+    ui->lineEdit->setReadOnly(1);
+    ui->tableView->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
+    ui->tableView_teknikServis->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
+    ui->tableView_log->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
 }
 
 MainWindow::~MainWindow()
@@ -358,14 +335,14 @@ void MainWindow::on_tableView_doubleClicked()
         refreshLog();
     }else if(QString::compare("Mobiot",cihazModel,Qt::CaseInsensitive) == 0) {
         InformationMobiotDialog *informMobiot = new InformationMobiotDialog();
-        informMobiot->initialize(mainWindowValue,database);
+        informMobiot->initialize(mainWindowValue,database,name);
         informMobiot->exec();
         refreshMobiot();
         refreshLog();
 
     }else {
         InformationDialog *inform = new InformationDialog();
-        inform->initialize(mainWindowValue,database);
+        inform->initialize(mainWindowValue,database,name);
         inform->exec();
         refresh();
         refreshLog();

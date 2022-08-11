@@ -19,10 +19,12 @@ InformationMusteriDialog::~InformationMusteriDialog()
     delete ui;
 }
 
-void InformationMusteriDialog::initialize(QSqlDatabase d, QString s)
+void InformationMusteriDialog::initialize(QSqlDatabase d, QString s, QString user)
 {
     database = d;
     seriNo = s;
+    username = user;
+
     QString adresTemp;
     if(database.isOpen()) {
 
@@ -43,10 +45,12 @@ void InformationMusteriDialog::initialize(QSqlDatabase d, QString s)
             }
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text())
         }
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected1");
+        setLog("[ERROR] informationmusteridialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -77,3 +81,13 @@ void InformationMusteriDialog::on_pushButton_clicked()
     this->close();
 }
 
+void InformationMusteriDialog::setLog(QString content) {
+
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
