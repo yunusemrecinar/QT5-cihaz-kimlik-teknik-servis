@@ -301,7 +301,8 @@ void MainWindow::on_pushButton_2_clicked()
     else{
         secdialog = new SecDialog(this);
         secdialog->initialize(database);
-        secdialog->exec();
+        secdialog->resize(600,600);
+        secdialog->exec();       
         refresh();
         ui->lineEdit->clear();
     }

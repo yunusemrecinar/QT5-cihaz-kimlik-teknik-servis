@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1175</width>
-    <height>974</height>
+    <width>929</width>
+    <height>902</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,6 +76,12 @@ border:1px;
             </item>
             <item>
              <widget class="QComboBox" name="model_">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -113,6 +119,12 @@ border:1px;
             </item>
             <item>
              <widget class="QLineEdit" name="cihaz_seri_no">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -145,6 +157,12 @@ border: 2px solid grey;
             </item>
             <item>
              <widget class="QLineEdit" name="UIDNo_1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -177,6 +195,12 @@ border:2px solid grey;
             </item>
             <item>
              <widget class="QLineEdit" name="anakart_">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -214,10 +238,16 @@ border:2px solid grey;
               </property>
               <item>
                <widget class="QSpinBox" name="date_day">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -229,10 +259,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="date_month">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -244,10 +280,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="date_year">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -308,7 +350,7 @@ border:1px;
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>18</pointsize>
+                  <pointsize>20</pointsize>
                  </font>
                 </property>
                </widget>
@@ -364,12 +406,12 @@ border:2px solid grey;
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>42</height>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>18</pointsize>
+                  <pointsize>20</pointsize>
                  </font>
                 </property>
                </widget>
@@ -391,7 +433,7 @@ border:2px solid grey;
              </property>
              <property name="minimumSize">
               <size>
-               <width>178</width>
+               <width>0</width>
                <height>0</height>
               </size>
              </property>
@@ -446,7 +488,7 @@ border:2px solid grey;
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>18</pointsize>
+                  <pointsize>20</pointsize>
                  </font>
                 </property>
                </widget>
@@ -516,6 +558,12 @@ border:2px solid grey;
             </item>
             <item>
              <widget class="QLineEdit" name="islemci_">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -548,6 +596,12 @@ border:2px solid grey;
             </item>
             <item>
              <widget class="QLineEdit" name="hdd_">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>18</pointsize>
@@ -566,6 +620,12 @@ border:2px solid grey;
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
             <widget class="QGroupBox" name="musteriAdiBox_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -580,6 +640,12 @@ border: 2px solid grey;
              <layout class="QVBoxLayout" name="verticalLayout_20">
               <item>
                <widget class="QLabel" name="musteriAdi_2">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -601,9 +667,21 @@ border: 2px solid grey;
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>170</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
-                  <pointsize>18</pointsize>
+                  <pointsize>20</pointsize>
                  </font>
                 </property>
                </widget>
@@ -613,9 +691,15 @@ border: 2px solid grey;
            </item>
            <item>
             <widget class="QGroupBox" name="TestDurumBox_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
-               <width>180</width>
+               <width>0</width>
                <height>0</height>
               </size>
              </property>
@@ -627,6 +711,12 @@ border:2px solid grey;
              <layout class="QVBoxLayout" name="verticalLayout_22">
               <item>
                <widget class="QLabel" name="testDurumu">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="font">
                  <font>
                   <pointsize>18</pointsize>
@@ -644,6 +734,12 @@ border:1px;
               </item>
               <item>
                <widget class="QComboBox" name="test_durum_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="font">
                  <font>
                   <pointsize>20</pointsize>
@@ -658,6 +754,12 @@ border:1px;
          </item>
          <item>
           <widget class="QGroupBox" name="uretimTarihBox_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
@@ -666,6 +768,12 @@ border:2px solid grey;
            <layout class="QVBoxLayout" name="verticalLayout_38">
             <item>
              <widget class="QLabel" name="uretim_tarih_6">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
@@ -683,10 +791,16 @@ border:2px solid grey;
               </property>
               <item>
                <widget class="QSpinBox" name="fatura_date_day_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -698,10 +812,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="fatura_date_month_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -713,10 +833,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="fatura_date_year_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -733,6 +859,12 @@ border:2px solid grey;
          </item>
          <item>
           <widget class="QGroupBox" name="uretimTarihBox_7">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
@@ -741,6 +873,12 @@ border:2px solid grey;
            <layout class="QVBoxLayout" name="verticalLayout_39">
             <item>
              <widget class="QLabel" name="uretim_tarih_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
@@ -758,10 +896,16 @@ border:2px solid grey;
               </property>
               <item>
                <widget class="QSpinBox" name="garanti_start_day_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -773,10 +917,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="garanti_start_month_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -788,10 +938,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="garanti_start_year_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -808,6 +964,12 @@ border:2px solid grey;
          </item>
          <item>
           <widget class="QGroupBox" name="uretimTarihBox_8">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="styleSheet">
             <string notr="true">QGroupBox {
 border:2px solid grey;
@@ -816,6 +978,12 @@ border:2px solid grey;
            <layout class="QVBoxLayout" name="verticalLayout_40">
             <item>
              <widget class="QLabel" name="uretim_tarih_8">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
@@ -833,10 +1001,16 @@ border:2px solid grey;
               </property>
               <item>
                <widget class="QSpinBox" name="garanti_bitis_day_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -848,10 +1022,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="garanti_bitis_month_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -863,10 +1043,16 @@ border:2px solid grey;
               </item>
               <item>
                <widget class="QSpinBox" name="garanti_bitis_year_">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">

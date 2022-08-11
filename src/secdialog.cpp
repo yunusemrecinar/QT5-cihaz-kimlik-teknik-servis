@@ -10,6 +10,7 @@
 #include "mobiotdialog.h"
 #include "serverdialog.h"
 
+
 #include <iostream>
 using namespace std;
 
@@ -29,6 +30,7 @@ SecDialog::~SecDialog()
     delete ui;
 }
 void SecDialog::changes() {
+
     ui->cihaz_seri_no->setMaxLength(9);
     ui->cihaz_seri_no->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
     ui->UIDNo_1->setMaxLength(12);
@@ -163,6 +165,7 @@ void SecDialog::addMusteri() {
 void SecDialog::commandChangedModemTipi(const QString& command_text) {
     modemTipi = command_text;
 }
+
 void SecDialog::commandChangedMusteriAdi(const QString& command_text) {
     musteriAdi = command_text;
 }
@@ -205,6 +208,8 @@ void SecDialog::commandChangedModel(const QString& command_text) {
             ui->faturaKesinBox->setVisible(true);
             ui->garantiBaslangicBox->setVisible(true);
             ui->garantiBitisBox->setVisible(true);
+            this->setGeometry(470,85,this->width(),this->height());
+
         }
 
     }

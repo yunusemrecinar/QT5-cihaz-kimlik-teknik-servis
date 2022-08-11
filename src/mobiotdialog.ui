@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1168</width>
-    <height>894</height>
+    <width>949</width>
+    <height>858</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -159,7 +159,7 @@ border: 2px solid grey;
           <widget class="QGroupBox" name="AnakartNoBox">
            <property name="minimumSize">
             <size>
-             <width>365</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
@@ -222,8 +222,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="date_day">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -237,8 +237,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="date_month">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -252,8 +252,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="date_year">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -370,7 +370,7 @@ border:2px solid grey;
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>42</height>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -460,6 +460,18 @@ border: 2px solid grey;
                <widget class="QComboBox" name="musteriAdi_1">
                 <property name="enabled">
                  <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>170</width>
+                  <height>0</height>
+                 </size>
                 </property>
                 <property name="font">
                  <font>
@@ -602,8 +614,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="fatura_date_day_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -617,8 +629,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="fatura_date_month_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -632,8 +644,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="fatura_date_year_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -677,8 +689,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="garanti_start_day_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -692,8 +704,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="garanti_start_month_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -707,8 +719,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="garanti_start_year_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -752,8 +764,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="garanti_bitis_day_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -767,8 +779,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="garanti_bitis_month_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">
@@ -782,8 +794,8 @@ border:2px solid grey;
                <widget class="QSpinBox" name="garanti_bitis_year_">
                 <property name="minimumSize">
                  <size>
-                  <width>120</width>
-                  <height>40</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="font">

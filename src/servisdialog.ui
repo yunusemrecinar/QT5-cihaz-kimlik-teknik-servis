@@ -373,7 +373,7 @@ border: 2px solid grey;
                    </font>
                   </property>
                   <property name="text">
-                   <string>CVBS Kablo(Görüntü - Ses)</string>
+                   <string>CVBS Kablo</string>
                   </property>
                  </widget>
                 </item>

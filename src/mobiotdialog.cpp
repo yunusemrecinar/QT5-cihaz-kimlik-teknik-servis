@@ -16,6 +16,7 @@ MobiotDialog::MobiotDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     changes();
+
 }
 
 MobiotDialog::~MobiotDialog()
@@ -233,7 +234,6 @@ void MobiotDialog::addMusteri() {
         qry ->prepare("select * from müsteri");
         if(qry -> exec()) {
             while(qry->next()) {
-                ui->musteriAdi_2->setText(qry->value(1).toString());
                 commandsMusteri.append(qry->value(1).toString());
             }
         }

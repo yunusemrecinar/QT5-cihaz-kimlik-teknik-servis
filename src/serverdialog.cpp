@@ -16,6 +16,8 @@ ServerDialog::ServerDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     changes();
+
+
 }
 
 ServerDialog::~ServerDialog()
@@ -138,6 +140,7 @@ void ServerDialog::addModels() {
     ui->model_->addItems(commandsModel);
     connect(ui->model_, &QComboBox::currentTextChanged, this, &ServerDialog::commandChangedModel);
 }
+
 void ServerDialog::addMusteri() {
     commandsMusteri.append("LAB");
     if(database.isOpen()) {

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1145</width>
+    <width>1116</width>
     <height>1011</height>
    </rect>
   </property>
@@ -809,26 +809,17 @@ border:2px solid grey;
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_31">
           <item>
-           <widget class="QLabel" name="label_4">
-            <property name="font">
-             <font>
-              <pointsize>20</pointsize>
-             </font>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="text">
-             <string>Modem Seri Numaraları</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="2" column="0">
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="modemSeri2_1">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
              <widget class="QLabel" name="modemSeri3_2">
               <property name="font">
                <font>
@@ -840,7 +831,7 @@ border:2px solid grey;
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="5" column="0">
              <widget class="QLabel" name="modemSeri5_2">
               <property name="font">
                <font>
@@ -852,17 +843,8 @@ border:2px solid grey;
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="modemSeri2_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="modemSeri4_1">
+             <widget class="QLineEdit" name="modemSeri3_1">
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
@@ -870,7 +852,16 @@ border:2px solid grey;
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="modemSeri1_1">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
              <widget class="QLineEdit" name="modemSeri5_1">
               <property name="font">
                <font>
@@ -879,19 +870,16 @@ border:2px solid grey;
               </property>
              </widget>
             </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="modemSeri1_2">
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="modemSeri6_1">
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
                </font>
               </property>
-              <property name="text">
-               <string>IMEI 1</string>
-              </property>
              </widget>
             </item>
-            <item row="3" column="0">
+            <item row="4" column="0">
              <widget class="QLabel" name="modemSeri4_2">
               <property name="font">
                <font>
@@ -903,7 +891,28 @@ border:2px solid grey;
               </property>
              </widget>
             </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="modemSeri4_1">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="0">
+             <widget class="QLabel" name="modemSeri1_2">
+              <property name="font">
+               <font>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>IMEI 1</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
              <widget class="QLabel" name="modemSeri2_2">
               <property name="font">
                <font>
@@ -915,25 +924,7 @@ border:2px solid grey;
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="modemSeri1_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="modemSeri3_1">
-              <property name="font">
-               <font>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
+            <item row="6" column="0">
              <widget class="QLabel" name="modemSeri6_2">
               <property name="font">
                <font>
@@ -945,12 +936,21 @@ border:2px solid grey;
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
-             <widget class="QLineEdit" name="modemSeri6_1">
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_4">
               <property name="font">
                <font>
                 <pointsize>20</pointsize>
                </font>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Modem Seri Numaraları</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
