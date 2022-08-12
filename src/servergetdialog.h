@@ -21,8 +21,9 @@ public:
     QString degisenParcalar = "";
     QString olay;
     QString seriNo;
+    QString username;
 public slots:
-    void initialize(QString index, QSqlDatabase d);
+    void initialize(QString index, QSqlDatabase d, QString username);
 private slots:
     void changes();
 
@@ -36,6 +37,7 @@ private slots:
 
     void on_donanim_3_clicked();
 
+    void setLog(QString log);
 private:
     Ui::ServerGetDialog *ui;
 

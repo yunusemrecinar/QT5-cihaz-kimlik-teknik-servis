@@ -4,6 +4,7 @@
 #include <QSqlQueryModel>
 #include <QMessageBox>
 #include <QSqlError>
+#include <QTime>
 
 #include <iostream>
 using namespace std;
@@ -21,9 +22,9 @@ SimKartlar::~SimKartlar()
     delete ui;
 }
 
-void SimKartlar::initialize(QSqlDatabase d) {
+void SimKartlar::initialize(QSqlDatabase d, QString user) {
     database = d;
-
+    username = user;
     refresh();
 }
 void SimKartlar::refresh() {
@@ -38,14 +39,23 @@ void SimKartlar::refresh() {
         ui->tableView->setModel(modal);
         ui->tableView->resizeColumnsToContents();
         ui->tableView->resizeRowsToContents();
-        //ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] simkartlar.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
+void SimKartlar::setLog(QString content) {
 
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
 void SimKartlar::on_pushButtonEkle_clicked()
 {
     QString numara = ui->numara_->text();
@@ -68,8 +78,10 @@ void SimKartlar::on_pushButtonEkle_clicked()
             qry.bindValue(":tarih",tarih);
             if(qry.exec()) {
                 QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
+                setLog("[NOTE] simkartlar.cpp : sim kart eklendi.");
             }else {
                 QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+                setLog("[NOTE] simkartlar.cpp : " + qry.lastError().text());
             }
             ui->numara_->clear();
             ui->kartSeriNo_->clear();
@@ -80,6 +92,7 @@ void SimKartlar::on_pushButtonEkle_clicked()
         refresh();
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[NOTE] simkartlar.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -93,14 +106,16 @@ void SimKartlar::on_pushButtonSil_clicked()
 
                 qry.prepare("DELETE FROM `simkart` WHERE `Kart Seri No` = '" + rowLocation + "';");
                 if(qry.exec()){
-
+                    setLog("[NOTE] simkartlar.cpp : sim kart silindi");
                 }else {
                     QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+                    setLog("[NOTE] simkartlar.cpp : " + qry.lastError().text());
                 }
 
         refresh();
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[NOTE] simkartlar.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }

@@ -29,8 +29,10 @@ public:
     QString oldUidNo;
 
     QString tarihLog = "";
+
+    QString username;
 public slots:
-  void initialize(QString s, QSqlDatabase d);
+  void initialize(QString s, QSqlDatabase d, QString username);
 private:
     Ui::InformationServerDialog *ui;
 
@@ -62,6 +64,8 @@ private slots:
     void commandChangedKasaTipi(const QString& command_text);
     void commandChangedDecklink(const QString& command_text);
     void on_pushButton_clicked();
+
+    void setLog(QString log);
 };
 
 #endif // INFORMATIONSERVERDIALOG_H

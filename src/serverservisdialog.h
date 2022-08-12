@@ -37,6 +37,7 @@ public:
     bool check = true;
 
     bool musteriCheck = false;
+
 public slots:
     void initialize(QSqlDatabase d, QString sNo, QString username);
     void changes();
@@ -62,6 +63,8 @@ private slots:
     void on_donanim_2_clicked();
 
     void on_donanim_3_clicked();
+
+    void setLog(QString log);
 };
 
 #endif // SERVERSERVISDIALOG_H

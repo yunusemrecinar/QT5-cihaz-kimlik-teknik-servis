@@ -346,7 +346,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın uid no'su değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();      
 
@@ -363,7 +363,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın durumu değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();
 
@@ -380,7 +380,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın modem tipi değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();
 
@@ -397,7 +397,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın test durumu değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();          
 
@@ -414,7 +414,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın modem kartı değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();
 
@@ -431,7 +431,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın anakartı değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();
 
@@ -448,7 +448,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın lcd kartı değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();
 
@@ -465,7 +465,7 @@ void InformationDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 setLog("[NOTE]" + ui->cihaz_seri_no_2->text() + " no'lu cihazın şarj kartı değiştirildi.");
             }else {
-                setLog("[ERROR] information.cpp : " + qry.lastError().text());
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
             }
             qry.clear();
 

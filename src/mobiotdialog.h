@@ -19,8 +19,9 @@ public:
     QString musteriAdi;
     QList<QString> commandsMusteri;
     QList<QString> commandsModemTipi;
+    QString username;
 public slots:
-    void initialize(QSqlDatabase d);
+    void initialize(QSqlDatabase d,QString username);
     void commandChangedModel(const QString& command_text);
 private slots:
     void on_pushButton_clicked();
@@ -35,6 +36,7 @@ private slots:
 
     void addModels();
 
+    void setLog(QString log);
 private:
     Ui::MobiotDialog *ui;
 

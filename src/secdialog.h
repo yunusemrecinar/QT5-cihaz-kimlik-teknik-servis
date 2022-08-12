@@ -30,8 +30,9 @@ public:
     QList<QString> commandsModemTipi;
 
     int count = 0;
+    QString username;
 public slots:
-    void initialize(QSqlDatabase d);
+    void initialize(QSqlDatabase d, QString username);
     void commandChangedModel(const QString& command_text);
 private slots:
     void addModels();
@@ -49,7 +50,7 @@ private slots:
 
     void checkModelChosen();
 
-
+    void setLog(QString log);
 private:
     Ui::SecDialog *ui;
     QSqlDatabase database;

@@ -19,8 +19,10 @@ public:
 
     QList<QString> commandsMusteri;
     QList<QString> commandsModel;
+
+    QString username;
 public slots:
-    void initialize(QSqlDatabase d);
+    void initialize(QSqlDatabase d, QString username);
     void commandChangedModel(const QString& command_text);
 private:
     Ui::ServerDialog *ui;
@@ -53,6 +55,8 @@ private slots:
     void commandChangedKasaTipi(const QString& command_text);
     void commandChangedDecklink(const QString& command_text);
     void on_pushButton_clicked();
+
+    void setLog(QString log);
 };
 
 #endif // SERVERDIALOG_H

@@ -277,7 +277,7 @@ void MainWindow::on_pushButton_2_clicked()
         QMessageBox::information(this, "ERROR", "Ekleme yapmadan önce modem tipi ekleyiniz!!");
     else{
         secdialog = new SecDialog(this);
-        secdialog->initialize(database);
+        secdialog->initialize(database, name);
         secdialog->resize(600,600);
         secdialog->exec();       
         refresh();
@@ -380,7 +380,7 @@ void MainWindow::on_tableView_teknikServis_doubleClicked()
 void MainWindow::on_pushButton_clicked()
 {
     Musteri *musteri = new Musteri();
-    musteri->initialize(database);
+    musteri->initialize(database, name);
     musteri->show();
 }
 void MainWindow::refreshServer() {

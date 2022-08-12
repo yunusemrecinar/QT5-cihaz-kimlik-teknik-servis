@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QSqlError>
 #include "informationmusteridialog.h"
+#include <QTime>
 
 #include <iostream>
 using namespace std;
@@ -19,7 +20,16 @@ Musteri::Musteri(QWidget *parent) :
     ui->lineEditSort->setPlaceholderText("Filtrele");
     ui->lineEditSort->setReadOnly(1);
 }
+void Musteri::setLog(QString content) {
 
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
 void Musteri::initialize(QSqlDatabase d, QString user) {
     database = d;
     username = user;
@@ -30,7 +40,11 @@ void Musteri::initialize(QSqlDatabase d, QString user) {
         QSqlQuery* qry = new QSqlQuery(database);
 
         qry ->prepare("select * from `müsteri`");
-        qry -> exec();
+        if(qry -> exec()){
+            setLog("[NOTE] musteri.cpp : musteri tablosu yükleniyor");
+        }else {
+            setLog("[ERROR] musteri.cpp : " + qry->lastError().text());
+        }
         modal->setQuery(*qry);
         ui->tableView->setModel(modal);
         ui->tableView->hideColumn(0);
@@ -40,6 +54,7 @@ void Musteri::initialize(QSqlDatabase d, QString user) {
         ui->tableView->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] musteri.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -70,6 +85,7 @@ void Musteri::on_lineEditSort_textChanged(const QString &arg1)
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[ERROR] musteri.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -89,14 +105,22 @@ void Musteri::on_pushButton_clicked()
                 }
         if(checkSeriNo) {
             qry.prepare("SELECT COUNT(*) FROM `müsteri` WHERE `İsim` = '" + isim + "';");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE] musteri.cpp musteri eklenecek cihaz seri no kontrol!!");
+            }else {
+                setLog("[ERROR] musteri.cpp : " + qry.lastError().text());
+            }
             while(qry.next()) {
                 count = qry.value(0).toInt();
             }
             qry.clear();
             if(count == 1) {
                 qry.prepare("SELECT `Cihaz Seri No` FROM `müsteri` WHERE İsim = '" + isim + "';");
-                qry.exec();
+                if(qry.exec()) {
+                    setLog("[NOTE] musteri.cpp musteri o isimdeki cihaz seri numaraları alındı!!");
+                }else {
+                    setLog("[ERROR] musteri.cpp : " + qry.lastError().text());
+                }
                 while(qry.next()) {
                     temp = qry.value(0).toString();
                 }
@@ -120,7 +144,11 @@ void Musteri::on_pushButton_clicked()
                     qry.bindValue(":adres",adres);
                     qry.bindValue(":cihazSeriNo",cihazSeriNo);
 
-                    qry.exec();
+                    if(qry.exec()) {
+                        setLog("[NOTE] musteri.cpp musteri eklendi!!");
+                    }else {
+                        setLog("[ERROR] musteri.cpp : " + qry.lastError().text());
+                    }
                 }
             }
         }else {
@@ -135,6 +163,7 @@ void Musteri::on_pushButton_clicked()
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] musteri.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 
@@ -159,6 +188,7 @@ void Musteri::refresh() {
 
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[ERROR] musteri.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -189,7 +219,11 @@ void Musteri::on_pushButton_sil_clicked()
         //setValue("select * from cihazkimlik");
         //ui->tableView->setModel(model);
         qry ->prepare("select * from müsteri");
-        qry -> exec();
+        if(qry->exec()) {
+            setLog("[NOTE] musteri.cpp musteri silindi!!");
+        }else {
+            setLog("[ERROR] musteri.cpp : " + qry->lastError().text());
+        }
         model->setQuery(*qry);
         ui->tableView->setModel(model);
         ui->tableView->resizeColumnsToContents();
@@ -197,6 +231,7 @@ void Musteri::on_pushButton_sil_clicked()
 
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[ERROR] musteri.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -211,7 +246,7 @@ void Musteri::on_tableView_doubleClicked(const QModelIndex &index)
     seriNo = rowValue;
 
     InformationMusteriDialog *musteriDialog = new InformationMusteriDialog();
-    musteriDialog->initialize(database, seriNo,);
+    musteriDialog->initialize(database, seriNo, username);
     musteriDialog->exec();
     refresh();
 }

@@ -5,6 +5,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMessageBox>
+#include <QTime>
+
 using namespace std;
 
 InformationMusteriDialog::InformationMusteriDialog(QWidget *parent) :
@@ -45,7 +47,7 @@ void InformationMusteriDialog::initialize(QSqlDatabase d, QString s, QString use
             }
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
-            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text())
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
         }
 
     }else {
@@ -72,10 +74,12 @@ void InformationMusteriDialog::on_pushButton_clicked()
 
         }else {
             QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry.lastError().text());
         }
         qry.clear();
     }else{
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] informationmusteridialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
     this->close();

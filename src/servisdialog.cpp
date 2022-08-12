@@ -109,7 +109,16 @@ ServisDialog::~ServisDialog()
 void ServisDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
 }
+void ServerServisDialog::setLog(QString content) {
 
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",name);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
 void ServisDialog::addMusteri() {
     commandsMusteri.append("LAB");
     if(database.isOpen()) {
@@ -119,12 +128,15 @@ void ServisDialog::addMusteri() {
             while(qry->next()) {
                 commandsMusteri.append(qry->value(1).toString());
             }
+        }else {
+            setLog("[ERROR] servisdialog.cpp : " + qry->lastError().text());
         }
         ui->musteriAdi_1->addItems(commandsMusteri);
         connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &ServisDialog::commandChangedMusteriAdi);
 
     }else {
         QMessageBox::information(this,"Error", database.lastError().text());
+        setLog("[ERROR] servisdialog.cpp : " + database.lastError().text());
     }
 
 }
@@ -148,7 +160,10 @@ void ServisDialog::setOrginalMusteri() {
             }
         }else {
             QMessageBox::information(this,"Error",qry->lastError().text());
+            setLog("[ERROR] servisdialog.cpp : " + qry->lastError().text());
         }
+    }else {
+        setLog("[ERROR] servisdialog.cpp : " + database.lastError().text());
     }
 
 }
@@ -272,8 +287,10 @@ void ServisDialog::on_pushButton_clicked()
 
         if(qry.exec()) {
             QMessageBox::information(this,"Inserted", "Data Inserted Succesfully");
+            setLog("[NOTE] servisdialog.cpp : servis eklendi");
         }else {
             QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+            setLog("[ERROR] servisdialog.cpp : " + qry.lastError().text());
         }
 
         qry.clear();
@@ -281,9 +298,11 @@ void ServisDialog::on_pushButton_clicked()
             qry.prepare("UPDATE `cihazkimlik` SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
             if(qry.exec()){
                 QMessageBox::information(this,"Updated", "Müşteri Adı Güncellendi!");
+                setLog("[NOTE] servisdialog.cpp : müşteri adı güncellendi");
                 insertNewMusteri(musteriAdi);
             }else {
                 QMessageBox::information(this,"Error", qry.lastError().text());
+                setLog("[ERROR] servisdialog.cpp : " + qry.lastError().text());
             }
         }
 
@@ -291,6 +310,7 @@ void ServisDialog::on_pushButton_clicked()
         this->close();
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] servisdialog.cpp : " + database.lastError().text());
     }
 
 }
@@ -307,7 +327,11 @@ void ServisDialog::insertNewMusteri(QString isim) {
         temp += "\n"+servisNo;
         qry.clear();
         qry.prepare("UPDATE `müsteri` SET `Cihaz Seri No` = '"+temp+"' WHERE İsim = '" + isim + "';");
-        qry.exec();
+        if(qry.exec()){
+            setLog("[NOTE] servisdialog.cpp : müşteri değiştirildi");
+        }else {
+            setLog("[ERROR] servisdialog.cpp : " + qry.lastError().text());
+        }
     }
 }
 

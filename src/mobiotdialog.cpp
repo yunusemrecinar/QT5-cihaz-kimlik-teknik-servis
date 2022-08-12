@@ -24,14 +24,14 @@ MobiotDialog::~MobiotDialog()
     delete ui;
 }
 
-void MobiotDialog::initialize(QSqlDatabase d)
+void MobiotDialog::initialize(QSqlDatabase d, QString user)
 {
     database = d;
 
     addMusteri();
     addModemTipi();
     addModels();
-
+    username = user;
 }
 
 void MobiotDialog::addModels() {
@@ -40,10 +40,25 @@ void MobiotDialog::addModels() {
         qry ->prepare("select * from model");
         if(qry -> exec()) {
             while(qry->next()) {commandsModel.append(qry->value(0).toString());}
+        }else{
+            setLog("[ERROR] mobiotdialog.cpp : " + qry->lastError().text());
         }
+    }else{
+        setLog("[ERROR] mobiotdialog.cpp : " + database.lastError().text());
     }
     ui->model_->addItems(commandsModel);
     connect(ui->model_, &QComboBox::currentTextChanged, this, &MobiotDialog::commandChangedModel);
+}
+
+void MobiotDialog::setLog(QString content) {
+
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
 }
 
 void MobiotDialog::commandChangedModel(const QString& command_text) {
@@ -51,7 +66,7 @@ void MobiotDialog::commandChangedModel(const QString& command_text) {
 
         if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
             ServerDialog *serverDialog = new ServerDialog();
-            serverDialog->initialize(database);
+            serverDialog->initialize(database, username);
             serverDialog->commandChangedModel(command_text);
             this->close();
             serverDialog->exec();
@@ -60,7 +75,7 @@ void MobiotDialog::commandChangedModel(const QString& command_text) {
         }else {
             model = command_text;
             SecDialog *secDialog = new SecDialog();
-            secDialog->initialize(database);
+            secDialog->initialize(database, username);
             secDialog->count = 1;
             secDialog->commandChangedModel(command_text);
             this->close();
@@ -125,6 +140,7 @@ void MobiotDialog::on_pushButton_clicked()
                 this->close();
             }else {
                 QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+                setLog("[ERROR] mobiotdialog.cpp : " + qry.lastError().text());
             }
         }else {
             QMessageBox::information(this,"Error","Cihaz Seri No bilgisi eksik!!");
@@ -132,6 +148,7 @@ void MobiotDialog::on_pushButton_clicked()
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] mobiotdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 
@@ -222,7 +239,11 @@ void MobiotDialog::addModemTipi() {
         qry ->prepare("select * from modemtipi");
         if(qry -> exec()) {
             while(qry->next()) {commandsModemTipi.append(qry->value(0).toString());}
+        }else {
+            setLog("[ERROR] mobiotdialog.cpp : " + qry->lastError().text());
         }
+    }else {
+        setLog("[ERROR] mobiotdialog.cpp : " + database.lastError().text());
     }
     ui->modemTipi_->addItems(commandsModemTipi);
     connect(ui->modemTipi_, &QComboBox::currentTextChanged, this, &MobiotDialog::commandChangedModemTipi);
@@ -236,7 +257,11 @@ void MobiotDialog::addMusteri() {
             while(qry->next()) {
                 commandsMusteri.append(qry->value(1).toString());
             }
+        }else {
+            setLog("[ERROR] mobiotdialog.cpp : " + qry->lastError().text());
         }
+    }else {
+        setLog("[ERROR] mobiotdialog.cpp : " + database.lastError().text());
     }
     ui->musteriAdi_1->addItems(commandsMusteri);
     connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &MobiotDialog::commandChangedMusteriAdi);

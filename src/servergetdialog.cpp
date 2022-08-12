@@ -22,10 +22,11 @@ ServerGetDialog::~ServerGetDialog()
     delete ui;
 }
 
-void ServerGetDialog::initialize(QString index, QSqlDatabase d)
+void ServerGetDialog::initialize(QString index, QSqlDatabase d, QString user)
 {
     indexValue = index;
     database = d;
+    username = user;
 
     if(database.open()) {
 
@@ -79,13 +80,26 @@ void ServerGetDialog::initialize(QString index, QSqlDatabase d)
 
                 ui->notlar_->setText(qry->value(8).toString());
             }
+        }else {
+            setLog("[ERROR] servergetdialog.cpp : " + qry->lastError().text());
         }
 
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected servisget");
+        setLog("[ERROR] servergetdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
+}
+void ServerGetDialog::setLog(QString content) {
+
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
 }
 void ServerGetDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
@@ -182,17 +196,19 @@ void ServerGetDialog::on_pushButton_clicked()
 
         if(qry.exec()) {
             QMessageBox::information(this,"Inserted","Data Updated Succesfully");
+            setLog("[NOTE] servergetdialog.cpp : Server cihazı güncellendi");
         }else {
             QMessageBox::critical(this, tr("error::"), qry.lastError().text());
+            setLog("[NOTE] servergetdialog.cpp : " + qry.lastError().text());
         }
 
 
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[NOTE] servergetdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
-    //database.close();
     this->close();
 }
 

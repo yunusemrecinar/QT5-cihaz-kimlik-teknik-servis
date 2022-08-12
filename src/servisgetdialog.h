@@ -23,8 +23,9 @@ public:
     QString olay;
     QString seriNo;
 
+    QString username;
 public slots:
-    void initialize(QString index, QSqlDatabase d);
+    void initialize(QString index, QSqlDatabase d, QString username);
 private slots:
     void changes();
     void on_pushButton_clicked();
@@ -53,6 +54,8 @@ private slots:
     void on_donanim_11_clicked();
 
     void on_donanim_10_clicked();
+
+    void setLog(QString);
 private:
     Ui::ServisGetDialog *ui;
 

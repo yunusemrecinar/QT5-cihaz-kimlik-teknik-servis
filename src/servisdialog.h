@@ -37,10 +37,13 @@ public:
     bool musteriCheck = false;
 
     bool check = true;
+
 public slots:
     void initialize(QSqlDatabase d, QString sNo, QString username);
     void changes();
 private slots:
+    void setLog(QString log);
+
     void on_pushButton_clicked();
 
     void commandChangedOlay(const QString& command_text);

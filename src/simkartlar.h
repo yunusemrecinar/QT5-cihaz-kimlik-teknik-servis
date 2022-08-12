@@ -16,8 +16,9 @@ public:
     explicit SimKartlar(QWidget *parent = nullptr);
     ~SimKartlar();
     QString rowLocation;
+    QString username;
 public slots:
-    void initialize(QSqlDatabase d);
+    void initialize(QSqlDatabase d, QString username);
 private:
     Ui::SimKartlar *ui;
 
@@ -27,6 +28,8 @@ private slots:
     void on_pushButtonEkle_clicked();
     void on_pushButtonSil_clicked();
     void on_tableView_clicked();
+
+    void setLog(QString log);
 };
 
 #endif // SIMKARTLAR_H

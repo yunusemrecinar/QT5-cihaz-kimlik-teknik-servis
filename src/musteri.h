@@ -36,7 +36,7 @@ private slots:
 
     void on_lineEditSort_textChanged(const QString &arg1);
 
-
+    void setLog(QString log);
 private:
     QSqlDatabase database;
     Ui::Musteri *ui;

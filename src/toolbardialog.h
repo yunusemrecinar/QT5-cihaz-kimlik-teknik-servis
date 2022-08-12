@@ -16,8 +16,10 @@ public:
     ~ToolBarDialog();
 
     QString rowLocation;
+
+    QString username;
 public slots:
-    void initialize(QSqlDatabase d, QString type, QString databaseName);
+    void initialize(QSqlDatabase d, QString type, QString databaseName, QString username);
 
 private:
     Ui::ToolBarDialog *ui;
@@ -31,6 +33,8 @@ private slots:
     void on_pushButtonEkle_clicked();
     void on_pushButtonSil_clicked();
     void on_tableView_clicked();
+
+    void setLog(QString log);
 };
 
 #endif // TOOLBARDIALOG_H

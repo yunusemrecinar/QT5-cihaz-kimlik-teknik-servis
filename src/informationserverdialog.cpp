@@ -22,9 +22,21 @@ InformationServerDialog::~InformationServerDialog()
     delete ui;
 }
 
-void InformationServerDialog::initialize(QString s, QSqlDatabase d) {
+void InformationServerDialog::setLog(QString content) {
+
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
+
+void InformationServerDialog::initialize(QString s, QSqlDatabase d, QString user) {
     seriNo = s;
     database = d;
+    username = user;
 
 
     if(database.isOpen()) {
@@ -84,10 +96,12 @@ void InformationServerDialog::initialize(QString s, QSqlDatabase d) {
             }
         }else {
             QMessageBox::critical(this, tr("error::"), qry->lastError().text());
+            setLog("[ERROR] informationserverdialog.cpp : " + qry->lastError().text());
         }
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected1");
+        setLog("[ERROR] informationserverdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -274,7 +288,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldUidNo);
             qry.bindValue(":yeniDeger",ui->UIDNo_1->text());
             qry.bindValue(":degisen","UIDNo Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın uid no'su değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
 
         }if(QString::compare(oldDurum, ui->durum_->currentText(), Qt::CaseInsensitive)) {
@@ -287,7 +305,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldDurum);
             qry.bindValue(":yeniDeger",ui->durum_->currentText());
             qry.bindValue(":degisen","Durum Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın durumu değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldKasaTipi, ui->kasaTipi_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -299,7 +321,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldKasaTipi);
             qry.bindValue(":yeniDeger",ui->kasaTipi_->currentText());
             qry.bindValue(":degisen","Kasa Tipi Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın kasa tipi değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldDeckLink, ui->decklink_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -311,7 +337,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldDeckLink);
             qry.bindValue(":yeniDeger",ui->decklink_->currentText());
             qry.bindValue(":degisen","Decklink Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın decklink i değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldRam, ui->ram_->text(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -323,7 +353,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldRam);
             qry.bindValue(":yeniDeger",ui->ram_->text());
             qry.bindValue(":degisen","Ram Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın ram i değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldIslemci, ui->islemci_->text(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -335,7 +369,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldIslemci);
             qry.bindValue(":yeniDeger",ui->islemci_->text());
             qry.bindValue(":degisen","İşlemci Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın islemcisi değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldHDD, ui->hdd_->text(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -347,7 +385,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldHDD);
             qry.bindValue(":yeniDeger",ui->hdd_->text());
             qry.bindValue(":degisen","HDD Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın hdd si değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }if(QString::compare(oldTestDurumu, ui->test_durum_->currentText(), Qt::CaseInsensitive)) {
             qry.prepare("INSERT INTO loglar(`Cihaz Seri No`,`Tarih`,`Eski Deger`,`Yeni Deger`,`Değişen`)"
@@ -359,7 +401,11 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldTestDurumu);
             qry.bindValue(":yeniDeger",ui->test_durum_->currentText());
             qry.bindValue(":degisen","Test Durum Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın test durumu değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
 
         }if(QString::compare(oldAnakartNo, ui->anakart_->text(),Qt::CaseInsensitive)) {
@@ -372,12 +418,17 @@ void InformationServerDialog::on_pushButton_clicked()
             qry.bindValue(":eskiDeger",oldAnakartNo);
             qry.bindValue(":yeniDeger",ui->anakart_->text());
             qry.bindValue(":degisen","Anakart Değişti");
-            qry.exec();
+            if(qry.exec()) {
+                setLog("[NOTE]" + ui->cihaz_seri_no->text() + " no'lu cihazın anakart no'su değiştirildi.");
+            }else {
+                setLog("[ERROR] informationdialog.cpp : " + qry.lastError().text());
+            }
             qry.clear();
         }
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] informationserverdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 

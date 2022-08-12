@@ -9,7 +9,7 @@
 #include "musteri.h"
 #include "mobiotdialog.h"
 #include "serverdialog.h"
-
+#include <QTime>
 
 #include <iostream>
 using namespace std;
@@ -134,8 +134,13 @@ void SecDialog::addModels() {
         qry ->prepare("select * from model");
         if(qry -> exec()) {
             while(qry->next()) {commandsModel.append(qry->value(0).toString());}
+        }else{
+            setLog("[ERROR] secdialog.cpp : " + qry->lastError().text());
         }
+    }else{
+        setLog("[ERROR] secdialog.cpp : " + database.lastError().text());
     }
+
     ui->model_->addItems(commandsModel);
     connect(ui->model_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedModel);
 }
@@ -145,8 +150,13 @@ void SecDialog::addModemTipi() {
         qry ->prepare("select * from modemtipi");
         if(qry -> exec()) {
             while(qry->next()) {commandsModemTipi.append(qry->value(0).toString());}
+        }else{
+            setLog("[ERROR] secdialog.cpp : " + qry->lastError().text());
         }
+    }else{
+        setLog("[ERROR] secdialog.cpp : " + database.lastError().text());
     }
+
     ui->modemTipi_->addItems(commandsModemTipi);
     connect(ui->modemTipi_, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedModemTipi);
 }
@@ -157,8 +167,13 @@ void SecDialog::addMusteri() {
         qry ->prepare("select * from müsteri");
         if(qry -> exec()) {
             while(qry->next()) {commandsMusteri.append(qry->value(1).toString());}
+        }else{
+            setLog("[ERROR] secdialog.cpp : " + qry->lastError().text());
         }
+    }else{
+        setLog("[ERROR] secdialog.cpp : " + database.lastError().text());
     }
+
     ui->musteriAdi_1->addItems(commandsMusteri);
     connect(ui->musteriAdi_1, &QComboBox::currentTextChanged, this, &SecDialog::commandChangedMusteriAdi);
 }
@@ -179,13 +194,13 @@ void SecDialog::commandChangedModel(const QString& command_text) {
 
         if(QString::compare("Server",command_text,Qt::CaseInsensitive) == 0) {
             serverDialog = new ServerDialog();
-            serverDialog->initialize(database);
+            serverDialog->initialize(database, username);
             serverDialog->commandChangedModel(command_text);
             this->close();
             serverDialog->exec();
         }else if(QString::compare("Mobiot",command_text,Qt::CaseInsensitive) == 0) {
             mobiotDialog = new MobiotDialog();
-            mobiotDialog->initialize(database);
+            mobiotDialog->initialize(database, username);
             mobiotDialog->commandChangedModel(command_text);
             this->close();
             mobiotDialog->exec();
@@ -221,14 +236,24 @@ void SecDialog::commandChangedDurum(const QString& command_text) {
 void SecDialog::commandChangedTestDurum(const QString& command_text) {
     testDurumu = command_text;
 }
-void SecDialog::initialize(QSqlDatabase d) {
+void SecDialog::initialize(QSqlDatabase d, QString user) {
     database = d;
 
     addModels();
     addModemTipi();
     addMusteri();
+    username = user;
 }
+void SecDialog::setLog(QString content) {
 
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",username);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
 void SecDialog::on_pushButton_clicked()
 {
 
@@ -296,9 +321,11 @@ void SecDialog::on_pushButton_clicked()
         if(checkSeriNo) {
             if(qry.exec()) {
                 QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
+                setLog("[NOTE] secdailog.cpp : Cihaz Eklendi");
                 this->close();
             }else {
                 QMessageBox::information(this,"Not Inserted",qry.lastError().text());
+                setLog("[ERROR] secdialog.cpp : " + qry.lastError().text());
             }
         }else {
             QMessageBox::information(this,"Error","Cihaz Seri No bilgisi eksik!!");
@@ -306,6 +333,7 @@ void SecDialog::on_pushButton_clicked()
 
     }else {
         QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
+        setLog("[ERROR] secdialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 
