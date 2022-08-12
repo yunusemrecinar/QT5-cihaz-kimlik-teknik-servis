@@ -66,6 +66,7 @@ public slots:
 signals:
     void notifyMessageSent(const QString& message);
 private slots:
+    void setLog(QString log);
 
     //void on_pushButton_clicked();
 

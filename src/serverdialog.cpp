@@ -56,7 +56,7 @@ void ServerDialog::commandChangedModel(const QString &command_text)
     }
 
 }
-void SecDialog::setLog(QString content) {
+void ServerDialog::setLog(QString content) {
 
     QSqlQuery qry;
     QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");

@@ -109,7 +109,7 @@ ServisDialog::~ServisDialog()
 void ServisDialog::commandChangedOlay(const QString& command_text) {
     olay = command_text;
 }
-void ServerServisDialog::setLog(QString content) {
+void ServisDialog::setLog(QString content) {
 
     QSqlQuery qry;
     QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
@@ -155,6 +155,7 @@ void ServisDialog::setOrginalMusteri() {
                 while(qry->next()) {
                     ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
                     musteriAdi = qry->value(0).toString();
+                    oldMusteri = qry->value(0).toString();
                     checkMusteriChange = true;
                 }
             }
@@ -172,6 +173,7 @@ void ServisDialog::commandChangedMusteriAdi(const QString &command_text)
     if(QString::compare(musteriAdi, command_text, Qt::CaseInsensitive) && checkMusteriChange) {
         QMessageBox::information(this,"Değişiklik","Müşteri Adını Değiştirdiniz. Yapılan İşleme Eklendi!");
         QString temp = ui->yapilanIslem_->toPlainText() + "\nMüşteri değiştirildi. Eksi Müşteri: "+ musteriAdi + ", Yeni Müşteri: " + command_text;
+        oldMusteri = musteriAdi;
         musteriCheck = true;
         ui->yapilanIslem_->setPlainText(temp);
         musteriAdi = command_text;
@@ -316,8 +318,28 @@ void ServisDialog::on_pushButton_clicked()
 }
 
 void ServisDialog::insertNewMusteri(QString isim) {
+    QString oldCustomer;
     if(database.isOpen()) {
         QSqlQuery qry;
+        if(oldMusteri.length() != 0) {
+            qry.prepare("SELECT `Cihaz Seri No` FROM `müsteri` WHERE İsim = '" + oldMusteri + "';");
+            if(qry.exec()) {
+                while(qry.next()) {
+                    oldCustomer = qry.value(0).toString();
+                    int start = oldCustomer.indexOf(servisNo, 0 , Qt::CaseInsensitive);
+                    QString substring = oldCustomer.mid(start-2,(servisNo.length()+2));
+                    QMessageBox::information(this,"errorS",oldCustomer);
+                    oldCustomer = oldCustomer.replace(substring, "");
+                    QMessageBox::information(this,"error",oldCustomer);
+                }
+            }else {
+                setLog("[ERROR] servisdialog.cpp : " + qry.lastError().text());
+            }
+            qry.clear();
+            qry.prepare("UPDATE `müsteri` SET `Cihaz Seri No` = '"+oldCustomer+"' WHERE İsim = '" + oldMusteri + "';");
+            qry.exec();
+        }
+        qry.clear();
         QString temp;
         qry.prepare("SELECT `Cihaz Seri No` FROM `müsteri` WHERE İsim = '" + isim + "';");
         qry.exec();

@@ -34,6 +34,8 @@ public:
 
     QString musteriAdi;
 
+    QString oldMusteri = "";
+
     bool musteriCheck = false;
 
     bool check = true;

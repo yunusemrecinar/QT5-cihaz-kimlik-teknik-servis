@@ -156,7 +156,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setLog(QString content) {
 
+    QSqlQuery qry;
+    QString date = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+    qry.prepare("INSERT INTO processlogs(`tarih`,`username`,`process`) VALUES (:tarih,:username,:process)");
+    qry.bindValue(":tarih",date);
+    qry.bindValue(":username",name);
+    qry.bindValue(":process",content);
+    qry.exec();
+}
 
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
@@ -181,6 +190,7 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[ERROR] mainwindow.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -250,7 +260,11 @@ void MainWindow::addModels() {
         qry ->prepare("select COUNT(*) from model");
         if(qry -> exec()) {
             while(qry->next()) {countModel = qry->value(0).toInt();}
+        }else {
+            setLog("[ERROR] mainwindow.cpp : " + qry->lastError().text());
         }
+    }else {
+        setLog("[ERROR] mainwindow.cpp : " + database.lastError().text());
     }
 }
 void MainWindow::addModemTipi() {
@@ -259,7 +273,11 @@ void MainWindow::addModemTipi() {
         qry ->prepare("select COUNT(*) from modemtipi");
         if(qry -> exec()) {
             while(qry->next()) {countModemTipi = qry->value(0).toInt();}
+        }else {
+            setLog("[ERROR] mainwindow.cpp : " + qry->lastError().text());
         }
+    }else {
+        setLog("[ERROR] mainwindow.cpp : " + database.lastError().text());
     }
 }
 void MainWindow::on_pushButton_2_clicked()
@@ -269,12 +287,18 @@ void MainWindow::on_pushButton_2_clicked()
     //secdialog.exec();
     addModels();
     addModemTipi();
-    if(countModel == 0 && countModemTipi == 0)
+    if(countModel == 0 && countModemTipi == 0){
         QMessageBox::information(this, "ERROR", "Ekleme yapmadan önce model ve modem tipi ekleyiniz!!");
-    else if(countModel == 0)
+        setLog("[ERROR] mainwindow.cpp : ekleme yapmadan önce model ve modem tipi ekleyiniz!!");
+    }
+    else if(countModel == 0) {
         QMessageBox::information(this, "ERROR", "Ekleme yapmadan önce model ekleyiniz!!");
-    else if(countModemTipi == 0)
+        setLog("[ERROR] mainwindow.cpp : ekleme yapmadan önce model ekleyiniz!!");
+    }
+    else if(countModemTipi == 0) {
         QMessageBox::information(this, "ERROR", "Ekleme yapmadan önce modem tipi ekleyiniz!!");
+        setLog("[ERROR] mainwindow.cpp : ekleme yapmadan önce modem tipi ekleyiniz!!");
+    }
     else{
         secdialog = new SecDialog(this);
         secdialog->initialize(database, name);
@@ -302,6 +326,7 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
         }
     }else {
         QMessageBox::information(this,"Error","Servis eklenecek cihazı seçiniz!!");
+        setLog("[ERROR] mainwindow.cpp : servis eklenecek cihazı seçiniz!!");
     }
 }
 
@@ -329,7 +354,7 @@ void MainWindow::on_tableView_doubleClicked()
 
     if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
         InformationServerDialog *informServer = new InformationServerDialog();
-        informServer->initialize(mainWindowValue, database);
+        informServer->initialize(mainWindowValue, database, name);
         informServer->exec();
         refreshServer();
         refreshLog();
@@ -365,13 +390,13 @@ void MainWindow::on_tableView_teknikServis_doubleClicked()
 
     if(QString::compare("Server",cihazModel,Qt::CaseInsensitive) == 0) {
         ServerGetDialog *serverDialog = new ServerGetDialog();
-        serverDialog->initialize(rowCount, database);
+        serverDialog->initialize(rowCount, database, name);
         serverDialog->exec();
         refreshServis();
 
     }else {
         ServisGetDialog *servisDialog = new ServisGetDialog();
-        servisDialog->initialize(rowCount, database);
+        servisDialog->initialize(rowCount, database, name);
         servisDialog->exec();
         refreshServis();
     }
@@ -402,6 +427,7 @@ void MainWindow::refreshServer() {
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[mainwindow.cpp : ]" + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -424,6 +450,7 @@ void MainWindow::refreshMobiot() {
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[mainwindow.cpp : ]" + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -444,6 +471,7 @@ void MainWindow::refresh() {
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[mainwindow.cpp : ]" + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 }
@@ -488,13 +516,15 @@ void MainWindow::refreshServis() {
         ui->tableView_teknikServis->setColumnWidth(2,150);
         ui->tableView_teknikServis->setColumnWidth(3,80);
         ui->tableView_teknikServis->setColumnWidth(4,ui->tableView_teknikServis->width()-230);
+    }else {
+        setLog("[mainwindow.cpp : ]" + database.lastError().text());
     }
 }
 
 void MainWindow::on_pushButton_modemTipi_clicked()
 {
     ToolBarDialog *toolbar = new ToolBarDialog();
-    toolbar->initialize(database, ui->pushButton_modemTipi->text(), "modemtipi");
+    toolbar->initialize(database, ui->pushButton_modemTipi->text(), "modemtipi", name);
     toolbar->exec();
 }
 
@@ -502,7 +532,7 @@ void MainWindow::on_pushButton_modemTipi_clicked()
 void MainWindow::on_pushButton_Model_clicked()
 {
     ToolBarDialog *toolbar = new ToolBarDialog();
-    toolbar->initialize(database, ui->pushButton_Model->text(), "model");
+    toolbar->initialize(database, ui->pushButton_Model->text(), "model", name);
     toolbar->exec();
 }
 
@@ -525,7 +555,7 @@ void MainWindow::on_splitter_splitterMoved()
 void MainWindow::on_pushButton_simKart_clicked()
 {
     SimKartlar *toolbar = new SimKartlar();
-    toolbar->initialize(database);
+    toolbar->initialize(database, name);
     toolbar->exec();
 }
 
