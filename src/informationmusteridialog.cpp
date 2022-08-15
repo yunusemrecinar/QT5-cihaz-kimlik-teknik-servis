@@ -51,6 +51,9 @@ void InformationMusteriDialog::changes() {
 
     ui->listViewToplam->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listViewMusteri->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->filter->setPlaceholderText("Filtrele");
+    ui->filter->setReadOnly(1);
 }
 void InformationMusteriDialog::fillListViews() {
 
@@ -169,8 +172,38 @@ void InformationMusteriDialog::setLog(QString content) {
     qry.exec();
 }
 
-void InformationMusteriDialog::on_listViewMusteri_entered(const QModelIndex &index)
+
+
+void InformationMusteriDialog::on_filter_selectionChanged()
 {
-    QMessageBox::information(this,"x","x");
+    ui->filter->setText("");
+    ui->filter->setReadOnly(0);
+}
+
+
+void InformationMusteriDialog::on_filter_textChanged(const QString &arg1)
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+        ui->listViewToplam->setModel(new QStringListModel());
+        qry ->prepare("select `Cihaz Seri No` from cihazisim where `Cihaz Seri No` LIKE '" + arg1 + "%' OR LOWER(`İsim`) LIKE '" + arg1.toLower() + "%';");
+        if(qry -> exec()) {
+            while(qry->next()) {
+                ui->listViewToplam->model()->insertRow(ui->listViewToplam->model()->rowCount());
+                QModelIndex oIndex = ui->listViewToplam->model()->index(
+                            ui->listViewToplam->model()->rowCount() - 1, 0);
+
+                ui->listViewToplam->model()->setData(oIndex, qry->value(0).toString());
+            }
+        }
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[ERROR] musteri.cpp : " + database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+
+
 }
 

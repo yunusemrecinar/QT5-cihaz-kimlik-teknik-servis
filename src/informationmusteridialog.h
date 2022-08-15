@@ -28,6 +28,10 @@ private slots:
     void changes();
     void updateChanges();
 
+    void on_filter_selectionChanged();
+
+    void on_filter_textChanged(const QString &arg1);
+
 private:
     Ui::InformationMusteriDialog *ui;
 
