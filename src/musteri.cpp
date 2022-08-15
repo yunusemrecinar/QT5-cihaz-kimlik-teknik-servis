@@ -75,7 +75,7 @@ void Musteri::on_lineEditSort_textChanged(const QString &arg1)
     if(database.isOpen()) {
         QSqlQuery* qry = new QSqlQuery(database);
 
-        qry ->prepare("select * from müsteri where `Cihaz Seri No` LIKE '" + arg1 + "%' OR LOWER(`İsim`) LIKE '" + arg1.toLower() + "%';");
+        qry ->prepare("select * from müsteri where `İsim` LIKE '" + arg1 + "%' OR LOWER(`İsim`) LIKE '" + arg1.toLower() + "%';");
         qry -> exec();
         model->setQuery(*qry);
         ui->tableView->setModel(model);

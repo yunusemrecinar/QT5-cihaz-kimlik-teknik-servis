@@ -25,12 +25,16 @@ private slots:
     void on_pushButton_clicked();
     void setLog(QString log);
     void fillListViews();
+    void changes();
+    void updateChanges();
+
 private:
     Ui::InformationMusteriDialog *ui;
 
     QSqlDatabase database;
 
     QString seriNo;
+
 };
 
 #endif // INFORMATIONMUSTERIDIALOG_H

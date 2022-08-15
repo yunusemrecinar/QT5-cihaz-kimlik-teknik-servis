@@ -16,6 +16,14 @@ InformationMusteriDialog::InformationMusteriDialog(QWidget *parent) :
     ui(new Ui::InformationMusteriDialog)
 {
     ui->setupUi(this);
+    changes();
+}
+
+InformationMusteriDialog::~InformationMusteriDialog()
+{
+    delete ui;
+}
+void InformationMusteriDialog::changes() {
     ui->listViewMusteri->setDragEnabled(true);
     ui->listViewMusteri->setAcceptDrops(true);
     ui->listViewMusteri->setDropIndicatorShown(true);
@@ -44,12 +52,6 @@ InformationMusteriDialog::InformationMusteriDialog(QWidget *parent) :
     ui->listViewToplam->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listViewMusteri->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
-
-InformationMusteriDialog::~InformationMusteriDialog()
-{
-    delete ui;
-}
-
 void InformationMusteriDialog::fillListViews() {
 
     if(database.isOpen()) {
@@ -68,8 +70,6 @@ void InformationMusteriDialog::fillListViews() {
         qry->clear();
         qry->prepare("SELECT `Cihaz Seri No` FROM `cihazisim` WHERE `İsim` = '" + ui->textEditIsim->toPlainText() + "';");
         QString te = "SELECT `Cihaz Seri No` FROM `cihazisim` WHERE `İsim` = '" + ui->textEditIsim->toPlainText()+ "';";
-        QMessageBox::information(this,"s", te);
-        QMessageBox::information(this,"x",ui->textEditIsim->toPlainText());
         if(qry -> exec()) {
             while(qry->next()) {
                 ui->listViewMusteri->model()->insertRow(ui->listViewMusteri->model()->rowCount());
@@ -110,8 +110,26 @@ void InformationMusteriDialog::initialize(QSqlDatabase d, QString s, QString use
         setLog("[ERROR] informationmusteridialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
+
 }
 
+void InformationMusteriDialog::updateChanges() {
+    if(database.isOpen()) {
+
+        QModelIndex oIndex;
+        QString value;
+        QSqlQuery* qry = new QSqlQuery(database);
+        int rowCount = ui->listViewMusteri->model()->rowCount();
+
+        for(int i = 0; i < rowCount; i++) {
+            oIndex = ui->listViewMusteri->model()->index(0, 0);
+            value = ui->listViewMusteri->model()->data(oIndex).toString();
+            qry->prepare("UPDATE `cihazisim` SET `İsim` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value + "';");
+            qry->exec();
+            qry->clear();
+        }
+    }
+}
 void InformationMusteriDialog::on_pushButton_clicked()
 {
     if(database.isOpen()) {
@@ -150,3 +168,9 @@ void InformationMusteriDialog::setLog(QString content) {
     qry.bindValue(":process",content);
     qry.exec();
 }
+
+void InformationMusteriDialog::on_listViewMusteri_entered(const QModelIndex &index)
+{
+    QMessageBox::information(this,"x","x");
+}
+
