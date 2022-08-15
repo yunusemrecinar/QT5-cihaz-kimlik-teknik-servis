@@ -24,7 +24,7 @@ private slots:
 
     void on_pushButton_clicked();
     void setLog(QString log);
-
+    void fillListViews();
 private:
     Ui::InformationMusteriDialog *ui;
 

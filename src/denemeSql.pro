@@ -18,6 +18,7 @@ SOURCES += \
     mainwindow.cpp \
     mobiotdialog.cpp \
     musteri.cpp \
+    musteriekle.cpp \
     notekledialog.cpp \
     notlardialog.cpp \
     secdialog.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     mainwindow.h \
     mobiotdialog.h \
     musteri.h \
+    musteriekle.h \
     notekledialog.h \
     notlardialog.h \
     secdialog.h \
@@ -57,6 +59,7 @@ FORMS += \
     mainwindow.ui \
     mobiotdialog.ui \
     musteri.ui \
+    musteriekle.ui \
     notekledialog.ui \
     notlardialog.ui \
     secdialog.ui \
