@@ -56,6 +56,7 @@ private:
 
     bool checkSeriNo = false;
 private slots:
+    void getMusteri();
     void changes();
 
     void commandChangedDurum(const QString& command_text);

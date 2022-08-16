@@ -224,7 +224,6 @@ void ServerDialog::on_pushButton_clicked()
         if(ui->cihaz_seri_no->text().length() == 9) {
             checkSeriNo = true;
         }
-        QMessageBox::information(this,"fdfs","asdsa" + QString::number(12) + "fdsfs");
 
         QSqlQuery qry;
 
@@ -256,6 +255,13 @@ void ServerDialog::on_pushButton_clicked()
             if(qry.exec()) {
                 QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
                 setLog("[NOTE] serverdialog.cpp : Servis eklendi");
+                qry.clear();
+                qry.prepare("INSERT INTO cihazisim(`Cihaz Seri No`,`İsim`) VALUES('"+ cihazSeriNo + "','" + musteriAdi + "');");
+                if(qry.exec()) {
+                    setLog("[NOTE] serverdialog.cpp : Yeni cihaz cihazisim tablosuna eklendi!");
+                }else {
+                    setLog("[ERROR] serverdialog.cpp : " + qry.lastError().text());
+                }
                 this->close();
             }else {
                 QMessageBox::information(this,"Not Inserted",qry.lastError().text());

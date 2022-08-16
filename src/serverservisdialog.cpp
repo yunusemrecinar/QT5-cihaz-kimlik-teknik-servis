@@ -109,19 +109,13 @@ void ServerServisDialog::setOrginalMusteri() {
     if(database.isOpen()) {
         QSqlQuery* qry = new QSqlQuery(database);
 
-        qry->prepare("SELECT İsim FROM müsteri WHERE `Cihaz Seri No` LIKE '%" + servisNo + "%';");
+        qry->prepare("SELECT İsim FROM cihazisim WHERE `Cihaz Seri No` = '" + servisNo + "';");
         if(qry->exec()) {
-            if(qry->size() == 0) {
-                ui->musteriAdi_1->setCurrentText("LAB");
-                musteriAdi = "LAB";
-                checkMusteriChange = true;
-            }else {
                 while(qry->next()) {
                     ui->musteriAdi_1->setCurrentText(qry->value(0).toString());
                     musteriAdi = qry->value(0).toString();
                     checkMusteriChange = true;
                 }
-            }
         }else {
             QMessageBox::information(this,"Error",qry->lastError().text());
             setLog("[ERROR] serverservisdialog.cpp : " + qry->lastError().text());
