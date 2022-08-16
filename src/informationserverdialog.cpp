@@ -58,28 +58,52 @@ void InformationServerDialog::initialize(QString s, QSqlDatabase d, QString user
                 ui->musteriAdi_1->setText(qry->value(10).toString());
                 ui->durum_->setCurrentText(qry->value(11).toString());
                 if(qry->value(12).toString().contains(".")) {
-                    QList<QString> date = qry->value(12).toString().split(".");
-                    ui->date_day->setValue(date.at(0).toInt());
-                    ui->date_month->setValue(date.at(1).toInt());
-                    ui->date_year->setValue(date.at(2).toInt());
+                    if(qry->value(12).toString().length() != 2) {
+                        QList<QString> date = qry->value(12).toString().split(".");
+                        ui->date_day->setValue(date.at(0).toInt());
+                        ui->date_month->setValue(date.at(1).toInt());
+                        ui->date_year->setValue(date.at(2).toInt());
+                    }else {
+                        ui->date_year->clear();
+                        ui->date_day->clear();
+                        ui->date_month->clear();
+                    }
                 }
                 if(qry->value(13).toString().contains(".")) {
-                    QList<QString> faturaKesim = qry->value(13).toString().split(".");
-                    ui->fatura_date_day_->setValue(faturaKesim.at(0).toInt());
-                    ui->fatura_date_month_->setValue(faturaKesim.at(1).toInt());
-                    ui->fatura_date_year_->setValue(faturaKesim.at(2).toInt());
+                    if(qry->value(13).toString().length() != 2) {
+                        QList<QString> faturaKesim = qry->value(13).toString().split(".");
+                        ui->fatura_date_day_->setValue(faturaKesim.at(0).toInt());
+                        ui->fatura_date_month_->setValue(faturaKesim.at(1).toInt());
+                        ui->fatura_date_year_->setValue(faturaKesim.at(2).toInt());
+                    }else {
+                        ui->fatura_date_year_->clear();
+                        ui->fatura_date_day_->clear();
+                        ui->fatura_date_month_->clear();
+                    }
                 }
                 if(qry->value(14).toString().contains(".")) {
-                    QList<QString> garantiStart = qry->value(14).toString().split(".");
-                    ui->garanti_start_day_->setValue(garantiStart.at(0).toInt());
-                    ui->garanti_start_month_->setValue(garantiStart.at(1).toInt());
-                    ui->garanti_start_year_->setValue(garantiStart.at(2).toInt());
+                    if(qry->value(14).toString().length() != 2) {
+                        QList<QString> garantiStart = qry->value(14).toString().split(".");
+                        ui->garanti_start_day_->setValue(garantiStart.at(0).toInt());
+                        ui->garanti_start_month_->setValue(garantiStart.at(1).toInt());
+                        ui->garanti_start_year_->setValue(garantiStart.at(2).toInt());
+                    }else {
+                        ui->garanti_start_year_->clear();
+                        ui->garanti_start_day_->clear();
+                        ui->garanti_start_month_->clear();
+                    }
                 }
                 if(qry->value(15).toString().contains(".")) {
-                    QList<QString> garantiBitis = qry->value(15).toString().split(".");
-                    ui->garanti_bitis_day_->setValue(garantiBitis.at(0).toInt());
-                    ui->garanti_bitis_month_->setValue(garantiBitis.at(1).toInt());
-                    ui->garanti_bitis_year_->setValue(garantiBitis.at(2).toInt());
+                    if(qry->value(15).toString().length() != 2) {
+                        QList<QString> garantiBitis = qry->value(15).toString().split(".");
+                        ui->garanti_bitis_day_->setValue(garantiBitis.at(0).toInt());
+                        ui->garanti_bitis_month_->setValue(garantiBitis.at(1).toInt());
+                        ui->garanti_bitis_year_->setValue(garantiBitis.at(2).toInt());
+                    }else {
+                        ui->garanti_bitis_year_->clear();
+                        ui->garanti_bitis_day_->clear();
+                        ui->garanti_bitis_month_->clear();
+                    }
                 }
                 ui->hdd_->setText(qry->value(16).toString());
                 ui->notlar_->setText(qry->value(17).toString());

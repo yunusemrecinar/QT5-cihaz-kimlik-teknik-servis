@@ -55,22 +55,41 @@ void InformationMobiotDialog::initialize(QString s, QSqlDatabase d,QString user)
                 ui->modemSeri2_->setText(qry->value(11).toString());
                 ui->modemSeri3_->setText(qry->value(12).toString());
                 if(qry->value(13).toString().contains(".")) {
-                    QList<QString> date = qry->value(13).toString().split(".");
-                    ui->fatura_date_day_->setValue(date.at(0).toInt());
-                    ui->fatura_date_month_->setValue(date.at(1).toInt());
-                    ui->fatura_date_year_->setValue(date.at(2).toInt());
+                    if(qry->value(13).toString().length() != 2) {
+                        QList<QString> date = qry->value(13).toString().split(".");
+                        ui->fatura_date_day_->setValue(date.at(0).toInt());
+                        ui->fatura_date_month_->setValue(date.at(1).toInt());
+                        ui->fatura_date_year_->setValue(date.at(2).toInt());
+                    }else {
+                        ui->fatura_date_year_->clear();
+                        ui->fatura_date_day_->clear();
+                        ui->fatura_date_month_->clear();
+                    }
+
                 }
                 if(qry->value(14).toString().contains(".")) {
-                    QList<QString> date = qry->value(14).toString().split(".");
-                    ui->garanti_start_day_->setValue(date.at(0).toInt());
-                    ui->garanti_start_month_->setValue(date.at(1).toInt());
-                    ui->garanti_start_year_->setValue(date.at(2).toInt());
+                    if(qry->value(14).toString().length() != 2) {
+                        QList<QString> date = qry->value(14).toString().split(".");
+                        ui->garanti_start_day_->setValue(date.at(0).toInt());
+                        ui->garanti_start_month_->setValue(date.at(1).toInt());
+                        ui->garanti_start_year_->setValue(date.at(2).toInt());
+                    }else {
+                        ui->garanti_start_year_->clear();
+                        ui->garanti_start_month_->clear();
+                        ui->garanti_start_day_->clear();
+                    }
                 }
                 if(qry->value(15).toString().contains(".")) {
-                    QList<QString> date = qry->value(15).toString().split(".");
-                    ui->garanti_bitis_day_->setValue(date.at(0).toInt());
-                    ui->garanti_bitis_month_->setValue(date.at(1).toInt());
-                    ui->garanti_bitis_year_->setValue(date.at(2).toInt());
+                    if(qry->value(15).toString().length() != 2) {
+                        QList<QString> date = qry->value(15).toString().split(".");
+                        ui->garanti_bitis_day_->setValue(date.at(0).toInt());
+                        ui->garanti_bitis_month_->setValue(date.at(1).toInt());
+                        ui->garanti_bitis_year_->setValue(date.at(2).toInt());
+                    }else {
+                        ui->garanti_bitis_year_->clear();
+                        ui->garanti_bitis_day_->clear();
+                        ui->garanti_bitis_month_->clear();
+                    }
                 }
                 ui->notlar_->setText(qry->value(16).toString());
 
