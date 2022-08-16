@@ -62,17 +62,17 @@ void InformationMusteriDialog::changes() {
 
 }
 void InformationMusteriDialog::listViewMusteriChanged() {
-    QMessageBox::information(this,"x","asdas");
+    updateChangesMusteri();
 }
 void InformationMusteriDialog::listViewToplamChanged() {
-    QMessageBox::information(this,"y","asdas");
+    updateChangesToplam();
 }
 void InformationMusteriDialog::fillListViews() {
 
     if(database.isOpen()) {
         QSqlQuery* qry = new QSqlQuery(database);
 
-        qry->prepare("SELECT `Cihaz Seri No` From `cihazisim` WHERE `İsim` IS NULL");
+        qry->prepare("SELECT `Cihaz Seri No` From `cihazisim` WHERE `İsim` = 'LAB'");
         if(qry -> exec()) {
             while(qry->next()) {
                 ui->listViewToplam->model()->insertRow(ui->listViewToplam->model()->rowCount());
@@ -81,10 +81,11 @@ void InformationMusteriDialog::fillListViews() {
 
                 ui->listViewToplam->model()->setData(oIndex, qry->value(0).toString());
             }
+        }else {
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
         }
         qry->clear();
         qry->prepare("SELECT `Cihaz Seri No` FROM `cihazisim` WHERE `İsim` = '" + ui->textEditIsim->toPlainText() + "';");
-        QString te = "SELECT `Cihaz Seri No` FROM `cihazisim` WHERE `İsim` = '" + ui->textEditIsim->toPlainText()+ "';";
         if(qry -> exec()) {
             while(qry->next()) {
                 ui->listViewMusteri->model()->insertRow(ui->listViewMusteri->model()->rowCount());
@@ -93,10 +94,14 @@ void InformationMusteriDialog::fillListViews() {
 
                 ui->listViewMusteri->model()->setData(oIndex, qry->value(0).toString());
             }
+        }else {
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
         }
 
         connect(ui->listViewMusteri->model(),&QAbstractItemModel::dataChanged,this, &InformationMusteriDialog::listViewMusteriChanged);
         connect(ui->listViewToplam->model(),&QAbstractItemModel::dataChanged,this,&InformationMusteriDialog::listViewToplamChanged);
+    }else {
+        setLog("[ERROR] informationmusteridialog.cpp : " + database.lastError().text());
     }
 }
 void InformationMusteriDialog::initialize(QSqlDatabase d, QString s, QString user)
@@ -130,8 +135,28 @@ void InformationMusteriDialog::initialize(QSqlDatabase d, QString s, QString use
     }
 
 }
+void InformationMusteriDialog::updateChangesToplam() {
+    if(database.isOpen()) {
 
-void InformationMusteriDialog::updateChanges() {
+        QModelIndex oIndex;
+        QString value;
+        QSqlQuery* qry = new QSqlQuery(database);
+        int rowCount = ui->listViewToplam->model()->rowCount();
+
+        for(int i = 0; i < rowCount; i++) {
+            oIndex = ui->listViewToplam->model()->index(i, 0);
+            value = ui->listViewToplam->model()->data(oIndex).toString();
+            qry->prepare("UPDATE `cihazisim` SET `İsim` = 'LAB' WHERE `Cihaz Seri No` = '" + value + "';");
+            if(qry->exec()){
+                setLog("[NOTE] informationmusteridialog.cpp : " + value + " nolu cihazın müşterisi  LAB olarak değiştirildi.");
+            }else {
+                setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
+            }
+            qry->clear();
+        }
+    }
+}
+void InformationMusteriDialog::updateChangesMusteri() {
     if(database.isOpen()) {
 
         QModelIndex oIndex;
@@ -143,11 +168,16 @@ void InformationMusteriDialog::updateChanges() {
             oIndex = ui->listViewMusteri->model()->index(i, 0);
             value = ui->listViewMusteri->model()->data(oIndex).toString();
             qry->prepare("UPDATE `cihazisim` SET `İsim` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value + "';");
-            qry->exec();
+            if(qry->exec()){
+                setLog("[NOTE] informationmusteridialog.cpp : " + value + " nolu cihazın müşterisi " + ui->textEditIsim->toPlainText() + " olarak değiştirildi.");
+            }else {
+                setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
+            }
             qry->clear();
         }
     }
 }
+/*
 void InformationMusteriDialog::on_pushButton_clicked()
 {
     if(database.isOpen()) {
@@ -175,7 +205,7 @@ void InformationMusteriDialog::on_pushButton_clicked()
     }
     this->close();
 }
-
+*/
 void InformationMusteriDialog::setLog(QString content) {
 
     QSqlQuery qry;
@@ -211,10 +241,12 @@ void InformationMusteriDialog::on_filter_textChanged(const QString &arg1)
 
                 ui->listViewToplam->model()->setData(oIndex, qry->value(0).toString());
             }
+        }else {
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
         }
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
-        setLog("[ERROR] musteri.cpp : " + database.lastError().text());
+        setLog("[ERROR] informationmusteridialog.cpp : " + database.lastError().text());
         cout << "Database not connected!" << endl;
     }
 

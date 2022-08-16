@@ -23,13 +23,17 @@ public slots:
     void initialize(QSqlDatabase d, QString s, QString username);
 private slots:
 
-    void on_pushButton_clicked();
     void setLog(QString log);
     void fillListViews();
+
     void changes();
-    void updateChanges();
+
+    void updateChangesMusteri();
+    void updateChangesToplam();
+
     void on_filter_selectionChanged();
     void on_filter_textChanged(const QString &arg1);
+
     void listViewMusteriChanged();
     void listViewToplamChanged();
 
