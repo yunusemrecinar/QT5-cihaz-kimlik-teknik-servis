@@ -1,0 +1,7 @@
+https://www.informit.com/articles/article.aspx?p=1405546
+https://doc.qt.io/qt-6/dnd.html
+https://stuff.mit.edu/afs/athena/software/texmaker_v5.0.2/qt57/doc/qtgui/dnd.html
+https://stackoverflow.com/questions/18299077/dragging-a-qwidget-in-qt-5
+https://stackoverflow.com/questions/12916324/drag-and-drop-of-qlistview-items
+https://forum.qt.io/topic/20695/drag-and-drop-of-qlistview-items
+https://www.qtcentre.org/threads/71162-QListView-drag-and-drop
