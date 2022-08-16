@@ -6,6 +6,10 @@
 #include <QSqlError>
 #include <QMessageBox>
 #include <QStringListModel>
+#include <QDropEvent>
+#include <QMouseEvent>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
 #include <QSqlQueryModel>
 #include <QTime>
 
@@ -17,6 +21,7 @@ InformationMusteriDialog::InformationMusteriDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     changes();
+
 }
 
 InformationMusteriDialog::~InformationMusteriDialog()
@@ -54,6 +59,13 @@ void InformationMusteriDialog::changes() {
 
     ui->filter->setPlaceholderText("Filtrele");
     ui->filter->setReadOnly(1);
+
+}
+void InformationMusteriDialog::listViewMusteriChanged() {
+    QMessageBox::information(this,"x","asdas");
+}
+void InformationMusteriDialog::listViewToplamChanged() {
+    QMessageBox::information(this,"y","asdas");
 }
 void InformationMusteriDialog::fillListViews() {
 
@@ -82,6 +94,9 @@ void InformationMusteriDialog::fillListViews() {
                 ui->listViewMusteri->model()->setData(oIndex, qry->value(0).toString());
             }
         }
+
+        connect(ui->listViewMusteri->model(),&QAbstractItemModel::dataChanged,this, &InformationMusteriDialog::listViewMusteriChanged);
+        connect(ui->listViewToplam->model(),&QAbstractItemModel::dataChanged,this,&InformationMusteriDialog::listViewToplamChanged);
     }
 }
 void InformationMusteriDialog::initialize(QSqlDatabase d, QString s, QString user)
@@ -125,7 +140,7 @@ void InformationMusteriDialog::updateChanges() {
         int rowCount = ui->listViewMusteri->model()->rowCount();
 
         for(int i = 0; i < rowCount; i++) {
-            oIndex = ui->listViewMusteri->model()->index(0, 0);
+            oIndex = ui->listViewMusteri->model()->index(i, 0);
             value = ui->listViewMusteri->model()->data(oIndex).toString();
             qry->prepare("UPDATE `cihazisim` SET `İsim` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value + "';");
             qry->exec();
@@ -173,7 +188,6 @@ void InformationMusteriDialog::setLog(QString content) {
 }
 
 
-
 void InformationMusteriDialog::on_filter_selectionChanged()
 {
     ui->filter->setText("");
@@ -206,4 +220,3 @@ void InformationMusteriDialog::on_filter_textChanged(const QString &arg1)
 
 
 }
-

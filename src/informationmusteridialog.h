@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 
 
+
 namespace Ui {
 class InformationMusteriDialog;
 }
@@ -27,10 +28,10 @@ private slots:
     void fillListViews();
     void changes();
     void updateChanges();
-
     void on_filter_selectionChanged();
-
     void on_filter_textChanged(const QString &arg1);
+    void listViewMusteriChanged();
+    void listViewToplamChanged();
 
 private:
     Ui::InformationMusteriDialog *ui;
