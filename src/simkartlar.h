@@ -30,6 +30,8 @@ private slots:
     void on_tableView_clicked();
 
     void setLog(QString log);
+
+    void changes();
 };
 
 #endif // SIMKARTLAR_H

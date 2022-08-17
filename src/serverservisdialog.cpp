@@ -215,7 +215,7 @@ void ServerServisDialog::on_pushButton_clicked()
 
         qry.clear();
         if(musteriCheck) {
-            qry.prepare("UPDATE `cihazkimlikserver` SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
+            qry.prepare("UPDATE `cihazkimlikserver` SET `Müşteri` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
             if(qry.exec()){
                 QMessageBox::information(this,"Updated", "Müşteri Adı Güncellendi!");
                 setLog("[NOTE] serverservisdialog.cpp : müşteri adı güncellendi");

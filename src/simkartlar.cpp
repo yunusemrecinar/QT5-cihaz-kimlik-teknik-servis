@@ -14,12 +14,22 @@ SimKartlar::SimKartlar(QWidget *parent) :
     ui(new Ui::SimKartlar)
 {
     ui->setupUi(this);
-
+    changes();
 }
 
 SimKartlar::~SimKartlar()
 {
     delete ui;
+}
+
+void SimKartlar::changes() {
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableView->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
+
+    ui->numara_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+    ui->kartSeriNo_->setValidator(new QRegularExpressionValidator(QRegularExpression("\\d*")));
+
+
 }
 
 void SimKartlar::initialize(QSqlDatabase d, QString user) {
