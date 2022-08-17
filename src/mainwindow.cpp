@@ -320,7 +320,11 @@ void MainWindow::on_pushButton_servis_ekle_clicked()
             refreshServis();
         }else {
             servisDialog = new ServisDialog();
-            servisDialog->initialize(database, mainWindowValue, name);
+            if(QString::compare("Mobiot",cihazModel,Qt::CaseInsensitive) == 0)
+                type = "Mobiot";
+            else
+                type = "Modeo";
+            servisDialog->initialize(database, mainWindowValue, name, type);
             servisDialog->exec();
             refreshServis();
         }

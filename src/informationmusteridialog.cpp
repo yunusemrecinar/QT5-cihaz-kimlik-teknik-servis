@@ -174,6 +174,15 @@ void InformationMusteriDialog::updateChangesMusteri() {
                 setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
             }
             qry->clear();
+            qry->prepare("UPDATE cihazkimlikserver SET `Müşteri` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
+            qry->exec();
+            qry->clear();
+            qry->prepare("UPDATE cihazkimlik SET `Müşteri Adı` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
+            qry->exec();
+            qry->clear();
+            qry->prepare("UPDATE cihazkimlikmobiot SET `Müşteri` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
+            qry->exec();
+            qry->clear();
         }
     }
 }

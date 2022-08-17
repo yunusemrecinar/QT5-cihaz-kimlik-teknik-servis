@@ -95,7 +95,7 @@ void InformationDialog::initialize(QString s,QSqlDatabase d, QString user) {
                 }
 
                 if(qry->value(20).toString().contains(".")) {
-                    if(qry->value(20).toString().length()) {
+                    if(qry->value(20).toString().length() != 2) {
                         QList<QString> date = qry->value(20).toString().split(".");
                         ui->date_day->setValue(date.at(0).toInt());
                         ui->date_month->setValue(date.at(1).toInt());

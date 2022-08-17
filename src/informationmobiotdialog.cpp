@@ -21,7 +21,30 @@ InformationMobiotDialog::~InformationMobiotDialog()
 {
     delete ui;
 }
+void InformationMobiotDialog::getMusteri() {
 
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        qry ->prepare("select İsim from cihazisim where `Cihaz Seri No` = '" + seriNo + "';");
+        if(qry -> exec()){
+
+                while(qry->next()) {
+                    ui->musteriAdi_1->setText(qry->value(0).toString());
+                }
+
+        }else {
+            QMessageBox::information(this,"Error", qry->lastError().text());
+            setLog("[ERROR] informationdialog.cpp : " + qry->lastError().text());
+        }
+
+
+    }else {
+        QMessageBox::information(this, "Not Connected", database.lastError().text());
+        setLog("[ERROR] informationdialog.cpp : " + database.lastError().text());
+        cout << "Database not connected!" << endl;
+    }
+}
 void InformationMobiotDialog::initialize(QString s, QSqlDatabase d,QString user)
 {
     seriNo = s;
@@ -42,7 +65,7 @@ void InformationMobiotDialog::initialize(QString s, QSqlDatabase d,QString user)
                 ui->anakart_->setText(qry->value(3).toString());
                 ui->UIDNo_1->setText(qry->value(4).toString());
                 ui->test_durum_->setCurrentText(qry->value(5).toString());
-                ui->musteriAdi_1->setText(qry->value(6).toString());
+                getMusteri();
                 ui->durum_->setCurrentText(qry->value(7).toString());
                 if(qry->value(8).toString().contains(".")) {
                     QList<QString> date = qry->value(8).toString().split(".");

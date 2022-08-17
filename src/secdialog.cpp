@@ -324,7 +324,7 @@ void SecDialog::on_pushButton_clicked()
                 setLog("[NOTE] secdailog.cpp : Cihaz Eklendi");
 
                 qry.clear();
-                qry.prepare("INSERT INTO cihazisim VALUES('"+ cihazSeriNo + "','" + musteriAdi + "';");
+                qry.prepare("INSERT INTO cihazisim VALUES('"+ cihazSeriNo + "','" + musteriAdi + "');");
                 if(qry.exec()) {
                     setLog("[NOTE] secdialog.cpp : Yeni cihaz cihazisim tablosuna eklendi!");
                 }else {

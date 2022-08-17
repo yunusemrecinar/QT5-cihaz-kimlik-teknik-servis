@@ -139,7 +139,7 @@ void MobiotDialog::on_pushButton_clicked()
                 QMessageBox::information(this,"Inserted","Data Inserted Succesfully");
                 setLog("[NOTE] mobiotdialog.cpp : Cihaz Eklendi");
                 qry.clear();
-                qry.prepare("INSERT INTO cihazisim VALUES('"+ cihazSeriNo + "','" + musteriAdi + "';");
+                qry.prepare("INSERT INTO cihazisim VALUES('"+ cihazSeriNo + "','" + musteriAdi + "');");
                 if(qry.exec()) {
                     setLog("[NOTE] mobiotdialog.cpp : Yeni cihaz cihazisim tablosuna eklendi!");
                 }else {

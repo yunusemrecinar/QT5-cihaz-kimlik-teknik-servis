@@ -215,10 +215,17 @@ void ServerServisDialog::on_pushButton_clicked()
 
         qry.clear();
         if(musteriCheck) {
-            qry.prepare("UPDATE `cihazkimlik` SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
+            qry.prepare("UPDATE `cihazkimlikserver` SET `Müşteri Adı` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
             if(qry.exec()){
                 QMessageBox::information(this,"Updated", "Müşteri Adı Güncellendi!");
-                setLog("[ERROR] serverservisdialog.cpp : müşteri adı güncellendi");
+                setLog("[NOTE] serverservisdialog.cpp : müşteri adı güncellendi");
+                qry.clear();
+                qry.prepare("UPDATE `cihazisim` SET `İsim` = '" + musteriAdi + "' WHERE `Cihaz Seri No` = '" + servisNo + "';");
+                if(qry.exec()){
+                    setLog("[NOTE] serverservisdialog.cpp : " + servisNo + " nolu cihazın müşterisi " + musteriAdi + " olarak değiştirildi.");
+                }else {
+                    setLog("[ERROR] serverservisdialog.cpp : " + qry.lastError().text());
+                }
             }else {
                 QMessageBox::information(this,"Error", qry.lastError().text());
                 setLog("[ERROR] serverservisdialog.cpp : " + qry.lastError().text());

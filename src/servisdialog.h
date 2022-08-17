@@ -20,6 +20,8 @@ public:
 
     QString name = "";
 
+    QString type_ = "";
+
     QList<QString> commandsMusteri;
 
     QString servisNo = "";
@@ -41,7 +43,7 @@ public:
     bool check = true;
 
 public slots:
-    void initialize(QSqlDatabase d, QString sNo, QString username);
+    void initialize(QSqlDatabase d, QString sNo, QString username, QString type);
     void changes();
 private slots:
     void setLog(QString log);
@@ -55,8 +57,6 @@ private slots:
     //void on_pushButton_2_clicked();
 
     void addMusteri();
-
-    void insertNewMusteri(QString isim);
 
     void commandChangedMusteriAdi(const QString& command_text);
 

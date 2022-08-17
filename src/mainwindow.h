@@ -31,6 +31,8 @@ public:
 
     QString mainWindowValue;
 
+    QString type = "";
+
     int check = 0;
 
     QString isim;

@@ -58,6 +58,7 @@ private:
 private slots:
     void on_pushButton_clicked();
     void changes();
+    void getMusteri();
 
     void addModemTipi();
     void commandChangedDurum(const QString& command_text);
