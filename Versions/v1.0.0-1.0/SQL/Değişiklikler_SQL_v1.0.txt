@@ -32,4 +32,47 @@ CHANGE `Degisen Parcalar` `Degisen Parcalar` VARCHAR(255) CHARACTER SET utf8mb4 
 CHANGE `Test Süresi` `Test Süresi` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, 
 CHANGE `Notlar` `Notlar` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL;
 
+11.08.2022 --------> işlemleri ve hataların tamamını rahatça analiz edilebilmesi için processLog tablosu oluşturulacak.
 
+id int PRIMARY KEY auto_increment
+tarih datetime(dd:mm:yyyy:hh:mm:ss) 
+kullanıcı varchar(50) 
+işlem varchar(255)
+
+CREATE TABLE `processlogs` (
+  `id` int(11) NOT NULL,
+  `tarih` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `process` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `cihazisim` (
+  `Cihaz Seri No` varchar(50) NOT NULL,
+  `İsim` varchar(55) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `cihazisim`
+  ADD PRIMARY KEY (`Cihaz Seri No`);
+
+ALTER TABLE `processlogs`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `cihazkimlik`
+  MODIFY `Sıra` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `cihazkimlikmobiot`
+  MODIFY `Sıra` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `cihazkimlikserver`
+  MODIFY `Sıra` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `müsteri`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `processlogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `teknikservis`
+  MODIFY `Sıra` int(11) NOT NULL AUTO_INCREMENT;
