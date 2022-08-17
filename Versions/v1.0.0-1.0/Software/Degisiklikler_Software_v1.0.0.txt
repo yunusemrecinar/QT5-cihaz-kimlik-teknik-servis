@@ -17,3 +17,46 @@ https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/e84acd522d
 
 10.08.2022 --------> ana ekranda gözükmesi gereken sütunlar, yeni eklenen sütunlardan sonra düzenlendi.
 https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/4ed0d9b4e77ce59f9552279aa00789abde76c63c
+
+11.08.2022  --------> arayüzde değişiklikler ve yeni python scripti ile eski servis bilgilerini veritabanına ekleme.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/4e603377d960b9e1ca90c7a9c1e54f49d2f8c9c5
+
+11.08.2022 --------> projede yeni yazılan yerlere log kodlarını ekleme.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/7f8dcbecd283d4f396882278b395e1143ada770c
+
+12.08.2022 --------> log kodlarını eksik yerlere ekleme
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/61fa6a11ab31ee038ef75bdd75715085ed70dc52
+
+12.08.2022 --------> müşteri değişikliğinde ortaya çıkan sorunun çözümü
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/d46cffb2da93a3a70cf03c03aec4c253b2aff300
+
+15.08.2022 --------> müşteri arayüzünün tamamıyla değiştirildi. İkiye bölünüp, müşteri ve cihaz seri numaraları olarak değiştirildi. Drag&Drop eklendi müşteri arayüzüne.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/3936b466f9ca9255ad3ae0a99ccae7abdded956c
+
+15.08.2022 --------> müşteri filtreleme fonskiyonu güncellendi
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/4a21513eab66f88dbc60d249635d5c995ad80675
+
+15.08.2022 --------> müşteri filtresi tamamlandı
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/cbd0db30630853f862a853a420bd1d740d90aba2
+
+16.08.2022 --------> Drag&Drop sorunu çözüldü
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/d1515b2d3fa03b82ac6a4b54bc621ce81d8c813a
+
+16.08.2022 --------> değişiklikler sonrası log kodları eklendi
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/cb7d0ca96b2817a344256cb99988a97664a7ab2f
+
+16.08.2022 --------> null date sorunu çözüldü
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/0d520b5e8b583ed1566063933748d14aabdc2f88
+
+16.08.2022 --------> değişiklikler sonrasında cihazların müşterisine ulaşılma şeklini değiştirdim
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/99d77f8032e5099dc7734a3fab116d826befbef7
+
+17.08.2022 --------> cihazın müşterisini eklerken, değiştirirken veya silerken oluşan sorunlar düzeltildi.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/f1fe782bf9654c2db19117900364a69d1eb23f1e
+
+17.08.2022 --------> simkartlar arayüzü düzeltilmeye başlandı.
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/c3b7afa063ae1d83552121947066623db5f76fb7
+
+17.08.2022 --------> versiyon 1.2.0-1.0 çıktı
+https://github.com/Yunuscinar41/QT5-cihaz-kimlik-teknik-servis/commit/fa22af25cdc7dadfab02ce3e1d45ce6622b9bc7e
+
