@@ -30,8 +30,9 @@ InformationMusteriDialog::~InformationMusteriDialog()
     delete ui;
 }
 void InformationMusteriDialog::changes() {
+
     ui->listViewToplam->setDragDropOverwriteMode(false);
-    ui->listViewMusteri->setDragDropOverwriteMode(true);
+    ui->listViewMusteri->setDragDropOverwriteMode(false);
     ui->listViewMusteri->setDragEnabled(true);
     ui->listViewMusteri->setAcceptDrops(true);
     ui->listViewMusteri->setDropIndicatorShown(true);
@@ -42,8 +43,8 @@ void InformationMusteriDialog::changes() {
     ui->listViewToplam->setDropIndicatorShown(true);
     ui->listViewToplam->setDefaultDropAction(Qt::MoveAction);
 
-    ui->listViewToplam->setModel(new QStringListModel());
-    ui->listViewMusteri->setModel(new QStringListModel());
+    ui->listViewToplam->setModel(toplam);
+    ui->listViewMusteri->setModel(musteri);
 
     ui->listViewMusteri->setStyleSheet(
                 "QListView { font-size: 20pt; font-weight: bold; }"
@@ -63,6 +64,50 @@ void InformationMusteriDialog::changes() {
     ui->filter->setPlaceholderText("Filtrele");
     ui->filter->setReadOnly(1);
 
+
+}
+
+QMimeData* ListModel::mimeData(const QModelIndexList& qMIndices) const {
+
+  QMimeData* const pQMimeData = new QMimeData;
+  QString qText;
+
+  for (const QModelIndex& qMIndex : qMIndices) {
+    qText += data(qMIndex, Qt::DisplayRole).toString() + "\n";
+  }
+  pQMimeData->setText(qText);
+
+  std::cout << "1" << std::endl;
+  draggedData = qText;
+  std::cout << draggedData.toStdString() << std::endl;
+  return pQMimeData;
+}
+bool ListModel::dropMimeData(const QMimeData* pQMimeData, Qt::DropAction action, int row, int, const QModelIndex& qMIndex) {
+
+  // get text from mime data
+  const QString qText = pQMimeData->text().trimmed();
+
+  if (qText.isEmpty()) return true;
+
+  // split text into lines
+  const QStringList qLines = qText.split(QChar('\n'));
+  const int n = qLines.size();
+
+  // fix row
+  if (qMIndex.isValid()) row = qMIndex.row(); // dropped on row
+  if (row < 0 || row > rowCount()) row = rowCount();
+
+  // insert list into list model
+  if (insertRows(row, n)) {
+    for (const QString& qLine : qLines) {
+      setData(index(row, 0), qLine);
+    }
+  }
+
+  // done
+  std::cout << "2" << std::endl;
+  draggedData = qText;
+  return true;
 }
 void InformationMusteriDialog::listViewMusteriChanged() {
     updateChangesMusteri();
@@ -142,52 +187,42 @@ void InformationMusteriDialog::initialize(QSqlDatabase d, QString s, QString use
 void InformationMusteriDialog::updateChangesToplam() {
     if(database.isOpen()) {
 
-        QModelIndex oIndex;
-        QString value;
+        QString value = musteri->draggedData;
         QSqlQuery* qry = new QSqlQuery(database);
-        int rowCount = ui->listViewToplam->model()->rowCount();
 
-        for(int i = 0; i < rowCount; i++) {
-            oIndex = ui->listViewToplam->model()->index(i, 0);
-            value = ui->listViewToplam->model()->data(oIndex).toString();
-            qry->prepare("UPDATE `cihazisim` SET `İsim` = 'LAB' WHERE `Cihaz Seri No` = '" + value + "';");
-            if(qry->exec()){
-                setLog("[NOTE] informationmusteridialog.cpp : " + value + " nolu cihazın müşterisi  LAB olarak değiştirildi.");
-            }else {
-                setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
-            }
-            qry->clear();
+        qry->prepare("UPDATE `cihazisim` SET `İsim` = 'LAB' WHERE `Cihaz Seri No` = '" + value + "';");
+        if(qry->exec()){
+            setLog("[NOTE] informationmusteridialog.cpp : " + value + " nolu cihazın müşterisi  LAB olarak değiştirildi.");
+        }else {
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
         }
+        qry->clear();
     }
+
 }
 void InformationMusteriDialog::updateChangesMusteri() {
     if(database.isOpen()) {
 
-        QModelIndex oIndex;
-        QString value;
+        QString value = toplam->draggedData;
         QSqlQuery* qry = new QSqlQuery(database);
-        int rowCount = ui->listViewMusteri->model()->rowCount();
 
-        for(int i = 0; i < rowCount; i++) {
-            oIndex = ui->listViewMusteri->model()->index(i, 0);
-            value = ui->listViewMusteri->model()->data(oIndex).toString();
-            qry->prepare("UPDATE `cihazisim` SET `İsim` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value + "';");
-            if(qry->exec()){
-                setLog("[NOTE] informationmusteridialog.cpp : " + value + " nolu cihazın müşterisi " + ui->textEditIsim->toPlainText() + " olarak değiştirildi.");
-            }else {
-                setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
-            }
-            qry->clear();
-            qry->prepare("UPDATE cihazkimlikserver SET `Müşteri` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
-            qry->exec();
-            qry->clear();
-            qry->prepare("UPDATE cihazkimlik SET `Müşteri Adı` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
-            qry->exec();
-            qry->clear();
-            qry->prepare("UPDATE cihazkimlikmobiot SET `Müşteri` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
-            qry->exec();
-            qry->clear();
+        qry->prepare("UPDATE `cihazisim` SET `İsim` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value + "';");
+        if(qry->exec()){
+            setLog("[NOTE] informationmusteridialog.cpp : " + value + " nolu cihazın müşterisi " + ui->textEditIsim->toPlainText() + " olarak değiştirildi.");
+        }else {
+            setLog("[ERROR] informationmusteridialog.cpp : " + qry->lastError().text());
         }
+        qry->clear();
+        qry->prepare("UPDATE cihazkimlikserver SET `Müşteri` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
+        qry->exec();
+        qry->clear();
+        qry->prepare("UPDATE cihazkimlik SET `Müşteri Adı` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
+        qry->exec();
+        qry->clear();
+        qry->prepare("UPDATE cihazkimlikmobiot SET `Müşteri` = '" + ui->textEditIsim->toPlainText() + "' WHERE `Cihaz Seri No` = '" + value +"';");
+        qry->exec();
+        qry->clear();
+
     }
 }
 
