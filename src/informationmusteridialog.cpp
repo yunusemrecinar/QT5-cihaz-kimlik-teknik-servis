@@ -22,6 +22,7 @@ InformationMusteriDialog::InformationMusteriDialog(QWidget *parent) :
     ui->setupUi(this);
     changes();
 
+
 }
 
 InformationMusteriDialog::~InformationMusteriDialog()
@@ -29,6 +30,8 @@ InformationMusteriDialog::~InformationMusteriDialog()
     delete ui;
 }
 void InformationMusteriDialog::changes() {
+    ui->listViewToplam->setDragDropOverwriteMode(false);
+    ui->listViewMusteri->setDragDropOverwriteMode(true);
     ui->listViewMusteri->setDragEnabled(true);
     ui->listViewMusteri->setAcceptDrops(true);
     ui->listViewMusteri->setDropIndicatorShown(true);
@@ -64,6 +67,7 @@ void InformationMusteriDialog::changes() {
 void InformationMusteriDialog::listViewMusteriChanged() {
     updateChangesMusteri();
 }
+
 void InformationMusteriDialog::listViewToplamChanged() {
     updateChangesToplam();
 }
@@ -186,35 +190,7 @@ void InformationMusteriDialog::updateChangesMusteri() {
         }
     }
 }
-/*
-void InformationMusteriDialog::on_pushButton_clicked()
-{
-    if(database.isOpen()) {
 
-        QSqlQuery qry;
-
-        QString isim = ui->textEditIsim->toPlainText();
-        QString adres = ui->textEditAdres->toPlainText();
-
-        qry.prepare("UPDATE `müsteri` SET `İsim` = '" + isim + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
-        qry.exec();
-        qry.clear();
-        qry.prepare("UPDATE `müsteri` SET `Adres` = '" + adres + "' WHERE `Cihaz Seri No` = '" + seriNo + "';");
-        if(qry.exec()){
-
-        }else {
-            QMessageBox::critical(this, tr("error::"), qry.lastError().text());
-            setLog("[ERROR] informationmusteridialog.cpp : " + qry.lastError().text());
-        }
-        qry.clear();
-    }else{
-        QMessageBox::information(this, "Not Connected", "Database Is Not Connected");
-        setLog("[ERROR] informationmusteridialog.cpp : " + database.lastError().text());
-        cout << "Database not connected!" << endl;
-    }
-    this->close();
-}
-*/
 void InformationMusteriDialog::setLog(QString content) {
 
     QSqlQuery qry;
@@ -261,3 +237,4 @@ void InformationMusteriDialog::on_filter_textChanged(const QString &arg1)
 
 
 }
+

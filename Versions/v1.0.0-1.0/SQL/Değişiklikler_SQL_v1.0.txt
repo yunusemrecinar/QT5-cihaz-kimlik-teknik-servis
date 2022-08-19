@@ -32,7 +32,7 @@ CHANGE `Degisen Parcalar` `Degisen Parcalar` VARCHAR(255) CHARACTER SET utf8mb4 
 CHANGE `Test Süresi` `Test Süresi` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, 
 CHANGE `Notlar` `Notlar` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL;
 
-11.08.2022 --------> işlemleri ve hataların tamamını rahatça analiz edilebilmesi için processLog tablosu oluşturulacak.
+17.08.2022 --------> işlemleri ve hataların tamamını rahatça analiz edilebilmesi için processLog tablosu oluşturulacak.
 
 id int PRIMARY KEY auto_increment
 tarih datetime(dd:mm:yyyy:hh:mm:ss) 

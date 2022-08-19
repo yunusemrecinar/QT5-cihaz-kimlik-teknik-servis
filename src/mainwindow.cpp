@@ -496,7 +496,7 @@ void MainWindow::refreshLog() {
 void MainWindow::resizeEvent(QResizeEvent* event) {
 
     QMainWindow::resizeEvent(event);
-        ui->tableView_teknikServis->setColumnWidth(2,150);
+        ui->tableView_teknikServis->setColumnWidth(2,185);
         ui->tableView_teknikServis->setColumnWidth(3,80);
         ui->tableView_teknikServis->setColumnWidth(4,ui->tableView_teknikServis->width()-230);
 
