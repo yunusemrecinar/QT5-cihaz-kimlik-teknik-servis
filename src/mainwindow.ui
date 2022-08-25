@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1295</width>
-    <height>890</height>
+    <width>1407</width>
+    <height>828</height>
    </rect>
   </property>
   <property name="palette">
@@ -455,6 +455,114 @@ background-color: #4CACBC;
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_Model">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+                <italic>false</italic>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">#pushButton_Model{
+border: 1px;
+color: #6B4F4F;
+}
+
+#pushButton_Model:hover {
+border: 1px;
+background-color: #EED6C4;
+}</string>
+              </property>
+              <property name="text">
+               <string>Model</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+                <italic>false</italic>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">#pushButton {
+border: 1px;
+color: #6B4F4F;
+}
+
+#pushButton:hover {
+border: 1px;
+background-color: #EED6C4;
+}</string>
+              </property>
+              <property name="text">
+               <string>Müşteri</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_simKart">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+                <italic>false</italic>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">#pushButton_simKart{
+border: 1px;
+color: #6B4F4F;
+}
+
+#pushButton_simKart:hover {
+border: 1px;
+background-color: #EED6C4;
+}</string>
+              </property>
+              <property name="text">
+               <string>Sim Kart</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -533,74 +641,17 @@ background-repeat: none;
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_simKart">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
+             <widget class="QLineEdit" name="servisLineEdit">
+              <property name="minimumSize">
                <size>
-                <width>16777215</width>
-                <height>30</height>
+                <width>150</width>
+                <height>40</height>
                </size>
               </property>
               <property name="font">
                <font>
-                <pointsize>18</pointsize>
-                <italic>false</italic>
+                <pointsize>20</pointsize>
                </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">#pushButton_simKart{
-border: 1px;
-color: #6B4F4F;
-}
-
-#pushButton_simKart:hover {
-border: 1px;
-background-color: #EED6C4;
-}</string>
-              </property>
-              <property name="text">
-               <string>Sim Kart</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_Model">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>18</pointsize>
-                <italic>false</italic>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">#pushButton_Model{
-border: 1px;
-color: #6B4F4F;
-}
-
-#pushButton_Model:hover {
-border: 1px;
-background-color: #EED6C4;
-}</string>
-              </property>
-              <property name="text">
-               <string>Model</string>
               </property>
              </widget>
             </item>
@@ -639,42 +690,6 @@ background-color: #EED6C4;
               </property>
               <property name="text">
                <string>Modem Tipi</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>18</pointsize>
-                <italic>false</italic>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">#pushButton {
-border: 1px;
-color: #6B4F4F;
-}
-
-#pushButton:hover {
-border: 1px;
-background-color: #EED6C4;
-}</string>
-              </property>
-              <property name="text">
-               <string>Müşteri</string>
               </property>
              </widget>
             </item>
@@ -760,7 +775,7 @@ background-color: #EED6C4;
 }</string>
           </property>
           <property name="text">
-           <string>v1.1.1-2.0</string>
+           <string>v1.1.2-2.0</string>
           </property>
          </widget>
         </item>
@@ -775,7 +790,7 @@ background-color: #EED6C4;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1295</width>
+     <width>1407</width>
      <height>21</height>
     </rect>
    </property>

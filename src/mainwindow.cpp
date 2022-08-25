@@ -34,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     hideColumnsServer();
     changes();
 
+
+
 }
 
 void MainWindow::readFile(QString filename)
@@ -146,6 +148,9 @@ void MainWindow::changes()
 
     ui->lineEdit->setPlaceholderText("Filtrele");
     ui->lineEdit->setReadOnly(1);
+    ui->servisLineEdit->setPlaceholderText("Filtrele");
+    ui->servisLineEdit->setReadOnly(1);
+    ui->servisLineEdit->setVisible(false);
     ui->tableView->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
     ui->tableView_teknikServis->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
     ui->tableView_log->horizontalHeader()->setStyleSheet("QHeaderView { font-size: 18pt; color:#002B5B; font-weight: bold; }");
@@ -194,7 +199,30 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
         cout << "Database not connected!" << endl;
     }
 }
+void MainWindow::on_servisLineEdit_textChanged(const QString &arg1)
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
 
+    if(database.isOpen()) {
+        QSqlQuery* qry = new QSqlQuery(database);
+
+        qry->prepare("SELECT * FROM `teknikservis` WHERE `Cihaz Seri No` = '" + mainWindowValue + "' AND SUBSTRING_INDEX(Tarih,' ',1) LIKE '%" + arg1 + "%' ORDER BY Tarih DESC");
+        qry->exec();
+        model->setQuery(*qry);
+        ui->tableView_teknikServis->setModel(model);
+        ui->tableView_teknikServis->resizeColumnsToContents();
+    /*
+        foreach(int col, columnsToHideServer) {
+            ui->tableView_teknikServis->hideColumn(col);
+        }*/
+
+        ui->tableView_teknikServis->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->tableView_teknikServis->setColumnWidth(2,150);
+        ui->tableView_teknikServis->setColumnWidth(3,80);
+        ui->tableView_teknikServis->setColumnWidth(4,ui->tableView_teknikServis->width()-230);
+
+    }
+}
 void MainWindow::hideColumns() {
     columnsToHideService.append(0);
     columnsToHideService.append(1);
@@ -306,6 +334,7 @@ void MainWindow::on_pushButton_2_clicked()
         secdialog->exec();       
         refresh();
         ui->lineEdit->clear();
+        ui->servisLineEdit->clear();
     }
 }
 
@@ -341,6 +370,7 @@ void MainWindow::on_tableView_clicked()
     QString rowValue = ui->tableView->model()->data(ui->tableView->model()->index(row,2)).toString();
     cihazModel = ui->tableView->model()->data(ui->tableView->model()->index(row,1)).toString();
     mainWindowValue = rowValue;
+    ui->servisLineEdit->setVisible(true);
     rowMusteri = "";
     ui->servisLabel->setText("Teknik Servis (" + mainWindowValue + ")");
 
@@ -429,6 +459,7 @@ void MainWindow::refreshServer() {
         foreach(int col, columnsToHideServer)
             ui->tableView->hideColumn(col);
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
         setLog("[mainwindow.cpp : ]" + database.lastError().text());
@@ -473,6 +504,7 @@ void MainWindow::refresh() {
         foreach(int col, columnsToHide)
             ui->tableView->hideColumn(col);
         ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     }else {
         QMessageBox::information(this, "Not Connected", database.lastError().text());
         setLog("[mainwindow.cpp : ]" + database.lastError().text());
@@ -508,7 +540,7 @@ void MainWindow::refreshServis() {
 
         QSqlQuery* qry = new QSqlQuery(database);
 
-        qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue + " ORDER BY Tarih DESC;");
+        qry ->prepare("select * from teknikservis where `Cihaz Seri No` = " + mainWindowValue + " ORDER BY Sıra DESC;");
         qry -> exec();
         modal->setQuery(*qry);
         ui->tableView_teknikServis->setModel(modal);
@@ -547,6 +579,11 @@ void MainWindow::on_lineEdit_selectionChanged()
     ui->lineEdit->setReadOnly(0);
 }
 
+void MainWindow::on_servisLineEdit_selectionChanged()
+{
+    ui->servisLineEdit->setText("");
+    ui->servisLineEdit->setReadOnly(0);
+}
 
 void MainWindow::on_splitter_splitterMoved()
 {

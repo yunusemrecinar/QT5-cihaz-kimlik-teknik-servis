@@ -134,6 +134,10 @@ private slots:
 
     void on_pushButton_serverGetir_clicked();
 
+    void on_servisLineEdit_textChanged(const QString &arg1);
+
+    void on_servisLineEdit_selectionChanged();
+
 private:
     Ui::MainWindow *ui;
 
