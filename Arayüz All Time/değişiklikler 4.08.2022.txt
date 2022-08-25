@@ -1,0 +1,18 @@
+INSERT INTO modeo.kullanıcılar values("Yunus")
+INSERT INTO modeo.kullanıcılar values("Faruk");
+Modemler tekrarlanmasın diye isim primary key olarak değiştirdim. Contains çok zaman alır
+Modem Tipi sayısı tekrarlanmasın diye isim primary key olarak değiştirildi.
+
+Model sayısı ve Modem Tipi sayısı kontrolü ekleme yapmadan önce. Eğer birer tane yoksa pop up.
+Eklenmiş cihazın modelinin değiştirilmesi engellendi.
+Servis eklenirken eklenen kullanıcının ismini de ekledim
+
+bir servis eklemede yazılan değişiklik sonrasında servis ekleme gerçekleştiğinde kullanıcının adı notun 
+başına ekleniyor fakat bir servis güncellendiğinde güncelleyen kişinin adını nota ekleyemedim çünkü
+aklıma şimdiki nottan önceki notu çıkardığım zaman yeni eklenen kısmı bulup onun başına ekleyebileceğim geldi
+fakat benim eklediğim notun orta kısmını farklı bir kullanıcı değiştirdiğinde cümlenin yarısnı da alacak değişiklik
+olarak.
+
+
+müşteri kısmında çift tık ile verileri gösterme 
+modelin veritabanından alınması 

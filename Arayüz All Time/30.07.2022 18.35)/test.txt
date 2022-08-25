@@ -1,0 +1,4 @@
+hostName=localhost
+userName=root
+password= 
+databaseName=modeo

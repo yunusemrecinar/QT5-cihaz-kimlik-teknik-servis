@@ -1,0 +1,3 @@
+müşteri arayüzüne filtreleme yeri eklendi. 
+Aramada küçük harf büyük harf ayrımı kaldırıldı.
+Müşteri eklemelerinde isimlerin başında ve sonunda kalan boşluklar silindi.

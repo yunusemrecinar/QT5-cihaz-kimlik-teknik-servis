@@ -1,0 +1,1 @@
+scp [kaynak ip]:~/[path] . içindeki dosyları indirmek için

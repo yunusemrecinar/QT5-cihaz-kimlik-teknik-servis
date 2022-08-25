@@ -1,0 +1,10 @@
+teknik servise müşteri adı gelecek eğer müşteri adı değiştiyse teknik servis kayıtlarında gözüküp cihazın
+müşterisi otomatik olarak güncellenecek
+
+
+python ile xlsx dosyası okuyup bilgileri verilen veritabanına ekleme yapılacak kodu yaz
+
+müşteri tablosu cihaz seri no sayısına göre aşağı doğru artsın--
+müşteri information dialog unda adres yeri daha büyük olsun
+müşteri tablosundaki sütunların isimlerini büyüt
+müşteri değiştiğinde pop up çıkar
